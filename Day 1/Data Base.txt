@@ -1,0 +1,26 @@
+category 
+	category id, category type
+
+
+Member
+	member_id, member_type(gold, bronze, dependent)
+
+
+
+Customer 
+	name, phone no, favorite_movie_category_id,Member_id
+
+
+Format
+	format_id, type(VHS, VCD, DVD)
+
+
+Movie 
+	Movie_id, Movie_name, Movie_category_id, Movie_format_id, cast_crew(json)
+
+
+Order_details
+	order_id, amount, Payment_id, dateOfPurchase, Due Date
+
+Payment 
+	Payment_id, order_id,  Payment_type, Amount, 
