@@ -49,3 +49,25 @@ select distinct concat(firstname,' ',surname) as member, name as facility from c
 inner join cd.facilities f on f.facid=b.facid
 where f.name in ('Tennis Court 2','Tennis Court 1')
 order by member, facility          ;
+
+SELECT CONCAT(firstname, ' ', surname) AS member, f.name AS facility,
+case 
+	when m.memid=0 then
+	b.slots*f.guestcost
+	else 
+	b.slots*f.membercost
+end AS cost 
+FROM cd.members m
+JOIN cd.bookings b ON m.memid = b.memid 
+JOIN cd.facilities f ON b.facid = f.facid
+WHERE b.starttime >= '2012-09-14' 
+and b.starttime<'2012-09-15' 
+and ((m.memid = 0 and b.slots*f.guestcost > 30) or
+	 (m.memid != 0 and b.slots*f.membercost>30)) order by cost desc;
+
+
+
+select distinct concat(m.firstname,' ',m.surname) as member	,
+(select concat(r.firstname,' ',r.surname) as recommender
+ from cd.members r where r.memid=m.recommendedby)
+from cd.members m order by member;
