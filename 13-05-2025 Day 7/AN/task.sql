@@ -156,7 +156,7 @@ begin
 
 
 end $$ language plpgsql;
-
+commit;
 select * from customer order by customer_id desc;
 
 
