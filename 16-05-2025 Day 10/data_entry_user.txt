@@ -1,0 +1,51 @@
+
+C:\Program Files\PostgreSQL\17\bin>psql -h localhost -p 5432 -U data_entry_user -d EdTechDB
+Password for user data_entry_user:
+
+psql (17.4)
+WARNING: Console code page (437) differs from Windows code page (1252)
+         8-bit characters might not work correctly. See psql reference
+         page "Notes for Windows users" for details.
+Type "help" for help.
+
+EdTechDB=> insert into students (name, email, phone) values ('john doe', 'john.doe@example.com', '1234567890');
+ERROR:  permission denied for sequence students_student_id_seq
+EdTechDB=> exit
+
+C:\Program Files\PostgreSQL\17\bin>psql -h localhost -p 5432 -U data_entry_user -d EdTechDB
+Password for user data_entry_user:
+
+psql (17.4)
+WARNING: Console code page (437) differs from Windows code page (1252)
+         8-bit characters might not work correctly. See psql reference
+         page "Notes for Windows users" for details.
+Type "help" for help.
+
+EdTechDB=> insert into students (name, email, phone) values ('john doe', 'john.doe@example.com', '1234567890');
+ERROR:  permission denied for sequence students_student_id_seq
+EdTechDB=> exit
+
+C:\Program Files\PostgreSQL\17\bin>psql -h localhost -p 5432 -U data_entry_user -d EdTechDB
+Password for user data_entry_user:
+
+psql (17.4)
+WARNING: Console code page (437) differs from Windows code page (1252)
+         8-bit characters might not work correctly. See psql reference
+         page "Notes for Windows users" for details.
+Type "help" for help.
+
+EdTechDB=> insert into students (name, email, phone) values ('john doe', 'john.doe@example.com', '1234567890');
+INSERT 0 1
+EdTechDB=> select * from students;
+ERROR:  permission denied for table students
+EdTechDB=> select * from certifications;
+ERROR:  permission denied for table certifications
+EdTechDB=> insert intoinsert into certifications (enrollment_id, issued_date, serial_no) values
+EdTechDB-> ;
+ERROR:  syntax error at or near "intoinsert"
+LINE 1: insert intoinsert into certifications (enrollment_id, issued...
+               ^
+EdTechDB=> insert into certifications (enrollment_id, issued_date, serial_no) values(3,current_timestamp,'CERT003');
+ERROR:  permission denied for sequence certifications_certificate_id_seq
+EdTechDB=>
+

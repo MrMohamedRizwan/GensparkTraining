@@ -1,0 +1,35 @@
+
+C:\Program Files\PostgreSQL\17\bin>psql -h localhost -p 5432 -U data_entry_user -d EdTechDB
+Password for user data_entry_user:
+
+psql: error: connection to server at "localhost" (::1), port 5432 failed: fe_sendauth: no password supplied
+
+C:\Program Files\PostgreSQL\17\bin>psql -h localhost -p 5432 -U readonly_user -d EdTechDB
+Password for user readonly_user:
+
+psql (17.4)
+WARNING: Console code page (437) differs from Windows code page (1252)
+         8-bit characters might not work correctly. See psql reference
+         page "Notes for Windows users" for details.
+Type "help" for help.
+
+EdTechDB=> select * from students
+EdTechDB-> ;
+ student_id |    name    |         email          |   phone
+------------+------------+------------------------+------------
+          1 | john doe   | john.doe@example.com   | 1234567890
+          2 | jane smith | jane.smith@example.com | 0987654321
+          3 | mike brown | mike.brown@example.com | 5551234567
+(3 rows)
+
+
+EdTechDB=> ('mike brown', 'mike.brown@example.com', '5551234567');
+ERROR:  syntax error at or near "'mike brown'"
+LINE 1: ('mike brown', 'mike.brown@example.com', '5551234567');
+         ^
+EdTechDB=>
+EdTechDB=> insert into students (name, email, phone) values
+EdTechDB-> ('john doe', 'john.doe@example.com', '1234567890');
+ERROR:  permission denied for table students
+EdTechDB=>
+EdTechDB=> ('john doe', 'john.doe@example.com', '1234567890');
