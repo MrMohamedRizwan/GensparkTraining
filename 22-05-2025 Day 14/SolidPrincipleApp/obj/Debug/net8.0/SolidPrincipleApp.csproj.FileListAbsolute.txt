@@ -1,0 +1,15 @@
+C:\Users\vc\OneDrive - Presidio Network Solutions\Desktop\GenSpark Training\22-05-2025 Day 14\SolidPrincipleApp\bin\Debug\net8.0\SolidPrincipleApp.exe
+C:\Users\vc\OneDrive - Presidio Network Solutions\Desktop\GenSpark Training\22-05-2025 Day 14\SolidPrincipleApp\bin\Debug\net8.0\SolidPrincipleApp.deps.json
+C:\Users\vc\OneDrive - Presidio Network Solutions\Desktop\GenSpark Training\22-05-2025 Day 14\SolidPrincipleApp\bin\Debug\net8.0\SolidPrincipleApp.runtimeconfig.json
+C:\Users\vc\OneDrive - Presidio Network Solutions\Desktop\GenSpark Training\22-05-2025 Day 14\SolidPrincipleApp\bin\Debug\net8.0\SolidPrincipleApp.dll
+C:\Users\vc\OneDrive - Presidio Network Solutions\Desktop\GenSpark Training\22-05-2025 Day 14\SolidPrincipleApp\bin\Debug\net8.0\SolidPrincipleApp.pdb
+C:\Users\vc\OneDrive - Presidio Network Solutions\Desktop\GenSpark Training\22-05-2025 Day 14\SolidPrincipleApp\obj\Debug\net8.0\SolidPrincipleApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\vc\OneDrive - Presidio Network Solutions\Desktop\GenSpark Training\22-05-2025 Day 14\SolidPrincipleApp\obj\Debug\net8.0\SolidPrincipleApp.AssemblyInfoInputs.cache
+C:\Users\vc\OneDrive - Presidio Network Solutions\Desktop\GenSpark Training\22-05-2025 Day 14\SolidPrincipleApp\obj\Debug\net8.0\SolidPrincipleApp.AssemblyInfo.cs
+C:\Users\vc\OneDrive - Presidio Network Solutions\Desktop\GenSpark Training\22-05-2025 Day 14\SolidPrincipleApp\obj\Debug\net8.0\SolidPrincipleApp.csproj.CoreCompileInputs.cache
+C:\Users\vc\OneDrive - Presidio Network Solutions\Desktop\GenSpark Training\22-05-2025 Day 14\SolidPrincipleApp\obj\Debug\net8.0\SolidPrincipleApp.sourcelink.json
+C:\Users\vc\OneDrive - Presidio Network Solutions\Desktop\GenSpark Training\22-05-2025 Day 14\SolidPrincipleApp\obj\Debug\net8.0\SolidPrincipleApp.dll
+C:\Users\vc\OneDrive - Presidio Network Solutions\Desktop\GenSpark Training\22-05-2025 Day 14\SolidPrincipleApp\obj\Debug\net8.0\refint\SolidPrincipleApp.dll
+C:\Users\vc\OneDrive - Presidio Network Solutions\Desktop\GenSpark Training\22-05-2025 Day 14\SolidPrincipleApp\obj\Debug\net8.0\SolidPrincipleApp.pdb
+C:\Users\vc\OneDrive - Presidio Network Solutions\Desktop\GenSpark Training\22-05-2025 Day 14\SolidPrincipleApp\obj\Debug\net8.0\SolidPrincipleApp.genruntimeconfig.cache
+C:\Users\vc\OneDrive - Presidio Network Solutions\Desktop\GenSpark Training\22-05-2025 Day 14\SolidPrincipleApp\obj\Debug\net8.0\ref\SolidPrincipleApp.dll

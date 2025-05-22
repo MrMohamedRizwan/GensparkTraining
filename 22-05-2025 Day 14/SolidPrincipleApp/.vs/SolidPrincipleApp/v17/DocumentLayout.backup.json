@@ -1,0 +1,139 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\vc\\OneDrive - Presidio Network Solutions\\Desktop\\GenSpark Training\\22-05-2025 Day 14\\SolidPrincipleApp\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{1257F763-74EF-4692-B250-3DA3FE7CB2AE}|SolidPrincipleApp.csproj|c:\\users\\vc\\onedrive - presidio network solutions\\desktop\\genspark training\\22-05-2025 day 14\\solidprincipleapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1257F763-74EF-4692-B250-3DA3FE7CB2AE}|SolidPrincipleApp.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1257F763-74EF-4692-B250-3DA3FE7CB2AE}|SolidPrincipleApp.csproj|c:\\users\\vc\\onedrive - presidio network solutions\\desktop\\genspark training\\22-05-2025 day 14\\solidprincipleapp\\good design\\open closed responsibility\\paymentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1257F763-74EF-4692-B250-3DA3FE7CB2AE}|SolidPrincipleApp.csproj|solutionrelative:good design\\open closed responsibility\\paymentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1257F763-74EF-4692-B250-3DA3FE7CB2AE}|SolidPrincipleApp.csproj|c:\\users\\vc\\onedrive - presidio network solutions\\desktop\\genspark training\\22-05-2025 day 14\\solidprincipleapp\\good design\\open closed responsibility\\upipayment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1257F763-74EF-4692-B250-3DA3FE7CB2AE}|SolidPrincipleApp.csproj|solutionrelative:good design\\open closed responsibility\\upipayment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1257F763-74EF-4692-B250-3DA3FE7CB2AE}|SolidPrincipleApp.csproj|c:\\users\\vc\\onedrive - presidio network solutions\\desktop\\genspark training\\22-05-2025 day 14\\solidprincipleapp\\good design\\single responsibility principle\\invoice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1257F763-74EF-4692-B250-3DA3FE7CB2AE}|SolidPrincipleApp.csproj|solutionrelative:good design\\single responsibility principle\\invoice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1257F763-74EF-4692-B250-3DA3FE7CB2AE}|SolidPrincipleApp.csproj|c:\\users\\vc\\onedrive - presidio network solutions\\desktop\\genspark training\\22-05-2025 day 14\\solidprincipleapp\\good design\\single responsibility principle\\invoicecalculator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1257F763-74EF-4692-B250-3DA3FE7CB2AE}|SolidPrincipleApp.csproj|solutionrelative:good design\\single responsibility principle\\invoicecalculator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1257F763-74EF-4692-B250-3DA3FE7CB2AE}|SolidPrincipleApp.csproj|c:\\users\\vc\\onedrive - presidio network solutions\\desktop\\genspark training\\22-05-2025 day 14\\solidprincipleapp\\good design\\single responsibility principle\\invoiceemail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1257F763-74EF-4692-B250-3DA3FE7CB2AE}|SolidPrincipleApp.csproj|solutionrelative:good design\\single responsibility principle\\invoiceemail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1257F763-74EF-4692-B250-3DA3FE7CB2AE}|SolidPrincipleApp.csproj|c:\\users\\vc\\onedrive - presidio network solutions\\desktop\\genspark training\\22-05-2025 day 14\\solidprincipleapp\\good design\\single responsibility principle\\invoiceprinter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1257F763-74EF-4692-B250-3DA3FE7CB2AE}|SolidPrincipleApp.csproj|solutionrelative:good design\\single responsibility principle\\invoiceprinter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 6,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PaymentService.cs",
+              "DocumentMoniker": "C:\\Users\\vc\\OneDrive - Presidio Network Solutions\\Desktop\\GenSpark Training\\22-05-2025 Day 14\\SolidPrincipleApp\\Good Design\\Open Closed Responsibility\\PaymentService.cs",
+              "RelativeDocumentMoniker": "Good Design\\Open Closed Responsibility\\PaymentService.cs",
+              "ToolTip": "C:\\Users\\vc\\OneDrive - Presidio Network Solutions\\Desktop\\GenSpark Training\\22-05-2025 Day 14\\SolidPrincipleApp\\Good Design\\Open Closed Responsibility\\PaymentService.cs",
+              "RelativeToolTip": "Good Design\\Open Closed Responsibility\\PaymentService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-22T11:11:04.363Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "UPIPayment.cs",
+              "DocumentMoniker": "C:\\Users\\vc\\OneDrive - Presidio Network Solutions\\Desktop\\GenSpark Training\\22-05-2025 Day 14\\SolidPrincipleApp\\Good Design\\Open Closed Responsibility\\UPIPayment.cs",
+              "RelativeDocumentMoniker": "Good Design\\Open Closed Responsibility\\UPIPayment.cs",
+              "ToolTip": "C:\\Users\\vc\\OneDrive - Presidio Network Solutions\\Desktop\\GenSpark Training\\22-05-2025 Day 14\\SolidPrincipleApp\\Good Design\\Open Closed Responsibility\\UPIPayment.cs",
+              "RelativeToolTip": "Good Design\\Open Closed Responsibility\\UPIPayment.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-22T11:11:02.808Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Invoice.cs",
+              "DocumentMoniker": "C:\\Users\\vc\\OneDrive - Presidio Network Solutions\\Desktop\\GenSpark Training\\22-05-2025 Day 14\\SolidPrincipleApp\\Good Design\\Single Responsibility Principle\\Invoice.cs",
+              "RelativeDocumentMoniker": "Good Design\\Single Responsibility Principle\\Invoice.cs",
+              "ToolTip": "C:\\Users\\vc\\OneDrive - Presidio Network Solutions\\Desktop\\GenSpark Training\\22-05-2025 Day 14\\SolidPrincipleApp\\Good Design\\Single Responsibility Principle\\Invoice.cs",
+              "RelativeToolTip": "Good Design\\Single Responsibility Principle\\Invoice.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-22T11:06:09.705Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "InvoiceCalculator.cs",
+              "DocumentMoniker": "C:\\Users\\vc\\OneDrive - Presidio Network Solutions\\Desktop\\GenSpark Training\\22-05-2025 Day 14\\SolidPrincipleApp\\Good Design\\Single Responsibility Principle\\InvoiceCalculator.cs",
+              "RelativeDocumentMoniker": "Good Design\\Single Responsibility Principle\\InvoiceCalculator.cs",
+              "ToolTip": "C:\\Users\\vc\\OneDrive - Presidio Network Solutions\\Desktop\\GenSpark Training\\22-05-2025 Day 14\\SolidPrincipleApp\\Good Design\\Single Responsibility Principle\\InvoiceCalculator.cs",
+              "RelativeToolTip": "Good Design\\Single Responsibility Principle\\InvoiceCalculator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-22T11:06:08.77Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "InvoiceEmail.cs",
+              "DocumentMoniker": "C:\\Users\\vc\\OneDrive - Presidio Network Solutions\\Desktop\\GenSpark Training\\22-05-2025 Day 14\\SolidPrincipleApp\\Good Design\\Single Responsibility Principle\\InvoiceEmail.cs",
+              "RelativeDocumentMoniker": "Good Design\\Single Responsibility Principle\\InvoiceEmail.cs",
+              "ToolTip": "C:\\Users\\vc\\OneDrive - Presidio Network Solutions\\Desktop\\GenSpark Training\\22-05-2025 Day 14\\SolidPrincipleApp\\Good Design\\Single Responsibility Principle\\InvoiceEmail.cs",
+              "RelativeToolTip": "Good Design\\Single Responsibility Principle\\InvoiceEmail.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-22T11:06:06.992Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "InvoicePrinter.cs",
+              "DocumentMoniker": "C:\\Users\\vc\\OneDrive - Presidio Network Solutions\\Desktop\\GenSpark Training\\22-05-2025 Day 14\\SolidPrincipleApp\\Good Design\\Single Responsibility Principle\\InvoicePrinter.cs",
+              "RelativeDocumentMoniker": "Good Design\\Single Responsibility Principle\\InvoicePrinter.cs",
+              "ToolTip": "C:\\Users\\vc\\OneDrive - Presidio Network Solutions\\Desktop\\GenSpark Training\\22-05-2025 Day 14\\SolidPrincipleApp\\Good Design\\Single Responsibility Principle\\InvoicePrinter.cs",
+              "RelativeToolTip": "Good Design\\Single Responsibility Principle\\InvoicePrinter.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-22T11:06:04.612Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\vc\\OneDrive - Presidio Network Solutions\\Desktop\\GenSpark Training\\22-05-2025 Day 14\\SolidPrincipleApp\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\vc\\OneDrive - Presidio Network Solutions\\Desktop\\GenSpark Training\\22-05-2025 Day 14\\SolidPrincipleApp\\Program.cs*",
+              "RelativeToolTip": "Program.cs*",
+              "ViewState": "AgIAACoAAAAAAAAAAAAmwDwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-22T09:30:32.898Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
