@@ -1,0 +1,15 @@
+C:\Users\vc\OneDrive - Presidio Network Solutions\Desktop\GenSpark Training\21-05-2025 Day 13\WholeApplication\WholeApplication\bin\Debug\net8.0\WholeApplication.exe
+C:\Users\vc\OneDrive - Presidio Network Solutions\Desktop\GenSpark Training\21-05-2025 Day 13\WholeApplication\WholeApplication\bin\Debug\net8.0\WholeApplication.deps.json
+C:\Users\vc\OneDrive - Presidio Network Solutions\Desktop\GenSpark Training\21-05-2025 Day 13\WholeApplication\WholeApplication\bin\Debug\net8.0\WholeApplication.runtimeconfig.json
+C:\Users\vc\OneDrive - Presidio Network Solutions\Desktop\GenSpark Training\21-05-2025 Day 13\WholeApplication\WholeApplication\bin\Debug\net8.0\WholeApplication.dll
+C:\Users\vc\OneDrive - Presidio Network Solutions\Desktop\GenSpark Training\21-05-2025 Day 13\WholeApplication\WholeApplication\bin\Debug\net8.0\WholeApplication.pdb
+C:\Users\vc\OneDrive - Presidio Network Solutions\Desktop\GenSpark Training\21-05-2025 Day 13\WholeApplication\WholeApplication\obj\Debug\net8.0\WholeApplication.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\vc\OneDrive - Presidio Network Solutions\Desktop\GenSpark Training\21-05-2025 Day 13\WholeApplication\WholeApplication\obj\Debug\net8.0\WholeApplication.AssemblyInfoInputs.cache
+C:\Users\vc\OneDrive - Presidio Network Solutions\Desktop\GenSpark Training\21-05-2025 Day 13\WholeApplication\WholeApplication\obj\Debug\net8.0\WholeApplication.AssemblyInfo.cs
+C:\Users\vc\OneDrive - Presidio Network Solutions\Desktop\GenSpark Training\21-05-2025 Day 13\WholeApplication\WholeApplication\obj\Debug\net8.0\WholeApplication.csproj.CoreCompileInputs.cache
+C:\Users\vc\OneDrive - Presidio Network Solutions\Desktop\GenSpark Training\21-05-2025 Day 13\WholeApplication\WholeApplication\obj\Debug\net8.0\WholeApplication.sourcelink.json
+C:\Users\vc\OneDrive - Presidio Network Solutions\Desktop\GenSpark Training\21-05-2025 Day 13\WholeApplication\WholeApplication\obj\Debug\net8.0\WholeApplication.dll
+C:\Users\vc\OneDrive - Presidio Network Solutions\Desktop\GenSpark Training\21-05-2025 Day 13\WholeApplication\WholeApplication\obj\Debug\net8.0\refint\WholeApplication.dll
+C:\Users\vc\OneDrive - Presidio Network Solutions\Desktop\GenSpark Training\21-05-2025 Day 13\WholeApplication\WholeApplication\obj\Debug\net8.0\WholeApplication.pdb
+C:\Users\vc\OneDrive - Presidio Network Solutions\Desktop\GenSpark Training\21-05-2025 Day 13\WholeApplication\WholeApplication\obj\Debug\net8.0\WholeApplication.genruntimeconfig.cache
+C:\Users\vc\OneDrive - Presidio Network Solutions\Desktop\GenSpark Training\21-05-2025 Day 13\WholeApplication\WholeApplication\obj\Debug\net8.0\ref\WholeApplication.dll

@@ -1,0 +1,139 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\vc\\OneDrive - Presidio Network Solutions\\Desktop\\GenSpark Training\\21-05-2025 Day 13\\AN Task\\AppointmentApp\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{6C34A8AA-5603-41F0-A0C4-E3A09520E8D5}|AppointmentApp\\AppointmentApp.csproj|c:\\users\\vc\\onedrive - presidio network solutions\\desktop\\genspark training\\21-05-2025 day 13\\an task\\appointmentapp\\appointmentapp\\repositories\\appointmentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6C34A8AA-5603-41F0-A0C4-E3A09520E8D5}|AppointmentApp\\AppointmentApp.csproj|solutionrelative:appointmentapp\\repositories\\appointmentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6C34A8AA-5603-41F0-A0C4-E3A09520E8D5}|AppointmentApp\\AppointmentApp.csproj|c:\\users\\vc\\onedrive - presidio network solutions\\desktop\\genspark training\\21-05-2025 day 13\\an task\\appointmentapp\\appointmentapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6C34A8AA-5603-41F0-A0C4-E3A09520E8D5}|AppointmentApp\\AppointmentApp.csproj|solutionrelative:appointmentapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6C34A8AA-5603-41F0-A0C4-E3A09520E8D5}|AppointmentApp\\AppointmentApp.csproj|c:\\users\\vc\\onedrive - presidio network solutions\\desktop\\genspark training\\21-05-2025 day 13\\an task\\appointmentapp\\appointmentapp\\interfaces\\iappointmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6C34A8AA-5603-41F0-A0C4-E3A09520E8D5}|AppointmentApp\\AppointmentApp.csproj|solutionrelative:appointmentapp\\interfaces\\iappointmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6C34A8AA-5603-41F0-A0C4-E3A09520E8D5}|AppointmentApp\\AppointmentApp.csproj|c:\\users\\vc\\onedrive - presidio network solutions\\desktop\\genspark training\\21-05-2025 day 13\\an task\\appointmentapp\\appointmentapp\\services\\appointmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6C34A8AA-5603-41F0-A0C4-E3A09520E8D5}|AppointmentApp\\AppointmentApp.csproj|solutionrelative:appointmentapp\\services\\appointmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6C34A8AA-5603-41F0-A0C4-E3A09520E8D5}|AppointmentApp\\AppointmentApp.csproj|c:\\users\\vc\\onedrive - presidio network solutions\\desktop\\genspark training\\21-05-2025 day 13\\an task\\appointmentapp\\appointmentapp\\models\\appointment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6C34A8AA-5603-41F0-A0C4-E3A09520E8D5}|AppointmentApp\\AppointmentApp.csproj|solutionrelative:appointmentapp\\models\\appointment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6C34A8AA-5603-41F0-A0C4-E3A09520E8D5}|AppointmentApp\\AppointmentApp.csproj|c:\\users\\vc\\onedrive - presidio network solutions\\desktop\\genspark training\\21-05-2025 day 13\\an task\\appointmentapp\\appointmentapp\\interfaces\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6C34A8AA-5603-41F0-A0C4-E3A09520E8D5}|AppointmentApp\\AppointmentApp.csproj|solutionrelative:appointmentapp\\interfaces\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6C34A8AA-5603-41F0-A0C4-E3A09520E8D5}|AppointmentApp\\AppointmentApp.csproj|c:\\users\\vc\\onedrive - presidio network solutions\\desktop\\genspark training\\21-05-2025 day 13\\an task\\appointmentapp\\appointmentapp\\exceptions\\collectionemptyexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6C34A8AA-5603-41F0-A0C4-E3A09520E8D5}|AppointmentApp\\AppointmentApp.csproj|solutionrelative:appointmentapp\\exceptions\\collectionemptyexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "IAppointmentService.cs",
+              "DocumentMoniker": "C:\\Users\\vc\\OneDrive - Presidio Network Solutions\\Desktop\\GenSpark Training\\21-05-2025 Day 13\\AN Task\\AppointmentApp\\AppointmentApp\\Interfaces\\IAppointmentService.cs",
+              "RelativeDocumentMoniker": "AppointmentApp\\Interfaces\\IAppointmentService.cs",
+              "ToolTip": "C:\\Users\\vc\\OneDrive - Presidio Network Solutions\\Desktop\\GenSpark Training\\21-05-2025 Day 13\\AN Task\\AppointmentApp\\AppointmentApp\\Interfaces\\IAppointmentService.cs",
+              "RelativeToolTip": "AppointmentApp\\Interfaces\\IAppointmentService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-21T10:26:46.891Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AppointmentRepository.cs",
+              "DocumentMoniker": "C:\\Users\\vc\\OneDrive - Presidio Network Solutions\\Desktop\\GenSpark Training\\21-05-2025 Day 13\\AN Task\\AppointmentApp\\AppointmentApp\\Repositories\\AppointmentRepository.cs",
+              "RelativeDocumentMoniker": "AppointmentApp\\Repositories\\AppointmentRepository.cs",
+              "ToolTip": "C:\\Users\\vc\\OneDrive - Presidio Network Solutions\\Desktop\\GenSpark Training\\21-05-2025 Day 13\\AN Task\\AppointmentApp\\AppointmentApp\\Repositories\\AppointmentRepository.cs",
+              "RelativeToolTip": "AppointmentApp\\Repositories\\AppointmentRepository.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAACYAAABBAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-21T09:24:42.332Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AppointmentService.cs",
+              "DocumentMoniker": "C:\\Users\\vc\\OneDrive - Presidio Network Solutions\\Desktop\\GenSpark Training\\21-05-2025 Day 13\\AN Task\\AppointmentApp\\AppointmentApp\\Services\\AppointmentService.cs",
+              "RelativeDocumentMoniker": "AppointmentApp\\Services\\AppointmentService.cs",
+              "ToolTip": "C:\\Users\\vc\\OneDrive - Presidio Network Solutions\\Desktop\\GenSpark Training\\21-05-2025 Day 13\\AN Task\\AppointmentApp\\AppointmentApp\\Services\\AppointmentService.cs",
+              "RelativeToolTip": "AppointmentApp\\Services\\AppointmentService.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAgwBQAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-21T10:16:04.512Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\vc\\OneDrive - Presidio Network Solutions\\Desktop\\GenSpark Training\\21-05-2025 Day 13\\AN Task\\AppointmentApp\\AppointmentApp\\Program.cs",
+              "RelativeDocumentMoniker": "AppointmentApp\\Program.cs",
+              "ToolTip": "C:\\Users\\vc\\OneDrive - Presidio Network Solutions\\Desktop\\GenSpark Training\\21-05-2025 Day 13\\AN Task\\AppointmentApp\\AppointmentApp\\Program.cs",
+              "RelativeToolTip": "AppointmentApp\\Program.cs",
+              "ViewState": "AgIAAGUAAAAAAAAAAAAAAGwAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-21T08:45:38.337Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Appointment.cs",
+              "DocumentMoniker": "C:\\Users\\vc\\OneDrive - Presidio Network Solutions\\Desktop\\GenSpark Training\\21-05-2025 Day 13\\AN Task\\AppointmentApp\\AppointmentApp\\Models\\Appointment.cs",
+              "RelativeDocumentMoniker": "AppointmentApp\\Models\\Appointment.cs",
+              "ToolTip": "C:\\Users\\vc\\OneDrive - Presidio Network Solutions\\Desktop\\GenSpark Training\\21-05-2025 Day 13\\AN Task\\AppointmentApp\\AppointmentApp\\Models\\Appointment.cs",
+              "RelativeToolTip": "AppointmentApp\\Models\\Appointment.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAuwCsAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-21T10:17:54.82Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "IRepository.cs",
+              "DocumentMoniker": "C:\\Users\\vc\\OneDrive - Presidio Network Solutions\\Desktop\\GenSpark Training\\21-05-2025 Day 13\\AN Task\\AppointmentApp\\AppointmentApp\\Interfaces\\IRepository.cs",
+              "RelativeDocumentMoniker": "AppointmentApp\\Interfaces\\IRepository.cs",
+              "ToolTip": "C:\\Users\\vc\\OneDrive - Presidio Network Solutions\\Desktop\\GenSpark Training\\21-05-2025 Day 13\\AN Task\\AppointmentApp\\AppointmentApp\\Interfaces\\IRepository.cs",
+              "RelativeToolTip": "AppointmentApp\\Interfaces\\IRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-21T11:30:32.177Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "CollectionEmptyException.cs",
+              "DocumentMoniker": "C:\\Users\\vc\\OneDrive - Presidio Network Solutions\\Desktop\\GenSpark Training\\21-05-2025 Day 13\\AN Task\\AppointmentApp\\AppointmentApp\\Exceptions\\CollectionEmptyException.cs",
+              "RelativeDocumentMoniker": "AppointmentApp\\Exceptions\\CollectionEmptyException.cs",
+              "ToolTip": "C:\\Users\\vc\\OneDrive - Presidio Network Solutions\\Desktop\\GenSpark Training\\21-05-2025 Day 13\\AN Task\\AppointmentApp\\AppointmentApp\\Exceptions\\CollectionEmptyException.cs",
+              "RelativeToolTip": "AppointmentApp\\Exceptions\\CollectionEmptyException.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-21T09:53:26.314Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
