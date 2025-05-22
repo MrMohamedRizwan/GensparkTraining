@@ -1,0 +1,72 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\vc\\OneDrive - Presidio Network Solutions\\Desktop\\GenSpark Training\\20-05-2025 Day 12\\ConsoleApp2\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{28A52083-9CCE-44DE-94A2-22B9A4310691}|ConsoleApp1\\ConsoleApp1.csproj|c:\\users\\vc\\onedrive - presidio network solutions\\desktop\\genspark training\\20-05-2025 day 12\\consoleapp2\\consoleapp1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{28A52083-9CCE-44DE-94A2-22B9A4310691}|ConsoleApp1\\ConsoleApp1.csproj|solutionrelative:consoleapp1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{28A52083-9CCE-44DE-94A2-22B9A4310691}|ConsoleApp1\\ConsoleApp1.csproj|c:\\users\\vc\\onedrive - presidio network solutions\\desktop\\genspark training\\20-05-2025 day 12\\consoleapp2\\consoleapp1\\2employeedetails.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{28A52083-9CCE-44DE-94A2-22B9A4310691}|ConsoleApp1\\ConsoleApp1.csproj|solutionrelative:consoleapp1\\2employeedetails.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{28A52083-9CCE-44DE-94A2-22B9A4310691}|ConsoleApp1\\ConsoleApp1.csproj|c:\\users\\vc\\onedrive - presidio network solutions\\desktop\\genspark training\\20-05-2025 day 12\\consoleapp2\\consoleapp1\\2_easy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{28A52083-9CCE-44DE-94A2-22B9A4310691}|ConsoleApp1\\ConsoleApp1.csproj|solutionrelative:consoleapp1\\2_easy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "2EmployeeDetails.cs",
+              "DocumentMoniker": "C:\\Users\\vc\\OneDrive - Presidio Network Solutions\\Desktop\\GenSpark Training\\20-05-2025 Day 12\\ConsoleApp2\\ConsoleApp1\\2EmployeeDetails.cs",
+              "RelativeDocumentMoniker": "ConsoleApp1\\2EmployeeDetails.cs",
+              "ToolTip": "C:\\Users\\vc\\OneDrive - Presidio Network Solutions\\Desktop\\GenSpark Training\\20-05-2025 Day 12\\ConsoleApp2\\ConsoleApp1\\2EmployeeDetails.cs",
+              "RelativeToolTip": "ConsoleApp1\\2EmployeeDetails.cs",
+              "ViewState": "AgIAAGMBAAAAAAAAAAAAAGoBAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-20T10:49:19.325Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "2_Easy.cs",
+              "DocumentMoniker": "C:\\Users\\vc\\OneDrive - Presidio Network Solutions\\Desktop\\GenSpark Training\\20-05-2025 Day 12\\ConsoleApp2\\ConsoleApp1\\2_Easy.cs",
+              "RelativeDocumentMoniker": "ConsoleApp1\\2_Easy.cs",
+              "ToolTip": "C:\\Users\\vc\\OneDrive - Presidio Network Solutions\\Desktop\\GenSpark Training\\20-05-2025 Day 12\\ConsoleApp2\\ConsoleApp1\\2_Easy.cs",
+              "RelativeToolTip": "ConsoleApp1\\2_Easy.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-20T11:53:16.658Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\vc\\OneDrive - Presidio Network Solutions\\Desktop\\GenSpark Training\\20-05-2025 Day 12\\ConsoleApp2\\ConsoleApp1\\Program.cs",
+              "RelativeDocumentMoniker": "ConsoleApp1\\Program.cs",
+              "ToolTip": "C:\\Users\\vc\\OneDrive - Presidio Network Solutions\\Desktop\\GenSpark Training\\20-05-2025 Day 12\\ConsoleApp2\\ConsoleApp1\\Program.cs*",
+              "RelativeToolTip": "ConsoleApp1\\Program.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-20T04:35:52.501Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
