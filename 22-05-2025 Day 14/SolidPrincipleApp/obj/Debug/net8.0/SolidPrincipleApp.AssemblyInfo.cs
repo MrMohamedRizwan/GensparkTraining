@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SolidPrincipleApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4026fcec7f3c4d323c612cd897215007944202cf")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b728e577a898f28e9d89f54f3fe90b973f7b8f25")]
 [assembly: System.Reflection.AssemblyProductAttribute("SolidPrincipleApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SolidPrincipleApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

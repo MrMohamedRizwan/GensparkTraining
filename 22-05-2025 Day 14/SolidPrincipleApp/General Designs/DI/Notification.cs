@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SolidPrincipleApp.General_Designs.DI
 {
-    internal class Notification
+    public class Notification
     {
         private EmailService _emailService = new EmailService();  
         public void NotifyUser(string message)
