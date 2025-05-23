@@ -1,0 +1,77 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\vc\\OneDrive - Presidio Network Solutions\\Desktop\\GenSpark Training\\23-05-2025 Day 15\\DesignPatterns\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{6E33C282-8C21-446A-8263-6E59392E3768}|DesignPatterns.csproj|c:\\users\\vc\\onedrive - presidio network solutions\\desktop\\genspark training\\23-05-2025 day 15\\designpatterns\\singleton\\filemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6E33C282-8C21-446A-8263-6E59392E3768}|DesignPatterns.csproj|solutionrelative:singleton\\filemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6E33C282-8C21-446A-8263-6E59392E3768}|DesignPatterns.csproj|c:\\users\\vc\\onedrive - presidio network solutions\\desktop\\genspark training\\23-05-2025 day 15\\designpatterns\\singleton\\input.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{6E33C282-8C21-446A-8263-6E59392E3768}|DesignPatterns.csproj|solutionrelative:singleton\\input.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6E33C282-8C21-446A-8263-6E59392E3768}|DesignPatterns.csproj|c:\\users\\vc\\onedrive - presidio network solutions\\desktop\\genspark training\\23-05-2025 day 15\\designpatterns\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6E33C282-8C21-446A-8263-6E59392E3768}|DesignPatterns.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\vc\\OneDrive - Presidio Network Solutions\\Desktop\\GenSpark Training\\23-05-2025 Day 15\\DesignPatterns\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\vc\\OneDrive - Presidio Network Solutions\\Desktop\\GenSpark Training\\23-05-2025 Day 15\\DesignPatterns\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-23T07:06:20.098Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "input.txt",
+              "DocumentMoniker": "C:\\Users\\vc\\OneDrive - Presidio Network Solutions\\Desktop\\GenSpark Training\\23-05-2025 Day 15\\DesignPatterns\\Singleton\\input.txt",
+              "RelativeDocumentMoniker": "Singleton\\input.txt",
+              "ToolTip": "C:\\Users\\vc\\OneDrive - Presidio Network Solutions\\Desktop\\GenSpark Training\\23-05-2025 Day 15\\DesignPatterns\\Singleton\\input.txt",
+              "RelativeToolTip": "Singleton\\input.txt",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2025-05-23T07:24:09.145Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "FileManager.cs",
+              "DocumentMoniker": "C:\\Users\\vc\\OneDrive - Presidio Network Solutions\\Desktop\\GenSpark Training\\23-05-2025 Day 15\\DesignPatterns\\Singleton\\FileManager.cs",
+              "RelativeDocumentMoniker": "Singleton\\FileManager.cs",
+              "ToolTip": "C:\\Users\\vc\\OneDrive - Presidio Network Solutions\\Desktop\\GenSpark Training\\23-05-2025 Day 15\\DesignPatterns\\Singleton\\FileManager.cs*",
+              "RelativeToolTip": "Singleton\\FileManager.cs*",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAAABUAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-23T07:08:19.829Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

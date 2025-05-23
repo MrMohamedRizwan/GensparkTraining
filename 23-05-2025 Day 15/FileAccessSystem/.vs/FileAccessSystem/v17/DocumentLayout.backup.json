@@ -1,0 +1,111 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\vc\\OneDrive - Presidio Network Solutions\\Desktop\\GenSpark Training\\23-05-2025 Day 15\\FileAccessSystem\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{C9C8687A-C8CA-44F4-BEB5-A42478007C1A}|FileAccessSystem.csproj|c:\\users\\vc\\onedrive - presidio network solutions\\desktop\\genspark training\\23-05-2025 day 15\\fileaccesssystem\\proxy\\proxy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C9C8687A-C8CA-44F4-BEB5-A42478007C1A}|FileAccessSystem.csproj|solutionrelative:proxy\\proxy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C9C8687A-C8CA-44F4-BEB5-A42478007C1A}|FileAccessSystem.csproj|c:\\users\\vc\\onedrive - presidio network solutions\\desktop\\genspark training\\23-05-2025 day 15\\fileaccesssystem\\interfaces\\ifile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C9C8687A-C8CA-44F4-BEB5-A42478007C1A}|FileAccessSystem.csproj|solutionrelative:interfaces\\ifile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C9C8687A-C8CA-44F4-BEB5-A42478007C1A}|FileAccessSystem.csproj|c:\\users\\vc\\onedrive - presidio network solutions\\desktop\\genspark training\\23-05-2025 day 15\\fileaccesssystem\\services\\fileservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C9C8687A-C8CA-44F4-BEB5-A42478007C1A}|FileAccessSystem.csproj|solutionrelative:services\\fileservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C9C8687A-C8CA-44F4-BEB5-A42478007C1A}|FileAccessSystem.csproj|c:\\users\\vc\\onedrive - presidio network solutions\\desktop\\genspark training\\23-05-2025 day 15\\fileaccesssystem\\models\\users.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C9C8687A-C8CA-44F4-BEB5-A42478007C1A}|FileAccessSystem.csproj|solutionrelative:models\\users.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C9C8687A-C8CA-44F4-BEB5-A42478007C1A}|FileAccessSystem.csproj|c:\\users\\vc\\onedrive - presidio network solutions\\desktop\\genspark training\\23-05-2025 day 15\\fileaccesssystem\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C9C8687A-C8CA-44F4-BEB5-A42478007C1A}|FileAccessSystem.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 198,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "FileService.cs",
+              "DocumentMoniker": "C:\\Users\\vc\\OneDrive - Presidio Network Solutions\\Desktop\\GenSpark Training\\23-05-2025 Day 15\\FileAccessSystem\\Services\\FileService.cs",
+              "RelativeDocumentMoniker": "Services\\FileService.cs",
+              "ToolTip": "C:\\Users\\vc\\OneDrive - Presidio Network Solutions\\Desktop\\GenSpark Training\\23-05-2025 Day 15\\FileAccessSystem\\Services\\FileService.cs*",
+              "RelativeToolTip": "Services\\FileService.cs*",
+              "ViewState": "AgIAACcAAAAAAAAAAAAAAEMAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-23T09:31:15.165Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "IFile.cs",
+              "DocumentMoniker": "C:\\Users\\vc\\OneDrive - Presidio Network Solutions\\Desktop\\GenSpark Training\\23-05-2025 Day 15\\FileAccessSystem\\Interfaces\\IFile.cs",
+              "RelativeDocumentMoniker": "Interfaces\\IFile.cs",
+              "ToolTip": "C:\\Users\\vc\\OneDrive - Presidio Network Solutions\\Desktop\\GenSpark Training\\23-05-2025 Day 15\\FileAccessSystem\\Interfaces\\IFile.cs*",
+              "RelativeToolTip": "Interfaces\\IFile.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-23T09:29:25.48Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Users.cs",
+              "DocumentMoniker": "C:\\Users\\vc\\OneDrive - Presidio Network Solutions\\Desktop\\GenSpark Training\\23-05-2025 Day 15\\FileAccessSystem\\Models\\Users.cs",
+              "RelativeDocumentMoniker": "Models\\Users.cs",
+              "ToolTip": "C:\\Users\\vc\\OneDrive - Presidio Network Solutions\\Desktop\\GenSpark Training\\23-05-2025 Day 15\\FileAccessSystem\\Models\\Users.cs",
+              "RelativeToolTip": "Models\\Users.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAiwAoAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-23T09:22:17.531Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\vc\\OneDrive - Presidio Network Solutions\\Desktop\\GenSpark Training\\23-05-2025 Day 15\\FileAccessSystem\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\vc\\OneDrive - Presidio Network Solutions\\Desktop\\GenSpark Training\\23-05-2025 Day 15\\FileAccessSystem\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAADMAAAAAAAAAAAAAAD4AAABLAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-23T09:17:20.885Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 202,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Proxy.cs",
+              "DocumentMoniker": "C:\\Users\\vc\\OneDrive - Presidio Network Solutions\\Desktop\\GenSpark Training\\23-05-2025 Day 15\\FileAccessSystem\\Proxy\\Proxy.cs",
+              "RelativeDocumentMoniker": "Proxy\\Proxy.cs",
+              "ToolTip": "C:\\Users\\vc\\OneDrive - Presidio Network Solutions\\Desktop\\GenSpark Training\\23-05-2025 Day 15\\FileAccessSystem\\Proxy\\Proxy.cs",
+              "RelativeToolTip": "Proxy\\Proxy.cs",
+              "ViewState": "AgIAABoAAAAAAAAAAAAAACIAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-23T09:33:18.46Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

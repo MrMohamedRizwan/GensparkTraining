@@ -1,0 +1,15 @@
+C:\Users\vc\OneDrive - Presidio Network Solutions\Desktop\GenSpark Training\23-05-2025 Day 15\FileAccessSystem\bin\Debug\net8.0\FileAccessSystem.exe
+C:\Users\vc\OneDrive - Presidio Network Solutions\Desktop\GenSpark Training\23-05-2025 Day 15\FileAccessSystem\bin\Debug\net8.0\FileAccessSystem.deps.json
+C:\Users\vc\OneDrive - Presidio Network Solutions\Desktop\GenSpark Training\23-05-2025 Day 15\FileAccessSystem\bin\Debug\net8.0\FileAccessSystem.runtimeconfig.json
+C:\Users\vc\OneDrive - Presidio Network Solutions\Desktop\GenSpark Training\23-05-2025 Day 15\FileAccessSystem\bin\Debug\net8.0\FileAccessSystem.dll
+C:\Users\vc\OneDrive - Presidio Network Solutions\Desktop\GenSpark Training\23-05-2025 Day 15\FileAccessSystem\bin\Debug\net8.0\FileAccessSystem.pdb
+C:\Users\vc\OneDrive - Presidio Network Solutions\Desktop\GenSpark Training\23-05-2025 Day 15\FileAccessSystem\obj\Debug\net8.0\FileAccessSystem.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\vc\OneDrive - Presidio Network Solutions\Desktop\GenSpark Training\23-05-2025 Day 15\FileAccessSystem\obj\Debug\net8.0\FileAccessSystem.AssemblyInfoInputs.cache
+C:\Users\vc\OneDrive - Presidio Network Solutions\Desktop\GenSpark Training\23-05-2025 Day 15\FileAccessSystem\obj\Debug\net8.0\FileAccessSystem.AssemblyInfo.cs
+C:\Users\vc\OneDrive - Presidio Network Solutions\Desktop\GenSpark Training\23-05-2025 Day 15\FileAccessSystem\obj\Debug\net8.0\FileAccessSystem.csproj.CoreCompileInputs.cache
+C:\Users\vc\OneDrive - Presidio Network Solutions\Desktop\GenSpark Training\23-05-2025 Day 15\FileAccessSystem\obj\Debug\net8.0\FileAccessSystem.sourcelink.json
+C:\Users\vc\OneDrive - Presidio Network Solutions\Desktop\GenSpark Training\23-05-2025 Day 15\FileAccessSystem\obj\Debug\net8.0\FileAccessSystem.dll
+C:\Users\vc\OneDrive - Presidio Network Solutions\Desktop\GenSpark Training\23-05-2025 Day 15\FileAccessSystem\obj\Debug\net8.0\refint\FileAccessSystem.dll
+C:\Users\vc\OneDrive - Presidio Network Solutions\Desktop\GenSpark Training\23-05-2025 Day 15\FileAccessSystem\obj\Debug\net8.0\FileAccessSystem.pdb
+C:\Users\vc\OneDrive - Presidio Network Solutions\Desktop\GenSpark Training\23-05-2025 Day 15\FileAccessSystem\obj\Debug\net8.0\FileAccessSystem.genruntimeconfig.cache
+C:\Users\vc\OneDrive - Presidio Network Solutions\Desktop\GenSpark Training\23-05-2025 Day 15\FileAccessSystem\obj\Debug\net8.0\ref\FileAccessSystem.dll
