@@ -1,3 +1,6 @@
+using FirstAPI.Contexts;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // ✅ Add Swagger service
@@ -7,6 +10,10 @@ builder.Services.AddSwaggerGen();
 // Add your other services
 builder.Services.AddControllers();
 
+builder.Services.AddDbContext<ClinicContext>(opts =>
+{
+    opts.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
 var app = builder.Build();
 
 // ✅ Enable Swagger only in development (optional but recommended)
