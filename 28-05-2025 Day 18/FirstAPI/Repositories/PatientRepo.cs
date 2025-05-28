@@ -1,0 +1,32 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using FirstAPI.Contexts;
+using FirstAPI.Models;
+using Microsoft.EntityFrameworkCore;
+
+namespace FirstAPI.Repositories
+{
+    public  class PatinetRepo : Repository<int, Patient>
+    {
+        public PatinetRepo(ClinicContext clinicContext) : base(clinicContext)
+        {
+        }
+
+        public override async Task<Patient> Get(int key)
+        {
+            var patient = await _clinicContext.patients.SingleOrDefaultAsync(p => p.Id == key);
+
+            return patient??throw new Exception("No patient with the given ID");
+        }
+
+        public override async Task<IEnumerable<Patient>> GetAll()
+        {
+            var patients = _clinicContext.patients;
+            if (patients.Count() == 0)
+                throw new Exception("No Patients in the database");
+            return (await patients.ToListAsync());
+        }
+    }
+}
