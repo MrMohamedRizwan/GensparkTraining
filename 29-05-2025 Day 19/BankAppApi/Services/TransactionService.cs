@@ -69,7 +69,9 @@ namespace BankAppApi.Services
             {
                 AccountId = t.AccountId,
                 Amount = t.Amount,
-                Type = t.Type
+                Type = t.Type,
+                Date = t.Date,
+                Account=t.Account
             });
             return transact;
         }

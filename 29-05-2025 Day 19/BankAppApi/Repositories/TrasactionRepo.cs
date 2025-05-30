@@ -17,16 +17,16 @@ namespace BankAppApi.Repositories
 
         public override async Task<Transaction> Get(int key)
         {
-            var doctor = await _bankContext.Transactions.SingleOrDefaultAsync(d => d.Id == key);
-            return doctor ?? throw new Exception("No Doctor with the given ID");
+            var transact = await _bankContext.Transactions.SingleOrDefaultAsync(d => d.Id == key);
+            return transact ?? throw new Exception("No Transaction with the given ID");
         }
 
         public override async Task<IEnumerable<Transaction>> GetAll()
         {
-            var doctor = _bankContext.Transactions;
-            if (doctor.Count() == 0)
-               throw new Exception("No Patients in the database");
-            return (await doctor.ToListAsync());
+            var transact = _bankContext.Transactions;
+            if (transact.Count() == 0)
+               throw new Exception("No Transactions in the database");
+            return (await transact.ToListAsync());
         }
     }
 }

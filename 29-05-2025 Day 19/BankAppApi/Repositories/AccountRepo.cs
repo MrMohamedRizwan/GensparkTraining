@@ -16,16 +16,16 @@ namespace BankAppApi.Repositories
 
         public override async Task<Account> Get(int key)
         {
-            var doctor = await _bankContext.Accounts.SingleOrDefaultAsync(d => d.Id == key);
-            return doctor ?? throw new Exception("No Accounts with the given ID");
+            var acc = await _bankContext.Accounts.SingleOrDefaultAsync(d => d.Id == key);
+            return acc ?? throw new Exception("No Accounts with the given ID");
         }
 
         public override async Task<IEnumerable<Account>> GetAll()
         {
-            var doctor = _bankContext.Accounts;
-            if (doctor.Count() == 0)
+            var acc = _bankContext.Accounts;
+            if (acc.Count() == 0)
                throw new Exception("No Accounts in the database");
-            return (await doctor.ToListAsync());
+            return (await acc.ToListAsync());
         }
     }
 }
