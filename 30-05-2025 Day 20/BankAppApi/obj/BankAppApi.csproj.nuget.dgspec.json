@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/presidio/Desktop/HI/GensparkTraining/29-05-2025 Day 19/BankAppApi/BankAppApi.csproj": {}
+    "/Users/presidio/Desktop/HI/GensparkTraining/30-05-2025 Day 20/BankAppApi/BankAppApi.csproj": {}
   },
   "projects": {
-    "/Users/presidio/Desktop/HI/GensparkTraining/29-05-2025 Day 19/BankAppApi/BankAppApi.csproj": {
+    "/Users/presidio/Desktop/HI/GensparkTraining/30-05-2025 Day 20/BankAppApi/BankAppApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/presidio/Desktop/HI/GensparkTraining/29-05-2025 Day 19/BankAppApi/BankAppApi.csproj",
+        "projectUniqueName": "/Users/presidio/Desktop/HI/GensparkTraining/30-05-2025 Day 20/BankAppApi/BankAppApi.csproj",
         "projectName": "BankAppApi",
-        "projectPath": "/Users/presidio/Desktop/HI/GensparkTraining/29-05-2025 Day 19/BankAppApi/BankAppApi.csproj",
+        "projectPath": "/Users/presidio/Desktop/HI/GensparkTraining/30-05-2025 Day 20/BankAppApi/BankAppApi.csproj",
         "packagesPath": "/Users/presidio/.nuget/packages/",
-        "outputPath": "/Users/presidio/Desktop/HI/GensparkTraining/29-05-2025 Day 19/BankAppApi/obj/",
+        "outputPath": "/Users/presidio/Desktop/HI/GensparkTraining/30-05-2025 Day 20/BankAppApi/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/presidio/.nuget/NuGet/NuGet.Config"

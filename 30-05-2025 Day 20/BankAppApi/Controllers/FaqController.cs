@@ -12,12 +12,12 @@ namespace BankAppApi.Controllers
     public class FaqController : ControllerBase
     {
         [HttpGet]
-        public ActionResult<string> GetFaq([FromQuery] string question)
+        public async Task<ActionResult<string>>  GetFaq([FromQuery] string question)
         {
             var faq = new FaqService();
-            string ans = faq.SendResponse(question);
-            Console.WriteLine($"\n\nAnswer:{ans}\n\n");
-            return Ok($"Received: {ans}");
+            var ans =await faq.SendResponse(question);
+            // Console.WriteLine($"\n\nAnswer:{ans}\n\n");
+            return Ok(new { ans });
         }
 
     }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "r0J4AUfEd5Q=",
+  "dgSpecHash": "pcKbFwKrSJs=",
   "success": true,
-  "projectFilePath": "/Users/presidio/Desktop/HI/GensparkTraining/29-05-2025 Day 19/BankAppApi/BankAppApi.csproj",
+  "projectFilePath": "/Users/presidio/Desktop/HI/GensparkTraining/30-05-2025 Day 20/BankAppApi/BankAppApi.csproj",
   "expectedPackageFiles": [
     "/Users/presidio/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
     "/Users/presidio/.nuget/packages/microsoft.aspnetcore.openapi/9.0.5/microsoft.aspnetcore.openapi.9.0.5.nupkg.sha512",

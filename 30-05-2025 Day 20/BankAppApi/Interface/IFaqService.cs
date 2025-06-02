@@ -7,6 +7,6 @@ namespace BankAppApi.Interface
 {
     public interface IFaqService
     {
-        public string SendResponse(string input);
+        public Task<string> SendResponse(string input);
     }
 }
