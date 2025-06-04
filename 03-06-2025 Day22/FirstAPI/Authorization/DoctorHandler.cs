@@ -26,19 +26,17 @@ namespace FirstAPI.Authorization
             var email = userIdClaim;
             Console.WriteLine(email);
 
-            Console.WriteLine($"\n\nThis is the all doctor in db{""}\n\n");
             
-            var d = await _doctorRepository.GetAll();
+            // var d = await _doctorRepository.GetAll();
             var doctorall = (await _doctorRepository.GetAll())
                             .FirstOrDefault(d =>d.Email == email);
-            Console.WriteLine($"\n\nInside Handle Requirements\n\n{doctorall} doctorlll");
+            // Console.WriteLine($"\n\nInside Handle Requirements\n\n{doctorall} doctorlll");
             int userId = doctorall.Id;
-
-            var doctors = await _doctorRepository.GetAll();
-            var doctor = doctors.FirstOrDefault(d => d.User != null && d.Id == userId);
+            float yoe = doctorall.YearsOfExperience;
+            Console.WriteLine($"\n\nThis is the UserId in db{userId}  {yoe}\n\n");
 
             
-            if (doctor != null && doctor.YearsOfExperience >= requirement.MinimumYears)
+            if (doctorall != null && yoe >= requirement.MinimumYears)
             {
                 context.Succeed(requirement);
             }

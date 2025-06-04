@@ -66,8 +66,8 @@ namespace FirstAPI.Controllers
             {
                 return Unauthorized();
             }
-
             int userId = user;
+            Console.WriteLine($"\n\nline 6789 {email} {user} \n\n");
             var success = await _doctorService.CancelAppointment(userId, appointmentId);
             if (!success)
                 return BadRequest("Unable to cancel appointment. Make sure it exists and you are authorized.");

@@ -114,8 +114,9 @@ namespace FirstAPI.Services
 
         public async Task<ICollection<Doctor>> GetDoctorsBySpeciality(string speciality)
         {
-            var result = (await _doctorRepository.GetAll()).FirstOrDefault(d =>d.YearsOfExperience == 2);
-            return result();
+            var result = (await _doctorRepository.GetAll()).FirstOrDefault(d => d.YearsOfExperience == 2);
+            // return result();
+            return null;
         }
 
         public async Task<bool> CancelAppointment(int doctorId, string AppointmnetNo)
@@ -142,10 +143,24 @@ namespace FirstAPI.Services
         }
         public async Task<int> GetDoctorIdByEmail(string email)
         {
-            var doctor = (await _doctorRepository.GetAll())
-                            .FirstOrDefault(d => d.User != null && d.Email.ToLower() == email.ToLower());
+            try
+            {
+                 var doctor= (await _doctorRepository.GetAll())
+                            .FirstOrDefault(d => d.Email == email);
+                if (doctor == null)
+                {
+                    Console.WriteLine($"\n\nNo doctor found with email: {email}");
+                    return -1;
+                }
+                Console.WriteLine($"\n\nGet Doctor ID by email{doctor.Email} {doctor.Id}");
 
-            return doctor.Id;
+                return doctor.Id;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("\n\n  Error", e.Message);
+                return -1;
+            }
         }
 
 
