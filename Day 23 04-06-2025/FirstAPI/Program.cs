@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using System.Text;
 using FirstAPI.Authorization;
 using FirstAPI.Contexts;
@@ -75,37 +76,73 @@ builder.Services.AddTransient<IOtherContextFunctionities, OtherFuncinalitiesImpl
 builder.Services.AddTransient<IEncryptionService, EncryptionService>();
 builder.Services.AddTransient<ITokenService, TokenService>();
 builder.Services.AddTransient<IAuthenticationService, AuthenticationService>();
+builder.Services.AddTransient<IAppointmentService, AppointmentService>();
+
 #endregion
 
 #region AuthenticationFilter
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options =>
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateAudience = false,
+            ValidateIssuer = false,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(builder.Configuration["Keys:JwtTokenKey"])),
+                RoleClaimType = ClaimTypes.Role
+        };
+
+        options.Events = new JwtBearerEvents
+        {
+            OnChallenge = context =>
+            {
+                context.HandleResponse(); // prevent default 401 body
+
+                context.Response.StatusCode = 401;
+                context.Response.ContentType = "application/json";
+
+                var result = System.Text.Json.JsonSerializer.Serialize(new
                 {
-                    options.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateAudience = false,
-                        ValidateIssuer = false,
-                        ValidateLifetime = true,
-                        ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Keys:JwtTokenKey"]))
-                    };
+                    error = "Authentication failed. Missing or invalid JWT token."
                 });
 
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultScheme = "Cookies";
-    options.DefaultChallengeScheme = "Google";
-})
-.AddCookie("Cookies")
-.AddGoogle("Google", options =>
-{
-    options.ClientId = builder.Configuration["Authentication:Google:ClientId"];
-    options.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
-    options.SaveTokens = true; 
-    options.Scope.Add("openid"); 
-    options.Scope.Add("profile");
-    options.Scope.Add("email");
-});  
+
+                return context.Response.WriteAsync(result);
+            },
+            OnForbidden = context =>
+            {
+                 Console.WriteLine("\n\n ⚠️ OnForbidden triggered\n\n"); 
+                context.Response.StatusCode = 403;
+                context.Response.ContentType = "application/json";
+
+                var result = System.Text.Json.JsonSerializer.Serialize(new
+                {
+                    error = "You do not have permission to access this resource."
+                });
+
+                return context.Response.WriteAsync(result);
+            }
+        };
+    });
+
+// builder.Services.AddAuthentication(options =>
+// {
+//     options.DefaultScheme = "Cookies";
+//     options.DefaultChallengeScheme = "Google";
+// })
+// .AddCookie("Cookies")
+// .AddGoogle("Google", options =>
+// {
+//     options.ClientId = builder.Configuration["Authentication:Google:ClientId"];
+//     options.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
+//     options.SaveTokens = true; 
+//     options.Scope.Add("openid"); 
+//     options.Scope.Add("profile");
+//     options.Scope.Add("email");
+// });  
 
 builder.Services.AddScoped<IAuthorizationHandler,DoctorHandler>();
 

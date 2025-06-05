@@ -24,7 +24,7 @@ namespace FirstAPI.Authorization
             if (string.IsNullOrEmpty(userIdClaim))
                 return;
             var email = userIdClaim;
-            Console.WriteLine(email);
+            // Console.WriteLine(email);
 
             
             // var d = await _doctorRepository.GetAll();
@@ -33,11 +33,11 @@ namespace FirstAPI.Authorization
             // Console.WriteLine($"\n\nInside Handle Requirements\n\n{doctorall} doctorlll");
             int userId = doctorall.Id;
             float yoe = doctorall.YearsOfExperience;
-            Console.WriteLine($"\n\nThis is the UserId in db{userId}  {yoe}\n\n");
 
             
             if (doctorall != null && yoe >= requirement.MinimumYears)
             {
+                // Console.WriteLine($"\n\nThis is the UserId in db{userId} {requirement.MinimumYears}  {yoe}\n\n");
                 context.Succeed(requirement);
             }
         }

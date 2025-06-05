@@ -9,6 +9,10 @@ namespace FirstAPI.Interfaces
 {
     public interface IAppointmentService
     {
-        public Task<Appointmnet> AddAppointmnet(AppointmnetAddRequestDTO Appointment);   
+        public Task<Appointmnet> AddAppointmnet(AppointmnetAddRequestDTO Appointment);
+        public Task<bool> CancelAppointment(string email, string AppointmnetNo);
+        public Task<int> GetDoctorIdByEmail(string email);
+        
+
     }
 }

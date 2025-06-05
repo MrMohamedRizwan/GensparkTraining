@@ -119,50 +119,5 @@ namespace FirstAPI.Services
             return null;
         }
 
-        public async Task<bool> CancelAppointment(int doctorId, string AppointmnetNo)
-        {
-            var doctors = await _doctorRepository.GetAll();
-            var doctor = doctors.FirstOrDefault(d => d.User != null && d.Id == doctorId);
-            if (doctor == null)
-                return false;
-
-            var appointment = (await _appointmentRepository.GetAll())
-                                .FirstOrDefault(a => a.AppointmnetNumber == AppointmnetNo && a.DoctorId == doctor.Id);
-            if (appointment == null)
-                return false;
-
-            try
-            {
-                await _appointmentRepository.Delete(appointment.AppointmnetNumber);
-                return true;
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
-        }
-        public async Task<int> GetDoctorIdByEmail(string email)
-        {
-            try
-            {
-                 var doctor= (await _doctorRepository.GetAll())
-                            .FirstOrDefault(d => d.Email == email);
-                if (doctor == null)
-                {
-                    Console.WriteLine($"\n\nNo doctor found with email: {email}");
-                    return -1;
-                }
-                Console.WriteLine($"\n\nGet Doctor ID by email{doctor.Email} {doctor.Id}");
-
-                return doctor.Id;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("\n\n  Error", e.Message);
-                return -1;
-            }
-        }
-
-
     }
 }
