@@ -1,0 +1,34 @@
+<html>
+  <body>
+      <h1>Notify - Document Sharing</h1>
+
+    <div id="notifications">
+        <strong>Notifications:</strong>
+        <div id="msgList">
+        </div>
+    </div>
+      <script src="https://cdn.jsdelivr.net/npm/@microsoft/signalr@8.0.7/dist/browser/signalr.min.js"></script>
+         <script>
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("http://localhost:5001/documentHub")
+            .build();
+
+        connection.on("ReceiveNotification", (message) => {
+          console.log("Recivecdmiwaebfeuyifaywbuegbuy fbwuhgfuyweguye ✅ ✅✅✅✅✅✅")
+          console.log(`${message} Recievede ✅ ✅✅✅✅✅✅`);
+            const msgList = document.getElementById("msgList");
+            const newMsg = document.createElement("div");
+            newMsg.innerHTML = `${message}`;
+            msgList.prepend(newMsg);
+        });
+
+        connection.start()
+            .then(() => console.log("✅ Connected to SignalR hub"))
+            .catch(err => console.error("❌ SignalR connection error:", err));
+    </script>
+  </body>
+</html>
+
+
+
+

@@ -1,0 +1,26 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace FirstAPI.Misc
+{
+    public class NameValidation:ValidationAttribute
+    {
+        public override bool IsValid(object? value)
+        {
+            string name = value as string ?? "";
+            // System.Console.WriteLine("Custom Validations");
+            if (string.IsNullOrEmpty(name))
+                return false;
+            foreach (char c in name)
+            {
+                if (!char.IsLetter(c) || !char.IsWhiteSpace(c))
+                    return false;
+            }
+            return true;
+            
+        }
+    }
+}
