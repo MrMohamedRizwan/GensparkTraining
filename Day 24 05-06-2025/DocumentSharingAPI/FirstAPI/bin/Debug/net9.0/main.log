@@ -3572,3 +3572,26 @@ Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Ambiguous HTTP meth
    at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
    at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
 2025-06-05 17:29:42,228 [.NET Signal Handler] INFO Microsoft.Hosting.Lifetime - Application is shutting down...
+2025-06-06 09:35:16,084 [1] INFO Microsoft.Hosting.Lifetime - Now listening on: http://localhost:5001
+2025-06-06 09:35:16,116 [1] INFO Microsoft.Hosting.Lifetime - Application started. Press Ctrl+C to shut down.
+2025-06-06 09:35:16,116 [1] INFO Microsoft.Hosting.Lifetime - Hosting environment: Development
+2025-06-06 09:35:16,116 [1] INFO Microsoft.Hosting.Lifetime - Content root path: /Users/presidio/Desktop/Genspark/GensparkTraining/Day 24 05-06-2025/DocumentSharingAPI/FirstAPI
+2025-06-06 09:36:37,962 [.NET TP Worker] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (76ms) [Parameters=[@p0='?', @p1='?' (DbType = Binary), @p2='?' (DbType = Binary), @p3='?', @p4='?'], CommandType='Text', CommandTimeout='30']
+INSERT INTO "Users" (email, "HashKey", "Password", "Role", "Username")
+VALUES (@p0, @p1, @p2, @p3, @p4);
+2025-06-06 09:37:02,357 [.NET TP Worker] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (4ms) [Parameters=[@__key_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT u.email, u."HashKey", u."Password", u."Role", u."Username"
+FROM "Users" AS u
+WHERE u.email = @__key_0
+LIMIT 2
+2025-06-06 09:42:31,483 [.NET TP Worker] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (2ms) [Parameters=[@__key_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT u.email, u."HashKey", u."Password", u."Role", u."Username"
+FROM "Users" AS u
+WHERE u.email = @__key_0
+LIMIT 2
+2025-06-06 10:33:10,530 [.NET TP Worker] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (3ms) [Parameters=[@__key_0='?'], CommandType='Text', CommandTimeout='30']
+SELECT u.email, u."HashKey", u."Password", u."Role", u."Username"
+FROM "Users" AS u
+WHERE u.email = @__key_0
+LIMIT 2
+2025-06-06 10:41:22,679 [.NET Signal Handler] INFO Microsoft.Hosting.Lifetime - Application is shutting down...
