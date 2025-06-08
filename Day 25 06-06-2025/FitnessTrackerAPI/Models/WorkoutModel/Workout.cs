@@ -11,10 +11,11 @@ namespace FitnessTrackerAPI.Models.WorkoutModel
         public Guid Id { get; set; }
         public Guid ClientId { get; set; }
         public Client? Client { get; set; } = null!;
-
+        
         public DateTime Date { get; set; } = DateTime.UtcNow;
         public string Description { get; set; } = string.Empty; // details about the workout
         public int? PlanAssignmentId { get; set; }
         public PlanAssignment? PlanAssignment { get; set; }
+        
     }
 }

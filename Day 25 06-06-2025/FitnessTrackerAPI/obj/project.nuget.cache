@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "uNPRpZWthyA=",
+  "dgSpecHash": "ySFqTdk62Pw=",
   "success": true,
   "projectFilePath": "/Users/presidio/Desktop/Genspark/GensparkTraining/Day 25 06-06-2025/FitnessTrackerAPI/FitnessTrackerAPI.csproj",
   "expectedPackageFiles": [
@@ -25,6 +25,7 @@
     "/Users/presidio/.nuget/packages/microsoft.aspnetcore.http.connections.common/1.2.0/microsoft.aspnetcore.http.connections.common.1.2.0.nupkg.sha512",
     "/Users/presidio/.nuget/packages/microsoft.aspnetcore.http.extensions/2.3.0/microsoft.aspnetcore.http.extensions.2.3.0.nupkg.sha512",
     "/Users/presidio/.nuget/packages/microsoft.aspnetcore.http.features/2.3.0/microsoft.aspnetcore.http.features.2.3.0.nupkg.sha512",
+    "/Users/presidio/.nuget/packages/microsoft.aspnetcore.mvc.versioning/5.1.0/microsoft.aspnetcore.mvc.versioning.5.1.0.nupkg.sha512",
     "/Users/presidio/.nuget/packages/microsoft.aspnetcore.openapi/8.0.16/microsoft.aspnetcore.openapi.8.0.16.nupkg.sha512",
     "/Users/presidio/.nuget/packages/microsoft.aspnetcore.routing/2.3.0/microsoft.aspnetcore.routing.2.3.0.nupkg.sha512",
     "/Users/presidio/.nuget/packages/microsoft.aspnetcore.routing.abstractions/2.3.0/microsoft.aspnetcore.routing.abstractions.2.3.0.nupkg.sha512",

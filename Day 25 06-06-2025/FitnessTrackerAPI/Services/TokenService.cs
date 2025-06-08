@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using FitnessTrackerAPI.Interfaces;
+using FitnessTrackerAPI.Misc;
 using FitnessTrackerAPI.Models;
 using Microsoft.IdentityModel.Tokens;
 
@@ -14,17 +15,24 @@ namespace FitnessTrackerAPI.Repository
     public class TokenService:ITokenService
     {
         private readonly SymmetricSecurityKey _securityKey;
-        public TokenService(IConfiguration configuration)
+        private readonly UniqueIdByEmail _uid;
+        public TokenService(IConfiguration configuration, UniqueIdByEmail uid)
         {
             _securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Keys:JwtTokenKey"]));
+            _uid = uid;
         }
         public async  Task<string> GenerateToken(User user)
         {
+            var uniqueId = await _uid.GetIdByEmail(user);
+            // Console.WriteLine($"\n\n ✅ {uniqueId}\n\n");
             List<Claim> claims = new List<Claim>
             {
+                new Claim("UserId",uniqueId),
                 new Claim(ClaimTypes.NameIdentifier,user.Email),
                 new Claim(ClaimTypes.Role,user.Role)
             };
+            // Console.WriteLine($"\n\n ✅ {uniqueId}\n\n");
+
             var creds = new SigningCredentials(_securityKey, SecurityAlgorithms.HmacSha256Signature);
 
             var tokenDescriptor = new SecurityTokenDescriptor

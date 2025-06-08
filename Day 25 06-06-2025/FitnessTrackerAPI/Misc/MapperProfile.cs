@@ -4,7 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using FitnessTrackerAPI.Models;
+using FitnessTrackerAPI.Models.Diet;
 using FitnessTrackerAPI.Models.DTOs;
+using FitnessTrackerAPI.Models.WorkoutModel;
 
 namespace FitnessTrackerAPI.Misc
 {
@@ -29,14 +31,14 @@ namespace FitnessTrackerAPI.Misc
             .ForMember(dest => dest.Email, act => act.MapFrom(src => src.Email));
             CreateMap<ClientAddRequestDTO, Client>()
             .ForMember(dest => dest.Email, act => act.MapFrom(src => src.Email));
-            // CreateMap<PatientaddRequestDTO, User>()
-            // .ForMember(dest => dest.Username, act => act.MapFrom(src => src.Email))
-            // .ForMember(dest => dest.Password, opt => opt.Ignore());
 
-            // CreateMap<User, PatientaddRequestDTO>()
-            // .ForMember(dest => dest.Email, act => act.MapFrom(src => src.Username));
+            CreateMap<DietPlanCreateRequestDTO, DietPlan>()
+            .ForMember(dest => dest.Meals, opt => opt.Ignore());
+            CreateMap<DietMealCreateDTO, DietMeal>();
 
-            // CreateMap<PatientaddRequestDTO, Patient>();
+            CreateMap<WorkoutPlanCreateRequestDTO, WorkoutPlan>()
+            .ForMember(dest => dest.Exercises, opt => opt.Ignore());
+            CreateMap<WorkoutExerciseCreateDTO, WorkoutExercise>();
         }
     }
 }

@@ -14,10 +14,12 @@ namespace FitnessTrackerAPI.Models
         public Guid ClientId { get; set; }
         public Guid? WorkoutPlanId { get; set; }
         public Guid? DietPlanId { get; set; }
+        public Guid AssignedByCoachId { get; set; }
         public DateTime AssignedOn { get; set; } = DateTime.UtcNow;
         public Client? Client { get; set; }
         public WorkoutPlan? WorkoutPlan { get; set; }
         public DietPlan? DietPlan { get; set; }
+        public Coach? AssignedByCoach { get; set; }
     }
 
 }

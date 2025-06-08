@@ -21,5 +21,6 @@ namespace FitnessTrackerAPI.Models
 
         public ICollection<WorkoutPlan>? WorkoutPlans { get; set; }
         public ICollection<DietPlan>? DietPlans { get; set; }
+        public ICollection<PlanAssignment>? AssignedPlans { get; set; } 
     }
 }

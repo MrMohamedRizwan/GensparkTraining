@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace FitnessTrackerAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -161,8 +161,8 @@ namespace FitnessTrackerAPI.Migrations
                     ClientId = table.Column<Guid>(type: "uuid", nullable: false),
                     WorkoutPlanId = table.Column<Guid>(type: "uuid", nullable: true),
                     DietPlanId = table.Column<Guid>(type: "uuid", nullable: true),
-                    AssignedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    WorkoutPlanId1 = table.Column<Guid>(type: "uuid", nullable: true)
+                    AssignedByCoachId = table.Column<Guid>(type: "uuid", nullable: false),
+                    AssignedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -174,20 +174,23 @@ namespace FitnessTrackerAPI.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
+                        name: "FK_PlanAssignment_Coach_AssignedByCoachId",
+                        column: x => x.AssignedByCoachId,
+                        principalTable: "Coach",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
                         name: "FK_PlanAssignment_DietPlans_DietPlanId",
                         column: x => x.DietPlanId,
                         principalTable: "DietPlans",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_PlanAssignment_WorkoutPlan_WorkoutPlanId",
                         column: x => x.WorkoutPlanId,
                         principalTable: "WorkoutPlan",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_PlanAssignment_WorkoutPlan_WorkoutPlanId1",
-                        column: x => x.WorkoutPlanId1,
-                        principalTable: "WorkoutPlan",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateTable(
@@ -263,6 +266,11 @@ namespace FitnessTrackerAPI.Migrations
                 column: "CoachId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_PlanAssignment_AssignedByCoachId",
+                table: "PlanAssignment",
+                column: "AssignedByCoachId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_PlanAssignment_ClientId",
                 table: "PlanAssignment",
                 column: "ClientId");
@@ -276,11 +284,6 @@ namespace FitnessTrackerAPI.Migrations
                 name: "IX_PlanAssignment_WorkoutPlanId",
                 table: "PlanAssignment",
                 column: "WorkoutPlanId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PlanAssignment_WorkoutPlanId1",
-                table: "PlanAssignment",
-                column: "WorkoutPlanId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Progress_ClientId",

@@ -1,12 +1,17 @@
 using System.Security.Claims;
 using System.Text;
+using System.Threading.RateLimiting;
 using FitnessTrackerAPI.Context;
 using FitnessTrackerAPI.Interfaces;
+using FitnessTrackerAPI.Misc;
 using FitnessTrackerAPI.Models;
+using FitnessTrackerAPI.Models.Diet;
+using FitnessTrackerAPI.Models.WorkoutModel;
 using FitnessTrackerAPI.Repository;
 using FitnessTrackerAPI.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -59,7 +64,13 @@ builder.Services.AddDbContext<FitnessDBContext>(opts =>
 });
 #region  Repositories
 builder.Services.AddTransient<IRepository<Guid, Coach>, CoachRepository>();
-// builder.Services.AddTransient<IRepository<string, User>, UserRepository>();
+builder.Services.AddTransient<IRepository<Guid, Client>, ClientRepository>();
+builder.Services.AddTransient<IRepository<Guid, DietMeal>, DietMealRepo>();
+builder.Services.AddTransient<IRepository<Guid, DietPlan>, DietPlanRepo>();
+builder.Services.AddTransient<IRepository<Guid, WorkoutPlan>, WorkoutPlanRepo>();
+builder.Services.AddTransient<IRepository<Guid, WorkoutExercise>, WorkoutExerciceRepo>();
+
+
 
 builder.Services.AddTransient<IRepository<string, User>, UserRepository>();
 
@@ -67,9 +78,8 @@ builder.Services.AddTransient<IRepository<string, User>, UserRepository>();
 
 #region Services
 builder.Services.AddTransient<IEncryptionService, EncryptionService>();
-// builder.Services.AddTransient<ITokenService, TokenService>();
-// builder.Services.AddTransient<IAuthenticationService, AuthenticationService>();
-// builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddTransient<ITokenService, TokenService>();
+builder.Services.AddTransient<IAuthenticationService, AuthenticationService>();
 builder.Services.AddTransient<IClientService, ClientService>();
 builder.Services.AddTransient<ICoachService, CoachService>();
 
@@ -124,6 +134,39 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
+builder.Services.AddRateLimiter(options =>
+{
+    options.GlobalLimiter = PartitionedRateLimiter.Create<HttpContext, string>(httpContext =>
+    {
+        var userId = httpContext.User?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value
+                     ?? httpContext.Connection.RemoteIpAddress?.ToString()
+                     ?? "anonymous";
+
+        return RateLimitPartition.GetTokenBucketLimiter(userId, _ => new TokenBucketRateLimiterOptions
+        {
+            TokenLimit = 1000,
+            TokensPerPeriod = 1000,
+            ReplenishmentPeriod = TimeSpan.FromHours(1),
+            QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+            QueueLimit = 0,
+            AutoReplenishment = true
+        });
+    });
+
+    options.OnRejected = async (context, token) =>
+    {
+        context.HttpContext.Response.StatusCode = StatusCodes.Status429TooManyRequests;
+        await context.HttpContext.Response.WriteAsync("Rate limit exceeded. Try again later.", token);
+    };
+});
+
+builder.Services.AddApiVersioning(options =>
+{
+    options.DefaultApiVersion = new ApiVersion(2, 0);
+    options.AssumeDefaultVersionWhenUnspecified = true;
+    options.ReportApiVersions = true;
+});
+
 // builder.Services.AddAuthentication(options =>
 // {
 //     options.DefaultScheme = "Cookies";
@@ -153,6 +196,9 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 #region  Misc
 builder.Services.AddAutoMapper(typeof(User));
+builder.Services.AddScoped<CustomExceptionFilter>();
+builder.Services.AddTransient<UniqueIdByEmail>();
+
 
 #endregion
 
@@ -182,6 +228,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors();
+app.UseRateLimiter(); 
 app.UseAuthentication();
 app.UseAuthorization();
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using FitnessTrackerAPI.Context;
 using FitnessTrackerAPI.Interfaces;
 using FitnessTrackerAPI.Models;
 using FitnessTrackerAPI.Models.DTOs;
@@ -15,18 +16,24 @@ namespace FitnessTrackerAPI.Services
         private readonly IRepository<string, User> _userRepository;
         private readonly IEncryptionService _encryptionService;
         private readonly IRepository<Guid, Client> _clientRepository;
+        private readonly FitnessDBContext _context;
+
         public ClientService(IMapper mapper,
                             IEncryptionService encryptionService,
                             IRepository<string, User> userRepository,
-                                IRepository<Guid, Client> clientRepository)
+                                IRepository<Guid, Client> clientRepository,
+                                FitnessDBContext context)
         {
             _mapper = mapper;
             _encryptionService = encryptionService;
             _userRepository = userRepository;
             _clientRepository = clientRepository;
+            _context = context;
+
         }
         public async Task<SignUpResponseDTO> AddCoach(ClientAddRequestDTO client)
         {
+            using var transaction = await _context.Database.BeginTransactionAsync();
             try
             {
                 var user = _mapper.Map<ClientAddRequestDTO, User>(client);
@@ -49,6 +56,7 @@ namespace FitnessTrackerAPI.Services
                 newClient = await _clientRepository.Add(newClient);
                 if (newClient == null)
                     throw new Exception("Could not add Client");
+                await transaction.CommitAsync(); 
                 return new SignUpResponseDTO
                 {
                     Id = newClient.Id,
@@ -58,6 +66,7 @@ namespace FitnessTrackerAPI.Services
             }
             catch (Exception e)
             {
+                await transaction.RollbackAsync(); 
                 Console.WriteLine($"Error ❌ {e.Message}");
                 throw new Exception(e.Message);
             }

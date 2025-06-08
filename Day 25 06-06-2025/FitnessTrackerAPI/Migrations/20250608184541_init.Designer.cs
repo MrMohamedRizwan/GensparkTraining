@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FitnessTrackerAPI.Migrations
 {
     [DbContext(typeof(FitnessDBContext))]
-    [Migration("20250606113151_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250608184541_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -145,6 +145,9 @@ namespace FitnessTrackerAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<Guid>("AssignedByCoachId")
+                        .HasColumnType("uuid");
+
                     b.Property<DateTime>("AssignedOn")
                         .HasColumnType("timestamp with time zone");
 
@@ -157,18 +160,15 @@ namespace FitnessTrackerAPI.Migrations
                     b.Property<Guid?>("WorkoutPlanId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid?>("WorkoutPlanId1")
-                        .HasColumnType("uuid");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("AssignedByCoachId");
 
                     b.HasIndex("ClientId");
 
                     b.HasIndex("DietPlanId");
 
                     b.HasIndex("WorkoutPlanId");
-
-                    b.HasIndex("WorkoutPlanId1");
 
                     b.ToTable("PlanAssignment");
                 });
@@ -359,6 +359,12 @@ namespace FitnessTrackerAPI.Migrations
 
             modelBuilder.Entity("FitnessTrackerAPI.Models.PlanAssignment", b =>
                 {
+                    b.HasOne("FitnessTrackerAPI.Models.Coach", "AssignedByCoach")
+                        .WithMany("AssignedPlans")
+                        .HasForeignKey("AssignedByCoachId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("FitnessTrackerAPI.Models.Client", "Client")
                         .WithMany("PlanAssignments")
                         .HasForeignKey("ClientId")
@@ -367,15 +373,15 @@ namespace FitnessTrackerAPI.Migrations
 
                     b.HasOne("FitnessTrackerAPI.Models.Diet.DietPlan", "DietPlan")
                         .WithMany()
-                        .HasForeignKey("DietPlanId");
+                        .HasForeignKey("DietPlanId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("FitnessTrackerAPI.Models.WorkoutModel.WorkoutPlan", "WorkoutPlan")
-                        .WithMany()
-                        .HasForeignKey("WorkoutPlanId");
-
-                    b.HasOne("FitnessTrackerAPI.Models.WorkoutModel.WorkoutPlan", null)
                         .WithMany("Assignments")
-                        .HasForeignKey("WorkoutPlanId1");
+                        .HasForeignKey("WorkoutPlanId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("AssignedByCoach");
 
                     b.Navigation("Client");
 
@@ -445,6 +451,8 @@ namespace FitnessTrackerAPI.Migrations
 
             modelBuilder.Entity("FitnessTrackerAPI.Models.Coach", b =>
                 {
+                    b.Navigation("AssignedPlans");
+
                     b.Navigation("DietPlans");
 
                     b.Navigation("WorkoutPlans");

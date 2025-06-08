@@ -15,6 +15,7 @@
 /Users/presidio/Desktop/Genspark/GensparkTraining/Day 25 06-06-2025/FitnessTrackerAPI/bin/Debug/net9.0/log4net.dll
 /Users/presidio/Desktop/Genspark/GensparkTraining/Day 25 06-06-2025/FitnessTrackerAPI/bin/Debug/net9.0/Microsoft.AspNetCore.Authentication.Google.dll
 /Users/presidio/Desktop/Genspark/GensparkTraining/Day 25 06-06-2025/FitnessTrackerAPI/bin/Debug/net9.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/Users/presidio/Desktop/Genspark/GensparkTraining/Day 25 06-06-2025/FitnessTrackerAPI/bin/Debug/net9.0/Microsoft.AspNetCore.Mvc.Versioning.dll
 /Users/presidio/Desktop/Genspark/GensparkTraining/Day 25 06-06-2025/FitnessTrackerAPI/bin/Debug/net9.0/Microsoft.AspNetCore.OpenApi.dll
 /Users/presidio/Desktop/Genspark/GensparkTraining/Day 25 06-06-2025/FitnessTrackerAPI/bin/Debug/net9.0/Microsoft.Bcl.AsyncInterfaces.dll
 /Users/presidio/Desktop/Genspark/GensparkTraining/Day 25 06-06-2025/FitnessTrackerAPI/bin/Debug/net9.0/Microsoft.Build.Locator.dll

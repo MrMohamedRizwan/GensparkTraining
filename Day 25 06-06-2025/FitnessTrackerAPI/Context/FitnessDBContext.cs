@@ -31,7 +31,7 @@ namespace FitnessTrackerAPI.Context
 
 
 
-        
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // ----- User -----
@@ -118,19 +118,32 @@ namespace FitnessTrackerAPI.Context
             modelBuilder.Entity<Progress>()
                 .HasKey(p => p.Id);
 
-            // ----- PlanAssignment -----
+            //Plan Assignments
             modelBuilder.Entity<PlanAssignment>()
                 .HasKey(pa => pa.Id);
 
             modelBuilder.Entity<PlanAssignment>()
                 .HasOne(pa => pa.DietPlan)
                 .WithMany()
-                .HasForeignKey(pa => pa.DietPlanId);
+                .HasForeignKey(pa => pa.DietPlanId)
+                .OnDelete(DeleteBehavior.SetNull);
+            modelBuilder.Entity<PlanAssignment>()
+                .HasOne(pa => pa.Client)
+                .WithMany(c => c.PlanAssignments) 
+                .HasForeignKey(pa => pa.ClientId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<PlanAssignment>()
+                .HasOne(pa => pa.AssignedByCoach)
+                .WithMany(c => c.AssignedPlans)
+                .HasForeignKey(pa => pa.AssignedByCoachId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<PlanAssignment>()
                 .HasOne(pa => pa.WorkoutPlan)
-                .WithMany()
-                .HasForeignKey(pa => pa.WorkoutPlanId);
+                .WithMany(wp => wp.Assignments) 
+                .HasForeignKey(pa => pa.WorkoutPlanId)
+                .OnDelete(DeleteBehavior.SetNull);
         }
         
     }
