@@ -31,7 +31,7 @@ namespace FitnessTrackerAPI.Repository
                 new Claim(ClaimTypes.NameIdentifier,user.Email),
                 new Claim(ClaimTypes.Role,user.Role)
             };
-            // Console.WriteLine($"\n\n ✅ {uniqueId}\n\n");
+            Console.WriteLine($"\n\n ✅ {uniqueId}\n\n");
 
             var creds = new SigningCredentials(_securityKey, SecurityAlgorithms.HmacSha256Signature);
 

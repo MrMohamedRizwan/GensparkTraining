@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using FirstAPI.Models.DTOs;
 using FitnessTrackerAPI.Models;
 using FitnessTrackerAPI.Models.Diet;
 using FitnessTrackerAPI.Models.DTOs;
@@ -27,6 +28,11 @@ namespace FitnessTrackerAPI.Interfaces
         public Task<bool> DeleteWorkoutPlanByTitle(string title, ClaimsPrincipal user);
         public Task<List<WorkoutPlanResponseDTO>> GetAllWorkoutPlansDTO(ClaimsPrincipal user);
         public Task<WorkoutPlanResponseDTO?> GetWorkouttPlanByTitle(string title, ClaimsPrincipal user);
+
+
+        public Task<PlanAssignment> AssignPlanToClient(PlanAssignmentRequestDTO dto, ClaimsPrincipal user);
+        public Task<List<AssignedPlanNamesDTO>> GetAssignedPlans(string title, ClaimsPrincipal user);
+        public Task<List<ClientWithoutPlansDTO>> GetClientsWithoutAssignedPlans();
 
     }
 }

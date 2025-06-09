@@ -6,12 +6,14 @@ using System.Reflection.Metadata.Ecma335;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
+using FirstAPI.Models.DTOs;
 using FitnessTrackerAPI.Context;
 using FitnessTrackerAPI.Interfaces;
 using FitnessTrackerAPI.Models;
 using FitnessTrackerAPI.Models.Diet;
 using FitnessTrackerAPI.Models.DTOs;
 using FitnessTrackerAPI.Models.WorkoutModel;
+using FitnessTrackerAPI.Repository;
 
 namespace FitnessTrackerAPI.Services
 {
@@ -27,6 +29,10 @@ namespace FitnessTrackerAPI.Services
         private readonly IRepository<Guid, WorkoutPlan> _workoutPlanRepository;
         private readonly IRepository<Guid, WorkoutExercise> _workoutExerciseRepository;
 
+        private readonly IRepository<Guid, PlanAssignment> _planAssignmentRepository;
+        private readonly IRepository<Guid, Client> _clientRepository;
+
+
 
 
         public CoachService(IMapper mapper,
@@ -37,7 +43,9 @@ namespace FitnessTrackerAPI.Services
                             IRepository<Guid, DietPlan> dietPlanRepository,
                             IRepository<Guid, WorkoutPlan> workoutPlanRepository,
                             IRepository<Guid, WorkoutExercise> workoutExerciseRepository,
-                            FitnessDBContext context
+                            FitnessDBContext context,
+                             IRepository<Guid, PlanAssignment> planAssignmentRepository,
+                              IRepository<Guid, Client> clientRepository
                             )
         {
             _mapper = mapper;
@@ -48,6 +56,9 @@ namespace FitnessTrackerAPI.Services
             _dietPlanRepository = dietPlanRepository;
             _workoutPlanRepository = workoutPlanRepository;
             _workoutExerciseRepository = workoutExerciseRepository;
+            _planAssignmentRepository = planAssignmentRepository;
+            _clientRepository = clientRepository;
+
             _context = context;
         }
 
@@ -428,7 +439,7 @@ namespace FitnessTrackerAPI.Services
             var workoutPlan = allPlan.FirstOrDefault(dp =>
                 dp.CoachId == coachId &&
                 dp.Title.Trim().ToLower() == normalizedTitle);
-            if(workoutPlan==null)
+            if (workoutPlan == null)
                 throw new Exception("Workout plan not found or unauthorized access");
 
             using var transaction = await _context.Database.BeginTransactionAsync();
@@ -445,7 +456,7 @@ namespace FitnessTrackerAPI.Services
                 await transaction.CommitAsync();
 
                 return true;
-                
+
             }
             catch (System.Exception e)
             {
@@ -471,37 +482,41 @@ namespace FitnessTrackerAPI.Services
 
             var result = coachPlans.Select(p => new WorkoutPlanResponseDTO
             {
-                Id=p.Id,
+                Id = p.Id,
                 Title = p.Title,
-                Description=p.Description,
-                DurationInWeeks=p.DurationInWeeks,
+                Description = p.Description,
+                DurationInWeeks = p.DurationInWeeks,
                 Exercises = exerciseGroups.ContainsKey(p.Id)
                     ? exerciseGroups[p.Id].Select(m => new WorkoutExerciseResponseDTO
                     {
-                        Id=m.Id,
+                        Id = m.Id,
                         Name = m.Name,
                         Sets = m.Sets,
                         Reps = m.Reps,
                         RestSeconds = m.RestSeconds,
-                        Notes=m.Notes
+                        Notes = m.Notes
                     }).ToList()
                     : new List<WorkoutExerciseResponseDTO>()
             }).ToList();
             return result;
         }
 
-        
+
         public async Task<WorkoutPlanResponseDTO?> GetWorkouttPlanByTitle(string title, ClaimsPrincipal user)
         {
             var coachIdClaim = user.FindFirst("UserId")?.Value;
             if (coachIdClaim == null || !Guid.TryParse(coachIdClaim, out Guid coachId))
                 throw new Exception("Invalid Coach ID");
-
+            // Console.WriteLine("💕");
             var plans = await _workoutPlanRepository.GetAll();
-            var plan = plans
-                        .Where(p => p.CoachId == coachId)
-                        .FirstOrDefault(p => p.Title.Equals(title.Trim(), StringComparison.OrdinalIgnoreCase));
+            // Console.WriteLine($"{plans.FirstOrDefault(p=>p.CoachId==coachId)} ✅");
+            var normalizedTitle = title.Trim();
+            var plan = plans.FirstOrDefault(p =>
+                p.CoachId == coachId &&
+                p.Title == normalizedTitle);
 
+            // Console.WriteLine($"\n\nExercise {normalizedTitle} {plan}✅");
+            
             if (plan == null)
                 return null;
 
@@ -509,7 +524,6 @@ namespace FitnessTrackerAPI.Services
                             .Where(m => m.WorkoutPlanId == plan.Id)
                             .ToList();
 
-            // Console.WriteLine($"\n\nExercise {exercise}✅");
 
             return new WorkoutPlanResponseDTO
             {
@@ -527,6 +541,135 @@ namespace FitnessTrackerAPI.Services
                     Notes = m.Notes
                 }).ToList()
             };
+        }
+
+
+
+        public async Task<PlanAssignment> AssignPlanToClient(PlanAssignmentRequestDTO dto, ClaimsPrincipal user)
+        {
+            var coachIdClaim = user.FindFirst("UserId")?.Value;
+            if (coachIdClaim == null || !Guid.TryParse(coachIdClaim, out Guid coachId))
+                throw new Exception("Invalid Coach ID from token");
+
+            var clientEmail = dto.ClientEmail;
+            var workoutPlanTitle = dto.WorkoutName;
+            var dietPlanTitle = dto.DietPlanName;
+
+            // 1. Get Client by Email
+            var client = (await _clientRepository.GetAll())
+                            .FirstOrDefault(c => c.Email.ToLower() == clientEmail.ToLower());
+
+            if (client == null)
+                throw new Exception("Client not found");
+
+            Guid? workoutPlanId = null;
+            Guid? dietPlanId = null;
+
+            // 2. Get Workout Plan by Title if provided
+            if (!string.IsNullOrWhiteSpace(workoutPlanTitle))
+            {
+                var workoutPlan = (await _workoutPlanRepository.GetAll())
+                    .FirstOrDefault(wp => wp.CoachId == coachId &&
+                                          wp.Title.ToLower().Trim() == workoutPlanTitle.ToLower().Trim());
+
+                if (workoutPlan == null)
+                    throw new Exception("Workout plan not found or not owned by this coach");
+
+                workoutPlanId = workoutPlan.Id;
+            }
+
+            // 3. Get Diet Plan by Title if provided
+            if (!string.IsNullOrWhiteSpace(dietPlanTitle))
+            {
+                var dietPlan = (await _dietPlanRepository.GetAll())
+                    .FirstOrDefault(dp => dp.CoachId == coachId &&
+                                          dp.DietTitle.ToLower().Trim() == dietPlanTitle.ToLower().Trim());
+
+                if (dietPlan == null)
+                    throw new Exception("Diet plan not found or not owned by this coach");
+
+                dietPlanId = dietPlan.Id;
+            }
+
+            // 4. Create Assignment
+            var assignment = new PlanAssignment
+            {
+                Id = Guid.NewGuid(),
+                ClientId = client.Id,
+                WorkoutPlanId = workoutPlanId,
+                DietPlanId = dietPlanId,
+                AssignedByCoachId = coachId,
+                AssignedOn = DateTime.UtcNow
+            };
+
+            await _planAssignmentRepository.Add(assignment);
+            return assignment;
+
+        }
+
+        public async Task<List<AssignedPlanNamesDTO>> GetAssignedPlans(string email, ClaimsPrincipal user)
+        {
+            
+            var client = (await _clientRepository.GetAll())
+                            .FirstOrDefault(c => c.Email.Trim().ToLower() == email.Trim().ToLower());
+
+            if (client == null)
+                throw new Exception("Client not found");
+
+            var assignments = (await _planAssignmentRepository.GetAll())
+                                .Where(p => p.ClientId == client.Id)
+                                .ToList();
+
+            var result = new List<AssignedPlanNamesDTO>();
+
+            foreach (var assignment in assignments)
+            {
+                string? workoutTitle = null;
+                string? dietTitle = null;
+
+                if (assignment.WorkoutPlanId.HasValue)
+                {
+                    var workoutPlan = await _workoutPlanRepository.Get(assignment.WorkoutPlanId.Value);
+                    workoutTitle = workoutPlan?.Title;
+                }
+
+                if (assignment.DietPlanId.HasValue)
+                {
+                    var dietPlan = await _dietPlanRepository.Get(assignment.DietPlanId.Value);
+                    dietTitle = dietPlan?.DietTitle;
+                }
+
+                result.Add(new AssignedPlanNamesDTO
+                {
+                    WorkoutPlanTitle = workoutTitle,
+                    DietPlanTitle = dietTitle
+                });
+            }
+
+            return result;
+        }
+
+        public async Task<List<ClientWithoutPlansDTO>> GetClientsWithoutAssignedPlans()
+        {
+            var allClients = await _clientRepository.GetAll();
+
+            var allAssignments = await _planAssignmentRepository.GetAll();
+
+            var assignedClientIds = allAssignments
+                                        .Select(pa => pa.ClientId)
+                                        .Distinct()
+                                        .ToHashSet();
+
+            var unassignedClients = allClients
+                                        .Where(c => !assignedClientIds.Contains(c.Id))
+                                        .Select(c => new ClientWithoutPlansDTO
+                                        {
+                                            Name = c.Name,
+                                            Email = c.Email
+                                        })
+                                        .ToList();
+
+            return unassignedClients;
         }
     }
 }

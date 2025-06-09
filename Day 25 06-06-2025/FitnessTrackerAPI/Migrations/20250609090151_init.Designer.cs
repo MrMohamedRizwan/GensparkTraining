@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FitnessTrackerAPI.Migrations
 {
     [DbContext(typeof(FitnessDBContext))]
-    [Migration("20250608184541_init")]
+    [Migration("20250609090151_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -238,17 +238,14 @@ namespace FitnessTrackerAPI.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int?>("PlanAssignmentId")
-                        .HasColumnType("integer");
-
-                    b.Property<Guid?>("PlanAssignmentId1")
+                    b.Property<Guid?>("PlanAssignmentId")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ClientId");
 
-                    b.HasIndex("PlanAssignmentId1");
+                    b.HasIndex("PlanAssignmentId");
 
                     b.ToTable("Workout");
                 });
@@ -411,7 +408,7 @@ namespace FitnessTrackerAPI.Migrations
 
                     b.HasOne("FitnessTrackerAPI.Models.PlanAssignment", "PlanAssignment")
                         .WithMany()
-                        .HasForeignKey("PlanAssignmentId1");
+                        .HasForeignKey("PlanAssignmentId");
 
                     b.Navigation("Client");
 

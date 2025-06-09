@@ -42,7 +42,7 @@ namespace FitnessTrackerAPI.Misc
 
                 }
             }
-            else if (user.Role == "Coach")
+            else if (user.Role == "Client")
             {
                 try
                 {

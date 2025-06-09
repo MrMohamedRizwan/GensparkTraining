@@ -235,17 +235,14 @@ namespace FitnessTrackerAPI.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int?>("PlanAssignmentId")
-                        .HasColumnType("integer");
-
-                    b.Property<Guid?>("PlanAssignmentId1")
+                    b.Property<Guid?>("PlanAssignmentId")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ClientId");
 
-                    b.HasIndex("PlanAssignmentId1");
+                    b.HasIndex("PlanAssignmentId");
 
                     b.ToTable("Workout");
                 });
@@ -408,7 +405,7 @@ namespace FitnessTrackerAPI.Migrations
 
                     b.HasOne("FitnessTrackerAPI.Models.PlanAssignment", "PlanAssignment")
                         .WithMany()
-                        .HasForeignKey("PlanAssignmentId1");
+                        .HasForeignKey("PlanAssignmentId");
 
                     b.Navigation("Client");
 

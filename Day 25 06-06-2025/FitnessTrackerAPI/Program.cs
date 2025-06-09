@@ -69,6 +69,8 @@ builder.Services.AddTransient<IRepository<Guid, DietMeal>, DietMealRepo>();
 builder.Services.AddTransient<IRepository<Guid, DietPlan>, DietPlanRepo>();
 builder.Services.AddTransient<IRepository<Guid, WorkoutPlan>, WorkoutPlanRepo>();
 builder.Services.AddTransient<IRepository<Guid, WorkoutExercise>, WorkoutExerciceRepo>();
+builder.Services.AddTransient<IRepository<Guid, PlanAssignment>, PlanAssignmentRepository>();
+
 
 
 

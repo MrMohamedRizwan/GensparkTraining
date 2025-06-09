@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FirstAPI.Models.DTOs;
 using FitnessTrackerAPI.Interfaces;
 using FitnessTrackerAPI.Models;
 using FitnessTrackerAPI.Models.Diet;
@@ -204,13 +205,54 @@ namespace FitnessTrackerAPI.Controllers
         [Authorize(Roles = "Coach")]
         public async Task<IActionResult> GetWorkoutPlanByTitle(string title)
         {
+            System.Console.WriteLine($"{title}💕");
             var result = await _coachService.GetWorkouttPlanByTitle(title, User);
             if (result == null)
-                return NotFound(new { message = "Diet plan not found" });
+                return NotFound(new { message = "Workout plan not found" });
 
             return Ok(result);
         }
 
+        [Authorize(Roles = "Coach")]
+        [HttpPost("AssignPlan")]
+        public async Task<IActionResult> AssignPlanToClient([FromBody] PlanAssignmentRequestDTO dto)
+        {
+            try
+            {
+                var assignment = await _coachService.AssignPlanToClient(dto, User);
+
+
+                var response = assignment;
+
+                return CreatedAtAction(nameof(AssignPlanToClient), new { id = response.Id }, new { message = "Plan Assigned to Client" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { Error = ex.Message });
+            }
+        }
+
+        [Authorize(Roles = "Coach")]
+        [HttpGet("getAssignedPlan/{clientEmail}")]
+        public async Task<IActionResult> GetAssignedPlansForParticualrClient(string clientEmail)
+        {
+            var result = await _coachService.GetAssignedPlans(clientEmail, User);
+            if (result == null)
+                return NotFound(new { message = "Workout plan not found" });
+
+            return Ok(result);
+        }
+
+        [Authorize(Roles = "Coach")]
+        [HttpGet("ClientWithoutPlansAssigned")]
+        public async Task<IActionResult> GetAssignedPlansForParticualrClient()
+        {
+            var result = await _coachService.GetClientsWithoutAssignedPlans();
+            if (result == null)
+                return NotFound(new { message = "Plans Assigned to all Clients" });
+
+            return Ok(result);
+        }
         
 
     }
