@@ -81,6 +81,7 @@ namespace FitnessTrackerAPI.Services
 
                 user.Password = encryptedData.EncryptedData;
                 user.Role = "Coach";
+                user.RefreshToken = "null";
                 user = await _userRepository.Add(user);
 
                 var newCoach = _mapper.Map<CoachAddRequestDTO, Coach>(coach);
@@ -101,6 +102,8 @@ namespace FitnessTrackerAPI.Services
             {
                 await transaction.RollbackAsync();
                 Console.WriteLine($"Error ❌ {e.Message}");
+                if (e.InnerException != null)
+                Console.WriteLine($"Inner Exception 💥 {e.InnerException.Message}");
                 throw new Exception(e.Message);
             }
         }

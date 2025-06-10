@@ -63,6 +63,7 @@ namespace FitnessTrackerAPI.Services
 
                 user.Password = encryptedData.EncryptedData;
                 user.Role = "Client";
+                user.RefreshToken = "null";
                 user = await _userRepository.Add(user);
 
                 var newClient = _mapper.Map<ClientAddRequestDTO, Client>(client);

@@ -151,6 +151,10 @@ namespace FitnessTrackerAPI.Migrations
                     b.Property<Guid>("ClientId")
                         .HasColumnType("uuid");
 
+                    b.Property<string>("CompletionStatus")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<Guid?>("DietPlanId")
                         .HasColumnType("uuid");
 
@@ -209,6 +213,13 @@ namespace FitnessTrackerAPI.Migrations
 
                     b.Property<byte[]>("Password")
                         .HasColumnType("bytea");
+
+                    b.Property<string>("RefreshToken")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("RefreshTokenExpiryTime")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Role")
                         .IsRequired()

@@ -11,7 +11,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace FitnessTrackerAPI.Controllers
 {
     [ApiController]
-    [Route("/api/[controller]")]
+    [ApiVersion("1.0")]
+    [Route("/api/v{version:apiVersion}/[controller]")]
     public class ClientController : ControllerBase
     {
         private readonly IClientService _clientService;

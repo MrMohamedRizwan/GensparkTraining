@@ -15,6 +15,7 @@ namespace FitnessTrackerAPI.Models
         public Guid? WorkoutPlanId { get; set; }
         public Guid? DietPlanId { get; set; }
         public Guid AssignedByCoachId { get; set; }
+        public string CompletionStatus { get; set; } = "Not Completed";
         public DateTime AssignedOn { get; set; } = DateTime.UtcNow;
         public Client? Client { get; set; }
         public WorkoutPlan? WorkoutPlan { get; set; }
