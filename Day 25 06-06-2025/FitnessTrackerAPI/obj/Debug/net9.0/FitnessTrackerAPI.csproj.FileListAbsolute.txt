@@ -7,6 +7,9 @@
 /Users/presidio/Desktop/Genspark/GensparkTraining/Day 25 06-06-2025/FitnessTrackerAPI/bin/Debug/net9.0/FitnessTrackerAPI.dll
 /Users/presidio/Desktop/Genspark/GensparkTraining/Day 25 06-06-2025/FitnessTrackerAPI/bin/Debug/net9.0/FitnessTrackerAPI.pdb
 /Users/presidio/Desktop/Genspark/GensparkTraining/Day 25 06-06-2025/FitnessTrackerAPI/bin/Debug/net9.0/AutoMapper.dll
+/Users/presidio/Desktop/Genspark/GensparkTraining/Day 25 06-06-2025/FitnessTrackerAPI/bin/Debug/net9.0/AWSSDK.Core.dll
+/Users/presidio/Desktop/Genspark/GensparkTraining/Day 25 06-06-2025/FitnessTrackerAPI/bin/Debug/net9.0/AWSSDK.Extensions.NETCore.Setup.dll
+/Users/presidio/Desktop/Genspark/GensparkTraining/Day 25 06-06-2025/FitnessTrackerAPI/bin/Debug/net9.0/AWSSDK.S3.dll
 /Users/presidio/Desktop/Genspark/GensparkTraining/Day 25 06-06-2025/FitnessTrackerAPI/bin/Debug/net9.0/BCrypt.Net-Next.dll
 /Users/presidio/Desktop/Genspark/GensparkTraining/Day 25 06-06-2025/FitnessTrackerAPI/bin/Debug/net9.0/Google.Apis.dll
 /Users/presidio/Desktop/Genspark/GensparkTraining/Day 25 06-06-2025/FitnessTrackerAPI/bin/Debug/net9.0/Google.Apis.Auth.dll
@@ -51,6 +54,16 @@
 /Users/presidio/Desktop/Genspark/GensparkTraining/Day 25 06-06-2025/FitnessTrackerAPI/bin/Debug/net9.0/Newtonsoft.Json.dll
 /Users/presidio/Desktop/Genspark/GensparkTraining/Day 25 06-06-2025/FitnessTrackerAPI/bin/Debug/net9.0/Npgsql.dll
 /Users/presidio/Desktop/Genspark/GensparkTraining/Day 25 06-06-2025/FitnessTrackerAPI/bin/Debug/net9.0/Npgsql.EntityFrameworkCore.PostgreSQL.dll
+/Users/presidio/Desktop/Genspark/GensparkTraining/Day 25 06-06-2025/FitnessTrackerAPI/bin/Debug/net9.0/Serilog.dll
+/Users/presidio/Desktop/Genspark/GensparkTraining/Day 25 06-06-2025/FitnessTrackerAPI/bin/Debug/net9.0/Serilog.AspNetCore.dll
+/Users/presidio/Desktop/Genspark/GensparkTraining/Day 25 06-06-2025/FitnessTrackerAPI/bin/Debug/net9.0/Serilog.Extensions.Hosting.dll
+/Users/presidio/Desktop/Genspark/GensparkTraining/Day 25 06-06-2025/FitnessTrackerAPI/bin/Debug/net9.0/Serilog.Extensions.Logging.dll
+/Users/presidio/Desktop/Genspark/GensparkTraining/Day 25 06-06-2025/FitnessTrackerAPI/bin/Debug/net9.0/Serilog.Formatting.Compact.dll
+/Users/presidio/Desktop/Genspark/GensparkTraining/Day 25 06-06-2025/FitnessTrackerAPI/bin/Debug/net9.0/Serilog.Settings.Configuration.dll
+/Users/presidio/Desktop/Genspark/GensparkTraining/Day 25 06-06-2025/FitnessTrackerAPI/bin/Debug/net9.0/Serilog.Sinks.Async.dll
+/Users/presidio/Desktop/Genspark/GensparkTraining/Day 25 06-06-2025/FitnessTrackerAPI/bin/Debug/net9.0/Serilog.Sinks.Console.dll
+/Users/presidio/Desktop/Genspark/GensparkTraining/Day 25 06-06-2025/FitnessTrackerAPI/bin/Debug/net9.0/Serilog.Sinks.Debug.dll
+/Users/presidio/Desktop/Genspark/GensparkTraining/Day 25 06-06-2025/FitnessTrackerAPI/bin/Debug/net9.0/Serilog.Sinks.File.dll
 /Users/presidio/Desktop/Genspark/GensparkTraining/Day 25 06-06-2025/FitnessTrackerAPI/bin/Debug/net9.0/Swashbuckle.AspNetCore.Swagger.dll
 /Users/presidio/Desktop/Genspark/GensparkTraining/Day 25 06-06-2025/FitnessTrackerAPI/bin/Debug/net9.0/Swashbuckle.AspNetCore.SwaggerGen.dll
 /Users/presidio/Desktop/Genspark/GensparkTraining/Day 25 06-06-2025/FitnessTrackerAPI/bin/Debug/net9.0/Swashbuckle.AspNetCore.SwaggerUI.dll

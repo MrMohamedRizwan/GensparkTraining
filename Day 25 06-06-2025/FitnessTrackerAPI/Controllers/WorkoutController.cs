@@ -11,7 +11,7 @@ namespace FitnessTrackerAPI.Controllers
     using Microsoft.AspNetCore.Mvc;
 
     [ApiController]
-    [Route("api/v1/workouts")]
+    [Route("api/[controller]")]
     public class WorkoutController : ControllerBase
     {
         private readonly IWorkoutService _workoutService;

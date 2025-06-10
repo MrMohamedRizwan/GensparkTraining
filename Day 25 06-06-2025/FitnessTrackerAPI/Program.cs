@@ -1,6 +1,7 @@
 using System.Security.Claims;
 using System.Text;
 using System.Threading.RateLimiting;
+using Amazon.S3;
 using FitnessTrackerAPI.Context;
 using FitnessTrackerAPI.Interfaces;
 using FitnessTrackerAPI.Misc;
@@ -16,6 +17,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Npgsql.Replication.PgOutput.Messages;
+using Amazon.Extensions.NETCore.Setup;
+using Amazon.S3;
+using Serilog;
+
+using Amazon.Runtime;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -58,6 +65,22 @@ builder.Services.AddControllers()
 
 // builder.Logging.AddLog4Net();
 
+#region Logging
+
+Log.Logger = new LoggerConfiguration()
+    .Enrich.FromLogContext()
+    .WriteTo.Console()
+    .WriteTo.File("Logs/log.txt", rollingInterval: RollingInterval.Day)
+    .CreateLogger();
+
+// var builder = WebApplication.CreateBuilder(args);
+
+builder.Host.UseSerilog(); 
+
+// Build and run app...
+
+#endregion
+
 builder.Services.AddDbContext<FitnessDBContext>(opts =>
 {
     opts.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
@@ -70,6 +93,10 @@ builder.Services.AddTransient<IRepository<Guid, DietPlan>, DietPlanRepo>();
 builder.Services.AddTransient<IRepository<Guid, WorkoutPlan>, WorkoutPlanRepo>();
 builder.Services.AddTransient<IRepository<Guid, WorkoutExercise>, WorkoutExerciceRepo>();
 builder.Services.AddTransient<IRepository<Guid, PlanAssignment>, PlanAssignmentRepository>();
+builder.Services.AddTransient<IRepository<Guid, Workout>, WorkoutRepo>();
+builder.Services.AddTransient<IRepository<Guid, Progress>, ProgressRepo>();
+
+
 
 
 
@@ -84,6 +111,36 @@ builder.Services.AddTransient<ITokenService, TokenService>();
 builder.Services.AddTransient<IAuthenticationService, AuthenticationService>();
 builder.Services.AddTransient<IClientService, ClientService>();
 builder.Services.AddTransient<ICoachService, CoachService>();
+builder.Services.AddTransient<IWorkoutService, WorkoutService>();
+builder.Services.AddTransient<IProgressService, ProgressService>();
+builder.Services.AddTransient<IAWSService, AWSS3Service>();
+builder.Services.AddTransient<IGeneralService, GeneralService>();
+
+
+
+builder.Services.AddAWSService<IAmazonS3>();
+
+// Register your custom AWS S3 service
+// var awsSection = builder.Configuration.GetSection("AWS");
+// var awsOptions = awsSection.Get<AWSOptions>();
+
+// Manually set credentials
+// ✅ Load AWS section from configuration
+var awsSection = builder.Configuration.GetSection("AWS");
+var awsRegion = awsSection["Region"];
+var accessKey = awsSection["AccessKey"];
+var secretKey = awsSection["SecretKey"];
+
+var credentials = new BasicAWSCredentials(accessKey, secretKey);
+
+// ✅ Register IAmazonS3 with custom credentials
+builder.Services.AddSingleton<IAmazonS3>(sp =>
+{
+    return new AmazonS3Client(credentials, Amazon.RegionEndpoint.GetBySystemName(awsRegion));
+});
+
+// ✅ Register your custom AWS service
+builder.Services.AddScoped<IAWSService, AWSS3Service>();
 
 
 #endregion
@@ -230,6 +287,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors();
+app.UseMiddleware<LoggingMiddleWare>();
 app.UseRateLimiter(); 
 app.UseAuthentication();
 app.UseAuthorization();

@@ -1,0 +1,23 @@
+<div class="page-center">
+  <div class="customer-container">
+    <h2 class="title">Customer Details</h2>
+
+    <h4>Name: {{ name }}</h4>
+    <h4>Email: {{ email }}</h4>
+    <h4>Phone: {{ phone }}</h4>
+
+    <div class="like-dislike-container">
+      <button class="icon-button like" (click)="like()">
+        <i class="bi bi-hand-thumbs-up"></i>
+      </button>
+
+      <span class="like-count">{{ likes    }}</span>
+
+      <button class="icon-button dislike" (click)="dislike()">
+        <i class="bi bi-hand-thumbs-down"></i>
+      </button>
+      <span class="like-count">{{ dislikes }}</span>
+
+    </div>
+  </div>
+</div>

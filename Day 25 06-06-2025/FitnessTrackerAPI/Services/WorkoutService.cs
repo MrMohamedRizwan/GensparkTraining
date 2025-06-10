@@ -34,7 +34,7 @@ namespace FitnessTrackerAPI.Services
                 throw new UnauthorizedAccessException("Invalid or missing Client ID.");
 
             var planAssignment = await _planAssignmentRepo.Get(dto.PlanAssignmentId);
-
+            System.Console.WriteLine($"{clientId} 😭");
             if (planAssignment == null || planAssignment.ClientId != clientId)
                 throw new InvalidOperationException("Invalid plan assignment or unauthorized access.");
 
@@ -43,7 +43,7 @@ namespace FitnessTrackerAPI.Services
                 Id = Guid.NewGuid(),
                 ClientId = clientId,
                 PlanAssignmentId = dto.PlanAssignmentId,
-                Date = dto.Date,
+                Date = DateTime.UtcNow,
                 Description = dto.Description
             };
 
@@ -52,6 +52,7 @@ namespace FitnessTrackerAPI.Services
             return new WorkoutResponseDTO
             {
                 Id = workout.Id,
+                ClientId=clientId,
                 Date = workout.Date,
                 Description = workout.Description,
                 PlanAssignmentId = workout.PlanAssignmentId

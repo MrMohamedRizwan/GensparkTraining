@@ -11,7 +11,7 @@ namespace FitnessTrackerAPI.Interfaces
     public interface IClientService
     {
         public Task<SignUpResponseDTO> AddCoach(ClientAddRequestDTO client);
-        public Task<AssignedPlanNamesDTO> GetAssignedPlansForClient(ClaimsPrincipal user);
+        public Task<List<AssignedPlanNamesDTO>> GetAssignedPlansForClient(ClaimsPrincipal user);
 
     }
 }

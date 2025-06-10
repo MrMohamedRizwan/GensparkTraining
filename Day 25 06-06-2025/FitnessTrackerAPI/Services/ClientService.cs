@@ -86,7 +86,7 @@ namespace FitnessTrackerAPI.Services
                 throw new Exception(e.Message);
             }
         }
-        public async Task<AssignedPlanNamesDTO> GetAssignedPlansForClient(ClaimsPrincipal user)
+        public async Task<List<AssignedPlanNamesDTO>> GetAssignedPlansForClient(ClaimsPrincipal user)
         {
             try
             {
@@ -94,46 +94,37 @@ namespace FitnessTrackerAPI.Services
                 if (clientIdClaim == null || !Guid.TryParse(clientIdClaim, out Guid clientId))
                     throw new Exception("Invalid Client ID");
 
-                var assignments = await _planAssignmentRepository.GetAll();
+                // var assignments = await _planAssignmentRepository.GetAll();
 
-                var latestAssignment = assignments
-                    .Where(p => p.ClientId == clientId)
-                    .FirstOrDefault();
+                // var latestAssignment = assignments
+                //     .Where(p => p.ClientId == clientId)
+                //     .FirstOrDefault();
 
-                if (latestAssignment == null)
-                    return null;
+                var assignments = (await _planAssignmentRepository.GetAll())
+                                .Where(a => a.ClientId == clientId)
+                                .ToList();
 
-                Console.WriteLine($" 😌 {latestAssignment.WorkoutPlanId} {latestAssignment.DietPlanId}");
+                var result = new List<AssignedPlanNamesDTO>();
 
-                string? workoutPlanTitle = null;
-                string? dietPlanTitle = null;
-
-
-                if (latestAssignment.WorkoutPlanId != null)
+                foreach (var assignment in assignments)
                 {
-                    var workoutPlans = await _workoutPlanRepository.GetAll();
-                    workoutPlanTitle = workoutPlans
-                        .Where(p => p.Id == latestAssignment.WorkoutPlanId)
-                        .Select(p => p.Title)
-                        .FirstOrDefault();
-                }
-            
-                if (latestAssignment.DietPlanId != null)
-                {
-                    var dietPlans = await _dietPlanRepository.GetAll();
-                    dietPlanTitle = dietPlans
-                        .Where(p => p.Id == latestAssignment.DietPlanId)  
-                        .Select(p => p.DietTitle)
-                        .FirstOrDefault();
+                    var workoutPlan = assignment.WorkoutPlanId.HasValue
+                        ? await _workoutPlanRepository.Get(assignment.WorkoutPlanId.Value)
+                        : null;
+
+                    var dietPlan = assignment.DietPlanId.HasValue
+                        ? await _dietPlanRepository.Get(assignment.DietPlanId.Value)
+                        : null;
+
+                    result.Add(new AssignedPlanNamesDTO
+                    {
+                        PlanAssignmentId = assignment.Id,
+                        WorkoutPlanTitle = workoutPlan?.Title ?? "Not Assigned",
+                        DietPlanTitle = dietPlan?.DietTitle ?? "Not Assigned"
+                    });
                 }
 
-                Console.WriteLine($"{workoutPlanTitle ?? "null"}  {dietPlanTitle ?? "null"}  😌");
-
-                return new AssignedPlanNamesDTO
-                {
-                    WorkoutPlanTitle = workoutPlanTitle ?? "No workout plan assigned",
-                    DietPlanTitle = dietPlanTitle ?? "No diet plan assigned"
-                };
+                return result;
             }
             catch (Exception e)
             {

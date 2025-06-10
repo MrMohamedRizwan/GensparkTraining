@@ -609,40 +609,35 @@ namespace FitnessTrackerAPI.Services
 
         public async Task<List<AssignedPlanNamesDTO>> GetAssignedPlans(string email, ClaimsPrincipal user)
         {
-            
+            // Find the client directly by email
             var client = (await _clientRepository.GetAll())
                             .FirstOrDefault(c => c.Email.Trim().ToLower() == email.Trim().ToLower());
 
             if (client == null)
                 throw new Exception("Client not found");
 
+            // Filter assignments for this client only
             var assignments = (await _planAssignmentRepository.GetAll())
-                                .Where(p => p.ClientId == client.Id)
+                                .Where(a => a.ClientId == client.Id)
                                 .ToList();
 
             var result = new List<AssignedPlanNamesDTO>();
 
             foreach (var assignment in assignments)
             {
-                string? workoutTitle = null;
-                string? dietTitle = null;
+                var workoutPlan = assignment.WorkoutPlanId.HasValue
+                    ? await _workoutPlanRepository.Get(assignment.WorkoutPlanId.Value)
+                    : null;
 
-                if (assignment.WorkoutPlanId.HasValue)
-                {
-                    var workoutPlan = await _workoutPlanRepository.Get(assignment.WorkoutPlanId.Value);
-                    workoutTitle = workoutPlan?.Title;
-                }
-
-                if (assignment.DietPlanId.HasValue)
-                {
-                    var dietPlan = await _dietPlanRepository.Get(assignment.DietPlanId.Value);
-                    dietTitle = dietPlan?.DietTitle;
-                }
+                var dietPlan = assignment.DietPlanId.HasValue
+                    ? await _dietPlanRepository.Get(assignment.DietPlanId.Value)
+                    : null;
 
                 result.Add(new AssignedPlanNamesDTO
                 {
-                    WorkoutPlanTitle = workoutTitle,
-                    DietPlanTitle = dietTitle
+                    PlanAssignmentId = assignment.Id,
+                    WorkoutPlanTitle = workoutPlan?.Title ?? "Not Assigned",
+                    DietPlanTitle = dietPlan?.DietTitle ?? "Not Assigned"
                 });
             }
 
