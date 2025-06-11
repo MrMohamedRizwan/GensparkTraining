@@ -37,6 +37,7 @@
     ".NETCoreApp,Version=v9.0": {
       "Fitness.Test/1.0.0": {
         "dependencies": {
+          "AutoMapper": "14.0.0",
           "FitnessTrackerAPI": "1.0.0",
           "Microsoft.AspNetCore.Mvc.Testing": "9.0.5",
           "Microsoft.EntityFrameworkCore.InMemory": "9.0.5",

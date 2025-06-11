@@ -5812,6 +5812,7 @@
   },
   "projectFileDependencyGroups": {
     "net9.0": [
+      "AutoMapper >= 14.0.0",
       "FitnessTrackerAPI >= 1.0.0",
       "Microsoft.AspNetCore.Mvc.Testing >= 9.0.5",
       "Microsoft.EntityFrameworkCore.InMemory >= 9.0.5",
@@ -5870,6 +5871,10 @@
       "net9.0": {
         "targetAlias": "net9.0",
         "dependencies": {
+          "AutoMapper": {
+            "target": "Package",
+            "version": "[14.0.0, )"
+          },
           "Microsoft.AspNetCore.Mvc.Testing": {
             "target": "Package",
             "version": "[9.0.5, )"

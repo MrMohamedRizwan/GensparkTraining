@@ -247,9 +247,9 @@ namespace FitnessTrackerAPI.Controllers
 
         [Authorize(Roles = "Coach")]
         [HttpGet("ClientWithoutPlansAssigned")]
-        public async Task<IActionResult> GetAssignedPlansForParticualrClient()
+        public async Task<IActionResult> GetClientsWithoutAssignedPlans([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
         {
-            var result = await _coachService.GetClientsWithoutAssignedPlans();
+            var result = await _coachService.GetClientsWithoutAssignedPlans(pageNumber,pageSize);
             if (result == null)
                 return NotFound(new { message = "Plans Assigned to all Clients" });
 

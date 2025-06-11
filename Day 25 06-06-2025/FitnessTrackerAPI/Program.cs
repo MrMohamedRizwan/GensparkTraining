@@ -119,10 +119,6 @@ builder.Services.AddTransient<IAWSService, AWSS3Service>();
 builder.Services.AddTransient<IGeneralService, GeneralService>();
 builder.Services.AddTransient<IWorkoutPlan, WorkoutPlanService>();
 builder.Services.AddTransient<IDietServices,DietPlanService>();
-
-
-
-
 builder.Services.AddAWSService<IAmazonS3>();
 
 // Register your custom AWS S3 service
@@ -226,7 +222,7 @@ builder.Services.AddRateLimiter(options =>
 
 builder.Services.AddApiVersioning(options =>
 {
-    options.DefaultApiVersion = new ApiVersion(2, 0);
+    options.DefaultApiVersion = new ApiVersion(1, 0);
     options.AssumeDefaultVersionWhenUnspecified = true;
     options.ReportApiVersions = true;
 });

@@ -22,7 +22,7 @@ namespace FitnessTrackerAPI.Controllers
             _workoutService = workoutService;
         }
         [HttpPost]
-        [Authorize(Roles = "Client")]
+        [Authorize(Roles = "Client")]          
         public async Task<IActionResult> AddWorkout([FromBody] WorkoutCreateDTO dto)
         {
             var result = await _workoutService.AddWorkout(dto, User);

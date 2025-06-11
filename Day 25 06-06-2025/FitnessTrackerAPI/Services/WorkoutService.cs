@@ -96,37 +96,24 @@ namespace FitnessTrackerAPI.Services
 
         public async Task<IEnumerable<WorkoutResponseDTO>> GetWorkoutsForCurrentClient(ClaimsPrincipal user)
         {
-            var role = user.FindFirst(ClaimTypes.Role)?.Value;
             var userIdClaim = user.FindFirst("UserId")?.Value;
 
-            if (string.IsNullOrEmpty(userIdClaim) || !Guid.TryParse(userIdClaim, out Guid coachId))
-                throw new UnauthorizedAccessException("Invalid Coach ID.");
-
-            // if (role != "Coach")
-            //     throw new UnauthorizedAccessException("Only coaches can access this resource.");
+            if (string.IsNullOrEmpty(userIdClaim) || !Guid.TryParse(userIdClaim, out Guid clientId))
+                throw new UnauthorizedAccessException("Invalid Client ID.");
 
             var allWorkouts = await _workoutRepo.GetAll();
-            var allPlanAssignments = await _planAssignmentRepo.GetAll();
 
-            var coachAssignedPlanIds = allPlanAssignments
-                .Where(p => p.AssignedByCoachId == coachId)
-                .Select(p => p.Id)
-                .ToHashSet();
-
-            var filteredWorkouts = allWorkouts
-                .Where(w => w.PlanAssignmentId.HasValue &&
-                            coachAssignedPlanIds.Contains(w.PlanAssignmentId.Value));
-
-            return filteredWorkouts.Select(w => new WorkoutResponseDTO
-            {
-                Id = w.Id,
-                Date = w.Date,
-                Description = w.Description,
-                PlanAssignmentId = w.PlanAssignmentId,
-                ClientId = w.ClientId
-            });
+            return allWorkouts
+                .Where(w => w.ClientId == clientId)
+                .Select(w => new WorkoutResponseDTO
+                {
+                    Id = w.Id,
+                    Date = w.Date,
+                    Description = w.Description,
+                    PlanAssignmentId = w.PlanAssignmentId,
+                    ClientId = w.ClientId
+                });
         }
-
 
         public async Task<IEnumerable<WorkoutResponseDTO>> GetWorkoutsByClientId(Guid clientId)
         {
