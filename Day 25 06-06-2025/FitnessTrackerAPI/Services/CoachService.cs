@@ -103,7 +103,7 @@ namespace FitnessTrackerAPI.Services
                 await transaction.RollbackAsync();
                 Console.WriteLine($"Error ❌ {e.Message}");
                 if (e.InnerException != null)
-                Console.WriteLine($"Inner Exception 💥 {e.InnerException.Message}");
+                    Console.WriteLine($"Inner Exception 💥 {e.InnerException.Message}");
                 throw new Exception(e.Message);
             }
         }
@@ -519,7 +519,7 @@ namespace FitnessTrackerAPI.Services
                 p.Title == normalizedTitle);
 
             // Console.WriteLine($"\n\nExercise {normalizedTitle} {plan}✅");
-            
+
             if (plan == null)
                 return null;
 
@@ -669,5 +669,25 @@ namespace FitnessTrackerAPI.Services
 
             return unassignedClients;
         }
+
+        public async Task<bool> MarkPlanAsCompletedAsync(Guid planAssignmentId, ClaimsPrincipal user)
+        {
+            var coachIdClaim = user.FindFirst("UserId")?.Value;
+            if (coachIdClaim == null || !Guid.TryParse(coachIdClaim, out Guid coachId))
+                throw new Exception("Invalid Coach ID from token");
+            var assignment = await _context.PlanAssignment.FindAsync(planAssignmentId);
+            if (assignment == null)
+                throw new Exception("Plan assignment not found.");
+
+            if (assignment.AssignedByCoachId != coachId)
+                throw new UnauthorizedAccessException("You are not authorized to update this plan.");
+
+            assignment.CompletionStatus = "Completed";
+
+            _context.PlanAssignment.Update(assignment);
+            await _context.SaveChangesAsync();
+            return true;
+        }
+
     }
 }

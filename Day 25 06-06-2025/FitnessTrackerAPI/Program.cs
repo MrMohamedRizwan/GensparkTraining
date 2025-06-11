@@ -95,6 +95,8 @@ builder.Services.AddTransient<IRepository<Guid, WorkoutExercise>, WorkoutExercic
 builder.Services.AddTransient<IRepository<Guid, PlanAssignment>, PlanAssignmentRepository>();
 builder.Services.AddTransient<IRepository<Guid, Workout>, WorkoutRepo>();
 builder.Services.AddTransient<IRepository<Guid, Progress>, ProgressRepo>();
+builder.Services.AddTransient<IRepository<Guid, WorkoutPlan>, WorkoutPlanRepo>();
+
 
 
 
@@ -115,6 +117,9 @@ builder.Services.AddTransient<IWorkoutService, WorkoutService>();
 builder.Services.AddTransient<IProgressService, ProgressService>();
 builder.Services.AddTransient<IAWSService, AWSS3Service>();
 builder.Services.AddTransient<IGeneralService, GeneralService>();
+builder.Services.AddTransient<IWorkoutPlan, WorkoutPlanService>();
+builder.Services.AddTransient<IDietServices,DietPlanService>();
+
 
 
 

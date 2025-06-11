@@ -65,7 +65,7 @@ namespace FitnessTrackerAPI.Services
 
 
                 var dbUser = await _userRepository.Get(email);
-                System.Console.WriteLine($"DB User: {email}, Refresh Token: {dbUser?.RefreshToken}, Expiry: {dbUser?.RefreshTokenExpiryTime},{principal.Identity.Name}");
+                System.Console.WriteLine($"DB User: {email}, Refresh Token: {dbUser?.RefreshToken}, Expiry: {dbUser?.RefreshTokenExpiryTime},{refreshToken}  ✅✅✅");
                 if (dbUser == null ||
                     dbUser.RefreshToken != refreshToken ||
                     dbUser.RefreshTokenExpiryTime <= DateTime.UtcNow)

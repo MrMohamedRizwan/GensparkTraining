@@ -9,6 +9,7 @@ using FitnessTrackerAPI.Models.Diet;
 using FitnessTrackerAPI.Models.DTOs;
 using FitnessTrackerAPI.Models.WorkoutModel;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
 
@@ -254,7 +255,26 @@ namespace FitnessTrackerAPI.Controllers
 
             return Ok(result);
         }
-        
+
+        [HttpPut("{id}/completed")]
+        [Authorize(Roles = "Coach")]
+        public async Task<IActionResult> MarkAsCompleted(Guid id)
+        {
+            try
+            {; // extract from JWT token
+                await _coachService.MarkPlanAsCompletedAsync(id, User);
+                return Ok("Plan marked as completed.");
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                return Forbid(e.Message);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
 
     }
 

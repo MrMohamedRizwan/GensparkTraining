@@ -68,6 +68,15 @@ namespace FitnessTrackerAPI.Services
                 throw new UnauthorizedAccessException("Invalid User ID");
 
             var workout = await _workoutRepo.Get(workoutId);
+            var planId= workout?.PlanAssignmentId;
+
+            var ps=(await _planAssignmentRepo.GetAll())
+                    .FirstOrDefault(ps=>ps.Id == planId);
+
+            if (role == "Coach" && (ps == null || ps.AssignedByCoachId != userId))
+            throw new UnauthorizedAccessException("Coaches can only access workouts assigned by themselves.");
+
+
 
             if (workout == null)
                 return null;
@@ -87,24 +96,37 @@ namespace FitnessTrackerAPI.Services
 
         public async Task<IEnumerable<WorkoutResponseDTO>> GetWorkoutsForCurrentClient(ClaimsPrincipal user)
         {
+            var role = user.FindFirst(ClaimTypes.Role)?.Value;
             var userIdClaim = user.FindFirst("UserId")?.Value;
 
-            if (string.IsNullOrEmpty(userIdClaim) || !Guid.TryParse(userIdClaim, out Guid clientId))
-                throw new UnauthorizedAccessException("Invalid Client ID.");
+            if (string.IsNullOrEmpty(userIdClaim) || !Guid.TryParse(userIdClaim, out Guid coachId))
+                throw new UnauthorizedAccessException("Invalid Coach ID.");
+
+            // if (role != "Coach")
+            //     throw new UnauthorizedAccessException("Only coaches can access this resource.");
 
             var allWorkouts = await _workoutRepo.GetAll();
+            var allPlanAssignments = await _planAssignmentRepo.GetAll();
 
-            return allWorkouts
-                .Where(w => w.ClientId == clientId)
-                .Select(w => new WorkoutResponseDTO
-                {
-                    Id = w.Id,
-                    Date = w.Date,
-                    Description = w.Description,
-                    PlanAssignmentId = w.PlanAssignmentId,
-                    ClientId = w.ClientId
-                });
+            var coachAssignedPlanIds = allPlanAssignments
+                .Where(p => p.AssignedByCoachId == coachId)
+                .Select(p => p.Id)
+                .ToHashSet();
+
+            var filteredWorkouts = allWorkouts
+                .Where(w => w.PlanAssignmentId.HasValue &&
+                            coachAssignedPlanIds.Contains(w.PlanAssignmentId.Value));
+
+            return filteredWorkouts.Select(w => new WorkoutResponseDTO
+            {
+                Id = w.Id,
+                Date = w.Date,
+                Description = w.Description,
+                PlanAssignmentId = w.PlanAssignmentId,
+                ClientId = w.ClientId
+            });
         }
+
 
         public async Task<IEnumerable<WorkoutResponseDTO>> GetWorkoutsByClientId(Guid clientId)
         {

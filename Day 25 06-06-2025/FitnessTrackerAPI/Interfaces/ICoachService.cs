@@ -33,6 +33,7 @@ namespace FitnessTrackerAPI.Interfaces
         public Task<PlanAssignment> AssignPlanToClient(PlanAssignmentRequestDTO dto, ClaimsPrincipal user);
         public Task<List<AssignedPlanNamesDTO>> GetAssignedPlans(string title, ClaimsPrincipal user);
         public Task<List<ClientWithoutPlansDTO>> GetClientsWithoutAssignedPlans();
+        public Task<bool> MarkPlanAsCompletedAsync(Guid planAssignmentId, ClaimsPrincipal user);
 
     }
 }
