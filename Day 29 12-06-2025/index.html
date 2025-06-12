@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Callback vs Promise vs Async/Await</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    button {
+      margin-right: 10px;
+      padding: 10px 15px;
+      cursor: pointer;
+    }
+    #output {
+      margin-top: 20px;
+    }
+    ul {
+      margin-top: 10px;
+    }
+    li {
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Load Users Using:</h2>
+  <button onclick="useCallback()">Callback</button>
+  <button onclick="usePromise()">Promise</button>
+  <button onclick="useAsyncAwait()">Async/Await</button>
+
+  <div id="output">Click a button to fetch user data...</div>
+
+  <script>
+    // Simulated user data array
+    const users = [
+      { id: 1, name: "Alice", email: "alice@example.com" },
+      { id: 2, name: "Bob", email: "bob@example.com" },
+      { id: 3, name: "Charlie", email: "charlie@example.com" },
+      { id: 4, name: "Diana", email: "diana@example.com" }
+    ];
+
+    // Utility to display user list
+    function displayUsers(method, data) {
+      const outputDiv = document.getElementById("output");
+      let html = `<strong>${method}:</strong><ul>`;
+      data.forEach(user => {
+        html += `<li>${user.name} - ${user.email}</li>`;
+      });
+      html += `</ul>`;
+      outputDiv.innerHTML = html;
+    }
+
+    function getUsersWithCallback(callback) {
+      setTimeout(() => {
+        callback(users);
+      }, 1000);
+    }
+
+    function useCallback() {
+      getUsersWithCallback((data) => {
+        displayUsers("Callback", data);
+      });
+    }
+
+    // 2️⃣ PROMISE
+    function getUsersWithPromise() {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(users);
+        }, 1000);
+      });
+    }
+
+    function usePromise() {
+      getUsersWithPromise().then((data) => {
+        displayUsers("Promise", data);
+      });
+    }
+
+    // 3️⃣ ASYNC/AWAIT
+    async function useAsyncAwait() {
+      const data = await getUsersWithPromise();
+      displayUsers("Async/Await", data);
+    }
+  </script>
+
+</body>
+</html>

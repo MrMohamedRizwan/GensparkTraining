@@ -22,12 +22,12 @@ using Amazon.S3;
 using Serilog;
 
 using Amazon.Runtime;
+using FitnessTrackerAPI.Services.Hubs;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(opt =>
 {
@@ -63,7 +63,6 @@ builder.Services.AddControllers()
                     opts.JsonSerializerOptions.WriteIndented = true;
                 });
 
-// builder.Logging.AddLog4Net();
 
 #region Logging
 
@@ -73,11 +72,9 @@ Log.Logger = new LoggerConfiguration()
     .WriteTo.File("Logs/log.txt", rollingInterval: RollingInterval.Day)
     .CreateLogger();
 
-// var builder = WebApplication.CreateBuilder(args);
 
 builder.Host.UseSerilog(); 
 
-// Build and run app...
 
 #endregion
 
@@ -121,12 +118,6 @@ builder.Services.AddTransient<IWorkoutPlan, WorkoutPlanService>();
 builder.Services.AddTransient<IDietServices,DietPlanService>();
 builder.Services.AddAWSService<IAmazonS3>();
 
-// Register your custom AWS S3 service
-// var awsSection = builder.Configuration.GetSection("AWS");
-// var awsOptions = awsSection.Get<AWSOptions>();
-
-// Manually set credentials
-// ✅ Load AWS section from configuration
 var awsSection = builder.Configuration.GetSection("AWS");
 var awsRegion = awsSection["Region"];
 var accessKey = awsSection["AccessKey"];
@@ -134,13 +125,12 @@ var secretKey = awsSection["SecretKey"];
 
 var credentials = new BasicAWSCredentials(accessKey, secretKey);
 
-// ✅ Register IAmazonS3 with custom credentials
 builder.Services.AddSingleton<IAmazonS3>(sp =>
 {
     return new AmazonS3Client(credentials, Amazon.RegionEndpoint.GetBySystemName(awsRegion));
 });
 
-// ✅ Register your custom AWS service
+
 builder.Services.AddScoped<IAWSService, AWSS3Service>();
 
 
@@ -165,7 +155,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         {
             OnChallenge = context =>
             {
-                context.HandleResponse(); // prevent default 401 body
+                context.HandleResponse();
 
                 context.Response.StatusCode = 401;
                 context.Response.ContentType = "application/json";
@@ -263,16 +253,16 @@ builder.Services.AddTransient<UniqueIdByEmail>();
 #endregion
 
 #region CORS
-// builder.Services.AddCors(options =>
-// {
-//     options.AddDefaultPolicy(policy =>
-//     {
-//         policy.WithOrigins("http://127.0.0.1:5501")
-//               .AllowAnyHeader()
-//               .AllowAnyMethod()
-//               .AllowCredentials();
-//     });
-// });
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.WithOrigins("http://127.0.0.1:5500")
+              .AllowAnyHeader()
+              .AllowAnyMethod()
+              .AllowCredentials();
+    });
+});
 
 #endregion
 builder.Services.AddSignalR();
@@ -288,10 +278,12 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors();
+
 app.UseMiddleware<LoggingMiddleWare>();
 app.UseRateLimiter(); 
 app.UseAuthentication();
 app.UseAuthorization();
+app.MapHub<NotificationHub>("/notificationHub");
 
 
 app.MapControllers();

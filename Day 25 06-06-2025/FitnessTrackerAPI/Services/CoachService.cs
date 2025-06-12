@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.SignalR;
 using AutoMapper;
 using FirstAPI.Models.DTOs;
 using FitnessTrackerAPI.Context;
@@ -14,6 +15,7 @@ using FitnessTrackerAPI.Models.Diet;
 using FitnessTrackerAPI.Models.DTOs;
 using FitnessTrackerAPI.Models.WorkoutModel;
 using FitnessTrackerAPI.Repository;
+using FitnessTrackerAPI.Services.Hubs;
 
 namespace FitnessTrackerAPI.Services
 {
@@ -31,6 +33,8 @@ namespace FitnessTrackerAPI.Services
 
         private readonly IRepository<Guid, PlanAssignment> _planAssignmentRepository;
         private readonly IRepository<Guid, Client> _clientRepository;
+        private readonly IHubContext<NotificationHub> _hubContext;
+
 
 
 
@@ -45,7 +49,8 @@ namespace FitnessTrackerAPI.Services
                             IRepository<Guid, WorkoutExercise> workoutExerciseRepository,
                             FitnessDBContext context,
                              IRepository<Guid, PlanAssignment> planAssignmentRepository,
-                              IRepository<Guid, Client> clientRepository
+                              IRepository<Guid, Client> clientRepository,
+                              IHubContext<NotificationHub> hubContext
                             )
         {
             _mapper = mapper;
@@ -58,7 +63,7 @@ namespace FitnessTrackerAPI.Services
             _workoutExerciseRepository = workoutExerciseRepository;
             _planAssignmentRepository = planAssignmentRepository;
             _clientRepository = clientRepository;
-
+            _hubContext = hubContext;
             _context = context;
         }
 
@@ -557,14 +562,18 @@ namespace FitnessTrackerAPI.Services
             var clientEmail = dto.ClientEmail;
             var workoutPlanTitle = dto.WorkoutName;
             var dietPlanTitle = dto.DietPlanName;
-
+            // System.Console.WriteLine($"💕{clientEmail} {workoutPlanTitle} {dietPlanTitle}");
+            if (string.IsNullOrWhiteSpace(clientEmail))
+                throw new Exception("Client email is required");
+            if (string.IsNullOrWhiteSpace(workoutPlanTitle) && string.IsNullOrWhiteSpace(dietPlanTitle))
+                throw new Exception("At least one plan (Workout or Diet) must be provided for assignment");
             // 1. Get Client by Email
             var client = (await _clientRepository.GetAll())
                             .FirstOrDefault(c => c.Email.ToLower() == clientEmail.ToLower());
 
             if (client == null)
                 throw new Exception("Client not found");
-
+            
             Guid? workoutPlanId = null;
             Guid? dietPlanId = null;
 
@@ -593,6 +602,8 @@ namespace FitnessTrackerAPI.Services
 
                 dietPlanId = dietPlan.Id;
             }
+            
+
 
             // 4. Create Assignment
             var assignment = new PlanAssignment
@@ -604,7 +615,18 @@ namespace FitnessTrackerAPI.Services
                 AssignedByCoachId = coachId,
                 AssignedOn = DateTime.UtcNow
             };
-
+            Console.WriteLine("\n\n💖  Assigning plan to client\n\n");
+            await _hubContext.Clients
+                .Group(client.Id.ToString())
+                .SendAsync("ReceivePlanAssignmentNotification", new
+                {
+                    Message = "A new plan has been assigned to you.",
+                    AssignedOn = assignment.AssignedOn,
+                    WorkoutPlanId = assignment.WorkoutPlanId,
+                    DietPlanId = assignment.DietPlanId
+                });
+            Console.WriteLine("\n\n💖 Assignied\n\n");
+        
             await _planAssignmentRepository.Add(assignment);
             return assignment;
 

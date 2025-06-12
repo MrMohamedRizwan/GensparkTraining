@@ -11,6 +11,7 @@
 // using FitnessTrackerAPI.Models.DTOs;
 // using FitnessTrackerAPI.Models.WorkoutModel;
 // using FitnessTrackerAPI.Services;
+// using FitnessTrackerAPI.Services.Hubs;
 // using Microsoft.EntityFrameworkCore;
 // using Moq;
 
@@ -32,6 +33,7 @@
 //         private Mock<IRepository<Guid, PlanAssignment>> _planAssignmentRepoMock;
 //         private Mock<IRepository<Guid, Client>> _clientRepoMock;
 //         private FitnessDBContext _context;
+//         private Mock<Microsoft.AspNetCore.SignalR.IHubContext<NotificationHub>> _hubContextMock;
 //         private CoachService _coachService;
 
 //         [SetUp]
@@ -50,9 +52,9 @@
 //             _dietMealRepoMock = new Mock<IRepository<Guid, DietMeal>>();
 //             _dietPlanRepoMock = new Mock<IRepository<Guid, DietPlan>>();
 //             _workoutPlanRepoMock = new Mock<IRepository<Guid, WorkoutPlan>>();
-//             _workoutExerciseRepoMock = new Mock<IRepository<Guid, WorkoutExercise>>();
 //             _planAssignmentRepoMock = new Mock<IRepository<Guid, PlanAssignment>>();
 //             _clientRepoMock = new Mock<IRepository<Guid, Client>>();
+//             _hubContextMock = new Mock<Microsoft.AspNetCore.SignalR.IHubContext<NotificationHub>>();
 
 //             _coachService = new CoachService(
 //                 _mapperMock.Object,
@@ -65,7 +67,8 @@
 //                 _workoutExerciseRepoMock.Object,
 //                 _context,
 //                 _planAssignmentRepoMock.Object,
-//                 _clientRepoMock.Object
+//                 _clientRepoMock.Object,
+//                 _hubContextMock.Object
 //             );
 //         }
 

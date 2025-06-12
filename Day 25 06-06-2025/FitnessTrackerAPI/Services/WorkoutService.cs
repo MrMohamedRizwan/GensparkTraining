@@ -36,7 +36,7 @@ namespace FitnessTrackerAPI.Services
             var planAssignment = await _planAssignmentRepo.Get(dto.PlanAssignmentId);
             System.Console.WriteLine($"{clientId} 😭");
             if (planAssignment == null || planAssignment.ClientId != clientId)
-                throw new InvalidOperationException("Invalid plan assignment or unauthorized access.");
+                throw new Exception("Invalid plan assignment or unauthorized access.");
 
             var workout = new Workout
             {

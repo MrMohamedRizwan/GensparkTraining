@@ -2,17 +2,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using FitnessTrackerAPI.Misc;
+using FitnessTrackerAPI.Interfaces;
+using FitnessTrackerAPI.Models.DTOs;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 namespace FitnessTrackerAPI.Controllers
 {
-    using FitnessTrackerAPI.Interfaces;
-    using FitnessTrackerAPI.Models.DTOs;
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Mvc;
 
     [ApiController]
     [ApiVersion("1.0")]
     [Route("/api/v{version:apiVersion}/[controller]")]
+    [CustomExceptionFilter]
     public class WorkoutController : ControllerBase
     {
         private readonly IWorkoutService _workoutService;
@@ -22,7 +23,7 @@ namespace FitnessTrackerAPI.Controllers
             _workoutService = workoutService;
         }
         [HttpPost]
-        [Authorize(Roles = "Client")]          
+        [Authorize(Roles = "Client")]
         public async Task<IActionResult> AddWorkout([FromBody] WorkoutCreateDTO dto)
         {
             var result = await _workoutService.AddWorkout(dto, User);
