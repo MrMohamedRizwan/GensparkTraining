@@ -79,20 +79,20 @@ namespace FitnessTrackerAPI.Tests
             Assert.ThrowsAsync<UnauthorizedAccessException>(() => _service.AddWorkout(dto, user));
         }
 
-        // [Test]
-        // public void AddWorkout_Should_Throw_When_Invalid_PlanAssignment()
-        // {
-        //     // Arrange
-        //     var clientId = Guid.NewGuid();
-        //     var planAssignmentId = Guid.NewGuid();
-        //     var dto = new WorkoutCreateDTO { PlanAssignmentId = planAssignmentId, Description = "Test workout" };
-        //     var user = CreateClaimsPrincipal(clientId);
+        [Test]
+        public void AddWorkout_Should_Throw_When_Invalid_PlanAssignment()
+        {
+            // Arrange
+            var clientId = Guid.NewGuid();
+            var planAssignmentId = Guid.NewGuid();
+            var dto = new WorkoutCreateDTO { PlanAssignmentId = planAssignmentId, Description = "Test workout" };
+            var user = CreateClaimsPrincipal(clientId);
 
-        //     _planAssignmentRepoMock.Setup(r => r.Get(planAssignmentId)).ReturnsAsync((PlanAssignment)null);
+            _planAssignmentRepoMock.Setup(r => r.Get(planAssignmentId)).ReturnsAsync((PlanAssignment)null);
 
-        //     // Act & Assert
-        //     Assert.ThrowsAsync<InvalidOperationException>(() => _service.AddWorkout(dto, user));
-        // }
+            // Act & Assert
+            Assert.ThrowsAsync<InvalidOperationException>(() => _service.AddWorkout(dto, user));
+        }
 
         [Test]
         public async Task GetWorkoutById_Should_Return_WorkoutResponseDTO_When_Authorized()

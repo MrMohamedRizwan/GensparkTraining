@@ -1,0 +1,8 @@
+<p>profile.component works!</p>
+<div *ngIf="user; else guest">
+  <h3>Welcome, {{ user.username }}</h3>
+</div>
+
+<ng-template #guest>
+  <p>Please login to view your profile.</p>
+</ng-template>
