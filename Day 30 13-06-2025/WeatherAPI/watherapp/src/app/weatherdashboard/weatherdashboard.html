@@ -1,0 +1,9 @@
+<app-city-search></app-city-search>
+<app-weather-card
+  *ngIf="weather$ | async as weather"
+  [weather]="weather"
+></app-weather-card>
+
+<div *ngIf="(weather$ | async)?.error">
+  {{ (weather$ | async)?.message }}
+</div>
