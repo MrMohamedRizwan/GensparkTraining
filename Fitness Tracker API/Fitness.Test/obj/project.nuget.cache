@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "PccDqE0LSEI=",
+  "dgSpecHash": "q6TAn+RqgMQ=",
   "success": true,
-  "projectFilePath": "/Users/presidio/Desktop/Genspark/GensparkTraining/Day 25 06-06-2025/Fitness.Test/Fitness.Test.csproj",
+  "projectFilePath": "/Users/presidio/Desktop/GensparkTraining/Fitness Tracker API/Fitness.Test/Fitness.Test.csproj",
   "expectedPackageFiles": [
     "/Users/presidio/.nuget/packages/automapper/14.0.0/automapper.14.0.0.nupkg.sha512",
     "/Users/presidio/.nuget/packages/awssdk.core/4.0.0.7/awssdk.core.4.0.0.7.nupkg.sha512",

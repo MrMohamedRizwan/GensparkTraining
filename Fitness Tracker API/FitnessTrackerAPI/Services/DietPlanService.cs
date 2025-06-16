@@ -225,6 +225,7 @@ namespace FitnessTrackerAPI.Services
 
             var result = coachPlans.Select(p => new DietPlanResponseDTO
             {
+                CoachId=p.Id,
                 DietTitle = p.DietTitle,
                 MealTypes = mealGroups.ContainsKey(p.Id)
                     ? mealGroups[p.Id].Select(m => new DietMealDTO

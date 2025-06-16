@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/presidio/Desktop/Genspark/GensparkTraining/Day 25 06-06-2025/Fitness.Test/Fitness.Test.csproj": {}
+    "/Users/presidio/Desktop/GensparkTraining/Fitness Tracker API/Fitness.Test/Fitness.Test.csproj": {}
   },
   "projects": {
-    "/Users/presidio/Desktop/Genspark/GensparkTraining/Day 25 06-06-2025/Fitness.Test/Fitness.Test.csproj": {
+    "/Users/presidio/Desktop/GensparkTraining/Fitness Tracker API/Fitness.Test/Fitness.Test.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/presidio/Desktop/Genspark/GensparkTraining/Day 25 06-06-2025/Fitness.Test/Fitness.Test.csproj",
+        "projectUniqueName": "/Users/presidio/Desktop/GensparkTraining/Fitness Tracker API/Fitness.Test/Fitness.Test.csproj",
         "projectName": "Fitness.Test",
-        "projectPath": "/Users/presidio/Desktop/Genspark/GensparkTraining/Day 25 06-06-2025/Fitness.Test/Fitness.Test.csproj",
+        "projectPath": "/Users/presidio/Desktop/GensparkTraining/Fitness Tracker API/Fitness.Test/Fitness.Test.csproj",
         "packagesPath": "/Users/presidio/.nuget/packages/",
-        "outputPath": "/Users/presidio/Desktop/Genspark/GensparkTraining/Day 25 06-06-2025/Fitness.Test/obj/",
+        "outputPath": "/Users/presidio/Desktop/GensparkTraining/Fitness Tracker API/Fitness.Test/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/presidio/.nuget/NuGet/NuGet.Config"
@@ -26,8 +26,8 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "/Users/presidio/Desktop/Genspark/GensparkTraining/Day 25 06-06-2025/FitnessTrackerAPI/FitnessTrackerAPI.csproj": {
-                "projectPath": "/Users/presidio/Desktop/Genspark/GensparkTraining/Day 25 06-06-2025/FitnessTrackerAPI/FitnessTrackerAPI.csproj"
+              "/Users/presidio/Desktop/GensparkTraining/Fitness Tracker API/FitnessTrackerAPI/FitnessTrackerAPI.csproj": {
+                "projectPath": "/Users/presidio/Desktop/GensparkTraining/Fitness Tracker API/FitnessTrackerAPI/FitnessTrackerAPI.csproj"
               }
             }
           }
@@ -101,18 +101,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.300/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.301/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "/Users/presidio/Desktop/Genspark/GensparkTraining/Day 25 06-06-2025/FitnessTrackerAPI/FitnessTrackerAPI.csproj": {
+    "/Users/presidio/Desktop/GensparkTraining/Fitness Tracker API/FitnessTrackerAPI/FitnessTrackerAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/presidio/Desktop/Genspark/GensparkTraining/Day 25 06-06-2025/FitnessTrackerAPI/FitnessTrackerAPI.csproj",
+        "projectUniqueName": "/Users/presidio/Desktop/GensparkTraining/Fitness Tracker API/FitnessTrackerAPI/FitnessTrackerAPI.csproj",
         "projectName": "FitnessTrackerAPI",
-        "projectPath": "/Users/presidio/Desktop/Genspark/GensparkTraining/Day 25 06-06-2025/FitnessTrackerAPI/FitnessTrackerAPI.csproj",
+        "projectPath": "/Users/presidio/Desktop/GensparkTraining/Fitness Tracker API/FitnessTrackerAPI/FitnessTrackerAPI.csproj",
         "packagesPath": "/Users/presidio/.nuget/packages/",
-        "outputPath": "/Users/presidio/Desktop/Genspark/GensparkTraining/Day 25 06-06-2025/FitnessTrackerAPI/obj/",
+        "outputPath": "/Users/presidio/Desktop/GensparkTraining/Fitness Tracker API/FitnessTrackerAPI/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/presidio/.nuget/NuGet/NuGet.Config"
@@ -243,7 +243,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.300/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.301/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

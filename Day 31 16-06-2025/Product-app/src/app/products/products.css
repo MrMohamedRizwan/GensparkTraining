@@ -1,0 +1,10 @@
+#search-bar{
+    width: 500px;
+    margin-left:35%;
+    border: 1px solid #ccc;
+}
+
+#card
+{
+    padding: 1%;
+}
