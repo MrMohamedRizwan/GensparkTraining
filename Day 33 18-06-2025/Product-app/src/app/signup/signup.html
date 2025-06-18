@@ -1,0 +1,19 @@
+<form [formGroup]="signupForm" (ngSubmit)="submitForm()">
+  <input formControlName="firstName" placeholder="First Name" class="form-control mb-2" />
+  <input formControlName="lastName" placeholder="Last Name" class="form-control mb-2" />
+  <input formControlName="age" type="number" placeholder="Age" class="form-control mb-2" />
+
+  <select formControlName="gender" class="form-control mb-2">
+    <option value="male">Male</option>
+    <option value="female">Female</option>
+  </select>
+
+  <select formControlName="role" class="form-control mb-2">
+    <option value="admin">Admin</option>
+    <option value="user">User</option>
+  </select>
+
+  <input formControlName="state" placeholder="State" class="form-control mb-2" />
+
+  <button class="btn btn-primary" type="submit">Add User</button>
+</form>

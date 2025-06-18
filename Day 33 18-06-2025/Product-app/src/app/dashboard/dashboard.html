@@ -1,0 +1,62 @@
+<h2>User Dashboard</h2>
+
+<div class="filters mb-3">
+  <select [(ngModel)]="gender" (change)="filterUsers()" class="form-control d-inline w-auto me-2">
+    <option value="">All Genders</option>
+    <option value="male">Male</option>
+    <option value="female">Female</option>
+  </select>
+
+  <select [(ngModel)]="role" (change)="filterUsers()" class="form-control d-inline w-auto me-2">
+    <option value="">All Roles</option>
+    <option value="admin">Admin</option>
+    <option value="user">User</option>
+    <option value="moderator">Moderator</option>
+
+  </select>
+
+  <input type="text" [(ngModel)]="state" (input)="filterUsers()" class="form-control d-inline w-auto" placeholder="Search by State"/>
+</div>
+
+<div style="display: flex;justify-content: center; gap: 20px;">
+
+<div class="chart-container mb-4 " style="max-width: 400px; height: 400px;">
+  <canvas baseChart
+    [data]="{ labels: genderChartLabels, datasets: [{ data: genderChartData }] }"
+    [type]="genderChartType"
+    [options]="{ responsive: true }">
+  </canvas>
+</div>
+
+
+<div class="chart-container mb-4 " style="max-width: 400px; height: 400px;">
+  <canvas baseChart
+    [data]="{ labels: roleChartLabels, 
+      datasets: [{ data: roleChartData,
+        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']  
+      }] }"
+    [type]="roleChartType"
+    [options]="{ responsive: true }">
+  </canvas>
+</div>
+</div>
+
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Gender</th>
+      <th>Role</th>
+      <th>State</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of filteredUsers">
+      <td>{{ user.firstName }} {{ user.lastName }}</td>
+      <td>{{ user.gender }}</td>
+      <td>{{ user.role }}</td>
+      <td>{{ user.address.state }}</td>
+    </tr>
+  </tbody>
+</table>
