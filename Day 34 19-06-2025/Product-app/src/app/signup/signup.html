@@ -1,0 +1,49 @@
+<form [formGroup]="signupForm" class="signupDiv" (ngSubmit)="submitForm()">
+  
+  <label class="form-label">{{ "Username" | uppercase }}</label>
+  <input class="form-control" type="text" formControlName="username" />
+  @if (signupForm.get('username')?.touched && signupForm.get('username')?.errors) {
+    <span class="alert alert-danger" *ngIf="signupForm.get('username')?.errors?.['required']">Username cannot be empty</span>
+    <span class="alert alert-danger" *ngIf="signupForm.get('username')?.errors?.['bannedUsername']">Invalid!! Try Other Username</span>
+  }
+
+  <label class="form-label">Email</label>
+  <input class="form-control" type="email" formControlName="email" />
+  @if (signupForm.get('email')?.touched && signupForm.get('email')?.errors) {
+    <span class="alert alert-danger" *ngIf="signupForm.get('email')?.errors?.['required']">Email is required</span>
+    <span class="alert alert-danger" *ngIf="signupForm.get('email')?.errors?.['email']">Invalid email format</span>
+  }
+
+  <label class="form-label">Password</label>
+  <input class="form-control" type="password" formControlName="password" />
+  @if (signupForm.get('password')?.touched && signupForm.get('password')?.errors) {
+    <span class="alert alert-danger" *ngIf="signupForm.get('password')?.errors?.['required']">Password is required</span>
+    <span class="alert alert-danger" *ngIf="signupForm.get('password')?.errors?.['minlength']">Password must be at least 8 characters</span>
+    <span class="alert alert-danger" *ngIf="signupForm.get('password')?.errors?.['passwordNoNumber']">Password must include a number and a special character</span>
+    <span class="alert alert-danger" *ngIf="signupForm.get('password')?.errors?.['passwordNoSymbol']">Password must include a number and a special character</span>
+
+  }
+
+  <!-- Confirm Password -->
+  <label class="form-label">Confirm Password</label>
+  <input class="form-control" type="password" formControlName="confirmPassword" />
+  @if (signupForm.get('confirmPassword')?.touched && signupForm.get('confirmPassword')?.errors) {
+    <span class="alert alert-danger">Confirm Password is required</span>
+  }
+  @if (signupForm.errors?.['passwordMismatch'] && signupForm.get('confirmPassword')?.touched) {
+    <span class="alert alert-danger">Passwords do not match</span>
+  }
+
+
+  <label class="form-label">Role</label>
+  <select class="form-select" formControlName="role">
+    <option value="Admin">Admin</option>
+    <option value="User">User</option>
+    <option value="Guest">Guest</option>
+  </select>
+
+  <button class="btn btn-success mt-3" >Sign Up</button>
+</form>
+
+
+<app-user-list></app-user-list>

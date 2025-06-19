@@ -1,0 +1,26 @@
+<input
+  class="form-control mb-2"
+  type="text"
+  [(ngModel)]="searchString"
+  (input)="handleSearch()"
+  placeholder="Search by username"
+/>
+
+<div class="mb-3">
+    <select class="form-select" [(ngModel)]="selectedRole" (change)="onRoleChange(selectedRole)">
+        <option value="All">All</option>
+        <option value="Admin">Admin</option>
+        <option value="User">User</option>
+        <option value="Guest">Guest</option>
+    </select>
+</div>
+
+<ul class="list-group">
+  <li class="list-group-item" *ngFor="let user of users">
+    {{ user.username }} — {{ user.role }}
+  </li>
+</ul>
+
+<div *ngIf="loading" class="text-center mt-2">
+  <span class="spinner-border"></span> Loading...
+</div>
