@@ -1,0 +1,66 @@
+                                                      ??"%                   presidio@Presidios-MacBook-Pro Desktop % touch sample.txt     
+presidio@Presidios-MacBook-Pro Desktop % vim sample.txt 
+presidio@Presidios-MacBook-Pro Desktop % cat sample.txt 
+Hi sample.txt
+ 
+presidio@Presidios-MacBook-Pro Desktop % man sample.txt 
+No manual entry for sample.txt
+presidio@Presidios-MacBook-Pro Desktop % man ls
+presidio@Presidios-MacBook-Pro Desktop % top
+presidio@Presidios-MacBook-Pro Desktop % 
+presidio@Presidios-MacBook-Pro Desktop % htop
+zsh: command not found: htop
+presidio@Presidios-MacBook-Pro Desktop % ls -l sample.txt 
+-rw-r--r--@ 1 presidio  staff  16 26 Jun 10:36 sample.txt
+presidio@Presidios-MacBook-Pro Desktop % ./sample.txt
+zsh: permission denied: ./sample.txt
+presidio@Presidios-MacBook-Pro Desktop % chmod +x sample.txt 
+presidio@Presidios-MacBook-Pro Desktop % ls -l sample.txt
+-rwxr-xr-x@ 1 presidio  staff  16 26 Jun 10:36 sample.txt
+presidio@Presidios-MacBook-Pro Desktop % ./sample.txt
+./sample.txt: line 1: Hi: command not found
+presidio@Presidios-MacBook-Pro Desktop % 
+
+
+presidio@Presidios-MacBook-Pro Desktop % chmod 744 sample.txt 
+presidio@Presidios-MacBook-Pro Desktop % 
+744
+Owner -> rwx
+Group ->r
+Public ->r
+
+
+Sticky Bit
+users can only delete their own files, improving security users
+ can only delete their own files, improving security.
+chmod +t dir
+
+User full access
+Group execute 
+Other nil
+chmod u=rwx,g=x,o= file.txt 
+Or
+Chmod 710
+
+UMASK
+presidio@Presidios-MacBook-Pro Desktop % umask
+022
+presidio@Presidios-MacBook-Pro Desktop % 
+umask (short for user file creation mask) is a default permission filter that determines what permissions are not granted when new files or directories are created.
+
+
+Umask 022
+Owner -> full access
+Group -> read & execute
+Others -> read & execute
+
+Umask 022 gives files to 
+chmod664 
+Read write for users and grops and read for others
+
+Umask 027 or 077
+Files -> owner read write only
+
+
+
+
