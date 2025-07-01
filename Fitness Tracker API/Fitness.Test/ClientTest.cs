@@ -31,6 +31,7 @@ namespace FitnessTrackerAPI.Tests
         private Mock<IRepository<Guid, PlanAssignment>> _planAssignmentRepositoryMock;
         private Mock<IRepository<Guid, WorkoutPlan>> _workoutPlanRepositoryMock;
         private Mock<IRepository<Guid, DietPlan>> _dietPlanRepositoryMock;
+        private Mock<ITokenService> _tokenServiceMock;
 
         [SetUp]
         public void Setup()
@@ -48,6 +49,7 @@ namespace FitnessTrackerAPI.Tests
             _planAssignmentRepositoryMock = new Mock<IRepository<Guid, PlanAssignment>>();
             _workoutPlanRepositoryMock = new Mock<IRepository<Guid, WorkoutPlan>>();
             _dietPlanRepositoryMock = new Mock<IRepository<Guid, DietPlan>>();
+            _tokenServiceMock = new Mock<ITokenService>();
 
             _service = new ClientService(
                 _mapperMock.Object,
@@ -56,7 +58,9 @@ namespace FitnessTrackerAPI.Tests
                 _clientRepositoryMock.Object,
                 _planAssignmentRepositoryMock.Object,
                 _workoutPlanRepositoryMock.Object,
+                // _tokenServiceMock.Object,
                 _dietPlanRepositoryMock.Object,
+                _tokenServiceMock.Object,
                 _dbContext
             );
         }
@@ -100,7 +104,7 @@ namespace FitnessTrackerAPI.Tests
 
             // Act & Assert
             var ex = Assert.ThrowsAsync<Exception>(() => _service.AddCoach(clientDto));
-            Assert.That(ex.Message, Is.EqualTo("User Already Exist"));
+            Assert.That(ex.Message, Is.EqualTo("User already exists"));
         }
 
         [Test]

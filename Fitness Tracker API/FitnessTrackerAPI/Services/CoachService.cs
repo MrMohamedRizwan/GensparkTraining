@@ -16,6 +16,10 @@ using FitnessTrackerAPI.Models.DTOs;
 using FitnessTrackerAPI.Models.WorkoutModel;
 using FitnessTrackerAPI.Repository;
 using FitnessTrackerAPI.Services.Hubs;
+using FitnessTrackerAPI.Models.DTO;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
+using System.Globalization;
 
 namespace FitnessTrackerAPI.Services
 {
@@ -33,7 +37,11 @@ namespace FitnessTrackerAPI.Services
 
         private readonly IRepository<Guid, PlanAssignment> _planAssignmentRepository;
         private readonly IRepository<Guid, Client> _clientRepository;
+        private readonly IRepository<Guid, Workout> _workoutLogRepo;
+
         private readonly IHubContext<NotificationHub> _hubContext;
+        private readonly ITokenService _tokenService;
+
 
 
 
@@ -48,9 +56,11 @@ namespace FitnessTrackerAPI.Services
                             IRepository<Guid, WorkoutPlan> workoutPlanRepository,
                             IRepository<Guid, WorkoutExercise> workoutExerciseRepository,
                             FitnessDBContext context,
+                            IRepository<Guid, Workout> workoutLogRepo,
                              IRepository<Guid, PlanAssignment> planAssignmentRepository,
                               IRepository<Guid, Client> clientRepository,
-                              IHubContext<NotificationHub> hubContext
+                              IHubContext<NotificationHub> hubContext,
+                              ITokenService tokenService
                             )
         {
             _mapper = mapper;
@@ -65,6 +75,8 @@ namespace FitnessTrackerAPI.Services
             _clientRepository = clientRepository;
             _hubContext = hubContext;
             _context = context;
+            _tokenService = tokenService;
+            _workoutLogRepo = workoutLogRepo;
         }
 
         public async Task<SignUpResponseDTO> AddCoach(CoachAddRequestDTO coach)
@@ -92,14 +104,23 @@ namespace FitnessTrackerAPI.Services
                 var newCoach = _mapper.Map<CoachAddRequestDTO, Coach>(coach);
                 newCoach.Email = user.Email;
 
+
                 newCoach = await _coachRepository.Add(newCoach);
                 if (newCoach == null)
                     throw new Exception("Could not add Coach");
+                var accessToken = await _tokenService.GenerateToken(user);
+                var refreshToken = _tokenService.GenerateRefreshToken();
+
+                user.RefreshToken = refreshToken;
+                user.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(7);
+                await _userRepository.Update(user.Email, user); // persist token changes
                 // await transaction.CommitAsync();
                 return new SignUpResponseDTO
                 {
                     Id = newCoach.Id,
-                    Email = newCoach.Email
+                    Email = newCoach.Email,
+                    Token = accessToken,
+                    RefreshToken = refreshToken
 
                 };
             }
@@ -112,6 +133,7 @@ namespace FitnessTrackerAPI.Services
                 throw new Exception(e.Message);
             }
         }
+
 
         // public async Task<DietPlan> AddMeal(DietPlanCreateRequestDTO diet, ClaimsPrincipal user)
         // {
@@ -559,84 +581,113 @@ namespace FitnessTrackerAPI.Services
             if (coachIdClaim == null || !Guid.TryParse(coachIdClaim, out Guid coachId))
                 throw new Exception("Invalid Coach ID from token");
 
-            var clientEmail = dto.ClientEmail;
-            var workoutPlanTitle = dto.WorkoutName;
-            var dietPlanTitle = dto.DietPlanName;
-            // System.Console.WriteLine($"💕{clientEmail} {workoutPlanTitle} {dietPlanTitle}");
-            if (string.IsNullOrWhiteSpace(clientEmail))
+            if (string.IsNullOrWhiteSpace(dto.ClientEmail))
                 throw new Exception("Client email is required");
-            if (string.IsNullOrWhiteSpace(workoutPlanTitle) && string.IsNullOrWhiteSpace(dietPlanTitle))
-                throw new Exception("At least one plan (Workout or Diet) must be provided for assignment");
-            // 1. Get Client by Email
+
+            if ((dto.WorkoutPlanID == null || dto.WorkoutPlanID == Guid.Empty) &&
+                (dto.DietPlanID == null || dto.DietPlanID == Guid.Empty))
+                throw new Exception("At least one plan (Workout or Diet) must be assigned.");
+
+            // Validate Workout Plan if present
+            if (dto.WorkoutPlanID.HasValue && dto.WorkoutPlanID.Value != Guid.Empty)
+            {
+                var workoutPlan = await _workoutPlanRepository.Get(dto.WorkoutPlanID.Value);
+                if (workoutPlan == null || workoutPlan.CoachId != coachId)
+                    throw new Exception("Invalid or unauthorized Workout Plan.");
+            }
+
+            // Validate Diet Plan if present
+            if (dto.DietPlanID.HasValue && dto.DietPlanID.Value != Guid.Empty)
+            {
+                var dietPlan = await _dietPlanRepository.Get(dto.DietPlanID.Value);
+                if (dietPlan == null || dietPlan.CoachId != coachId)
+                    throw new Exception("Invalid or unauthorized Diet Plan.");
+            }
+
+            // Get client by email and coach match
             var client = (await _clientRepository.GetAll())
-                            .FirstOrDefault(c => c.Email.ToLower() == clientEmail.ToLower());
+                            .FirstOrDefault(c =>
+                                c.Email.Trim().ToLower() == dto.ClientEmail!.Trim().ToLower() &&
+                                c.CoachId == coachId);
 
             if (client == null)
-                throw new Exception("Client not found");
-            
-            Guid? workoutPlanId = null;
-            Guid? dietPlanId = null;
+                throw new Exception("Client not found or not assigned to this coach.");
+            dto.DueDate = DateTime.SpecifyKind(dto.DueDate, DateTimeKind.Utc);
 
-            // 2. Get Workout Plan by Title if provided
-            if (!string.IsNullOrWhiteSpace(workoutPlanTitle))
-            {
-                var workoutPlan = (await _workoutPlanRepository.GetAll())
-                    .FirstOrDefault(wp => wp.CoachId == coachId &&
-                                          wp.Title.ToLower().Trim() == workoutPlanTitle.ToLower().Trim());
-
-                if (workoutPlan == null)
-                    throw new Exception("Workout plan not found or not owned by this coach");
-
-                workoutPlanId = workoutPlan.Id;
-            }
-
-            // 3. Get Diet Plan by Title if provided
-            if (!string.IsNullOrWhiteSpace(dietPlanTitle))
-            {
-                var dietPlan = (await _dietPlanRepository.GetAll())
-                    .FirstOrDefault(dp => dp.CoachId == coachId &&
-                                          dp.DietTitle.ToLower().Trim() == dietPlanTitle.ToLower().Trim());
-
-                if (dietPlan == null)
-                    throw new Exception("Diet plan not found or not owned by this coach");
-
-                dietPlanId = dietPlan.Id;
-            }
-            
-
-
-            // 4. Create Assignment
+            // Create Plan Assignment
             var assignment = new PlanAssignment
             {
                 Id = Guid.NewGuid(),
                 ClientId = client.Id,
-                WorkoutPlanId = workoutPlanId,
-                DietPlanId = dietPlanId,
+                WorkoutPlanId = dto.WorkoutPlanID,
+                DietPlanId = dto.DietPlanID,
                 AssignedByCoachId = coachId,
-                AssignedOn = DateTime.UtcNow
+                AssignedOn = DateTime.UtcNow,
+                DueDate = dto.DueDate,
+                CompletionStatus = "Not Started"
             };
-            // Console.WriteLine("\n\n💖  Assigning plan to client\n\n");
+
+            // Notify client via SignalR
             await _hubContext.Clients
                 .Group(client.Id.ToString())
                 .SendAsync("ReceivePlanAssignmentNotification", new
                 {
                     Message = "A new plan has been assigned to you.",
                     AssignedOn = assignment.AssignedOn,
+                    DueDate = assignment.DueDate,
                     WorkoutPlanId = assignment.WorkoutPlanId,
                     DietPlanId = assignment.DietPlanId
                 });
-            Console.WriteLine("\n\n💖 Assignied\n\n");
-        
-            await _planAssignmentRepository.Add(assignment);
+
+            try
+            {
+
+                await _planAssignmentRepository.Add(assignment);
+            }
+            catch (DbUpdateException ex)
+            {
+                Console.WriteLine("💥 EF Error: " + ex.InnerException?.Message ?? ex.Message);
+                throw;
+            }
             return assignment;
+        }
+
+        public async Task<PagedResult<GetCoachDTO>> GetAllCoachesAsync(int pageNumber, int pageSize)
+        {
+            var allCoaches = await _coachRepository.GetAll();
+            var pagedCoaches = allCoaches
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+            Func<IEnumerable<Coach>, List<GetCoachDTO>> mapToDto = clients =>
+                clients.Select(c => new GetCoachDTO
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    YearsOfExperience = c.YearsOfExperience,
+                    Email = c.Email
+                }).ToList();
+            var coachDtos = mapToDto(pagedCoaches);
+
+            return new PagedResult<GetCoachDTO>
+            {
+                Items = coachDtos,
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                TotalRecords = allCoaches.Count()
+            };
 
         }
 
         public async Task<List<AssignedPlanNamesDTO>> GetAssignedPlans(string email, ClaimsPrincipal user)
         {
+            var coachIdClaim = user.FindFirst("UserId")?.Value;
+            if (coachIdClaim == null || !Guid.TryParse(coachIdClaim, out Guid coachId))
+                throw new Exception("Invalid Coach ID from token");
             // Find the client directly by email
+
             var client = (await _clientRepository.GetAll())
-                            .FirstOrDefault(c => c.Email.Trim().ToLower() == email.Trim().ToLower());
+                            .FirstOrDefault(c => c.Email.Trim().ToLower() == email.Trim().ToLower() && c.CoachId == coachId);
 
             if (client == null)
                 throw new Exception("Client not found");
@@ -644,6 +695,7 @@ namespace FitnessTrackerAPI.Services
             // Filter assignments for this client only
             var assignments = (await _planAssignmentRepository.GetAll())
                                 .Where(a => a.ClientId == client.Id)
+                                .OrderByDescending(a => a.Id)
                                 .ToList();
 
             var result = new List<AssignedPlanNamesDTO>();
@@ -661,29 +713,78 @@ namespace FitnessTrackerAPI.Services
                 result.Add(new AssignedPlanNamesDTO
                 {
                     PlanAssignmentId = assignment.Id,
+                    AssignedOn = assignment.AssignedOn,
                     WorkoutPlanTitle = workoutPlan?.Title ?? "Not Assigned",
-                    DietPlanTitle = dietPlan?.DietTitle ?? "Not Assigned"
+                    DietPlanTitle = dietPlan?.Title ?? "Not Assigned",
+                    status = assignment.CompletionStatus,
+                    progressPercentage=await CalculateWorkoutProgress(assignment.ClientId, assignment.Id)
+                    
                 });
             }
 
             return result;
         }
-        public async Task<PagedResult<ClientWithoutPlansDTO>> GetClientsWithoutAssignedPlans(int pageNumber, int pageSize, string searchTerm)
+
+         private async Task<double> CalculateWorkoutProgress(Guid clientId, Guid planAssignmentId)
         {
-            var allClients = await _clientRepository.GetAll();
+
+
+            // Total days between AssignedOn and DueDate (duration of plan)
+            var assignment = (await _planAssignmentRepository.GetAll())
+                                        .FirstOrDefault(p => p.Id == planAssignmentId);
+            if (assignment == null) return -12;
+
+            var totalDays = (assignment.DueDate ?? DateTime.UtcNow).Date
+                          .Subtract(assignment.AssignedOn.Date).Days + 1;
+
+            // Count number of workout logs submitted for this plan
+            var completedDays = (await _workoutLogRepo.GetAll())
+                .Where(w => w.ClientId == clientId && w.PlanAssignmentId == planAssignmentId)
+                .Select(w => w.Date.Date)
+                // .Distinct()
+                .Count();
+            Console.WriteLine("🎉🎉🎉🎉🎉" + completedDays);
+
+            // Prevent division by zero
+            if (totalDays <= 0) return 0;
+            // totalDays = 1;
+            double progress = (double)completedDays / totalDays * 100;
+            return Math.Round(progress, 2); // Return as a percentage
+        }
+        public async Task<PagedResult<ClientWithoutPlansDTO>> GetClientsWithoutAssignedPlans(int pageNumber, int pageSize, string searchTerm, ClaimsPrincipal user)
+        {
+            var coachIdClaim = user.FindFirst("UserId")?.Value;
+            if (coachIdClaim == null || !Guid.TryParse(coachIdClaim, out Guid coachId))
+                throw new Exception("Invalid Coach ID from token");
+            var allClients = (await _clientRepository.GetAll())
+                                .Where(c => c.CoachId == coachId)
+                                .OrderByDescending(c => c.Id)
+                                .ToList();
             var allAssignments = await _planAssignmentRepository.GetAll();
 
             var assignedClientIds = allAssignments
+                .OrderByDescending(pa => pa.AssignedOn)
                 .Select(pa => pa.ClientId)
                 .Distinct()
                 .ToHashSet();
 
+            // Map clients to DTOs and include their plan assignment status if available
             Func<IEnumerable<Client>, List<ClientWithoutPlansDTO>> mapToDto = clients =>
-                clients.Select(c => new ClientWithoutPlansDTO
+                clients.Select(c =>
                 {
-                    Id=c.Id,
-                    Name = c.Name,
-                    Email = c.Email
+                    // Find the latest plan assignment for this client (if any)
+                    var assignment = allAssignments
+                        .Where(pa => pa.ClientId == c.Id)
+                        .OrderByDescending(pa => pa.AssignedOn)
+                        .FirstOrDefault();
+
+                    return new ClientWithoutPlansDTO
+                    {
+                        Id = c.Id,
+                        Name = c.Name,
+                        Email = c.Email,
+                        status = assignment?.CompletionStatus ?? "Unassigned"
+                    };
                 }).ToList();
 
             List<ClientWithoutPlansDTO> filteredClients;
@@ -768,7 +869,7 @@ namespace FitnessTrackerAPI.Services
         //                              .ToList();
         //     }
 
-            
+
 
         //     var totalRecords = x.Count;
 
@@ -803,6 +904,56 @@ namespace FitnessTrackerAPI.Services
             _context.PlanAssignment.Update(assignment);
             await _context.SaveChangesAsync();
             return true;
+        }
+
+    public async Task<ChartResponse> GetAssignedPlansChartAsync(ClaimsPrincipal user)
+        {
+            var coachIdClaim = user.FindFirst("UserId")?.Value;
+            if (coachIdClaim == null || !Guid.TryParse(coachIdClaim, out Guid coachId))
+                throw new Exception("Invalid Coach ID from token");
+
+            var allAssignments = await _planAssignmentRepository.GetAll();
+            var workoutAssignments = allAssignments
+                .Where(a => a.AssignedByCoachId == coachId && a.WorkoutPlanId != null)
+                .Select(a => new { a.AssignedOn });
+
+            var dietAssignments = allAssignments
+                .Where(a => a.AssignedByCoachId == coachId && a.DietPlanId != null)
+                .Select(a => new { a.AssignedOn });
+
+            var calendar = CultureInfo.InvariantCulture.Calendar;
+
+            var workoutByDay = workoutAssignments
+                .GroupBy(w => w.AssignedOn.Date)
+                .ToDictionary(g => g.Key, g => g.Count());
+
+            var dietByDay = dietAssignments
+                .GroupBy(d => d.AssignedOn.Date)
+                .ToDictionary(g => g.Key, g => g.Count());
+
+            var allDays = workoutByDay.Keys.Union(dietByDay.Keys).OrderBy(d => d).ToList();
+
+            var labels = allDays.Select(day => day.ToString("yyyy-MM-dd")).ToList();
+            var workoutData = allDays.Select(w => workoutByDay.ContainsKey(w) ? workoutByDay[w] : 0).ToList();
+            var dietData = allDays.Select(w => dietByDay.ContainsKey(w) ? dietByDay[w] : 0).ToList();
+
+            return new ChartResponse
+            {
+                Labels = labels,
+                Datasets = new List<ChartDataset>
+            {
+                new ChartDataset
+                {
+                    Label = "Workout Plans Assigned",
+                    Data = workoutData
+                },
+                new ChartDataset
+                {
+                    Label = "Diet Plans Assigned",
+                    Data = dietData
+                }
+                }
+            };
         }
 
     }

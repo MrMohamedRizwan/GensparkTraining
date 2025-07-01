@@ -11,6 +11,7 @@ using FitnessTrackerAPI.Models.WorkoutModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using FitnessTrackerAPI.Misc;
 using Microsoft.AspNetCore.Mvc.Routing;
 
 namespace FitnessTrackerAPI.Controllers
@@ -18,6 +19,8 @@ namespace FitnessTrackerAPI.Controllers
     [ApiController]
     [ApiVersion("1.0")]
     [Route("/api/v{version:apiVersion}/[controller]")]
+    [CustomExceptionFilter]
+
     public class CoachController : ControllerBase
     {
         private readonly ICoachService _coachService;
@@ -247,13 +250,27 @@ namespace FitnessTrackerAPI.Controllers
 
         [Authorize(Roles = "Coach")]
         [HttpGet("ClientWithoutPlansAssigned")]
-        public async Task<IActionResult> GetClientsWithoutAssignedPlans([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10,[FromQuery] string? searchTerm = "all")
+        public async Task<IActionResult> GetClientsWithoutAssignedPlans([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10, [FromQuery] string? searchTerm = "all")
         {
-            var result = await _coachService.GetClientsWithoutAssignedPlans(pageNumber,pageSize,searchTerm);
+            var result = await _coachService.GetClientsWithoutAssignedPlans(pageNumber, pageSize, searchTerm, User);
             if (result == null)
                 return NotFound(new { message = "Plans Assigned to all Clients" });
 
             return Ok(result);
+        }
+        [Authorize]
+        [HttpGet("getAllCoaches")]
+        public async Task<IActionResult> GetAllCoaches([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+        {
+            try
+            {
+                var coaches = await _coachService.GetAllCoachesAsync(pageNumber, pageSize);
+                return Ok(coaches);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         [HttpPut("{id}/completed")]
@@ -261,9 +278,10 @@ namespace FitnessTrackerAPI.Controllers
         public async Task<IActionResult> MarkAsCompleted(Guid id)
         {
             try
-            {; // extract from JWT token
+            {
+                // ; // extract from JWT token
                 await _coachService.MarkPlanAsCompletedAsync(id, User);
-                return Ok("Plan marked as completed.");
+                return Ok(new { message = "Plan marked as completed." });
             }
             catch (UnauthorizedAccessException e)
             {
@@ -274,6 +292,26 @@ namespace FitnessTrackerAPI.Controllers
                 return BadRequest(e.Message);
             }
         }
+
+        [HttpGet("assignedPlansByWeek")]
+        [Authorize(Roles = "Coach")]
+        public async Task<IActionResult> AssignedPlansByWeek()
+        {
+            try
+            {
+                var chartData = await _coachService.GetAssignedPlansChartAsync(User);
+                return Ok(chartData);
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                return Forbid(e.Message);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+        
 
 
     }

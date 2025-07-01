@@ -93,6 +93,7 @@ builder.Services.AddTransient<IRepository<Guid, PlanAssignment>, PlanAssignmentR
 builder.Services.AddTransient<IRepository<Guid, Workout>, WorkoutRepo>();
 builder.Services.AddTransient<IRepository<Guid, Progress>, ProgressRepo>();
 builder.Services.AddTransient<IRepository<Guid, WorkoutPlan>, WorkoutPlanRepo>();
+builder.Services.AddTransient<IRepository<Guid, Admin>, AdminRepository>();
 
 
 
@@ -115,7 +116,9 @@ builder.Services.AddTransient<IProgressService, ProgressService>();
 builder.Services.AddTransient<IAWSService, AWSS3Service>();
 builder.Services.AddTransient<IGeneralService, GeneralService>();
 builder.Services.AddTransient<IWorkoutPlan, WorkoutPlanService>();
-builder.Services.AddTransient<IDietServices,DietPlanService>();
+builder.Services.AddTransient<IDietServices, DietPlanService>();
+builder.Services.AddScoped<IAdminService, AdminService>();
+
 builder.Services.AddAWSService<IAmazonS3>();
 
 var awsSection = builder.Configuration.GetSection("AWS");
@@ -257,7 +260,7 @@ builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
     {
-        policy.WithOrigins("http://127.0.0.1:5500")
+        policy.WithOrigins("http://127.0.0.1:5500","http://localhost:4200")
               .AllowAnyHeader()
               .AllowAnyMethod()
               .AllowCredentials();

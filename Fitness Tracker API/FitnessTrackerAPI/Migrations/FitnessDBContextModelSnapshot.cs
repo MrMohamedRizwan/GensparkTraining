@@ -22,14 +22,11 @@ namespace FitnessTrackerAPI.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("FitnessTrackerAPI.Models.Client", b =>
+            modelBuilder.Entity("FitnessTrackerAPI.Models.Admin", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
-
-                    b.Property<int>("Age")
-                        .HasColumnType("integer");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -43,7 +40,57 @@ namespace FitnessTrackerAPI.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("UserEmail")
+                        .HasColumnType("text");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserEmail");
+
+                    b.ToTable("Admin");
+                });
+
+            modelBuilder.Entity("FitnessTrackerAPI.Models.Client", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("Age")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid?>("CoachId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Gender")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Goal")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<float>("Height")
+                        .HasColumnType("real");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<float>("Weight")
+                        .HasColumnType("real");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CoachId");
 
                     b.HasIndex("Email")
                         .IsUnique();
@@ -92,15 +139,15 @@ namespace FitnessTrackerAPI.Migrations
                     b.Property<int>("CarbsGrams")
                         .HasColumnType("integer");
 
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<Guid>("DietPlanId")
                         .HasColumnType("uuid");
 
                     b.Property<int>("FatGrams")
                         .HasColumnType("integer");
+
+                    b.Property<string>("MealName")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("MealType")
                         .IsRequired()
@@ -125,7 +172,14 @@ namespace FitnessTrackerAPI.Migrations
                     b.Property<Guid>("CoachId")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("DietTitle")
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("DurationInWeeks")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -157,6 +211,9 @@ namespace FitnessTrackerAPI.Migrations
 
                     b.Property<Guid?>("DietPlanId")
                         .HasColumnType("uuid");
+
+                    b.Property<DateTime?>("DueDate")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<Guid?>("WorkoutPlanId")
                         .HasColumnType("uuid");
@@ -242,12 +299,25 @@ namespace FitnessTrackerAPI.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("Description")
+                    b.Property<string>("DietMealJSON")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("jsonb");
+
+                    b.Property<string>("ExerciseJSON")
+                        .IsRequired()
+                        .HasColumnType("jsonb");
 
                     b.Property<Guid?>("PlanAssignmentId")
                         .HasColumnType("uuid");
+
+                    b.Property<int>("caloriesBurnt")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("caloriesTaken")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("totalExercises")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -284,6 +354,9 @@ namespace FitnessTrackerAPI.Migrations
                     b.Property<Guid>("WorkoutPlanId")
                         .HasColumnType("uuid");
 
+                    b.Property<int>("caloriesBurnt")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
 
                     b.HasIndex("WorkoutPlanId");
@@ -318,13 +391,29 @@ namespace FitnessTrackerAPI.Migrations
                     b.ToTable("WorkoutPlan");
                 });
 
+            modelBuilder.Entity("FitnessTrackerAPI.Models.Admin", b =>
+                {
+                    b.HasOne("FitnessTrackerAPI.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserEmail");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("FitnessTrackerAPI.Models.Client", b =>
                 {
+                    b.HasOne("FitnessTrackerAPI.Models.Coach", "Coach")
+                        .WithMany("Clients")
+                        .HasForeignKey("CoachId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
                     b.HasOne("FitnessTrackerAPI.Models.User", "User")
                         .WithOne("Client")
                         .HasForeignKey("FitnessTrackerAPI.Models.Client", "Email")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Coach");
 
                     b.Navigation("User");
                 });
@@ -457,6 +546,8 @@ namespace FitnessTrackerAPI.Migrations
             modelBuilder.Entity("FitnessTrackerAPI.Models.Coach", b =>
                 {
                     b.Navigation("AssignedPlans");
+
+                    b.Navigation("Clients");
 
                     b.Navigation("DietPlans");
 

@@ -9,7 +9,9 @@ namespace FitnessTrackerAPI.Models.Diet
     {
         public Guid Id { get; set; }
         public Guid CoachId { get; set; }
-        public string DietTitle { get; set; } = string.Empty;
+        public string Title { get; set; } = string.Empty;
+        public int DurationInWeeks { get; set; }
+        public string Description { get; set; } = string.Empty;
         public Coach? Coach { get; set; }
         public ICollection<DietMeal>? Meals { get; set; }
 

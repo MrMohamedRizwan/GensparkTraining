@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using FirstAPI.Models.DTOs;
 using FitnessTrackerAPI.Models;
 using FitnessTrackerAPI.Models.Diet;
+using FitnessTrackerAPI.Models.DTO;
 using FitnessTrackerAPI.Models.DTOs;
 using FitnessTrackerAPI.Models.WorkoutModel;
 
@@ -32,8 +33,10 @@ namespace FitnessTrackerAPI.Interfaces
 
         public Task<PlanAssignment> AssignPlanToClient(PlanAssignmentRequestDTO dto, ClaimsPrincipal user);
         public Task<List<AssignedPlanNamesDTO>> GetAssignedPlans(string title, ClaimsPrincipal user);
-        public Task<PagedResult<ClientWithoutPlansDTO>> GetClientsWithoutAssignedPlans(int pageNumber, int pageSize,string searchTerm);
+        public Task<PagedResult<ClientWithoutPlansDTO>> GetClientsWithoutAssignedPlans(int pageNumber, int pageSize, string searchTerm, ClaimsPrincipal user);
+        public Task<PagedResult<GetCoachDTO>> GetAllCoachesAsync(int pageNumber, int pageSize);
         public Task<bool> MarkPlanAsCompletedAsync(Guid planAssignmentId, ClaimsPrincipal user);
+        public Task<ChartResponse> GetAssignedPlansChartAsync(ClaimsPrincipal user);
 
     }
 }

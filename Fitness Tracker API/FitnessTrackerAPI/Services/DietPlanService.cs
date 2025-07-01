@@ -65,7 +65,7 @@ namespace FitnessTrackerAPI.Services
             if (coachIdClaim == null || !Guid.TryParse(coachIdClaim, out Guid coachId))
                 throw new Exception("Invalid Coach ID from token");
             var existingPlans = await _dietPlanRepository.GetAll();
-            if (existingPlans.Any(p => p.CoachId == coachId && p.DietTitle.ToLower() == diet.DietTitle.ToLower()))
+            if (existingPlans.Any(p => p.CoachId == coachId && p.Title.ToLower() == diet.Title.ToLower()))
             {
                 throw new Exception("A diet plan with this title already exists. Choose a new title or edit the previous diet plan");
             }
@@ -112,7 +112,7 @@ namespace FitnessTrackerAPI.Services
             var dietPlans = await _dietPlanRepository.GetAll();
             var existingDietPlan = dietPlans.FirstOrDefault(dp =>
                 dp.CoachId == coachId &&
-                dp.DietTitle.Trim().ToLower() == normalizedTitle
+                dp.Title.Trim().ToLower() == normalizedTitle
             );
 
             if (existingDietPlan == null)
@@ -132,7 +132,7 @@ namespace FitnessTrackerAPI.Services
             try
             {
                 // Update diet title
-                existingDietPlan.DietTitle = dto.DietTitle.Trim();
+                existingDietPlan.Title = dto.Title.Trim();
 
                 // Delete existing meals
                 var existingMeals = (await _dietMealRepository.GetAll())
@@ -178,7 +178,7 @@ namespace FitnessTrackerAPI.Services
             var allPlans = await _dietPlanRepository.GetAll();
             var dietPlan = allPlans.FirstOrDefault(dp =>
                 dp.CoachId == coachId &&
-                dp.DietTitle.Trim().ToLower() == normalizedTitle);
+                dp.Title.Trim().ToLower() == normalizedTitle);
 
             if (dietPlan == null)
                 throw new Exception("Diet plan not found or unauthorized access");
@@ -225,13 +225,16 @@ namespace FitnessTrackerAPI.Services
 
             var result = coachPlans.Select(p => new DietPlanResponseDTO
             {
-                CoachId=p.Id,
-                DietTitle = p.DietTitle,
+                Id=p.Id,
+                CoachId =p.CoachId,
+                Title = p.Title,
+                Description=p.Description,
+                DurationInWeeks=p.DurationInWeeks,
                 MealTypes = mealGroups.ContainsKey(p.Id)
                     ? mealGroups[p.Id].Select(m => new DietMealDTO
                     {
                         MealType = m.MealType,
-                        Description = m.Description,
+                        MealName = m.MealName,
                         Calories = m.Calories,
                         ProteinGrams = m.ProteinGrams,
                         CarbsGrams = m.CarbsGrams,
@@ -253,37 +256,110 @@ namespace FitnessTrackerAPI.Services
                 TotalRecords = result.Count
             };
         }
-        public async Task<DietPlanResponseDTO?> GetDietPlanByTitle(string title, ClaimsPrincipal user)
+        public async Task<DietPlanResponseDTO?> GetDietPlanByTitle(Guid Id, ClaimsPrincipal user)
         {
+            var roleClaim = user.FindFirst(ClaimTypes.Role)?.Value ?? user.FindFirst("role")?.Value;
             var coachIdClaim = user.FindFirst("UserId")?.Value;
             if (coachIdClaim == null || !Guid.TryParse(coachIdClaim, out Guid coachId))
                 throw new Exception("Invalid Coach ID");
-
-            var plans = await _dietPlanRepository.GetAll();
-            var plan = plans
-                        .Where(p => p.CoachId == coachId)
-                        .FirstOrDefault(p => p.DietTitle.Equals(title.Trim(), StringComparison.OrdinalIgnoreCase));
-
-            if (plan == null)
-                return null;
-
-            var meals = (await _dietMealRepository.GetAll())
-                            .Where(m => m.DietPlanId == plan.Id)
-                            .ToList();
-
-            return new DietPlanResponseDTO
+            if (roleClaim == "Coach")
             {
-                DietTitle = plan.DietTitle,
-                MealTypes = meals.Select(m => new DietMealDTO
+
+
+                var plans = await _dietPlanRepository.GetAll();
+                var plan = plans
+                            .Where(p => p.CoachId == coachId)
+                            .FirstOrDefault(p => p.Id.Equals(Id));
+
+                if (plan == null)
+                    return null;
+
+                var meals = (await _dietMealRepository.GetAll())
+                                .Where(m => m.DietPlanId == plan.Id)
+                                .ToList();
+                var allClients = await _clientRepository.GetAll();
+                var assignments = (await _planAssignmentRepository.GetAll())
+                    .Where(a => a.DietPlanId== plan.Id)
+                    .GroupBy(a => a.ClientId)
+                    .Select(g =>
+                    {
+                        var a = g.First();
+                        return new
+                        {
+                            a.Id,
+                            a.ClientId,
+                            a.AssignedOn,
+                            a.CompletionStatus,
+                            ClientName = allClients.FirstOrDefault(c => c.Id == a.ClientId)?.Name,
+                            ClientEmail = allClients.FirstOrDefault(c => c.Id == a.ClientId)?.Email
+                        };
+                    })
+                    .ToList();
+
+                return new DietPlanResponseDTO
                 {
-                    MealType = m.MealType,
-                    Description = m.Description,
-                    Calories = m.Calories,
-                    ProteinGrams = m.ProteinGrams,
-                    CarbsGrams = m.CarbsGrams,
-                    FatGrams = m.FatGrams
-                }).ToList()
-            };
+                    Id = plan.Id,
+                    CoachId = plan.CoachId,
+                    Title = plan.Title,
+                    Description = plan.Description,
+                    DurationInWeeks = plan.DurationInWeeks,
+                    Clients = assignments.Select(c =>
+                    {
+                        var assignment = assignments.FirstOrDefault(a => a.ClientId == c.Id);
+                        return new AssignedClientResponseDTO
+                        {
+                            Name = c.ClientName,
+                            Email = c.ClientEmail,
+                            AssignedOn = c.AssignedOn,
+                            Status = c.CompletionStatus,
+                        };
+                    }).ToList(),
+                    MealTypes = meals.Select(m => new DietMealDTO
+                    {
+                        Id = m.Id,
+                        MealType = m.MealType,
+                        MealName = m.MealName,
+                        Calories = m.Calories,
+                        ProteinGrams = m.ProteinGrams,
+                        CarbsGrams = m.CarbsGrams,
+                        FatGrams = m.FatGrams
+                    }).ToList()
+                };
+            }
+            else
+            {
+                var plans = await _dietPlanRepository.GetAll();
+                var plan = plans
+                            .Where(p => p.CoachId == coachId)
+                            .FirstOrDefault(p => p.Id.Equals(Id));
+
+                if (plan == null)
+                    return null;
+
+                var meals = (await _dietMealRepository.GetAll())
+                                .Where(m => m.DietPlanId == plan.Id)
+                                .ToList();
+
+                return new DietPlanResponseDTO
+                {
+                    Id = plan.Id,
+                    CoachId = plan.CoachId,
+                    Title = plan.Title,
+                    Description = plan.Description,
+                    DurationInWeeks = plan.DurationInWeeks,
+                    MealTypes = meals.Select(m => new DietMealDTO
+                    {
+                        Id = m.Id,
+                        MealType = m.MealType,
+                        MealName = m.MealName,
+                        Calories = m.Calories,
+                        ProteinGrams = m.ProteinGrams,
+                        CarbsGrams = m.CarbsGrams,
+                        FatGrams = m.FatGrams
+                    }).ToList()
+                };
+                
+            }
         }
 
 

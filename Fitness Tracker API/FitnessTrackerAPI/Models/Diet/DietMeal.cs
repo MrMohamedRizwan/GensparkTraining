@@ -10,8 +10,9 @@ namespace FitnessTrackerAPI.Models.Diet
         public Guid Id { get; set; }
 
         public Guid DietPlanId { get; set; }
+        public string MealName { get; set; } = string.Empty;
         public string MealType { get; set; } = string.Empty; // e.g., Breakfast, Lunch, Dinner
-        public string Description { get; set; } = string.Empty;
+    
         public int Calories { get; set; }
         public int ProteinGrams { get; set; }
         public int CarbsGrams { get; set; }

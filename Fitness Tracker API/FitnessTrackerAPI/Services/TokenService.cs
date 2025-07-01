@@ -21,6 +21,7 @@ public class TokenService : ITokenService
     public async Task<string> GenerateToken(User user)
     {
         var uniqueId = await _uid.GetIdByEmail(user);
+        Console.WriteLine($"\n\n🔑 Generating token for user: {user.Email} Role:{user.Role} with unique ID: {uniqueId}\n\n");
         var claims = new List<Claim>
         {
             new Claim("UserId", uniqueId),
@@ -33,7 +34,7 @@ public class TokenService : ITokenService
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(claims),
-            Expires = DateTime.UtcNow.AddMinutes(30),
+            Expires = DateTime.UtcNow.AddMinutes(3000),
             SigningCredentials = creds
         };
 

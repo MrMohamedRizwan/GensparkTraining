@@ -28,6 +28,8 @@ namespace FitnessTrackerAPI.Models.DTOs
         [StringLength(100, MinimumLength = 2)]
         public string Name { get; set; } = string.Empty;
 
+        public int caloriesBurnt{ get; set; }
+
         [Range(1, 20, ErrorMessage = "Sets must be between 1 and 20.")]
         public int Sets { get; set; }
 

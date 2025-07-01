@@ -4,8 +4,12 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using FitnessTrackerAPI.Interfaces;
+using FitnessTrackerAPI.Migrations;
 using FitnessTrackerAPI.Models;
 using FitnessTrackerAPI.Models.DTOs;
+using FitnessTrackerAPI.Models.WorkoutModel;
+using FitnessTrackerAPI.Repository;
+using Microsoft.VisualBasic;
 
 namespace FitnessTrackerAPI.Services
 {
@@ -14,14 +18,17 @@ namespace FitnessTrackerAPI.Services
         private readonly IRepository<Guid, Progress> _progressRepo;
         private readonly IRepository<Guid, Client> _clientRepo;
         private readonly IRepository<Guid, PlanAssignment> _planAssignmentRepo;
+        private readonly IRepository<Guid, Workout> _workoutRepo;
         private readonly IAWSService _awsS3Service;
 
         public ProgressService(IRepository<Guid, Progress> progressRepo,
                                IRepository<Guid, Client> clientRepo,
                                IRepository<Guid, PlanAssignment> planAssignmentRepo,
+                               IRepository<Guid, Workout>WorkoutRepo,
                                IAWSService awsS3Service
                                )
         {
+            _workoutRepo = WorkoutRepo;
             _progressRepo = progressRepo;
             _clientRepo = clientRepo;
             _planAssignmentRepo = planAssignmentRepo;
@@ -37,6 +44,9 @@ namespace FitnessTrackerAPI.Services
             if (client == null)
                 throw new InvalidOperationException("Client not found.");
 
+            var allowedImageTypes = new[] { "image/jpeg", "image/png", "image/webp" };
+            if (dto.ImageFile == null || !allowedImageTypes.Contains(dto.ImageFile.ContentType.ToLower()))
+                throw new InvalidOperationException("Invalid file type. Only image files (JPEG, PNG, GIF, WEBP) are allowed.");
             // Upload file and get the S3 key
             string objectKey = await _awsS3Service.UploadFileAsync(dto.ImageFile, "progress-images");
 
@@ -44,7 +54,7 @@ namespace FitnessTrackerAPI.Services
             {
                 Id = Guid.NewGuid(),
                 ClientId = clientId,
-                ImagePath = objectKey, // Store only the S3 object key in DB
+                ImagePath = objectKey,
                 Height = dto.Height,
                 Weight = dto.Weight,
                 UploadedAt = DateTime.UtcNow
@@ -69,17 +79,19 @@ namespace FitnessTrackerAPI.Services
 
         public async Task<IEnumerable<ProgressResponseDTO>> GetProgressByClientIdAsync(Guid clientId, ClaimsPrincipal user)
         {
+            
             var role = user.FindFirst(ClaimTypes.Role)?.Value;
             var userIdClaim = user.FindFirst("UserId")?.Value;
 
             if (string.IsNullOrEmpty(userIdClaim) || !Guid.TryParse(userIdClaim, out var userId))
                 throw new UnauthorizedAccessException("Invalid User ID");
-
+            var assignmentIds = new List<Guid>();
             if (role == "Coach")
             {
                 // Verify coach is assigned to this client
                 var assignments = await _planAssignmentRepo.GetAll();
                 var assignedToCoach = assignments.Any(a => a.ClientId == clientId && a.AssignedByCoachId == userId);
+                 assignmentIds = assignments.Select(p => p.Id).ToList();
 
                 if (!assignedToCoach)
                     throw new UnauthorizedAccessException("Coach not assigned to this client.");
@@ -96,17 +108,34 @@ namespace FitnessTrackerAPI.Services
             }
 
             var allProgress = await _progressRepo.GetAll();
-            return allProgress
+            var progressList = allProgress
                 .Where(p => p.ClientId == clientId)
-                .Select(p => new ProgressResponseDTO
+                .ToList();
+
+            var responseList = new List<ProgressResponseDTO>();
+            
+
+            //     var totalCaloriesBurnt = await GetCaloriesBurnt(clientId, assignmentIds[1]);
+            // var workoutCompletionPercent = await CalculateWorkoutProgress(clientId, assignmentIds[1]);
+            foreach (var p in progressList)
+            {
+                // var weightChangeSummary = await GetWeightChange(clientId);
+                Console.WriteLine("😂😂😂😂😂😂");
+
+                responseList.Add(new ProgressResponseDTO
                 {
                     Id = p.Id,
                     ClientId = p.ClientId,
                     ImagePath = p.ImagePath,
                     Height = p.Height,
                     Weight = p.Weight,
-                    UploadedAt = p.UploadedAt
+                    UploadedAt = p.UploadedAt,
+                    
                 });
+            }
+
+            return responseList;
+
         }
 
         public async Task<IEnumerable<ProgressResponseDTO>> GetMyProgressAsync(ClaimsPrincipal user)
@@ -116,18 +145,158 @@ namespace FitnessTrackerAPI.Services
                 throw new UnauthorizedAccessException("Invalid or missing Client ID.");
 
             var allProgress = await _progressRepo.GetAll();
-            return allProgress
+            var progressList = allProgress
                 .Where(p => p.ClientId == clientId)
-                .Select(p => new ProgressResponseDTO
+                .ToList();
+
+            var responseList = new List<ProgressResponseDTO>();
+
+            foreach (var p in progressList)
+            {
+                // var workoutCompletionPercent = await CalculateWorkoutProgress(clientId, p.Id);
+                // var weightChangeSummary = await GetWeightChange(clientId);
+                // var totalCaloriesBurnt = await GetCaloriesBurnt(clientId, p.Id);
+
+                responseList.Add(new ProgressResponseDTO
                 {
                     Id = p.Id,
                     ClientId = p.ClientId,
                     ImagePath = p.ImagePath,
                     Height = p.Height,
                     Weight = p.Weight,
-                    UploadedAt = p.UploadedAt
+                    UploadedAt = p.UploadedAt,
+                
                 });
+            }
+
+            return responseList;
         }
+
+        public async Task<ProgressGraphDTO> GetProgressGraphByClientId(Guid clientId)
+        {
+            var assignmentIds = (await _workoutRepo.GetAll())
+                .Where(w => w.ClientId == clientId && w.PlanAssignmentId.HasValue)
+                .Select(w => w.PlanAssignmentId.Value)
+                .Distinct()
+                .ToList();
+
+            if (assignmentIds.Count == 0)
+            {
+                return new ProgressGraphDTO
+                {
+                    Assignments = new List<PlanProgressDTO>()
+                };
+            }
+
+            var result = new List<PlanProgressDTO>();
+
+            foreach (var assignmentId in assignmentIds)
+            {
+                var assignment = (await _planAssignmentRepo.GetAll()).FirstOrDefault(p => p.Id == assignmentId);
+                if (assignment == null) continue;
+
+                var progress = await CalculateWorkoutProgress(clientId, assignment.Id);
+                var calories = await GetCaloriesBurnt(clientId, assignment.Id);
+                var caloriesIntake = await GetCaloriesIntake(clientId, assignment.Id);
+
+                result.Add(new PlanProgressDTO
+                {
+                    PlanAssignmentId = assignment.Id,
+                    ProgressPercentage = progress,
+                    CaloriesBurnt = calories,
+                    caloriesIntake=caloriesIntake,
+                    // Optionally include:
+                    // AssignedOn = assignment.AssignedOn,
+                    // DueDate = assignment.DueDate
+                });
+            }
+
+            return new ProgressGraphDTO
+            {
+                Assignments = result
+            };
+        }
+        public async Task<double> CalculateWorkoutProgress(Guid clientId, Guid planAssignmentId)
+        {
+
+
+            // Total days between AssignedOn and DueDate (duration of plan)
+            var assignment = (await _planAssignmentRepo.GetAll())
+                                        .FirstOrDefault(p => p.Id == planAssignmentId);
+            if (assignment == null) return -12;
+
+            var totalDays = (assignment.DueDate ?? DateTime.UtcNow).Date
+                          .Subtract(assignment.AssignedOn.Date).Days + 1;
+
+            // Count number of workout logs submitted for this plan
+            var completedDays = (await _workoutRepo.GetAll())
+                .Where(w => w.ClientId == clientId && w.PlanAssignmentId == planAssignmentId)
+                .Select(w => w.Date.Date)
+                // .Distinct()
+                .Count();
+            Console.WriteLine("🎉🎉🎉🎉🎉" + completedDays);
+
+            // Prevent division by zero
+            if (totalDays <= 0) return 0;
+            // totalDays = 1;
+            double progress = (double)completedDays / totalDays * 100;
+            return Math.Round(progress, 2); // Return as a percentage
+        }
+        public async Task<int> GetCaloriesIntake(Guid clientId, Guid planAssignmentId)
+        {
+            var workouts = (await _workoutRepo.GetAll())
+                ?.Where(w => w != null && w.PlanAssignmentId == planAssignmentId)
+                .ToList();
+
+            if (workouts == null || workouts.Count == 0)
+                return 0;
+
+            // Safely sum CaloriesBurnt if the property exists and is not null
+            int totalCalories = workouts
+                .Where(w => w != null)
+                .Sum(w => (w?.caloriesTaken) ?? 0);
+
+            return totalCalories;
+
+        }
+        public async Task<string> GetWeightChange(Guid clientId)
+        {
+            var weightLogs = (await _progressRepo.GetAll())
+                .Where(p => p.ClientId == clientId)
+                .OrderBy(p => p.UploadedAt)
+                .ToList();
+
+            if (weightLogs.Count < 2) return "Insufficient data";
+
+            var startWeight = weightLogs.First().Weight;
+            var endWeight = weightLogs.Last().Weight;
+
+            var change = endWeight - startWeight;
+            return change >= 0
+                ? $"Gained {change} kg"
+                : $"Lost {Math.Abs(change)} kg";
+        }
+        public async Task<int> GetCaloriesBurnt(Guid clientId, Guid planAssignmentId)
+        {
+            // return -1;
+            // Console.WriteLine($"😉❌{clientId}. plan &{planAssignmentId}");
+            var workouts = (await _workoutRepo.GetAll())
+                ?.Where(w => w != null && w.PlanAssignmentId == planAssignmentId)
+                .ToList();
+
+            if (workouts == null || workouts.Count == 0)
+                return 0;
+
+            // Safely sum CaloriesBurnt if the property exists and is not null
+            int totalCalories = workouts
+                .Where(w => w != null)
+                .Sum(w => (w?.caloriesBurnt) ?? 0);
+
+            return totalCalories;
+        }
+
+
+
     }
 
 

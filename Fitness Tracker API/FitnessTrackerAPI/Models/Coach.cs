@@ -18,6 +18,7 @@ namespace FitnessTrackerAPI.Models
         public string Phone { get; set; } = string.Empty;
 
         public User? User { get; set; }
+        public ICollection<Client>? Clients { get; set; }
 
         public ICollection<WorkoutPlan>? WorkoutPlans { get; set; }
         public ICollection<DietPlan>? DietPlans { get; set; }

@@ -49,7 +49,7 @@ namespace FitnessTrackerAPI.Controllers
             return Ok(workouts);
         }
 
-        [HttpGet("my")]
+        [HttpGet("client/my")]
         [Authorize(Roles = "Client")]
         public async Task<IActionResult> GetMyWorkouts()
         {

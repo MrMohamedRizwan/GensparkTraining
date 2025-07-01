@@ -27,5 +27,7 @@ namespace FitnessTrackerAPI.Models.DTOs
         [Required]
         [StringLength(100, MinimumLength = 6, ErrorMessage = "Password must be at least 6 characters.")]
         public string Password { get; set; } = string.Empty;
+            public Guid? CoachId { get; set; } // 🆕 Optional
+
     }
 }

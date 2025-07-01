@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FitnessTrackerAPI.Controllers
 {
-    
+
 
     [ApiController]
     [ApiVersion("1.0")]
@@ -56,6 +56,14 @@ namespace FitnessTrackerAPI.Controllers
         public async Task<IActionResult> GetProgressForClient(Guid clientId)
         {
             var progress = await _progressService.GetProgressByClientIdAsync(clientId, User);
+            return Ok(progress);
+        }
+
+        [HttpGet("getProgressLogs/{clientId}")]
+        [Authorize]
+        public async Task<IActionResult> GetProgressLog(Guid clientId)
+        {
+            var progress = await _progressService.GetProgressGraphByClientId(clientId);
             return Ok(progress);
         }
     }

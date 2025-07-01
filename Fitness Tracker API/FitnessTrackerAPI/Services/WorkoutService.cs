@@ -36,31 +36,51 @@ namespace FitnessTrackerAPI.Services
             var planAssignment = await _planAssignmentRepo.Get(dto.PlanAssignmentId);
             System.Console.WriteLine($"{clientId} 😭");
             if (planAssignment == null || planAssignment.ClientId != clientId)
-                throw new Exception("Invalid plan assignment or unauthorized access.");
+                throw new Exception("Invalid plan assignment or unauthorized access. By Client");
 
             var workout = new Workout
             {
                 Id = Guid.NewGuid(),
                 ClientId = clientId,
+                caloriesBurnt=dto.caloriesBurnt,
+                caloriesTaken=dto.caloriesTaken,
                 PlanAssignmentId = dto.PlanAssignmentId,
                 Date = DateTime.UtcNow,
-                Description = dto.Description
+                ExerciseJSON = dto.ExercisesJSON??"[]",
+                totalExercises =dto.totalExercises,
+                DietMealJSON =dto.DietMealJSON??"[]"
             };
+            try
+            {
 
-            await _workoutRepo.Add(workout);
+                await _workoutRepo.Add(workout);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("\n\n\n😩❌");
+                Console.WriteLine($"Exception: {ex.Message}");
+                if (ex.InnerException != null)
+                {
+                    Console.WriteLine($"Inner Exception: {ex.InnerException.Message}");
+                }
+                throw new Exception("Exception");
+                Console.WriteLine("\n\n\n");
+
+            }
 
             return new WorkoutResponseDTO
             {
                 Id = workout.Id,
                 ClientId=clientId,
                 Date = workout.Date,
-                Description = workout.Description,
+                // Description = workout.Description,
                 PlanAssignmentId = workout.PlanAssignmentId
             };
         }
 
         public async Task<WorkoutResponseDTO?> GetWorkoutById(Guid workoutId, ClaimsPrincipal user)
         {
+            Console.Write("❌❌❌❌❌");
             var role = user.FindFirst(ClaimTypes.Role)?.Value;
             var userIdClaim = user.FindFirst("UserId")?.Value;
 
@@ -88,7 +108,7 @@ namespace FitnessTrackerAPI.Services
             {
                 Id = workout.Id,
                 Date = workout.Date,
-                Description = workout.Description,
+                // Description = workout.Description,
                 PlanAssignmentId = workout.PlanAssignmentId,
                 ClientId = workout.ClientId
             };
@@ -109,7 +129,7 @@ namespace FitnessTrackerAPI.Services
                 {
                     Id = w.Id,
                     Date = w.Date,
-                    Description = w.Description,
+                    // Description = w.Description,
                     PlanAssignmentId = w.PlanAssignmentId,
                     ClientId = w.ClientId
                 });
@@ -125,7 +145,7 @@ namespace FitnessTrackerAPI.Services
                 {
                     Id = w.Id,
                     Date = w.Date,
-                    Description = w.Description,
+                    // Description = w.Description,
                     PlanAssignmentId = w.PlanAssignmentId,
                     ClientId = w.ClientId
                 });

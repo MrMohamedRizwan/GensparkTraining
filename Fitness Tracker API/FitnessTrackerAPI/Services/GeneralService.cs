@@ -32,7 +32,7 @@ namespace FitnessTrackerAPI.Services
         public async Task<DietPlanResponseDTO?> GetDietPlanByTitle(string title)
         {
             var plans = await _dietPlanRepo.GetAll();
-            var plan = plans.FirstOrDefault(p => p.DietTitle.Equals(title, StringComparison.OrdinalIgnoreCase));
+            var plan = plans.FirstOrDefault(p => p.Title.Equals(title, StringComparison.OrdinalIgnoreCase));
 
             if (plan == null)
                 return null;
@@ -43,7 +43,7 @@ namespace FitnessTrackerAPI.Services
                 .Select(m => new DietMealDTO
                 {
                     MealType = m.MealType,
-                    Description = m.Description,
+                    MealName = m.MealName,
                     Calories = m.Calories,
                     ProteinGrams = m.ProteinGrams,
                     CarbsGrams = m.CarbsGrams,
@@ -54,7 +54,7 @@ namespace FitnessTrackerAPI.Services
             return new DietPlanResponseDTO
             {
                 CoachId = coachId,
-                DietTitle = plan.DietTitle,
+                Title = plan.Title,
                 MealTypes = relatedMeals
             };
         }

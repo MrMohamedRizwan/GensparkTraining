@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using FitnessTrackerAPI.Interfaces;
 using FitnessTrackerAPI.Models.DTOs;
@@ -51,6 +52,82 @@ namespace FitnessTrackerAPI.Controllers
             catch (Exception ex)
             {
                 return BadRequest(new { Error = ex.Message });
+            }
+        }
+        [Authorize]
+        [HttpGet("get-client/{clientId}")]
+        public async Task<IActionResult> GetClientById(Guid clientId)
+        {
+            try
+            {
+                var result = await _clientService.GetClientById(clientId);
+                if (result == null)
+                    return NotFound(new { Message = "Client not found." });
+
+                return Ok(new { Message = result });
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(new { Error = ex.Message });
+            }
+        }
+
+        [Authorize(Roles = "Client")]
+        [HttpGet("my-details")]
+        public async Task<IActionResult> MyDetails()
+        {
+            System.Console.WriteLine("\n\n\nMY DETAILS ----------------\n\n");
+            try
+            {
+                var result = await _clientService.GetMyDetails(User);
+                if (result == null)
+                    return NotFound(new { Message = "Client not found." });
+
+                return Ok(new { Message = result });
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(new { Error = ex.Message });
+            }
+        }
+
+        [Authorize(Roles = "Client")]
+        [HttpPut("update-client-details")]
+        public async Task<IActionResult> UpdateClientDetails([FromBody] ClientUpdateRequestDTO clientUpdate)
+        {
+            try
+            {
+                var result = await _clientService.UpdateClientDetails(User, clientUpdate);
+                if (result == null)
+                    return NotFound(new { Message = "Client not found." });
+
+                return Ok(new { Message = result });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { Error = ex.Message });
+            }
+        }
+        [Authorize]
+        [HttpPut("UpdateStatus")]
+        [Authorize(Roles = "Client")]
+        public async Task<IActionResult> MarkAsCompleted(UpdateStatusDTO dto)
+        {
+            try
+            {
+                ; // extract from JWT token
+                await _clientService.UpdatePlanStatus(dto.PlanAssignmentID, User,dto.status);
+                return Ok(new { Message = "Plan Status Updated." });
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                return Forbid(e.Message);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
             }
         }
 

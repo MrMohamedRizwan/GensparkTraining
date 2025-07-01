@@ -97,12 +97,12 @@ namespace FitnessTrackerAPI.Controllers
             }
         }
 
-        [HttpGet("Workoutplan/{title}")]
-        [Authorize(Roles = "Coach")]
-        public async Task<IActionResult> GetWorkoutPlanByTitle(string title)
+        [HttpGet("Workoutplan/{Id}")]
+        [Authorize]
+        public async Task<IActionResult> GetWorkoutPlanByTitle(Guid Id)
         {
-            System.Console.WriteLine($"{title}💕");
-            var result = await _workoutplanService.GetWorkouttPlanByTitle(title, User);
+            // System.Console.WriteLine($"{title}💕");
+            var result = await _workoutplanService.GetWorkouttPlanByTitle(Id, User);
             if (result == null)
                 return NotFound(new { message = "Workout plan not found" });
 

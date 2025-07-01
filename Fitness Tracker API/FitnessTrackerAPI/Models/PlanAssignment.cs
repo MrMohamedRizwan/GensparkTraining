@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using FitnessTrackerAPI.Models.Diet;
 using FitnessTrackerAPI.Models.WorkoutModel;
+using Microsoft.VisualBasic;
 
 namespace FitnessTrackerAPI.Models
 {
@@ -21,6 +22,7 @@ namespace FitnessTrackerAPI.Models
         public WorkoutPlan? WorkoutPlan { get; set; }
         public DietPlan? DietPlan { get; set; }
         public Coach? AssignedByCoach { get; set; }
+        public DateTime? DueDate{ get; set; }
     }
 
 }

@@ -208,6 +208,7 @@ namespace FitnessTrackerAPI.Services
 
             var result = coachPlans.Select(p => new WorkoutPlanResponseDTO
             {
+                CoachId = p.CoachId,
                 Id = p.Id,
                 Title = p.Title,
                 Description = p.Description,
@@ -240,45 +241,156 @@ namespace FitnessTrackerAPI.Services
         }
 
 
-        public async Task<WorkoutPlanResponseDTO?> GetWorkouttPlanByTitle(string title, ClaimsPrincipal user)
+        public async Task<WorkoutPlanResponseDTO?> GetWorkouttPlanByTitle(Guid Id, ClaimsPrincipal user)
         {
+            var roleClaim = user.FindFirst(ClaimTypes.Role)?.Value ?? user.FindFirst("role")?.Value;
+            // Console.WriteLine(roleClaim);
             var coachIdClaim = user.FindFirst("UserId")?.Value;
             if (coachIdClaim == null || !Guid.TryParse(coachIdClaim, out Guid coachId))
                 throw new Exception("Invalid Coach ID");
             // Console.WriteLine("💕");
-            var plans = await _workoutPlanRepository.GetAll();
-            // Console.WriteLine($"{plans.FirstOrDefault(p=>p.CoachId==coachId)} ✅");
-            var normalizedTitle = title.Trim();
-            var plan = plans.FirstOrDefault(p =>
-                p.CoachId == coachId &&
-                p.Title == normalizedTitle);
-
-            // Console.WriteLine($"\n\nExercise {normalizedTitle} {plan}✅");
-            
-            if (plan == null)
-                return null;
-
-            var exercise = (await _workoutExerciseRepository.GetAll())
-                            .Where(m => m.WorkoutPlanId == plan.Id)
-                            .ToList();
-
-
-            return new WorkoutPlanResponseDTO
+            if (roleClaim == "Coach")
             {
-                Id = plan.Id,
-                Title = plan.Title,
-                Description = plan.Description,
-                DurationInWeeks = plan.DurationInWeeks,
-                Exercises = exercise.Select(m => new WorkoutExerciseResponseDTO
+
+                var plans = await _workoutPlanRepository.GetAll();
+                // Console.WriteLine($"{plans.FirstOrDefault(p=>p.CoachId==coachId)} ✅");
+                // var normalizedTitle = title.Trim();
+                var plan = plans.FirstOrDefault(p =>
+                    p.CoachId == coachId &&
+                    p.Id == Id);
+
+                // Console.WriteLine($"\n\nExercise {normalizedTitle} {plan}✅");
+
+                if (plan == null)
+                    return null;
+
+                var exercise = (await _workoutExerciseRepository.GetAll())
+                                .Where(m => m.WorkoutPlanId == plan.Id)
+                                .ToList();
+                // Get all plan assignments for this workout plan
+                // Get all assignments for this workout plan, including client name and email
+                var allClients = await _clientRepository.GetAll();
+                var assignments = (await _planAssignmentRepository.GetAll())
+                    .Where(a => a.WorkoutPlanId == plan.Id)
+                    .GroupBy(a => a.ClientId)
+                    .Select(g =>
+                    {
+                        var a = g.First();
+                        return new
+                        {
+                            a.Id,
+                            a.ClientId,
+                            a.AssignedOn,
+                            a.CompletionStatus,
+                            ClientName = allClients.FirstOrDefault(c => c.Id == a.ClientId)?.Name,
+                            ClientEmail = allClients.FirstOrDefault(c => c.Id == a.ClientId)?.Email
+                        };
+                    })
+                    .ToList();
+
+                // Get all clients assigned to this workout plan
+                // var clientIds = assignments.Select(a => a.ClientId).Distinct().ToList();
+                // var clients = (await _clientRepository.GetAll())
+                //     .Where(c => clientIds.Contains(c.Id))
+                //     .Select(c => new
+                //     {
+                //         c.Id,
+                //         c.Name,
+                //         c.Email
+                //     })
+                //     .ToList();
+
+                // You can add this list to the response DTO if needed, e.g. as a property like AssignedClients
+                // For now, just for demonstration, you could log or use it as needed
+
+                return new WorkoutPlanResponseDTO
                 {
-                    Id = m.Id,
-                    Name = m.Name,
-                    Sets = m.Sets,
-                    Reps = m.Reps,
-                    RestSeconds = m.RestSeconds,
-                    Notes = m.Notes
-                }).ToList()
-            };
+                    CoachId = plan.CoachId,
+                    Id = plan.Id,
+                    Title = plan.Title,
+                    Description = plan.Description,
+                    DurationInWeeks = plan.DurationInWeeks,
+                    Clients = assignments.Select(c =>
+                    {
+                        var assignment = assignments.FirstOrDefault(a => a.ClientId == c.Id);
+                        return new AssignedClientsResponseDTO
+                        {
+                            Name = c.ClientName,
+                            Email = c.ClientEmail,
+                            AssignedOn = c.AssignedOn,
+                            Status = c.CompletionStatus,
+                        };
+                    }).ToList(),
+                    Exercises = exercise.Select(m => new WorkoutExerciseResponseDTO
+
+                    {
+                        Id = m.Id,
+                        Name = m.Name,
+                        caloriesBurnt=m.caloriesBurnt,
+                        Sets = m.Sets,
+                        Reps = m.Reps,
+                        RestSeconds = m.RestSeconds,
+                        Notes = m.Notes
+                    }).ToList()
+                };
+            }
+            else
+            {
+                var plans = await _workoutPlanRepository.GetAll();
+                // Console.WriteLine($"{plans.FirstOrDefault(p=>p.CoachId==coachId)} ✅");
+                // var normalizedTitle = title.Trim();
+                var plan = plans.FirstOrDefault(p =>
+                    p.Id == Id);
+
+                // Console.WriteLine($"\n\nExercise {normalizedTitle} {plan}✅");
+
+                if (plan == null)
+                    return null;
+
+                var exercise = (await _workoutExerciseRepository.GetAll())
+                                .Where(m => m.WorkoutPlanId == plan.Id)
+                                .ToList();
+                var assignments = (await _planAssignmentRepository.GetAll())
+                    .Where(a => a.WorkoutPlanId == plan.Id)
+                    .ToList();
+
+                // Get all clients assigned to this workout plan
+                // var clientIds = assignments.Select(a => a.ClientId).Distinct().ToList();
+                // var clients = (await _clientRepository.GetAll())
+                //     .Where(c => clientIds.Contains(c.Id))
+                //     .Select(c => new
+                //     {
+                //         c.Id,
+                //         c.Name,
+                //         c.Email
+                //     })
+                //     .ToList();
+
+                // You can add this list to the response DTO if needed, e.g. as a property like AssignedClients
+                // For now, just for demonstration, you could log or use it as needed
+
+                return new WorkoutPlanResponseDTO
+                {
+                    CoachId = plan.CoachId,
+                    Id = plan.Id,
+                    Title = plan.Title,
+                    Description = plan.Description,
+                    DurationInWeeks = plan.DurationInWeeks,
+                    
+                    Exercises = exercise.Select(m => new WorkoutExerciseResponseDTO
+
+                    {
+                        Id = m.Id,
+                        Name = m.Name,
+                        caloriesBurnt=m.caloriesBurnt,
+                        Sets = m.Sets,
+                        Reps = m.Reps,
+                        RestSeconds = m.RestSeconds,
+                        Notes = m.Notes
+                    }).ToList()
+                };
+
+            }
         }
 
     }

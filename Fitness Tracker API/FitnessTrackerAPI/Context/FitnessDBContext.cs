@@ -21,6 +21,7 @@ namespace FitnessTrackerAPI.Context
         public DbSet<User> Users { get; set; }
         public DbSet<Progress> Progress { get; set; }
         public DbSet<PlanAssignment> PlanAssignment { get; set; }
+        public DbSet<Admin> Admin { get; set; }
         public DbSet<Coach> Coach { get; set; }
         public DbSet<Client> Client { get; set; }
         public DbSet<Workout> Workout { get; set; }
@@ -55,6 +56,12 @@ namespace FitnessTrackerAPI.Context
                 .HasKey(c => c.Id);
 
             modelBuilder.Entity<Client>()
+                .HasOne(c => c.Coach)
+                .WithMany(coach => coach.Clients)
+                .HasForeignKey(c => c.CoachId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<Client>()
                 .HasMany(c => c.Workouts)
                 .WithOne(w => w.Client)
                 .HasForeignKey(w => w.ClientId);
@@ -69,6 +76,11 @@ namespace FitnessTrackerAPI.Context
                 .WithOne(pa => pa.Client)
                 .HasForeignKey(pa => pa.ClientId);
 
+
+            // ------Admin-----
+            modelBuilder.Entity<Admin>()
+                .HasKey(c => c.Id);
+
             // ----- Coach -----
             modelBuilder.Entity<Coach>()
                 .HasKey(c => c.Id);
@@ -82,6 +94,15 @@ namespace FitnessTrackerAPI.Context
                 .HasMany(c => c.DietPlans)
                 .WithOne(dp => dp.Coach)
                 .HasForeignKey(dp => dp.CoachId);
+
+            //workout
+            modelBuilder.Entity<Workout>()
+                .Property(w => w.ExerciseJSON)
+                .HasColumnType("jsonb");
+
+            modelBuilder.Entity<Workout>()
+                .Property(w => w.DietMealJSON)
+                .HasColumnType("jsonb");
 
             // ----- WorkoutPlan -----
             modelBuilder.Entity<WorkoutPlan>()

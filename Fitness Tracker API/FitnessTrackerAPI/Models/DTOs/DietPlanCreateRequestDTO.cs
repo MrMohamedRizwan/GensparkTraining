@@ -8,9 +8,15 @@ namespace FitnessTrackerAPI.Models.DTOs
 {
     public class DietPlanCreateRequestDTO
     {
-        [Required]
-        [StringLength(100, MinimumLength = 2, ErrorMessage = "Diet title must be between 2 and 100 characters.")]
-        public string DietTitle { get; set; } = string.Empty;
+          [Required]
+        [StringLength(100, MinimumLength = 2)]
+        public string Title { get; set; } = string.Empty;
+
+        [StringLength(500)]
+        public string Description { get; set; } = string.Empty;
+
+        [Range(1, 52, ErrorMessage = "Duration must be between 1 and 52 weeks.")]
+        public int DurationInWeeks { get; set; }
 
         [Required]
         [MinLength(1, ErrorMessage = "At least one meal must be provided.")]
@@ -24,8 +30,8 @@ namespace FitnessTrackerAPI.Models.DTOs
         public string MealType { get; set; } = string.Empty; // e.g., Breakfast, Lunch
 
         [Required]
-        [StringLength(200, MinimumLength = 2, ErrorMessage = "Description must be between 2 and 200 characters.")]
-        public string Description { get; set; } = string.Empty;
+        [StringLength(200, MinimumLength = 2, ErrorMessage = "MealName must be between 2 and 200 characters.")]
+        public string MealName { get; set; } = string.Empty;
 
         [Range(0, 10000, ErrorMessage = "Calories must be between 0 and 10,000.")]
         public int Calories { get; set; }

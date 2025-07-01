@@ -12,6 +12,7 @@ namespace FitnessTrackerAPI.Interfaces
         Task<ProgressResponseDTO> AddProgressAsync(ProgressCreateDTO dto, ClaimsPrincipal user);
         Task<IEnumerable<ProgressResponseDTO>> GetProgressByClientIdAsync(Guid clientId, ClaimsPrincipal user);
         Task<IEnumerable<ProgressResponseDTO>> GetMyProgressAsync(ClaimsPrincipal user);
+        Task<ProgressGraphDTO> GetProgressGraphByClientId(Guid clientId);
     }
 
 }

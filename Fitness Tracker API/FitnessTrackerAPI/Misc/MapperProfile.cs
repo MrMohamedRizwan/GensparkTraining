@@ -18,6 +18,21 @@ namespace FitnessTrackerAPI.Misc
             .ForMember(dest => dest.Email, act => act.MapFrom(src => src.Email))
             .ForMember(dest => dest.Password, opt => opt.Ignore());
 
+
+
+
+            
+            CreateMap<UserDTO, User>()
+            .ForMember(dest => dest.Email, act => act.MapFrom(src => src.Email))
+            .ForMember(dest => dest.Password, opt => opt.Ignore());
+
+            CreateMap<UserDTO, Admin>()
+            .ForMember(dest => dest.Email, act => act.MapFrom(src => src.Email));
+
+
+
+
+
             CreateMap<User, CoachAddRequestDTO>()
             .ForMember(dest => dest.Email, act => act.MapFrom(src => src.Email));
             CreateMap<CoachAddRequestDTO, Coach>()

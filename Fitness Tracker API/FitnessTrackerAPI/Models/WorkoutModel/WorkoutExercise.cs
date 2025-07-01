@@ -15,6 +15,7 @@ namespace FitnessTrackerAPI.Models.WorkoutModel
         public int Sets { get; set; }
         public int Reps { get; set; }
         public int RestSeconds { get; set; }
+        public int caloriesBurnt{ get; set; }
         public string Notes { get; set; } = string.Empty;
 
         public WorkoutPlan? WorkoutPlan { get; set; }

@@ -48,11 +48,11 @@ namespace FitnessTrackerAPI.Controllers
                 {
                     Message = "Diet plan updated successfully",
                     PlanId = updatedPlan.Id,
-                    Title = updatedPlan.DietTitle,
+                    Title = updatedPlan.Title,
                     Meals = updatedPlan.Meals?.Select(m => new
                     {
                         m.MealType,
-                        m.Description,
+                        m.MealName,
                         m.Calories,
                         m.ProteinGrams,
                         m.CarbsGrams,
@@ -97,11 +97,11 @@ namespace FitnessTrackerAPI.Controllers
             }
         }
 
-        [HttpGet("dietplan/{title}")]
-        [Authorize(Roles = "Coach")]
-        public async Task<IActionResult> GetDietPlanByTitle(string title)
+        [HttpGet("dietplan/{Id}")]
+        [Authorize]
+        public async Task<IActionResult> GetDietPlanByTitle(Guid Id)
         {
-            var result = await _dietServices.GetDietPlanByTitle(title, User);
+            var result = await _dietServices.GetDietPlanByTitle(Id, User);
             if (result == null)
                 return NotFound(new { message = "Diet plan not found" });
 
