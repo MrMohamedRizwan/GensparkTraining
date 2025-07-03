@@ -119,7 +119,7 @@ namespace FitnessTrackerAPI.Services
             // var workoutCompletionPercent = await CalculateWorkoutProgress(clientId, assignmentIds[1]);
             foreach (var p in progressList)
             {
-                // var weightChangeSummary = await GetWeightChange(clientId);
+                var weightChangeSummary = await GetWeightChange(clientId);
                 Console.WriteLine("😂😂😂😂😂😂");
 
                 responseList.Add(new ProgressResponseDTO
@@ -130,6 +130,7 @@ namespace FitnessTrackerAPI.Services
                     Height = p.Height,
                     Weight = p.Weight,
                     UploadedAt = p.UploadedAt,
+                    WeightChangeSummary = weightChangeSummary
                     
                 });
             }
@@ -154,7 +155,7 @@ namespace FitnessTrackerAPI.Services
             foreach (var p in progressList)
             {
                 // var workoutCompletionPercent = await CalculateWorkoutProgress(clientId, p.Id);
-                // var weightChangeSummary = await GetWeightChange(clientId);
+                var weightChangeSummary = await GetWeightChange(clientId);
                 // var totalCaloriesBurnt = await GetCaloriesBurnt(clientId, p.Id);
 
                 responseList.Add(new ProgressResponseDTO
@@ -165,6 +166,7 @@ namespace FitnessTrackerAPI.Services
                     Height = p.Height,
                     Weight = p.Weight,
                     UploadedAt = p.UploadedAt,
+                    WeightChangeSummary= weightChangeSummary
                 
                 });
             }
@@ -177,7 +179,13 @@ namespace FitnessTrackerAPI.Services
             var assignmentIds = (await _workoutRepo.GetAll())
                 .Where(w => w.ClientId == clientId && w.PlanAssignmentId.HasValue)
                 .Select(w => w.PlanAssignmentId.Value)
-                .Distinct()
+                // .Distinct()
+                .ToList();
+
+            var date = (await _workoutRepo.GetAll())
+                .Where(w => w.ClientId == clientId && w.PlanAssignmentId.HasValue)
+                .Select(w => w.Date)
+                // .Distinct()
                 .ToList();
 
             if (assignmentIds.Count == 0)
@@ -201,13 +209,14 @@ namespace FitnessTrackerAPI.Services
 
                 result.Add(new PlanProgressDTO
                 {
+                    SubmittedOn=date,
                     PlanAssignmentId = assignment.Id,
                     ProgressPercentage = progress,
                     CaloriesBurnt = calories,
                     caloriesIntake=caloriesIntake,
                     // Optionally include:
-                    // AssignedOn = assignment.AssignedOn,
-                    // DueDate = assignment.DueDate
+                    AssignedOn = assignment.AssignedOn,
+                    DueDate = assignment.DueDate
                 });
             }
 

@@ -39,12 +39,12 @@ namespace FitnessTrackerAPI.Controllers
             }
         }
         [Authorize(Roles = "Coach")]
-        [HttpPut("EditWorkoutPlan/{title}")]
-        public async Task<IActionResult> UpdateWorkoutByTitle(string title, [FromBody] WorkoutPlanCreateRequestDTO dto)
+        [HttpPut("EditWorkoutPlan/{id}")]
+        public async Task<IActionResult> UpdateWorkoutByTitle(Guid id, [FromBody] WorkoutPlanCreateRequestDTO dto)
         {
             try
             {
-                var updatedPlan = await _workoutplanService.UpdateWorkoutPlanByTitle(title, dto, User);
+                var updatedPlan = await _workoutplanService.UpdateWorkoutPlanByTitle(id, dto, User);
                 return Ok(new
                 {
                     Message = "Workout plan updated successfully",
@@ -66,14 +66,14 @@ namespace FitnessTrackerAPI.Controllers
             }
         }
 
-        [HttpDelete("Delete-Workout/{title}")]
-        public async Task<IActionResult> DeleteWorkoutByTitle(string title)
+        [HttpDelete("Delete-Workout/{id}")]
+        public async Task<IActionResult> DeleteWorkoutByTitle(Guid id)
         {
             try
             {
-                var success = await _workoutplanService.DeleteWorkoutPlanByTitle(title, User);
+                var success = await _workoutplanService.DeleteWorkoutPlanByTitle(id, User);
                 if (success)
-                    return Ok(new { Message = $"Workout plan '{title}' deleted successfully" });
+                    return Ok(new { Message = $"Workout plan '{id}' deleted successfully" });
                 return NotFound(new { Message = "Workout plan not found" });
             }
             catch (Exception ex)

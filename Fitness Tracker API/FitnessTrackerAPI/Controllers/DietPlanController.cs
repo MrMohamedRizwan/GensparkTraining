@@ -38,12 +38,12 @@ namespace FitnessTrackerAPI.Controllers
             }
         }
         [Authorize(Roles = "Coach")]
-        [HttpPut("Edit-Diet/{title}")]
-        public async Task<IActionResult> UpdateDietByTitle(string title, [FromBody] DietPlanCreateRequestDTO dto)
+        [HttpPut("Edit-Diet/{id}")]
+        public async Task<IActionResult> UpdateDietByTitle(Guid id, [FromBody] DietPlanCreateRequestDTO dto)
         {
             try
             {
-                var updatedPlan = await _dietServices.UpdateDietPlanByTitle(title, dto, User);
+                var updatedPlan = await _dietServices.UpdateDietPlanByTitle(id, dto, User);
                 return Ok(new
                 {
                     Message = "Diet plan updated successfully",
@@ -66,14 +66,14 @@ namespace FitnessTrackerAPI.Controllers
             }
         }
         [Authorize(Roles = "Coach")]
-        [HttpDelete("Delete-Diet/{title}")]
-        public async Task<IActionResult> DeleteDietByTitle(string title)
+        [HttpDelete("Delete-Diet/{id}")]
+        public async Task<IActionResult> DeleteDietByTitle(Guid id)
         {
             try
             {
-                var success = await _dietServices.DeleteDietPlanByTitle(title, User);
+                var success = await _dietServices.DeleteDietPlanByTitle(id, User);
                 if (success)
-                    return Ok(new { Message = $"Diet plan '{title}' deleted successfully" });
+                    return Ok(new { Message = $"Diet plan '{id}' deleted successfully" });
                 return NotFound(new { Message = "Diet plan not found" });
             }
             catch (Exception ex)

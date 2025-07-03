@@ -22,11 +22,12 @@ namespace FitnessTrackerAPI.Models.DTOs
     public class ProgressResponseDTO
     {
         public Guid Id { get; set; }
-        
+
         public string ImagePath { get; set; } = string.Empty;
         public float Height { get; set; }
         public float Weight { get; set; }
         public DateTime UploadedAt { get; set; }
         public Guid ClientId { get; set; }
+        public string WeightChangeSummary { get; set; } = string.Empty;
     }
 }

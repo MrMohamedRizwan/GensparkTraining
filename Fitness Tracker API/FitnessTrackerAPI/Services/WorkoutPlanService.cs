@@ -99,17 +99,17 @@ namespace FitnessTrackerAPI.Services
 
         }
 
-        public async Task<WorkoutPlan> UpdateWorkoutPlanByTitle(string title, WorkoutPlanCreateRequestDTO dto, ClaimsPrincipal user)
+        public async Task<WorkoutPlan> UpdateWorkoutPlanByTitle(Guid id, WorkoutPlanCreateRequestDTO dto, ClaimsPrincipal user)
         {
             var coachIdClaim = user.FindFirst("UserId")?.Value;
             if (coachIdClaim == null || !Guid.TryParse(coachIdClaim, out Guid coachId))
                 throw new Exception("Invalid Coach ID from token");
 
-            var normalizedTitle = title.Trim().ToLower();
+            // var normalizedTitle = title.Trim().ToLower();
             var workoutPlans = await _workoutPlanRepository.GetAll();
             var existingWorkoutPlan = workoutPlans.FirstOrDefault(dp =>
                 dp.CoachId == coachId &&
-                dp.Title.Trim().ToLower() == normalizedTitle
+                dp.Id==id
             );
 
             if (existingWorkoutPlan == null)
@@ -154,17 +154,17 @@ namespace FitnessTrackerAPI.Services
             }
         }
 
-        public async Task<bool> DeleteWorkoutPlanByTitle(string title, ClaimsPrincipal user)
+        public async Task<bool> DeleteWorkoutPlanByTitle(Guid id, ClaimsPrincipal user)
         {
             var coachIdClaim = user.FindFirst("UserId")?.Value;
             if (coachIdClaim == null || !Guid.TryParse(coachIdClaim, out Guid coachId))
                 throw new Exception("Invalid Coach ID from token");
 
-            var normalizedTitle = title.Trim().ToLower();
+            // var normalizedTitle = title.Trim().ToLower();
             var allPlan = await _workoutPlanRepository.GetAll();
             var workoutPlan = allPlan.FirstOrDefault(dp =>
                 dp.CoachId == coachId &&
-                dp.Title.Trim().ToLower() == normalizedTitle);
+                dp.Id==id);
             if (workoutPlan == null)
                 throw new Exception("Workout plan not found or unauthorized access");
 
@@ -221,6 +221,7 @@ namespace FitnessTrackerAPI.Services
                         Sets = m.Sets,
                         Reps = m.Reps,
                         RestSeconds = m.RestSeconds,
+                        caloriesBurnt=m.caloriesBurnt,
                         Notes = m.Notes
                     }).ToList()
                     : new List<WorkoutExerciseResponseDTO>()

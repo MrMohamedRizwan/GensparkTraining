@@ -36,6 +36,20 @@ namespace FitnessTrackerAPI.Controllers
                 return BadRequest(e.Message);
             }
         }
+        [Authorize]
+        [HttpGet("getAllClients")]
+        public async Task<IActionResult> GetAllClients([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+        {
+            try
+            {
+                var coaches = await _clientService.GetAllClientsAsync(pageNumber, pageSize);
+                return Ok(coaches);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
 
         [Authorize(Roles = "Client")]
         [HttpGet("assigned-plans")]

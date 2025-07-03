@@ -9,6 +9,7 @@ using FitnessTrackerAPI.Context;
 using FitnessTrackerAPI.Interfaces;
 using FitnessTrackerAPI.Models;
 using FitnessTrackerAPI.Models.Diet;
+using FitnessTrackerAPI.Models.DTO;
 using FitnessTrackerAPI.Models.DTOs;
 using FitnessTrackerAPI.Models.WorkoutModel;
 using Microsoft.AspNetCore.Components;
@@ -51,6 +52,33 @@ namespace FitnessTrackerAPI.Services
             _dietPlanRepository = dietPlanRepository;
             _workoutRepo = workoutRepo;
             _context = context;
+
+        }
+        public async Task<PagedResult<GetClientDTO>> GetAllClientsAsync(int pageNumber, int pageSize)
+        {
+            var allCoaches = await _clientRepository.GetAll();
+            var pagedCoaches = allCoaches
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+            Func<IEnumerable<Client>, List<GetClientDTO>> mapToDto = clients =>
+                clients.Select(c => new GetClientDTO
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    Age = c.Age,
+                    Gender=c.Gender,
+                    Email = c.Email
+                }).ToList();
+            var coachDtos = mapToDto(pagedCoaches);
+
+            return new PagedResult<GetClientDTO>
+            {
+                Items = coachDtos,
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                TotalRecords = allCoaches.Count()
+            };
 
         }
         public async Task<SignUpResponseDTO> AddCoach(ClientAddRequestDTO client)

@@ -101,18 +101,18 @@ namespace FitnessTrackerAPI.Services
                 throw new Exception(e.Message);
             }
         }
-        public async Task<DietPlan> UpdateDietPlanByTitle(string title, DietPlanCreateRequestDTO dto, ClaimsPrincipal user)
+        public async Task<DietPlan> UpdateDietPlanByTitle(Guid id, DietPlanCreateRequestDTO dto, ClaimsPrincipal user)
         {
             var coachIdClaim = user.FindFirst("UserId")?.Value;
             if (coachIdClaim == null || !Guid.TryParse(coachIdClaim, out Guid coachId))
                 throw new Exception("Invalid Coach ID from token");
 
-            var normalizedTitle = title.Trim().ToLower();
+            // var normalizedTitle = title.Trim().ToLower();
 
             var dietPlans = await _dietPlanRepository.GetAll();
             var existingDietPlan = dietPlans.FirstOrDefault(dp =>
                 dp.CoachId == coachId &&
-                dp.Title.Trim().ToLower() == normalizedTitle
+                dp.Id==id
             );
 
             if (existingDietPlan == null)
@@ -167,18 +167,18 @@ namespace FitnessTrackerAPI.Services
 
         }
 
-        public async Task<bool> DeleteDietPlanByTitle(string title, ClaimsPrincipal user)
+        public async Task<bool> DeleteDietPlanByTitle(Guid id, ClaimsPrincipal user)
         {
             var coachIdClaim = user.FindFirst("UserId")?.Value;
             if (coachIdClaim == null || !Guid.TryParse(coachIdClaim, out Guid coachId))
                 throw new Exception("Invalid Coach ID from token");
 
-            var normalizedTitle = title.Trim().ToLower();
+            // var normalizedTitle = title.Trim().ToLower();
 
             var allPlans = await _dietPlanRepository.GetAll();
             var dietPlan = allPlans.FirstOrDefault(dp =>
                 dp.CoachId == coachId &&
-                dp.Title.Trim().ToLower() == normalizedTitle);
+                dp.Id==id);
 
             if (dietPlan == null)
                 throw new Exception("Diet plan not found or unauthorized access");
@@ -270,6 +270,7 @@ namespace FitnessTrackerAPI.Services
                 var plan = plans
                             .Where(p => p.CoachId == coachId)
                             .FirstOrDefault(p => p.Id.Equals(Id));
+                            
 
                 if (plan == null)
                     return null;
@@ -277,9 +278,11 @@ namespace FitnessTrackerAPI.Services
                 var meals = (await _dietMealRepository.GetAll())
                                 .Where(m => m.DietPlanId == plan.Id)
                                 .ToList();
-                var allClients = await _clientRepository.GetAll();
+                var allClients = (await _clientRepository.GetAll())
+                                    .ToList();
                 var assignments = (await _planAssignmentRepository.GetAll())
-                    .Where(a => a.DietPlanId== plan.Id)
+                    .Where(a => a.DietPlanId == plan.Id)
+                    .OrderByDescending(a=>a.AssignedOn)
                     .GroupBy(a => a.ClientId)
                     .Select(g =>
                     {
@@ -326,11 +329,10 @@ namespace FitnessTrackerAPI.Services
                     }).ToList()
                 };
             }
-            else
+            else if (roleClaim == "Client")
             {
                 var plans = await _dietPlanRepository.GetAll();
                 var plan = plans
-                            .Where(p => p.CoachId == coachId)
                             .FirstOrDefault(p => p.Id.Equals(Id));
 
                 if (plan == null)
@@ -358,7 +360,11 @@ namespace FitnessTrackerAPI.Services
                         FatGrams = m.FatGrams
                     }).ToList()
                 };
-                
+
+            }
+            else
+            {
+                throw new Exception("Unauthorized access");
             }
         }
 

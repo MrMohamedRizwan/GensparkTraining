@@ -11,8 +11,8 @@ namespace FitnessTrackerAPI.Interfaces
     public interface IWorkoutPlan
     {
         public Task<WorkoutPlan> AddWorkoutPlan(WorkoutPlanCreateRequestDTO workout, ClaimsPrincipal user);
-        public Task<WorkoutPlan> UpdateWorkoutPlanByTitle(string title, WorkoutPlanCreateRequestDTO dto, ClaimsPrincipal user);
-        public Task<bool> DeleteWorkoutPlanByTitle(string title, ClaimsPrincipal user);
+        public Task<WorkoutPlan> UpdateWorkoutPlanByTitle(Guid id, WorkoutPlanCreateRequestDTO dto, ClaimsPrincipal user);
+        public Task<bool> DeleteWorkoutPlanByTitle(Guid id, ClaimsPrincipal user);
         public Task<PagedResult<WorkoutPlanResponseDTO>> GetAllWorkoutPlansDTO(ClaimsPrincipal user, int pageNumber, int pageSize);
         public Task<WorkoutPlanResponseDTO?> GetWorkouttPlanByTitle(Guid Id, ClaimsPrincipal user);
     }

@@ -109,6 +109,11 @@ namespace FitnessTrackerAPI.Services
                 Id = workout.Id,
                 Date = workout.Date,
                 // Description = workout.Description,
+                ExerciseJSON=workout.ExerciseJSON,
+                totalExercises=workout.totalExercises,
+                DietMealJSON=workout.DietMealJSON,
+                caloriesBurnt=workout.caloriesBurnt,
+                caloriesTaken=workout.caloriesTaken,
                 PlanAssignmentId = workout.PlanAssignmentId,
                 ClientId = workout.ClientId
             };
