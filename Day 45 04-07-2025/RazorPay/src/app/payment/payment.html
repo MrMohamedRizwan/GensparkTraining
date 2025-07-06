@@ -1,0 +1,87 @@
+<div class="container mt-5">
+  <div
+    class="card shadow-lg border-0 rounded-4 mx-auto"
+    style="max-width: 600px"
+  >
+    <div class="card-body p-5">
+      <h2 class="text-center mb-4 fw-bold" style="color: #0d4dfd">
+        UPI Payment
+      </h2>
+
+      <form [formGroup]="paymentForm" (ngSubmit)="pay()">
+        <div class="mb-3">
+          <label for="amount" class="form-label fw-semibold">Amount (₹)</label>
+          <input
+            type="number"
+            id="amount"
+            class="form-control"
+            formControlName="amount"
+          />
+          <div class="form-text text-danger">{{ showError('amount') }}</div>
+        </div>
+
+        <div class="mb-3">
+          <label for="name" class="form-label fw-semibold">Customer Name</label>
+          <input
+            type="text"
+            id="name"
+            class="form-control"
+            formControlName="name"
+          />
+          <div class="form-text text-danger">{{ showError('name') }}</div>
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label fw-semibold">Email</label>
+          <input
+            type="email"
+            id="email"
+            class="form-control"
+            formControlName="email"
+          />
+          <div class="form-text text-danger">{{ showError('email') }}</div>
+        </div>
+
+        <div class="mb-4">
+          <label for="contact" class="form-label fw-semibold"
+            >Contact Number</label
+          >
+          <input
+            type="tel"
+            id="contact"
+            class="form-control"
+            formControlName="contact"
+          />
+          <div class="form-text text-danger">{{ showError('contact') }}</div>
+        </div>
+
+        <button
+          type="submit"
+          [disabled]="isProcessing"
+          class="btn btn-success w-100 py-2"
+          style="background-color: #0d4dfd; color: #fff"
+        >
+          {{ isProcessing ? 'Processing...' : 'Pay Now' }}
+        </button>
+      </form>
+
+      <div *ngIf="message" class="mt-4 text-center">
+        <div
+          class="alert"
+          [ngClass]="{
+            'alert-success': message.includes('✅'),
+            'alert-danger': !message.includes('✅')
+          }"
+        >
+          {{ message }}
+        </div>
+      </div>
+
+      <!-- Optional Test Note
+      <div class="text-center text-muted mt-3" style="font-size: 0.85rem">
+        Use <strong>successrazorpay</strong> for success<br />
+        Use <strong>failrazorpay</strong> for failure
+      </div> -->
+    </div>
+  </div>
+</div>

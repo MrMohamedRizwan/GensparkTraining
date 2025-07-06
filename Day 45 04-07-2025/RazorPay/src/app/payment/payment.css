@@ -1,0 +1,102 @@
+Container .container {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  border: 1px solid #f0f0f0;
+  font-family: "Segoe UI", Roboto, sans-serif;
+}
+
+/* Heading */
+.container h2 {
+  font-size: 28px;
+  font-weight: 700;
+  text-align: center;
+  color: #006f6d;
+  margin-bottom: 24px;
+}
+
+/* Labels */
+.form-label {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 4px;
+  display: block;
+}
+
+/* Inputs */
+input.form-control {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: border 0.3s ease;
+}
+
+input.form-control:focus {
+  border-color: #006f6d;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 111, 109, 0.1);
+}
+
+/* Button */
+button.btn {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  background-color: #006f6d;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+button.btn:hover {
+  background-color: #004e4c;
+}
+
+button.btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Validation Message */
+.text-danger {
+  color: #e53935;
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+/* Payment Status */
+.alert {
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 14px;
+  text-align: center;
+}
+
+.alert-success {
+  background-color: #e6f4ea;
+  color: #2e7d32;
+  border: 1px solid #c8e6c9;
+}
+
+.alert-danger {
+  background-color: #fdecea;
+  color: #d32f2f;
+  border: 1px solid #fbc9c7;
+}
+
+/* Info Text */
+.info-text {
+  font-size: 12px;
+  color: #666;
+  text-align: center;
+  margin-top: 20px;
+}
