@@ -1,0 +1,384 @@
+ 
+Welcome to Fedora 33 (riscv64)
+ 
+[root@localhost ~]# showami
+sh: showami: command not found
+[root@localhost ~]# whoami
+root
+[root@localhost ~]# groupadd dev-team
+ 
+ 
+[root@localhost ~]#
+[root@localhost ~]#
+[root@localhost ~]# cat /etc/g
+gconf/     gdbinit.d/ glvnd/     group      gshadow-
+gcrypt/    geoclue/   gnupg/     group-     gss/
+gdbinit    glances/   groff/     gshadow    gssproxy/
+[root@localhost ~]# cat /etc/group
+root:x:0:
+bin:x:1:
+daemon:x:2:
+sys:x:3:
+adm:x:4:
+tty:x:5:
+disk:x:6:
+lp:x:7:
+mem:x:8:
+kmem:x:9:
+wheel:x:10:
+cdrom:x:11:
+mail:x:12:
+man:x:15:
+dialout:x:18:
+floppy:x:19:
+games:x:20:
+tape:x:33:
+video:x:39:
+ftp:x:50:
+lock:x:54:
+audio:x:63:
+users:x:100:
+nobody:x:65534:
+utmp:x:22:
+utempter:x:35:
+mock:x:135:kojibuilder
+unbound:x:999:
+ssh_keys:x:998:
+tss:x:59:
+stapusr:x:156:
+stapsys:x:157:
+stapdev:x:158:
+input:x:997:
+kvm:x:36:qemu
+render:x:996:
+systemd-journal:x:190:
+systemd-coredump:x:995:
+systemd-network:x:192:
+systemd-resolve:x:193:
+systemd-timesync:x:994:
+dbus:x:81:
+polkitd:x:993:
+saslauth:x:76:
+dnsmasq:x:992:
+setroubleshoot:x:991:
+radvd:x:75:
+rpc:x:32:
+rpcuser:x:29:
+geoclue:x:990:
+qemu:x:107:
+libvirt:x:989:
+kojibuilder:x:988:
+chrony:x:987:
+sshd:x:74:
+pesign:x:986:
+screen:x:84:
+ccache:x:985:
+dev-team:x:1000:
+[root@localhost ~]# useradd -G dev-team John
+[root@localhost ~]# useradd -G dev-teamm Bob
+useradd: group 'dev-teamm' does not exist
+[root@localhost ~]# useradd -G dev-team Bob
+[root@localhost ~]# passwd John
+Changing password for user John.
+New password:
+BAD PASSWORD: The password is shorter than 8 characters
+Retype new password:
+Sorry, passwords do not match.
+New password:
+BAD PASSWORD: The password is shorter than 8 characters
+Retype new password:
+passwd: all authentication tokens updated successfully.
+[root@localhost ~]# passwd Bob
+Changing password for user Bob.
+New password:
+BAD PASSWORD: The password is shorter than 8 characters
+Retype new password:
+passwd: all authentication tokens updated successfully.
+[root@localhost ~]# ls
+bench.py  hello.c
+
+[root@localhost ~]# passwd Bob
+Changing password for user Bob.
+New password:
+BAD PASSWORD: The password is shorter than 8 characters
+Retype new password:
+passwd: all authentication tokens updated successfully.
+[root@localhost ~]# ls
+bench.py  hello.c
+[root@localhost ~]# pwd
+/root
+[root@localhost ~]# cd ..
+[root@localhost /]# pwd
+/
+[root@localhost /]# cd r
+root/ run/
+[root@localhost /]# cd r
+root/ run/
+[root@localhost /]# cd r
+root/ run/
+[root@localhost /]# cd home/
+Bob/  John/
+[root@localhost /]# cd home/
+[root@localhost home]# mkdir dev-team
+[root@localhost home]# chown :dev-team /
+bin/        etc/        lib64/      opt/        run/        tmp/
+boot/       .fscmd      lost+found/ .preload2/  sbin/       usr/
+.cache/     home/       media/      proc/       srv/        var/
+dev/        lib/        mnt/        root/       sys/        .viminfo
+[root@localhost home]# chown :dev-team /
+bin/        etc/        lib64/      opt/        run/        tmp/
+boot/       .fscmd      lost+found/ .preload2/  sbin/       usr/
+.cache/     home/       media/      proc/       srv/        var/
+dev/        lib/        mnt/        root/       sys/        .viminfo
+[root@localhost home]# chown :dev-team /home/dev-team/
+[root@localhost home]# chmod g+w /home/dev-team/
+[root@localhost home]# chmod o-rx dev-team/
+[root@localhost home]# ls-lrt
+sh: ls-lrt: command not found
+[root@localhost home]# ls -lrt
+total 12
+drwx------ 2 John John     166 Jul  7 12:03 John
+drwx------ 2 Bob  Bob      166 Jul  7 12:03 Bob
+drwxrwx--- 2 root dev-team  37 Jul  7 12:05 dev-team
+[root@localhost home]# exit
+logout
+[root@localhost ~]# su - John
+[John@localhost ~]$ whoamu
+-bash: whoamu: command not found
+[John@localhost ~]$ whoami
+John
+[John@localhost ~]$ ls
+[John@localhost ~]$ pwd
+/home/John
+[John@localhost ~]$ cd ..
+[John@localhost home]$ cd dev-team/
+[John@localhost dev-team]$ touch file1.txt
+[John@localhost dev-team]$ ls-lrt
+-bash: ls-lrt: command not found
+[John@localhost dev-team]$ ls -lrt
+total 0
+-rw-r--r-- 1 John John 0 Jul  7 02:40 file1.txt
+[John@localhost dev-team]$ chown dev-team file1.txt
+chown: invalid user: ‘dev-team’
+[John@localhost dev-team]$ chown :dev-team file1.txt
+[John@localhost dev-team]$ ls -lrt
+total 0
+-rw-r--r-- 1 John dev-team 0 Jul  7 02:40 file1.txt
+[John@localhost dev-team]$ exit
+logout
+[root@localhost ~]# su - Bob
+w[Bob@localhost ~]$ whoami
+Bob
+[Bob@localhost ~]$ ls -l | grep file1.txt
+[Bob@localhost ~]$ pwd
+/home/Bob
+[Bob@localhost ~]$ cd ..
+[Bob@localhost home]$ ls
+Bob  dev-team  John
+[Bob@localhost home]$ ls -l | grep file1.txt
+[Bob@localhost home]$ cd dev-team/
+[Bob@localhost dev-team]$ ls -lrt
+total 0
+-rw-r--r-- 1 John dev-team 0 Jul  7 02:40 file1.txt
+[Bob@localhost dev-team]$ echo "Bob from User Bob" > file1.txt
+-bash: file1.txt: Permission denied
+[Bob@localhost dev-team]$ cat file1.txt
+[Bob@localhost dev-team]$ echo "Bob from User Bob" > file1.txt
+-bash: file1.txt: Permission denied
+[Bob@localhost dev-team]$ ls -lrt
+total 0
+-rw-r--r-- 1 John dev-team 0 Jul  7 02:40 file1.txt
+[Bob@localhost dev-team]$ exit
+logout
+[root@localhost ~]# su - John
+Last login: Mon Jul  7 12:09:02 UTC 2025 on hvc0
+[John@localhost ~]$ whoami
+John
+[John@localhost ~]$ cd .
+[John@localhost home]$ ls
+Bob  dev-team  John
+[John@localhost home]$ cd dev-team/
+[John@localhost dev-team]$ chown :dev-team file1.txt
+[John@localhost dev-team]$ ls -lrt
+total 0
+-rw-r--r-- 1 John dev-team 0 Jul  7 02:40 file1.txt
+[John@localhost dev-team]$ ls -lrt
+total 0
+-rw-r--r-- 1 John dev-team 0 Jul  7 02:40 file1.txt
+[John@localhost dev-team]$ chown :dev-teama file1.txt
+chown: invalid group: ‘:dev-teama’
+[John@localhost dev-team]$ chown :dev-team file1.txt
+[John@localhost dev-team]$ ls -lrt
+total 0
+-rw-r--r-- 1 John dev-team 0 Jul  7 02:40 file1.txt
+[John@localhost dev-team]$ chmod g+w file1.txt
+[John@localhost dev-team]$ ls -lrt
+total 0
+-rw-rw-r-- 1 John dev-team 0 Jul  7 02:40 file1.txt
+[John@localhost dev-team]$ exit
+logout
+[root@localhost ~]# su - Bob
+Last login: Mon Jul  7 12:11:58 UTC 2025 on hvc0
+[Bob@localhost ~]$ cd ..
+[Bob@localhost home]$ cd dev-team/
+[Bob@localhost dev-team]$
+[Bob@localhost dev-team]$ ls -l | grep file1.txt
+-rw-rw-r-- 1 John dev-team 0 Jul  7 02:40 file1.txt
+[Bob@localhost dev-team]$ echo "Bob from user BOB"
+Bob from user BOB
+[Bob@localhost dev-team]$ cat file1.txt
+[Bob@localhost dev-team]$ echo "Bob from user BOB" > file1.txt
+[Bob@localhost dev-team]$ cat file1.txt
+Bob from user BOB
+[Bob@localhost dev-team]$ exit
+logout
+[root@localhost ~]# su - root
+[root@localhost ~]# groupadd project-manager
+[root@localhost ~]# useradd -G project-manager Fatima passwd root
+Usage: useradd [options] LOGIN
+       useradd -D
+       useradd -D [options]
+ 
+Options:
+      --badnames                do not check for bad names
+  -b, --base-dir BASE_DIR       base directory for the home directory of the
+                                new account
+      --btrfs-subvolume-home    use BTRFS subvolume for home directory
+  -c, --comment COMMENT         GECOS field of the new account
+  -d, --home-dir HOME_DIR       home directory of the new account
+  -D, --defaults                print or change default useradd configuration
+  -e, --expiredate EXPIRE_DATE  expiration date of the new account
+  -f, --inactive INACTIVE       password inactivity period of the new account
+  -g, --gid GROUP               name or ID of the primary group of the new
+                                account
+  -G, --groups GROUPS           list of supplementary groups of the new
+                                account
+  -h, --help                    display this help message and exit
+  -k, --skel SKEL_DIR           use this alternative skeleton directory
+  -K, --key KEY=VALUE           override /etc/login.defs defaults
+  -l, --no-log-init             do not add the user to the lastlog and
+                                faillog databases
+  -m, --create-home             create the user's home directory
+  -M, --no-create-home          do not create the user's home directory
+  -N, --no-user-group           do not create a group with the same name as
+                                the user
+  -o, --non-unique              allow to create users with duplicate
+                                (non-unique) UID
+  -p, --password PASSWORD       encrypted password of the new account
+  -r, --system                  create a system account
+  -R, --root CHROOT_DIR         directory to chroot into
+  -P, --prefix PREFIX_DIR       prefix directory where are located the /etc/* fi
+les
+  -s, --shell SHELL             login shell of the new account
+  -u, --uid UID                 user ID of the new account
+  -U, --user-group              create a group with the same name as the user
+  -Z, --selinux-user SEUSER     use a specific SEUSER for the SELinux user mappi
+ng
+ 
+[root@localhost ~]# useradd -G project-manager Fatima passwd root
+Usage: useradd [options] LOGIN
+       useradd -D
+       useradd -D [options]
+ 
+Options:
+      --badnames                do not check for bad names
+  -b, --base-dir BASE_DIR       base directory for the home directory of the
+                                new account
+      --btrfs-subvolume-home    use BTRFS subvolume for home directory
+  -c, --comment COMMENT         GECOS field of the new account
+  -d, --home-dir HOME_DIR       home directory of the new account
+  -D, --defaults                print or change default useradd configuration
+  -e, --expiredate EXPIRE_DATE  expiration date of the new account
+  -f, --inactive INACTIVE       password inactivity period of the new account
+  -g, --gid GROUP               name or ID of the primary group of the new
+                                account
+  -G, --groups GROUPS           list of supplementary groups of the new
+
+                               account
+  -G, --groups GROUPS           list of supplementary groups of the new
+                                account
+  -h, --help                    display this help message and exit
+  -k, --skel SKEL_DIR           use this alternative skeleton directory
+  -K, --key KEY=VALUE           override /etc/login.defs defaults
+  -l, --no-log-init             do not add the user to the lastlog and
+                                faillog databases
+  -m, --create-home             create the user's home directory
+  -M, --no-create-home          do not create the user's home directory
+  -N, --no-user-group           do not create a group with the same name as
+                                the user
+  -o, --non-unique              allow to create users with duplicate
+                                (non-unique) UID
+  -p, --password PASSWORD       encrypted password of the new account
+  -r, --system                  create a system account
+  -R, --root CHROOT_DIR         directory to chroot into
+  -P, --prefix PREFIX_DIR       prefix directory where are located the /etc/* fi
+les
+  -s, --shell SHELL             login shell of the new account
+  -u, --uid UID                 user ID of the new account
+  -U, --user-group              create a group with the same name as the user
+  -Z, --selinux-user SEUSER     use a specific SEUSER for the SELinux user mappi
+ng
+ 
+[root@localhost ~]# exit
+logout
+[root@localhost ~]# su - Fatim
+su: user Fatim does not exist or the user entry does not contain all the require
+d fields
+[root@localhost ~]# su - Fatima
+su: user Fatima does not exist or the user entry does not contain all the requir
+ed fields
+[root@localhost ~]# whoami
+root
+[root@localhost ~]# passwd Fatima
+passwd: Unknown user name 'Fatima'.
+[root@localhost ~]# cd ..
+[root@localhost /]# cd cd cdcwhami
+sh: cd: too many arguments
+[root@localhost /]# whoami
+root
+[root@localhost /]# cd ..
+[root@localhost /]# cd
+bin/        etc/        lib64/      opt/        run/        tmp/
+boot/       .fscmd      lost+found/ .preload2/  sbin/       usr/
+.cache/     home/       media/      proc/       srv/        var/
+dev/        lib/        mnt/        root/       sys/        .viminfo
+[root@localhost /]# cd home/
+[root@localhost home]# ls
+Bob  dev-team  John
+[root@localhost home]# groupadd project-manager useradd -G project-manager Fatim
+a
+groupadd: invalid option -- 'G'
+Usage: groupadd [options] GROUP
+ 
+Options:
+  -f, --force                   exit successfully if the group already exists,
+                                and cancel -g if the GID is already used
+  -g, --gid GID                 use GID for the new group
+  -h, --help                    display this help message and exit
+  -K, --key KEY=VALUE           override /etc/login.defs defaults
+  -o, --non-unique              allow to create groups with duplicate
+                                (non-unique) GID
+  -p, --password PASSWORD       use this encrypted password for the new group
+  -r, --system                  create a system account
+  -R, --root CHROOT_DIR         directory to chroot into
+  -P, --prefix PREFIX_DIR       directory prefix
+ 
+[root@localhost home]# groupadd project-manager
+groupadd: group 'project-manager' already exists
+[root@localhost home]# useradd -G project-manager Fatima
+[root@localhost home]# passwd Fatima
+Changing password for user Fatima.
+New password:
+BAD PASSWORD: The password is shorter than 8 characters
+Retype new password:
+passwd: all authentication tokens updated successfully.
+[root@localhost home]# exit
+logout
+lo      [root@localhost ~]# su - Fatima
+wh[Fatima@localhost ~]$ whoami
+Fatima
+[Fatima@localhost ~]$ cd ..
+[Fatima@localhost home]$ cd dev-team/
+-bash: cd: dev-team/: Permission denied
+[Fatima@localhost home]$
+[Fatima@localhost home]$
