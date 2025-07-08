@@ -9,6 +9,8 @@ using FitnessTrackerAPI.Models;
 using FitnessTrackerAPI.Models.DTOs;
 using FitnessTrackerAPI.Models.WorkoutModel;
 using FitnessTrackerAPI.Repository;
+using FitnessTrackerAPI.Services.Hubs;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.VisualBasic;
 
 namespace FitnessTrackerAPI.Services
@@ -20,17 +22,20 @@ namespace FitnessTrackerAPI.Services
         private readonly IRepository<Guid, PlanAssignment> _planAssignmentRepo;
         private readonly IRepository<Guid, Workout> _workoutRepo;
         private readonly IAWSService _awsS3Service;
+        private readonly IHubContext<NotificationHub> _hubContext;
 
         public ProgressService(IRepository<Guid, Progress> progressRepo,
                                IRepository<Guid, Client> clientRepo,
                                IRepository<Guid, PlanAssignment> planAssignmentRepo,
-                               IRepository<Guid, Workout>WorkoutRepo,
+                               IRepository<Guid, Workout> WorkoutRepo,
+                               IHubContext<NotificationHub> hubContext,
                                IAWSService awsS3Service
                                )
         {
             _workoutRepo = WorkoutRepo;
             _progressRepo = progressRepo;
             _clientRepo = clientRepo;
+            _hubContext = hubContext;
             _planAssignmentRepo = planAssignmentRepo;
             _awsS3Service = awsS3Service;
         }
@@ -61,6 +66,28 @@ namespace FitnessTrackerAPI.Services
             };
 
             await _progressRepo.Add(progress);
+
+            // Find assigned coach for signalR notification
+            var assignment = (await _planAssignmentRepo.GetAll())
+                .FirstOrDefault(a => a.ClientId == clientId &&
+                                     a.AssignedByCoachId != null &&
+                                     (a.DueDate == null || a.DueDate >= DateTime.UtcNow));
+
+            if (assignment != null)
+            {
+                var coachId = assignment.AssignedByCoachId.ToString();
+                Console.WriteLine("\n\n\n\nCoach ID: \n\n\n\n" + coachId);
+
+                await _hubContext.Clients.Group(coachId).SendAsync("ProgressUploaded", new
+                {
+                    ClientId = clientId,
+                    ClientName = client?.Name,
+                    Height = progress.Height,
+                    Weight = progress.Weight,
+                    UploadedAt = progress.UploadedAt
+                });
+            }
+
 
             // Generate pre-signed URL with expiration for the client to view/download the image
             string preSignedUrl = _awsS3Service.GeneratePreSignedURL(objectKey, expiryMinutes: 60);
@@ -110,6 +137,7 @@ namespace FitnessTrackerAPI.Services
             var allProgress = await _progressRepo.GetAll();
             var progressList = allProgress
                 .Where(p => p.ClientId == clientId)
+                .OrderByDescending(p=> p.UploadedAt)
                 .ToList();
 
             var responseList = new List<ProgressResponseDTO>();
@@ -148,6 +176,7 @@ namespace FitnessTrackerAPI.Services
             var allProgress = await _progressRepo.GetAll();
             var progressList = allProgress
                 .Where(p => p.ClientId == clientId)
+                .OrderByDescending(p => p.UploadedAt)
                 .ToList();
 
             var responseList = new List<ProgressResponseDTO>();
@@ -176,25 +205,22 @@ namespace FitnessTrackerAPI.Services
 
         public async Task<ProgressGraphDTO> GetProgressGraphByClientId(Guid clientId)
         {
-            var assignmentIds = (await _workoutRepo.GetAll())
+            var workouts = (await _workoutRepo.GetAll())
                 .Where(w => w.ClientId == clientId && w.PlanAssignmentId.HasValue)
-                .Select(w => w.PlanAssignmentId.Value)
-                // .Distinct()
                 .ToList();
 
-            var date = (await _workoutRepo.GetAll())
-                .Where(w => w.ClientId == clientId && w.PlanAssignmentId.HasValue)
-                .Select(w => w.Date)
-                // .Distinct()
-                .ToList();
-
-            if (assignmentIds.Count == 0)
+            if (!workouts.Any())
             {
                 return new ProgressGraphDTO
                 {
                     Assignments = new List<PlanProgressDTO>()
                 };
             }
+
+            var assignmentIds = workouts
+                .Select(w => w.PlanAssignmentId!.Value)
+                .Distinct()
+                .ToList();
 
             var result = new List<PlanProgressDTO>();
 
@@ -203,20 +229,33 @@ namespace FitnessTrackerAPI.Services
                 var assignment = (await _planAssignmentRepo.GetAll()).FirstOrDefault(p => p.Id == assignmentId);
                 if (assignment == null) continue;
 
-                var progress = await CalculateWorkoutProgress(clientId, assignment.Id);
-                var calories = await GetCaloriesBurnt(clientId, assignment.Id);
-                var caloriesIntake = await GetCaloriesIntake(clientId, assignment.Id);
+                var progress = await CalculateWorkoutProgress(clientId, assignmentId);
+                var totalBurnt = await GetCaloriesBurnt(clientId, assignmentId);
+                var totalIntake = await GetCaloriesIntake(clientId, assignmentId);
+
+                // Group workouts by date to get calories per date
+                var submittedOn = workouts
+                    .Where(w => w.PlanAssignmentId == assignmentId)
+                    .GroupBy(w => w.Date.Date)
+                    .Select(g => new DateCaloriesDTO
+                    {
+                        Date = g.Key,
+                        CaloriesBurnt = g.Sum(w => w.caloriesBurnt),
+                        CaloriesIntake = g.Sum(w => w.caloriesTaken)
+                    })
+                    .OrderBy(d => d.Date)
+                    .ToList();
 
                 result.Add(new PlanProgressDTO
                 {
-                    SubmittedOn=date,
                     PlanAssignmentId = assignment.Id,
+                    // PlanName = assignment.PlanName,
                     ProgressPercentage = progress,
-                    CaloriesBurnt = calories,
-                    caloriesIntake=caloriesIntake,
-                    // Optionally include:
+                    CaloriesBurnt = totalBurnt,
+                    caloriesIntake = totalIntake,
                     AssignedOn = assignment.AssignedOn,
-                    DueDate = assignment.DueDate
+                    DueDate = assignment.DueDate,
+                    SubmittedOn = submittedOn
                 });
             }
 
@@ -225,6 +264,7 @@ namespace FitnessTrackerAPI.Services
                 Assignments = result
             };
         }
+
         public async Task<double> CalculateWorkoutProgress(Guid clientId, Guid planAssignmentId)
         {
 
@@ -264,7 +304,7 @@ namespace FitnessTrackerAPI.Services
             int totalCalories = workouts
                 .Where(w => w != null)
                 .Sum(w => (w?.caloriesTaken) ?? 0);
-
+            
             return totalCalories;
 
         }
@@ -290,13 +330,24 @@ namespace FitnessTrackerAPI.Services
             // return -1;
             // Console.WriteLine($"😉❌{clientId}. plan &{planAssignmentId}");
             var workouts = (await _workoutRepo.GetAll())
-                ?.Where(w => w != null && w.PlanAssignmentId == planAssignmentId)
+                ?.Where(w => w != null && w.PlanAssignmentId == planAssignmentId )
                 .ToList();
 
             if (workouts == null || workouts.Count == 0)
                 return 0;
 
             // Safely sum CaloriesBurnt if the property exists and is not null
+            var allDate= (await _workoutRepo.GetAll())
+                .Where(w => w.ClientId == clientId && w.PlanAssignmentId == planAssignmentId)
+                .Select(w => w.Date.Date)
+                .Distinct()
+                .ToList();
+            // for (int i = 0; i < allDate.Count; i++)
+            // {
+            //     Console.WriteLine("🎉🎉🎉🎉🎉" + allDate[i]);
+            // }
+            // Console.WriteLine("\n\n\n\n\n🎉🎉🎉🎉🎉" + allDate.Count+ " Total Date counrted");
+
             int totalCalories = workouts
                 .Where(w => w != null)
                 .Sum(w => (w?.caloriesBurnt) ?? 0);

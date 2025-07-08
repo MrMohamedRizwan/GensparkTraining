@@ -18,11 +18,13 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Npgsql.Replication.PgOutput.Messages;
 using Amazon.Extensions.NETCore.Setup;
-using Amazon.S3;
+
 using Serilog;
 
 using Amazon.Runtime;
 using FitnessTrackerAPI.Services.Hubs;
+using Amazon.SimpleEmail;
+using Amazon;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -118,8 +120,9 @@ builder.Services.AddTransient<IGeneralService, GeneralService>();
 builder.Services.AddTransient<IWorkoutPlan, WorkoutPlanService>();
 builder.Services.AddTransient<IDietServices, DietPlanService>();
 builder.Services.AddScoped<IAdminService, AdminService>();
+builder.Services.AddTransient<IOtpService, OtpService>();
 
-builder.Services.AddAWSService<IAmazonS3>();
+
 
 var awsSection = builder.Configuration.GetSection("AWS");
 var awsRegion = awsSection["Region"];
@@ -132,6 +135,15 @@ builder.Services.AddSingleton<IAmazonS3>(sp =>
 {
     return new AmazonS3Client(credentials, Amazon.RegionEndpoint.GetBySystemName(awsRegion));
 });
+var awsOptions = new AWSOptions
+{
+    Region = RegionEndpoint.GetBySystemName(awsRegion),
+    Credentials = new BasicAWSCredentials(accessKey, secretKey)
+};
+
+builder.Services.AddDefaultAWSOptions(awsOptions);
+builder.Services.AddAWSService<IAmazonS3>();
+builder.Services.AddAWSService<IAmazonSimpleEmailService>(); 
 
 
 builder.Services.AddScoped<IAWSService, AWSS3Service>();

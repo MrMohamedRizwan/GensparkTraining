@@ -1,13 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "5fn6b5tM+G0=",
+  "dgSpecHash": "YCCAxzMq6PY=",
   "success": true,
   "projectFilePath": "/Users/presidio/Desktop/GensparkTraining/Fitness Tracker API/FitnessTrackerAPI/FitnessTrackerAPI.csproj",
   "expectedPackageFiles": [
     "/Users/presidio/.nuget/packages/automapper/14.0.0/automapper.14.0.0.nupkg.sha512",
-    "/Users/presidio/.nuget/packages/awssdk.core/4.0.0.7/awssdk.core.4.0.0.7.nupkg.sha512",
+    "/Users/presidio/.nuget/packages/awssdk.core/4.0.0.14/awssdk.core.4.0.0.14.nupkg.sha512",
     "/Users/presidio/.nuget/packages/awssdk.extensions.netcore.setup/4.0.1/awssdk.extensions.netcore.setup.4.0.1.nupkg.sha512",
     "/Users/presidio/.nuget/packages/awssdk.s3/4.0.1.3/awssdk.s3.4.0.1.3.nupkg.sha512",
+    "/Users/presidio/.nuget/packages/awssdk.simpleemail/4.0.0.12/awssdk.simpleemail.4.0.0.12.nupkg.sha512",
     "/Users/presidio/.nuget/packages/bcrypt.net-next/4.0.3/bcrypt.net-next.4.0.3.nupkg.sha512",
     "/Users/presidio/.nuget/packages/google.apis/1.69.0/google.apis.1.69.0.nupkg.sha512",
     "/Users/presidio/.nuget/packages/google.apis.auth/1.69.0/google.apis.auth.1.69.0.nupkg.sha512",

@@ -9,7 +9,10 @@ namespace FitnessTrackerAPI.Interfaces
     public interface IAuthenticationService
     {
         public Task<UserLoginResponse> Login(UserLoginRequest user);
-        
+
         public Task<UserLoginResponse> RefreshToken(TokenRefreshRequest request);
+        
+        
+
     }
 }

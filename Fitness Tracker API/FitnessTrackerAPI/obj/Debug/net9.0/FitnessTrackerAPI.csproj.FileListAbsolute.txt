@@ -177,6 +177,7 @@
 /Users/presidio/Desktop/GensparkTraining/Fitness Tracker API/FitnessTrackerAPI/bin/Debug/net9.0/AWSSDK.Core.dll
 /Users/presidio/Desktop/GensparkTraining/Fitness Tracker API/FitnessTrackerAPI/bin/Debug/net9.0/AWSSDK.Extensions.NETCore.Setup.dll
 /Users/presidio/Desktop/GensparkTraining/Fitness Tracker API/FitnessTrackerAPI/bin/Debug/net9.0/AWSSDK.S3.dll
+/Users/presidio/Desktop/GensparkTraining/Fitness Tracker API/FitnessTrackerAPI/bin/Debug/net9.0/AWSSDK.SimpleEmail.dll
 /Users/presidio/Desktop/GensparkTraining/Fitness Tracker API/FitnessTrackerAPI/bin/Debug/net9.0/BCrypt.Net-Next.dll
 /Users/presidio/Desktop/GensparkTraining/Fitness Tracker API/FitnessTrackerAPI/bin/Debug/net9.0/Google.Apis.dll
 /Users/presidio/Desktop/GensparkTraining/Fitness Tracker API/FitnessTrackerAPI/bin/Debug/net9.0/Google.Apis.Auth.dll

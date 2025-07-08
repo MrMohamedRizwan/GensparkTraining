@@ -209,7 +209,7 @@ namespace FitnessTrackerAPI.Services
             var completedDays = (await _workoutRepo.GetAll())
                 .Where(w => w.ClientId == clientId && w.PlanAssignmentId == planAssignmentId)
                 .Select(w => w.Date.Date)
-                // .Distinct()
+                .Distinct()
                 .Count();
             Console.WriteLine("🎉🎉🎉🎉🎉" + completedDays);
 

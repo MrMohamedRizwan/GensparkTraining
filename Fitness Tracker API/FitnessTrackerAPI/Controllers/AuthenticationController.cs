@@ -19,10 +19,13 @@ namespace FitnessTrackerAPI.Controllers
     public class AuthenticationController : ControllerBase
     {
         private readonly IAuthenticationService _authenticationService;
-        public AuthenticationController(IAuthenticationService authenticationService)
+        private readonly IOtpService _otpService;
+        public AuthenticationController(IAuthenticationService authenticationService, IOtpService otpService)
         {
             _authenticationService = authenticationService;
+            _otpService = otpService;
         }
+
         [HttpPost]
 
         public async Task<ActionResult<UserLoginResponse>> PostClient([FromBody] UserLoginRequest loginRequest)
@@ -44,6 +47,36 @@ namespace FitnessTrackerAPI.Controllers
                 return Unauthorized(new { message = ex.Message });
             }
         }
+
+
+        // [HttpPost("forgot-password")]
+        // public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordreqDTO dto)
+        // {
+        //     try
+        //     {
+        //         await _otpService.SendOtpAsync(dto.Email);
+        //         return Ok(new { message = "OTP sent to email." });
+        //     }
+        //     catch (Exception ex)
+        //     {
+        //         Console.WriteLine($"❌ Exception in forgot-password: {ex.Message}");
+        //         return StatusCode(500, new { error = ex.Message });
+        //     }
+        // }
+
+        // [HttpPost("verify-otp")]
+        // public async Task<IActionResult> VerifyOtp([FromBody] VerifyOtpRequest request)
+        // {
+        //     var isValid = await _otpService.VerifyOtpAsync(request.Email, request.Otp);
+        //     return isValid ? Ok() : BadRequest(new { error = "Invalid or expired OTP" });
+        // }
+
+        // [HttpPost("reset-password")]
+        // public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordRequest request)
+        // {
+        //     await _userService.UpdatePasswordAsync(request.Email, request.NewPassword); // Use BCrypt
+        //     return Ok(new { message = "Password reset successful." });
+        // }
 
     }
 }

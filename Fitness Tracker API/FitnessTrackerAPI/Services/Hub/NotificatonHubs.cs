@@ -16,5 +16,15 @@ namespace FitnessTrackerAPI.Services.Hubs
         // {
         //     await Groups.RemoveFromGroupAsync(Context.ConnectionId, clientId);
         // }
+
+        public Task JoinCoachGroup(string coachId)
+        {
+            return Groups.AddToGroupAsync(Context.ConnectionId, coachId);
+        }
+
+        public Task LeaveCoachGroup(string coachId)
+        {
+            return Groups.RemoveFromGroupAsync(Context.ConnectionId, coachId);
+        }
     }
 }

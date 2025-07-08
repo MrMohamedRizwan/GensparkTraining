@@ -956,5 +956,26 @@ namespace FitnessTrackerAPI.Services
             };
         }
 
+        public async Task<bool> DeletePlanAsync(Guid PlanId)
+        {
+            var plan =(await _planAssignmentRepository.GetAll())
+                .FirstOrDefault(p => p.Id == PlanId);
+            if (plan == null)
+            {
+                throw new Exception("Plan not found");
+            }
+            try
+            {
+                await _planAssignmentRepository.Delete(plan.Id);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Error ❌ {e.Message}");
+                if (e.InnerException != null)
+                    Console.WriteLine($"Inner Exception 💥 {e.InnerException.Message}");
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

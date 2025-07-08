@@ -15,6 +15,8 @@ namespace FitnessTrackerAPI.Interfaces
     public interface ICoachService
     {
         public Task<SignUpResponseDTO> AddCoach(CoachAddRequestDTO coach);
+
+        public Task<bool> DeletePlanAsync(Guid userId);
         // public Task<DietPlan> AddMeal(DietPlanCreateRequestDTO diet, ClaimsPrincipal user);
         // public Task<DietPlan> UpdateDietPlanByTitle(string title, DietPlanCreateRequestDTO dto, ClaimsPrincipal user);
         // public Task<bool> DeleteDietPlanByTitle(string title, ClaimsPrincipal user);

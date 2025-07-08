@@ -43,6 +43,23 @@ namespace FitnessTrackerAPI.Controllers
                 return BadRequest(e.Message);
             }
         }
+        [Authorize(Roles = "Coach")]
+        [HttpDelete("Delete-Assigned-Plans/{id}")]
+        public async Task<IActionResult> DeleteCoachById(Guid id)
+        {
+            try
+            {
+                var success = await _coachService.DeletePlanAsync(id);
+                if (success)
+                    return Ok(new { Message = $"Plan '{id}' deleted successfully" });
+                return NotFound(new { Message = "Plan not found" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { Error = ex.Message });
+            }
+
+        }
 
         // [Authorize(Roles = "Coach")]
         // [HttpPost("AddDiet")]
