@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/component/coach/assign-plan/assign-plan.css"],
+  "sourcesContent": [".cursor-pointer {\n  cursor: pointer;\n}\n\n.card.border-primary,\n.card.border-info,\n.card.border-success {\n  background-color: #f8f9fa;\n  transition: border-color 0.2s ease, box-shadow 0.2s ease;\n}\n\n/* Blue shade on hover */\n.card:hover {\n  border-color: #007bff;\n  box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);\n}\n\n/* Blue shade for selected state */\n.card.selected {\n  border-color: #0056b3;\n  box-shadow: 0 0 12px rgba(0, 86, 179, 0.3);\n}\n\n.expand-btn {\n  opacity: 0;\n  transition: opacity 0.2s ease;\n}\n\n.expand-btn:hover {\n  border-color: #007bff;\n  box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);\n  color: #007bff;\n  background-color: #e6f0ff;\n}\n\n.card:hover .expand-btn {\n  display: block; /* or remove this if you're using only opacity */\n  opacity: 1;\n}\n"],
+  "mappings": ";AAAA,CAAC;AACC,UAAQ;AACV;AAEA,CAAC,IAAI,CAAC;AACN,CADC,IACI,CAAC;AACN,CAFC,IAEI,CAAC;AACJ,oBAAkB;AAClB,cAAY,aAAa,KAAK,IAAI,EAAE,WAAW,KAAK;AACtD;AAGA,CARC,IAQI;AACH,gBAAc;AACd,cAAY,EAAE,EAAE,IAAI,KAAK,CAAC,EAAE,GAAG,EAAE,GAAG,EAAE;AACxC;AAGA,CAdC,IAcI,CAAC;AACJ,gBAAc;AACd,cAAY,EAAE,EAAE,KAAK,KAAK,CAAC,EAAE,EAAE,EAAE,GAAG,EAAE;AACxC;AAEA,CAAC;AACC,WAAS;AACT,cAAY,QAAQ,KAAK;AAC3B;AAEA,CALC,UAKU;AACT,gBAAc;AACd,cAAY,EAAE,EAAE,IAAI,KAAK,CAAC,EAAE,GAAG,EAAE,GAAG,EAAE;AACtC,SAAO;AACP,oBAAkB;AACpB;AAEA,CA/BC,IA+BI,OAAO,CAZX;AAaC,WAAS;AACT,WAAS;AACX;",
+  "names": []
+}

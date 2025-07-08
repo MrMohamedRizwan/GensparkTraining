@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/component/client/progress/progress.css"],
+  "sourcesContent": ["canvas {\n  display: block;\n  width: 100% !important;\n  height: 300px !important; /* critical */\n}\n"],
+  "mappings": ";AAAA;AACE,WAAS;AACT,SAAO;AACP,UAAQ;AACV;",
+  "names": []
+}

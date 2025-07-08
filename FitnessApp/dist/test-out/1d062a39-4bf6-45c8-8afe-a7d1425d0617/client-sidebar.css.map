@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/component/client/client-sidebar/client-sidebar.css"],
+  "sourcesContent": [".fade-in {\n  animation: fadeIn 0.4s ease-in-out;\n}\n\n@keyframes fadeIn {\n  from {\n    opacity: 0;\n    transform: translateX(10px);\n  }\n  to {\n    opacity: 1;\n    transform: translateX(0);\n  }\n}\n"],
+  "mappings": ";AAAA,CAAC;AACC,aAAW,OAAO,KAAK;AACzB;AAEA,WAHa;AAIX;AACE,aAAS;AACT,eAAW,WAAW;AACxB;AACA;AACE,aAAS;AACT,eAAW,WAAW;AACxB;AACF;",
+  "names": []
+}

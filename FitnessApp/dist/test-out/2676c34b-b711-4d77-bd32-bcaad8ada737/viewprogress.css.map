@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/component/coach/viewprogress/viewprogress.css"],
+  "sourcesContent": [".card-img-top {\n  height: 200px;\n  object-fit: contain;\n  border-bottom: 1px solid #ddd;\n}\n\ncanvas {\n  max-width: 100%;\n}\n"],
+  "mappings": ";AAAA,CAAC;AACC,UAAQ;AACR,cAAY;AACZ,iBAAe,IAAI,MAAM;AAC3B;AAEA;AACE,aAAW;AACb;",
+  "names": []
+}

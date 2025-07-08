@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/component/client/workout-plan/workout-plan.css"],
+  "sourcesContent": ["/* In your global styles or component CSS */\n.text-decoration-line-through {\n  text-decoration: line-through;\n}\n.cc {\n  padding: 0 10%;\n}\n"],
+  "mappings": ";AACA,CAAC;AACC,mBAAiB;AACnB;AACA,CAAC;AACC,WAAS,EAAE;AACb;",
+  "names": []
+}

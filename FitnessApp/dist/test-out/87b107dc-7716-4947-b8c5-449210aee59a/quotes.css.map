@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/component/client/quotes/quotes.css"],
+  "sourcesContent": [".quote-box {\n  padding: 20px;\n  margin: 10px auto;\n  background-color: #f8f9fa;\n  border-left: 5px solid #007bff;\n  font-style: italic;\n  font-size: 1.2rem;\n  max-width: 600px;\n}\n"],
+  "mappings": ";AAAA,CAAC;AACC,WAAS;AACT,UAAQ,KAAK;AACb,oBAAkB;AAClB,eAAa,IAAI,MAAM;AACvB,cAAY;AACZ,aAAW;AACX,aAAW;AACb;",
+  "names": []
+}

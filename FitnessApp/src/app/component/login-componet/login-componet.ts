@@ -11,6 +11,7 @@ import { UserLoginModel } from '../../models/userLoginModel';
 import { UserService } from '../../services/UserService';
 import { Router, RouterLink } from '@angular/router';
 import { ToastService } from '../../services/ToastService';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login-componet',
@@ -29,7 +30,8 @@ export class LoginComponet {
   constructor(
     private userService: UserService,
     private router: Router,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private toastr: ToastrService
   ) {
     this.loginForm = new FormGroup({
       username: new FormControl('cbum@gmail.com', Validators.required),
@@ -41,10 +43,11 @@ export class LoginComponet {
     this.userService.validateUser(this.loginForm.value).subscribe({
       next: () => {
         this.toastService.showToast(
-          'Login Successful',
-          'You have been logged in.',
+          'Success',
+          'Login completed successfully.',
           'success'
         );
+        // this.toastr.success('Operation Successful!', 'Success');
       },
       error: (errMessage: string) => {
         this.toastService.showToast('Login Failed', errMessage, 'error');

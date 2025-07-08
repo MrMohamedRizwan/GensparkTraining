@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/component/notification/notification.css"],
+  "sourcesContent": ["#notification {\n  background-color: #f8f9fa;\n  padding: 10px;\n  border: 1px solid #ccc;\n  max-width: 400px;\n  margin-top: 20px;\n}\n"],
+  "mappings": ";AAAA,CAAC;AACC,oBAAkB;AAClB,WAAS;AACT,UAAQ,IAAI,MAAM;AAClB,aAAW;AACX,cAAY;AACd;",
+  "names": []
+}

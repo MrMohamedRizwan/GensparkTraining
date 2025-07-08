@@ -1,0 +1,356 @@
+import {
+  CoachService,
+  init_CoachService
+} from "./chunk-6FMV4ZXE.js";
+import {
+  FormsModule,
+  init_forms
+} from "./chunk-4BOFPGSM.js";
+import {
+  Router,
+  init_router
+} from "./chunk-XZQZQLJQ.js";
+import "./chunk-VOWP6SJ3.js";
+import "./chunk-E5G6P5QB.js";
+import {
+  CommonModule,
+  init_common
+} from "./chunk-G6SPFJGI.js";
+import {
+  TestBed,
+  fakeAsync,
+  init_testing,
+  tick
+} from "./chunk-M6CJ4AGH.js";
+import {
+  ChangeDetectorRef,
+  Component,
+  __async,
+  __commonJS,
+  __decorate,
+  __esm,
+  init_core,
+  init_esm,
+  init_tslib_es6,
+  of,
+  throwError
+} from "./chunk-X6QY723D.js";
+
+// angular:jit:template:src/app/component/coach/my-client/my-client.html
+var my_client_default;
+var init_my_client = __esm({
+  "angular:jit:template:src/app/component/coach/my-client/my-client.html"() {
+    my_client_default = `<div class="container py-4">
+  <h2 class="mb-3">My Clients</h2>
+  <p class="text-muted">Manage and track your clients' progress</p>
+
+  <div class="card shadow-sm mb-4">
+    <div
+      class="card-header d-flex flex-column flex-md-row justify-content-between align-items-center"
+    >
+      <div>
+        <h5 class="mb-1">Clients Overview</h5>
+        <small class="text-muted"
+          >Total: {{ filteredClients.length }} clients</small
+        >
+      </div>
+      <div class="input-group mt-3 mt-md-0" style="max-width: 300px">
+        <span class="input-group-text"><i class="bi bi-search"></i></span>
+        <input
+          type="text"
+          [(ngModel)]="searchTerm"
+          (ngModelChange)="filterClients()"
+          class="form-control"
+          placeholder="Search clients..."
+        />
+      </div>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table table-striped mb-0 text-center align-middle">
+        <thead class="table-light">
+          <tr>
+            <th class="text-center align-middle">Name</th>
+            <th class="text-center align-middle">Email</th>
+            <th class="text-center align-middle">Staus</th>
+            <th class="text-center align-middle">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let client of paginatedClients"
+            class="text-center align-middle"
+          >
+            <td class="text-center align-middle">{{ client.name }}</td>
+            <td class="text-center align-middle">{{ client.email }}</td>
+            <td class="text-center align-middle">
+              <span
+                [ngClass]="{
+                  'badge bg-danger': client.status === 'Unassigned',
+                  'badge bg-warning ': client.status === 'Not Completed',
+                  'badge bg-success': client.status === 'Completed',
+                  'badge  bg-warning': client.status === 'On Progress',
+                  'badge bg-secondary': client.status === 'Not Started'
+                }"
+                style="
+                  font-size: 1rem;
+                  padding: 0.5em 1em;
+                  border-radius: 1em;
+                  letter-spacing: 0.5px;
+                  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+                "
+              >
+                {{ client.status }}
+              </span>
+            </td>
+            <td class="text-center align-middle">
+              <button
+                (click)="showDetails(client); $event.stopPropagation()"
+                class="btn btn-sm btn-outline-primary me-2"
+              >
+                View
+              </button>
+
+              <button
+                [disabled]="client.status === 'Not Started' || client.status === 'On Progress'"
+                class="btn btn-sm btn-success"
+                (click)="goToAssignPlan(client.id)"
+              >
+                Assign Plan
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card-footer d-flex justify-content-between align-items-center">
+      <small class="text-muted">
+        Showing {{ startIndex + 1 }} to {{ endIndex }} of {{
+        filteredClients.length }} clients
+      </small>
+      <div>
+        <button
+          class="btn btn-outline-secondary btn-sm me-2"
+          (click)="prevPage()"
+          [disabled]="currentPage === 1"
+        >
+          <i class="bi bi-chevron-left"></i> Previous
+        </button>
+        <button
+          class="btn btn-outline-secondary btn-sm"
+          (click)="nextPage()"
+          [disabled]="currentPage === totalPages"
+        >
+          Next <i class="bi bi-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+  }
+});
+
+// angular:jit:style:src/app/component/coach/my-client/my-client.css
+var my_client_default2;
+var init_my_client2 = __esm({
+  "angular:jit:style:src/app/component/coach/my-client/my-client.css"() {
+    my_client_default2 = "/* src/app/component/coach/my-client/my-client.css */\n/*# sourceMappingURL=my-client.css.map */\n";
+  }
+});
+
+// src/app/component/coach/my-client/my-client.ts
+var MyClient;
+var init_my_client3 = __esm({
+  "src/app/component/coach/my-client/my-client.ts"() {
+    "use strict";
+    init_tslib_es6();
+    init_my_client();
+    init_my_client2();
+    init_core();
+    init_CoachService();
+    init_forms();
+    init_common();
+    init_router();
+    MyClient = class MyClient2 {
+      clientService;
+      router;
+      cdr;
+      searchTerm = "";
+      currentPage = 1;
+      itemsPerPage = 8;
+      clients = [];
+      filteredClients = [];
+      paginatedClients = [];
+      constructor(clientService, router, cdr) {
+        this.clientService = clientService;
+        this.router = router;
+        this.cdr = cdr;
+      }
+      showDetails(details) {
+        this.router.navigate(["/client-details", details.id]);
+      }
+      ngOnInit() {
+        this.loadClients();
+      }
+      goToAssignPlan(clientId) {
+        this.router.navigate(["/assign-plan", clientId]);
+      }
+      loadClients() {
+        this.clientService.getClientsList().subscribe({
+          next: (res) => {
+            console.log("Fetched clients:", this.clients);
+            this.clients = res.items.$values;
+            this.filterClients();
+            this.cdr.detectChanges();
+            console.log("Fetched clients:", this.clients);
+          },
+          error: (err) => {
+            console.error("Error fetching clients:", err);
+          }
+        });
+      }
+      filterClients() {
+        this.filteredClients = this.clients.filter((client) => client.name.toLowerCase().includes(this.searchTerm.toLowerCase()) || client.email.toLowerCase().includes(this.searchTerm.toLowerCase()));
+        this.currentPage = 1;
+        this.paginateClients();
+      }
+      paginateClients() {
+        const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+        this.paginatedClients = this.filteredClients.slice(startIndex, startIndex + this.itemsPerPage);
+      }
+      nextPage() {
+        const totalPages = Math.ceil(this.filteredClients.length / this.itemsPerPage);
+        if (this.currentPage < totalPages) {
+          this.currentPage++;
+          this.paginateClients();
+        }
+      }
+      prevPage() {
+        if (this.currentPage > 1) {
+          this.currentPage--;
+          this.paginateClients();
+        }
+      }
+      get startIndex() {
+        return (this.currentPage - 1) * this.itemsPerPage;
+      }
+      get endIndex() {
+        return Math.min(this.startIndex + this.itemsPerPage, this.filteredClients.length);
+      }
+      get totalPages() {
+        return Math.ceil(this.filteredClients.length / this.itemsPerPage);
+      }
+      static ctorParameters = () => [
+        { type: CoachService },
+        { type: Router },
+        { type: ChangeDetectorRef }
+      ];
+    };
+    MyClient = __decorate([
+      Component({
+        selector: "app-my-client",
+        imports: [FormsModule, CommonModule],
+        template: my_client_default,
+        standalone: true,
+        styles: [my_client_default2]
+      })
+    ], MyClient);
+  }
+});
+
+// src/app/component/coach/my-client/my-client.spec.ts
+var require_my_client_spec = __commonJS({
+  "src/app/component/coach/my-client/my-client.spec.ts"(exports) {
+    init_testing();
+    init_my_client3();
+    init_CoachService();
+    init_esm();
+    init_router();
+    init_common();
+    init_forms();
+    describe("MyClient Component", () => {
+      let component;
+      let fixture;
+      let coachServiceSpy;
+      let routerSpy;
+      const mockClients = {
+        items: {
+          $values: [
+            { id: "1", name: "Alice Johnson", email: "alice@example.com" },
+            { id: "2", name: "Bob Smith", email: "bob@example.com" },
+            { id: "3", name: "Charlie Brown", email: "charlie@example.com" }
+          ]
+        }
+      };
+      beforeEach(() => __async(null, null, function* () {
+        coachServiceSpy = jasmine.createSpyObj("CoachService", ["getClientsList"]);
+        routerSpy = jasmine.createSpyObj("Router", ["navigate"]);
+        yield TestBed.configureTestingModule({
+          imports: [MyClient, CommonModule, FormsModule],
+          providers: [
+            { provide: CoachService, useValue: coachServiceSpy },
+            { provide: Router, useValue: routerSpy }
+          ]
+        }).compileComponents();
+        fixture = TestBed.createComponent(MyClient);
+        component = fixture.componentInstance;
+      }));
+      it("should create the component", () => {
+        expect(component).toBeTruthy();
+      });
+      it("should load clients on init", fakeAsync(() => {
+        coachServiceSpy.getClientsList.and.returnValue(of(mockClients));
+        component.ngOnInit();
+        tick();
+        expect(coachServiceSpy.getClientsList).toHaveBeenCalled();
+        expect(component.clients.length).toBe(3);
+        expect(component.filteredClients.length).toBe(3);
+        expect(component.paginatedClients.length).toBe(3);
+      }));
+      it("should handle error during loadClients", fakeAsync(() => {
+        spyOn(console, "error");
+        coachServiceSpy.getClientsList.and.returnValue(throwError(() => "Network error"));
+        component.loadClients();
+        tick();
+        expect(console.error).toHaveBeenCalledWith("Error fetching clients:", "Network error");
+      }));
+      it("should filter clients by name", () => {
+        component.clients = mockClients.items.$values;
+        component.searchTerm = "alice";
+        component.filterClients();
+        expect(component.filteredClients.length).toBe(1);
+        expect(component.filteredClients[0].name).toBe("Alice Johnson");
+      });
+      it("should navigate to assign plan", () => {
+        component.goToAssignPlan("123");
+        expect(routerSpy.navigate).toHaveBeenCalledWith(["/assign-plan", "123"]);
+      });
+      it("should navigate to client details", () => {
+        const mockClient = { id: "999" };
+        component.showDetails(mockClient);
+        expect(routerSpy.navigate).toHaveBeenCalledWith(["/client-details", "999"]);
+      });
+      it("should paginate to next and previous page", () => {
+        const fakeClients = Array.from({ length: 20 }, (_, i) => ({
+          id: `${i}`,
+          name: `Client ${i}`,
+          email: `client${i}@example.com`
+        }));
+        component.clients = fakeClients;
+        component.filteredClients = fakeClients;
+        component.paginateClients();
+        expect(component.paginatedClients.length).toBe(8);
+        expect(component.currentPage).toBe(1);
+        component.nextPage();
+        expect(component.currentPage).toBe(2);
+        expect(component.paginatedClients.length).toBe(8);
+        component.prevPage();
+        expect(component.currentPage).toBe(1);
+      });
+    });
+  }
+});
+export default require_my_client_spec();
+//# sourceMappingURL=spec-app-component-coach-my-client-my-client.spec.js.map

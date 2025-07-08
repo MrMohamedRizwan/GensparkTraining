@@ -102,17 +102,23 @@ export class Viewprogress implements OnInit {
       ],
     };
 
+    const filteredAssigns = assigns.filter(
+      (a) => a.caloriesIntake !== 0 && a.caloriesBurnt !== 0
+    );
+
     this.caloriesChartData = {
-      labels: assigns.map((_, i) => `Plan ${i + 1}`),
+      labels: filteredAssigns.map((a) =>
+        a.assignedDate ? new Date(a.assignedDate).toLocaleDateString() : ''
+      ),
       datasets: [
         {
           label: 'Calories Intake',
-          data: assigns.map((a) => a.caloriesIntake),
+          data: filteredAssigns.map((a) => a.caloriesIntake),
           backgroundColor: 'orange',
         },
         {
           label: 'Calories Burnt',
-          data: assigns.map((a) => a.caloriesBurnt),
+          data: filteredAssigns.map((a) => a.caloriesBurnt),
           backgroundColor: 'red',
         },
       ],
@@ -121,13 +127,56 @@ export class Viewprogress implements OnInit {
 
   setupCalorieLineChart() {
     const assigns = this.assignments();
-    const labels = assigns.map((_, i) => `Plan ${i + 1}`);
+    const calorieMap: Record<string, { intake: number; burnt: number }> = {};
+
+    for (const assign of assigns) {
+      const rawDates = assign.submittedOn?.$values;
+
+      if (!Array.isArray(rawDates)) continue;
+
+      for (const entry of rawDates) {
+        const isoDate = entry.date;
+        const intake = Number(entry.caloriesIntake || 0);
+        const burnt = Number(entry.caloriesBurnt || 0);
+
+        const dateKey = new Date(isoDate).toLocaleDateString();
+
+        if (!calorieMap[dateKey]) {
+          calorieMap[dateKey] = { intake: 0, burnt: 0 };
+        }
+
+        calorieMap[dateKey].intake += intake;
+        calorieMap[dateKey].burnt += burnt;
+      }
+    }
+    console.table(calorieMap);
+    // Sort dates
+    const sortedDates = Object.keys(calorieMap)
+      .sort(
+        (a, b) => new Date(b).getTime() - new Date(a).getTime() // 🔁 descending order
+      )
+      .reverse();
+
+    // const labels = images.map((img) =>
+    //   new Date(img.uploadedAt).toLocaleDateString()
+    // );
+    // const sortedDates = Object.keys(calorieMap).sort(); // ISO format sorts correctly
+
+    const labels: string[] = [];
+    const intakeData: number[] = [];
+    const burntData: number[] = [];
+
+    for (const date of sortedDates) {
+      labels.push(date);
+      intakeData.push(calorieMap[date].intake);
+      burntData.push(calorieMap[date].burnt);
+    }
 
     this.calorieLineChartData = {
       labels,
       datasets: [
         {
-          data: assigns.map((a) => a.caloriesIntake),
+          data: intakeData,
           label: 'Calories Intake',
           borderColor: 'orange',
           fill: false,
@@ -135,7 +184,7 @@ export class Viewprogress implements OnInit {
           pointBackgroundColor: 'orange',
         },
         {
-          data: assigns.map((a) => a.caloriesBurnt),
+          data: burntData,
           label: 'Calories Burnt',
           borderColor: 'red',
           fill: false,

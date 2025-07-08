@@ -17,6 +17,18 @@ export class DietPlanService {
     const user = localStorage.getItem('user');
     return user ? JSON.parse(user)?.token : null;
   }
+  public updateDietPlan(id: any, updated: any): Observable<any> {
+    const token = this.getToken();
+    return this.http.put(
+      `http://localhost:5002/api/v1/DietPlan/Edit-Diet/${id}`,
+      updated,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+  }
 
   public addDietPlan(plan: any): Observable<any> {
     const token = this.getToken();
@@ -32,15 +44,26 @@ export class DietPlanService {
   }
   public GetAllDiets(): Observable<any> {
     const token = this.getToken();
-    return this.http.get<any>(`${this.baseUrl}diet/all`, {
+    return this.http.get<any>(
+      `${this.baseUrl}diet/all?pageNumber=1&pageSize=1000`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+  }
+  public GetParticularDiet(id: string): Observable<any> {
+    const token = this.getToken();
+    return this.http.get(`${this.baseUrl}dietplan/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
   }
-  public GetParticularDiet(id: string): Observable<any> {
+  public deleteDietPlan(id: string): Observable<any> {
     const token = this.getToken();
-    return this.http.get(`${this.baseUrl}dietplan/${id}`, {
+    return this.http.delete(`${this.baseUrl}Delete-Diet/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

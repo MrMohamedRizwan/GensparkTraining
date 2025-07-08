@@ -35,7 +35,7 @@ export class UserService {
             } else if (role == 'Client') {
               this.router.navigate(['/client-dashboard']);
             } else {
-              this.router.navigate(['/']);
+              this.router.navigate(['/admin-dashboard']);
             }
 
             observer.next(true);
@@ -84,6 +84,44 @@ export class UserService {
         },
       }
     );
+  }
+
+  getAllClients(): Observable<any[]> {
+    const token = this.getToken();
+    return this.http.get<any[]>(
+      'http://localhost:5002/api/v1/Client/getAllClients?pageNumber=1&pageSize=100',
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+  }
+  deleteCoach(id: any): Observable<any[]> {
+    {
+      const token = this.getToken();
+      return this.http.delete<any[]>(
+        `http://localhost:5002/api/v1/Admin/Delete-Coach/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+    }
+  }
+  deleteClient(id: any): Observable<any[]> {
+    {
+      const token = this.getToken();
+      return this.http.delete<any[]>(
+        `http://localhost:5002/api/v1/Admin/Delete-Client/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+    }
   }
 
   public UpdateClientDetails(data: ClientUpdateRequestDTO): Observable<any> {

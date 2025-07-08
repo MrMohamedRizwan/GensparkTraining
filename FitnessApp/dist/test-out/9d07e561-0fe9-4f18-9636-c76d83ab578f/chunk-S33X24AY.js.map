@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/services/ToastService.ts"],
+  "sourcesContent": ["import { Injectable } from '@angular/core';\nimport { BehaviorSubject, timer } from 'rxjs';\n\ninterface ToastData {\n  title: string;\n  message: string;\n  type: string;\n  visible: boolean;\n}\n\n@Injectable({ providedIn: 'root' })\nexport class ToastService {\n  private toastSubject = new BehaviorSubject<ToastData>({\n    title: '',\n    message: '',\n    type: '',\n    visible: false,\n  });\n\n  toast$ = this.toastSubject.asObservable();\n\n  showToast(title: string, message: string, type: string) {\n    this.toastSubject.next({ title, message, type, visible: true });\n\n    // Auto-dismiss after 5 seconds\n    timer(1000).subscribe(() => {\n      this.toastSubject.next({ ...this.toastSubject.value, visible: false });\n    });\n  }\n}\n"],
+  "mappings": ";;;;;;;;;;;;;;IAWa;;;;;AAXb;AACA;AAUO,IAAM,eAAN,MAAMA,cAAY;MACf,eAAe,IAAI,gBAA2B;QACpD,OAAO;QACP,SAAS;QACT,MAAM;QACN,SAAS;OACV;MAED,SAAS,KAAK,aAAa,aAAY;MAEvC,UAAU,OAAe,SAAiB,MAAY;AACpD,aAAK,aAAa,KAAK,EAAE,OAAO,SAAS,MAAM,SAAS,KAAI,CAAE;AAG9D,cAAM,GAAI,EAAE,UAAU,MAAK;AACzB,eAAK,aAAa,KAAK,iCAAK,KAAK,aAAa,QAAvB,EAA8B,SAAS,MAAK,EAAE;QACvE,CAAC;MACH;;AAjBW,mBAAY,WAAA;MADxB,WAAW,EAAE,YAAY,OAAM,CAAE;OACrB,YAAY;;;",
+  "names": ["ToastService"]
+}

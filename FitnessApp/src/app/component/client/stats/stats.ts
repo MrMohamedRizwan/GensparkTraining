@@ -112,17 +112,22 @@ export class Stats implements OnInit {
       ],
     };
 
+    // Filter out assignments where either caloriesIntake or caloriesBurnt is zero
+    const filteredAssigns = assigns.filter(
+      (a) => a.caloriesIntake !== 0 && a.caloriesBurnt !== 0
+    );
+
     this.caloriesChartData = {
-      labels: assigns.map((_, i) => `Plan ${i + 1}`),
+      labels: filteredAssigns.map((_, i) => `Plan ${i + 1}`),
       datasets: [
         {
           label: 'Calories Intake',
-          data: assigns.map((a) => a.caloriesIntake),
-          backgroundColor: 'orange',
+          data: filteredAssigns.map((a) => a.caloriesIntake),
+          // backgroundColor: 'orange',
         },
         {
           label: 'Calories Burnt',
-          data: assigns.map((a) => a.caloriesBurnt),
+          data: filteredAssigns.map((a) => a.caloriesBurnt),
           backgroundColor: 'red',
         },
       ],
@@ -131,26 +136,41 @@ export class Stats implements OnInit {
 
   setupCalorieLineChart() {
     const assigns = this.assignments();
-    const labels = assigns.map((_, i) => `Plan ${i + 1}`);
+    let totalIntake = 0;
+    let totalBurnt = 0;
+    let intakeCount = 0;
+    let burntCount = 0;
+
+    for (const assign of assigns) {
+      const entries = assign.submittedOn?.$values;
+      if (!Array.isArray(entries)) continue;
+
+      for (const entry of entries) {
+        const intake = Number(entry.caloriesIntake || 0);
+        const burnt = Number(entry.caloriesBurnt || 0);
+
+        if (intake > 0) {
+          totalIntake += intake;
+          intakeCount++;
+        }
+
+        if (burnt > 0) {
+          totalBurnt += burnt;
+          burntCount++;
+        }
+      }
+    }
+
+    const avgIntake = intakeCount > 0 ? totalIntake / intakeCount : 0;
+    const avgBurnt = burntCount > 0 ? totalBurnt / burntCount : 0;
 
     this.calorieLineChartData = {
-      labels,
+      labels: ['Avg Calories Intake', 'Avg Calories Burnt'],
       datasets: [
         {
-          data: assigns.map((a) => a.caloriesIntake),
-          label: 'Calories Intake',
-          borderColor: 'orange',
-          fill: false,
-          tension: 0.3,
-          pointBackgroundColor: 'orange',
-        },
-        {
-          data: assigns.map((a) => a.caloriesBurnt),
-          label: 'Calories Burnt',
-          borderColor: 'red',
-          fill: false,
-          tension: 0.3,
-          pointBackgroundColor: 'red',
+          data: [avgIntake, avgBurnt],
+          backgroundColor: ['orange', 'red'],
+          label: 'Calories Distribution',
         },
       ],
     };

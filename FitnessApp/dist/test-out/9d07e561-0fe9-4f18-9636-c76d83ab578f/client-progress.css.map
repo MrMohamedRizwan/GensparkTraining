@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/component/coach/client-progress/client-progress.css"],
+  "sourcesContent": [".card {\n  border-radius: 12px;\n}\n\n.card-body {\n  padding: 1rem;\n}\n\n.card-title {\n  font-weight: 600;\n}\n\nbutton.btn-sm {\n  min-width: 120px;\n}\n.client-progress {\n  padding: 0 150px;\n}\n"],
+  "mappings": ";AAAA,CAAC;AACC,iBAAe;AACjB;AAEA,CAAC;AACC,WAAS;AACX;AAEA,CAAC;AACC,eAAa;AACf;AAEA,MAAM,CAAC;AACL,aAAW;AACb;AACA,CAAC;AACC,WAAS,EAAE;AACb;",
+  "names": []
+}
