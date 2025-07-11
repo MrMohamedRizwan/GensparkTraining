@@ -15,6 +15,9 @@ namespace FitnessTrackerAPI.Models
         public byte[]? HashKey { get; set; }
         public Coach? Coach { get; set; }
         public Client? Client { get; set; }
+        public bool IsActive { get; set; } = true;
+        public DateTime LastLoginAt { get; set; } = DateTime.UtcNow;
+
     }
 
 }

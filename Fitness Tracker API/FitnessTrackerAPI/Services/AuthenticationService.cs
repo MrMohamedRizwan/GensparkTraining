@@ -38,6 +38,8 @@ namespace FitnessTrackerAPI.Services
 
             dbUser.RefreshToken = refreshToken;
             dbUser.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(7);
+            dbUser.LastLoginAt = DateTime.UtcNow;
+            dbUser.IsActive = true;
 
             await _userRepository.Update(dbUser.Email, dbUser);
 

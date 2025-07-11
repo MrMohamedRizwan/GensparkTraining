@@ -99,6 +99,8 @@ namespace FitnessTrackerAPI.Services
                 user.Password = encryptedData.EncryptedData;
                 user.Role = "Coach";
                 user.RefreshToken = "null";
+                user.LastLoginAt = DateTime.UtcNow;
+                user.IsActive = true;
                 user = await _userRepository.Add(user);
 
                 var newCoach = _mapper.Map<CoachAddRequestDTO, Coach>(coach);
@@ -113,6 +115,8 @@ namespace FitnessTrackerAPI.Services
 
                 user.RefreshToken = refreshToken;
                 user.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(7);
+                user.LastLoginAt = DateTime.UtcNow;
+                user.IsActive = true;
                 await _userRepository.Update(user.Email, user); // persist token changes
                 // await transaction.CommitAsync();
                 return new SignUpResponseDTO
@@ -659,15 +663,21 @@ namespace FitnessTrackerAPI.Services
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
                 .ToList();
-            Func<IEnumerable<Coach>, List<GetCoachDTO>> mapToDto = clients =>
-                clients.Select(c => new GetCoachDTO
+             var coachDtos = new List<GetCoachDTO>();
+
+            foreach (var coach in pagedCoaches)
+            {
+                var user = await _userRepository.Get(coach.Email);
+                coachDtos.Add(new GetCoachDTO
                 {
-                    Id = c.Id,
-                    Name = c.Name,
-                    YearsOfExperience = c.YearsOfExperience,
-                    Email = c.Email
-                }).ToList();
-            var coachDtos = mapToDto(pagedCoaches);
+                    Id = coach.Id,
+                    Name = coach.Name,
+                    YearsOfExperience = coach.YearsOfExperience,
+                    Email = coach.Email,
+                    IsActive = user?.IsActive ?? false
+                });
+            }
+
 
             return new PagedResult<GetCoachDTO>
             {

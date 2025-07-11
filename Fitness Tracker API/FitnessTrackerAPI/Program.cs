@@ -122,6 +122,9 @@ builder.Services.AddTransient<IDietServices, DietPlanService>();
 builder.Services.AddScoped<IAdminService, AdminService>();
 builder.Services.AddTransient<IOtpService, OtpService>();
 
+builder.Services.AddHostedService<UserActivityChecker>();
+
+
 
 
 var awsSection = builder.Configuration.GetSection("AWS");

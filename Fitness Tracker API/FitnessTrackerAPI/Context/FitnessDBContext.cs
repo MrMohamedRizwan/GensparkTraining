@@ -30,6 +30,7 @@ namespace FitnessTrackerAPI.Context
         public DbSet<DietMeal> DietMeal { get; set; }
         public DbSet<DietPlan> DietPlans { get; set; }
 
+        
 
 
 

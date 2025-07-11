@@ -62,13 +62,18 @@ namespace FitnessTrackerAPI.Services
                 .Take(pageSize)
                 .ToList();
             Func<IEnumerable<Client>, List<GetClientDTO>> mapToDto = clients =>
-                clients.Select(c => new GetClientDTO
+                clients.Select(c =>
                 {
-                    Id = c.Id,
-                    Name = c.Name,
-                    Age = c.Age,
-                    Gender=c.Gender,
-                    Email = c.Email
+                    var user = _userRepository.Get(c.Email).Result;
+                    return new GetClientDTO
+                    {
+                        Id = c.Id,
+                        Name = c.Name,
+                        Age = c.Age,
+                        Gender = c.Gender,
+                        Email = c.Email,
+                        IsActive = user?.IsActive ?? false
+                    };
                 }).ToList();
             var coachDtos = mapToDto(pagedCoaches);
 
@@ -94,6 +99,8 @@ namespace FitnessTrackerAPI.Services
                 var encryptedData = await _encryptionService.EncryptData(new EncryptModel { Data = client.Password });
                 user.Password = encryptedData.EncryptedData;
                 user.Role = "Client";
+                user.LastLoginAt = DateTime.UtcNow;
+                user.IsActive = true;
                 user.RefreshToken = string.Empty;
 
                 try
