@@ -1,0 +1,48 @@
+/* You can add global styles to this file, and also import other style files
+/* @import url('bootstrap/dist/css/bootstrap.css'); */
+/* @font-face {
+  font-family: "CustomFont";
+  src: url("assets/fonts/CustomFont.woff2") format("woff2");
+} */
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+/* Make toast text larger */
+.toast {
+  font-size: 1rem;
+}
+
+/* Change success background */
+.toast-success {
+  background-color: #28a745 !important;
+  color: #fff;
+}
+
+/* Center toasts (not default top-right) */
+.toast-top-center {
+  top: 12px;
+  right: 0;
+  left: 0;
+  margin: auto;
+}

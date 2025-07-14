@@ -1,0 +1,101 @@
+<div class="container py-5">
+  <!-- Header -->
+  <div class="text-center mb-5">
+    <h2 class="fw-bold">Track Your Progress</h2>
+    <p class="text-muted">
+      Upload your photo and body stats to track progress.
+    </p>
+  </div>
+
+  <!-- Upload Form -->
+  <div class="card shadow-sm">
+    <div class="card-header bg-white">
+      <h5 class="mb-0">Upload New Progress</h5>
+    </div>
+    <div class="card-body">
+      <!-- File Upload -->
+      <div class="mb-4">
+        <label class="form-label fw-semibold">Progress Photo</label>
+        <div
+          class="border border-2 border-secondary rounded p-4 text-center position-relative"
+          style="cursor: pointer"
+        >
+          <input
+            type="file"
+            accept="image/*"
+            class="position-absolute top-0 start-0 w-100 h-100 opacity-0"
+            (change)="onFileSelected($event)"
+          />
+          <div *ngIf="selectedFile; else noFile">
+            <img
+              [src]="selectedFilePreview"
+              class="img-fluid rounded mb-2"
+              style="max-height: 200px"
+              *ngIf="selectedFilePreview"
+            />
+            <p class="fw-medium mb-0">{{ selectedFile.name }}</p>
+            <small class="text-muted">Click to change image</small>
+          </div>
+          <ng-template #noFile>
+            <p class="text-muted">Click to upload or drag and drop</p>
+            <small class="text-secondary">PNG, JPG, up to 10MB</small>
+          </ng-template>
+        </div>
+      </div>
+
+      <!-- Inputs -->
+      <div class="row g-3 mb-4">
+        <div class="col-md-6">
+          <label class="form-label">Height (cm)</label>
+          <input
+            type="number"
+            class="form-control"
+            [(ngModel)]="height"
+            placeholder="e.g. 170"
+            #heightInput="ngModel"
+          />
+          <div
+            class="text-danger small mt-1"
+            *ngIf="heightData.length && height < heightData[0] && heightInput.touched"
+          >
+            <i class="bi bi-exclamation-circle-fill"></i>
+            Height must be greater than or equal to your previous entry ({{
+            heightData[0] }} cm).
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Weight (kg)</label>
+          <input
+            type="number"
+            class="form-control"
+            [(ngModel)]="weight"
+            placeholder="e.g. 65"
+          />
+        </div>
+      </div>
+
+      <!-- Submit -->
+      <div>
+        <button
+          class="btn btn-primary w-100"
+          (click)="onSubmit()"
+          [disabled]="!isFormValid || submitting() || !canUploadProgress()"
+        >
+          {{ submitting() ? 'Submitting...' : 'Submit Progress' }}
+        </button>
+      </div>
+      <div
+        *ngIf="!canUploadProgress()"
+        class="alert alert-warning mt-3 text-center"
+      >
+        <strong>You can only upload progress once every 5 days.</strong><br />
+        Last uploaded on: {{ lastUploadedDate | date:'mediumDate' }}
+      </div>
+      <!-- Last uploaded on: {{ lastUploadedDate | date:'mediumDate' }} -->
+    </div>
+  </div>
+
+  <br /><br />
+
+  <app-calender-component [clientId]="this.clientId"></app-calender-component>
+</div>
