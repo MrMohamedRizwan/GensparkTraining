@@ -380,3 +380,4 @@ Content-Type: application/xml
 2025-07-14 14:57:35.060 +05:30 [INF] Executed action BlobTestApp.Controllers.FilesController.Upload (BlobTestApp) in 2935.3685ms
 2025-07-14 14:57:35.061 +05:30 [INF] Executed endpoint 'BlobTestApp.Controllers.FilesController.Upload (BlobTestApp)'
 2025-07-14 14:57:35.062 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5134/api/Files/upload - 200 null text/plain; charset=utf-8 2937.4846ms
+2025-07-14 17:17:52.112 +05:30 [INF] Application is shutting down...
