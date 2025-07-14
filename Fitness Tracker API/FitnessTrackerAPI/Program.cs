@@ -26,6 +26,8 @@ using FitnessTrackerAPI.Services.Hubs;
 using Amazon.SimpleEmail;
 using Amazon;
 
+using Azure.Security.KeyVault.Secrets;
+using Azure.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -75,15 +77,30 @@ Log.Logger = new LoggerConfiguration()
     .CreateLogger();
 
 
-builder.Host.UseSerilog(); 
+builder.Host.UseSerilog();
 
 
 #endregion
 
+#region Database Context using AzureVault
+var blobUrl = builder.Configuration["AzureBlob:KeyVaultUrl"];
+SecretClient secretClient = new SecretClient(new Uri(blobUrl), new DefaultAzureCredential());
+KeyVaultSecret secret = secretClient.GetSecret("PgSQL");
+var pgsqlValue = secret.Value;
+Console.WriteLine($"\n\n\nBlob URL: {pgsqlValue}\n\n\n");
+
 builder.Services.AddDbContext<FitnessDBContext>(opts =>
 {
-    opts.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
+    // opts.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
+    opts.UseNpgsql(pgsqlValue);
+
 });
+
+#endregion
+
+
+
+
 #region  Repositories
 builder.Services.AddTransient<IRepository<Guid, Coach>, CoachRepository>();
 builder.Services.AddTransient<IRepository<Guid, Client>, ClientRepository>();

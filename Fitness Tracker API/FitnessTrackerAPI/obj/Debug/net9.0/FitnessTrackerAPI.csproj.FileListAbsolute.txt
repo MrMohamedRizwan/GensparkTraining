@@ -337,3 +337,10 @@
 /Users/presidio/Desktop/GensparkTraining/Fitness Tracker API/FitnessTrackerAPI/obj/Debug/net9.0/FitnessTrackerAPI.pdb
 /Users/presidio/Desktop/GensparkTraining/Fitness Tracker API/FitnessTrackerAPI/obj/Debug/net9.0/FitnessTrackerAPI.genruntimeconfig.cache
 /Users/presidio/Desktop/GensparkTraining/Fitness Tracker API/FitnessTrackerAPI/obj/Debug/net9.0/ref/FitnessTrackerAPI.dll
+/Users/presidio/Desktop/GensparkTraining/Fitness Tracker API/FitnessTrackerAPI/bin/Debug/net9.0/Azure.Core.dll
+/Users/presidio/Desktop/GensparkTraining/Fitness Tracker API/FitnessTrackerAPI/bin/Debug/net9.0/Azure.Identity.dll
+/Users/presidio/Desktop/GensparkTraining/Fitness Tracker API/FitnessTrackerAPI/bin/Debug/net9.0/Azure.Security.KeyVault.Secrets.dll
+/Users/presidio/Desktop/GensparkTraining/Fitness Tracker API/FitnessTrackerAPI/bin/Debug/net9.0/Microsoft.Identity.Client.dll
+/Users/presidio/Desktop/GensparkTraining/Fitness Tracker API/FitnessTrackerAPI/bin/Debug/net9.0/Microsoft.Identity.Client.Extensions.Msal.dll
+/Users/presidio/Desktop/GensparkTraining/Fitness Tracker API/FitnessTrackerAPI/bin/Debug/net9.0/System.ClientModel.dll
+/Users/presidio/Desktop/GensparkTraining/Fitness Tracker API/FitnessTrackerAPI/bin/Debug/net9.0/System.Memory.Data.dll
