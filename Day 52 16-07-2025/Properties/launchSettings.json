@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "Day_52_16_07_2025": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7117",
+      "launchBrowser": false
+    }
+  }
+}

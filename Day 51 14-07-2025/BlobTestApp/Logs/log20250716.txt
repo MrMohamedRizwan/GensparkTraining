@@ -1,0 +1,296 @@
+2025-07-16 12:15:41.385 +05:30 [INF] Now listening on: http://localhost:5134
+2025-07-16 12:15:41.450 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-07-16 12:15:41.450 +05:30 [INF] Hosting environment: Development
+2025-07-16 12:15:41.450 +05:30 [INF] Content root path: /Users/presidio/Desktop/GensparkTraining/Day 51 14-07-2025/BlobTestApp
+2025-07-16 12:15:41.863 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5134/_framework/aspnetcore-browser-refresh.js - null null
+2025-07-16 12:15:41.863 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5134/swagger/swagger-ui-bundle.js - null null
+2025-07-16 12:15:41.863 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5134/swagger/swagger-ui-standalone-preset.js - null null
+2025-07-16 12:15:41.863 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5134/swagger/swagger-ui.css - null null
+2025-07-16 12:15:41.879 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5134/_framework/aspnetcore-browser-refresh.js - 200 16091 application/javascript; charset=utf-8 17.4999ms
+2025-07-16 12:15:41.938 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5134/swagger/swagger-ui.css - 200 155175 text/css 77.6478ms
+2025-07-16 12:15:41.958 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5134/swagger/swagger-ui-standalone-preset.js - 200 229223 text/javascript 97.6088ms
+2025-07-16 12:15:41.958 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5134/swagger/swagger-ui-bundle.js - 200 1485750 text/javascript 98.4797ms
+2025-07-16 12:15:42.169 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5134/swagger/v1/swagger.json - null null
+2025-07-16 12:15:42.306 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5134/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 137.3608ms
+2025-07-16 12:15:54.202 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5134/api/Files/upload - multipart/form-data; boundary=----WebKitFormBoundary3uodzbqEukaG32Rz 127334
+2025-07-16 12:15:54.207 +05:30 [INF] API Call: POST /api/Files/upload by anonymous at "2025-07-16T06:45:54.2056920Z"
+2025-07-16 12:15:54.211 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-07-16 12:15:54.214 +05:30 [INF] Executing endpoint 'BlobTestApp.Controllers.FilesController.Upload (BlobTestApp)'
+2025-07-16 12:15:54.235 +05:30 [INF] Route matched with {action = "Upload", controller = "Files"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Upload(BlobTestApp.Models.UploadRequestDto) on controller BlobTestApp.Controllers.FilesController (BlobTestApp).
+2025-07-16 12:15:58.863 +05:30 [INF] Executed action BlobTestApp.Controllers.FilesController.Upload (BlobTestApp) in 4624.0401ms
+2025-07-16 12:15:58.864 +05:30 [INF] Executed endpoint 'BlobTestApp.Controllers.FilesController.Upload (BlobTestApp)'
+2025-07-16 12:15:58.865 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+Azure.RequestFailedException: Server failed to authenticate the request. Make sure the value of Authorization header is formed correctly including the signature.
+RequestId:b038b534-a01e-0007-301d-f610b1000000
+Time:2025-07-16T06:45:58.7737699Z
+Status: 403 (Server failed to authenticate the request. Make sure the value of Authorization header is formed correctly including the signature.)
+ErrorCode: AuthenticationFailed
+
+Additional Information:
+AuthenticationErrorDetail: Signature did not match. String to sign used was rw
+
+2025-07-16T07:32:54Z
+/blob/rizwanstorageblob/filecontainer/Screenshot 2025-07-08 at 2.31.02 PM.png
+
+
+
+2025-07-05
+b
+
+
+
+
+
+
+
+
+Content:
+﻿<?xml version="1.0" encoding="utf-8"?><Error><Code>AuthenticationFailed</Code><Message>Server failed to authenticate the request. Make sure the value of Authorization header is formed correctly including the signature.
+RequestId:b038b534-a01e-0007-301d-f610b1000000
+Time:2025-07-16T06:45:58.7737699Z</Message><AuthenticationErrorDetail>Signature did not match. String to sign used was rw
+
+2025-07-16T07:32:54Z
+/blob/rizwanstorageblob/filecontainer/Screenshot 2025-07-08 at 2.31.02 PM.png
+
+
+
+2025-07-05
+b
+
+
+
+
+
+
+</AuthenticationErrorDetail></Error>
+
+Headers:
+Server: Microsoft-HTTPAPI/2.0
+x-ms-request-id: b038b534-a01e-0007-301d-f610b1000000
+x-ms-error-code: AuthenticationFailed
+Date: Wed, 16 Jul 2025 06:45:58 GMT
+Content-Length: 551
+Content-Type: application/xml
+
+   at Azure.Storage.Blobs.BlockBlobRestClient.UploadAsync(Int64 contentLength, Stream body, Nullable`1 timeout, Byte[] transactionalContentMD5, String blobContentType, String blobContentEncoding, String blobContentLanguage, Byte[] blobContentMD5, String blobCacheControl, IDictionary`2 metadata, String leaseId, String blobContentDisposition, String encryptionKey, String encryptionKeySha256, Nullable`1 encryptionAlgorithm, String encryptionScope, Nullable`1 tier, Nullable`1 ifModifiedSince, Nullable`1 ifUnmodifiedSince, String ifMatch, String ifNoneMatch, String ifTags, String blobTagsString, Nullable`1 immutabilityPolicyExpiry, Nullable`1 immutabilityPolicyMode, Nullable`1 legalHold, Byte[] transactionalContentCrc64, String structuredBodyType, Nullable`1 structuredContentLength, CancellationToken cancellationToken)
+   at Azure.Storage.Blobs.Specialized.BlockBlobClient.UploadInternal(Stream content, BlobHttpHeaders blobHttpHeaders, IDictionary`2 metadata, IDictionary`2 tags, BlobRequestConditions conditions, Nullable`1 accessTier, BlobImmutabilityPolicy immutabilityPolicy, Nullable`1 legalHold, IProgress`1 progressHandler, UploadTransferValidationOptions transferValidationOverride, String operationName, Boolean async, CancellationToken cancellationToken)
+   at Azure.Storage.Blobs.Specialized.BlockBlobClient.<>c__DisplayClass65_0.<<GetPartitionedUploaderBehaviors>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Azure.Storage.PartitionedUploader`2.UploadInternal(Stream content, Nullable`1 expectedContentLength, TServiceSpecificData args, IProgress`1 progressHandler, Boolean async, CancellationToken cancellationToken)
+   at Azure.Storage.Blobs.BlobClient.StagedUploadInternal(Stream content, BlobUploadOptions options, Boolean async, CancellationToken cancellationToken)
+   at BlobTestApp.Services.BlobStorageService.UploadFile(Stream fileStream, String fileName) in /Users/presidio/Desktop/GensparkTraining/Day 51 14-07-2025/BlobTestApp/Services/BlobStorageService.cs:line 33
+   at BlobTestApp.Controllers.FilesController.Upload(UploadRequestDto request) in /Users/presidio/Desktop/GensparkTraining/Day 51 14-07-2025/BlobTestApp/Controllers/FilesController.cs:line 36
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at BlobTestAppBlobTestApp.Misc.LoggingMiddleWare.Invoke(HttpContext context) in /Users/presidio/Desktop/GensparkTraining/Day 51 14-07-2025/BlobTestApp/Misc/LoggingMiddleWare.cs:line 28
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-07-16 12:15:58.892 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5134/api/Files/upload - 500 null text/plain; charset=utf-8 4689.0931ms
+2025-07-16 12:20:05.126 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5134/api/Files/upload - multipart/form-data; boundary=----WebKitFormBoundaryzEVLF2LAQXzTiDBV 127334
+2025-07-16 12:20:05.127 +05:30 [INF] API Call: POST /api/Files/upload by anonymous at "2025-07-16T06:50:05.1279170Z"
+2025-07-16 12:20:05.128 +05:30 [INF] Executing endpoint 'BlobTestApp.Controllers.FilesController.Upload (BlobTestApp)'
+2025-07-16 12:20:05.128 +05:30 [INF] Route matched with {action = "Upload", controller = "Files"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Upload(BlobTestApp.Models.UploadRequestDto) on controller BlobTestApp.Controllers.FilesController (BlobTestApp).
+2025-07-16 12:20:09.694 +05:30 [INF] Executed action BlobTestApp.Controllers.FilesController.Upload (BlobTestApp) in 4565.6867ms
+2025-07-16 12:20:09.694 +05:30 [INF] Executed endpoint 'BlobTestApp.Controllers.FilesController.Upload (BlobTestApp)'
+2025-07-16 12:20:09.695 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+Azure.RequestFailedException: This request is not authorized to perform this operation using this permission.
+RequestId:1ace1f50-a01e-0038-1d1d-f6d812000000
+Time:2025-07-16T06:50:09.6354231Z
+Status: 403 (This request is not authorized to perform this operation using this permission.)
+ErrorCode: AuthorizationPermissionMismatch
+
+Content:
+﻿<?xml version="1.0" encoding="utf-8"?><Error><Code>AuthorizationPermissionMismatch</Code><Message>This request is not authorized to perform this operation using this permission.
+RequestId:1ace1f50-a01e-0038-1d1d-f6d812000000
+Time:2025-07-16T06:50:09.6354231Z</Message></Error>
+
+Headers:
+Server: Windows-Azure-Blob/1.0 Microsoft-HTTPAPI/2.0
+x-ms-request-id: 1ace1f50-a01e-0038-1d1d-f6d812000000
+x-ms-client-request-id: b8840182-f823-4028-a3b0-06e24aed12c7
+x-ms-version: 2025-05-05
+x-ms-error-code: AuthorizationPermissionMismatch
+Date: Wed, 16 Jul 2025 06:50:09 GMT
+Content-Length: 279
+Content-Type: application/xml
+
+   at Azure.Storage.Blobs.BlockBlobRestClient.UploadAsync(Int64 contentLength, Stream body, Nullable`1 timeout, Byte[] transactionalContentMD5, String blobContentType, String blobContentEncoding, String blobContentLanguage, Byte[] blobContentMD5, String blobCacheControl, IDictionary`2 metadata, String leaseId, String blobContentDisposition, String encryptionKey, String encryptionKeySha256, Nullable`1 encryptionAlgorithm, String encryptionScope, Nullable`1 tier, Nullable`1 ifModifiedSince, Nullable`1 ifUnmodifiedSince, String ifMatch, String ifNoneMatch, String ifTags, String blobTagsString, Nullable`1 immutabilityPolicyExpiry, Nullable`1 immutabilityPolicyMode, Nullable`1 legalHold, Byte[] transactionalContentCrc64, String structuredBodyType, Nullable`1 structuredContentLength, CancellationToken cancellationToken)
+   at Azure.Storage.Blobs.Specialized.BlockBlobClient.UploadInternal(Stream content, BlobHttpHeaders blobHttpHeaders, IDictionary`2 metadata, IDictionary`2 tags, BlobRequestConditions conditions, Nullable`1 accessTier, BlobImmutabilityPolicy immutabilityPolicy, Nullable`1 legalHold, IProgress`1 progressHandler, UploadTransferValidationOptions transferValidationOverride, String operationName, Boolean async, CancellationToken cancellationToken)
+   at Azure.Storage.Blobs.Specialized.BlockBlobClient.<>c__DisplayClass65_0.<<GetPartitionedUploaderBehaviors>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Azure.Storage.PartitionedUploader`2.UploadInternal(Stream content, Nullable`1 expectedContentLength, TServiceSpecificData args, IProgress`1 progressHandler, Boolean async, CancellationToken cancellationToken)
+   at Azure.Storage.Blobs.BlobClient.StagedUploadInternal(Stream content, BlobUploadOptions options, Boolean async, CancellationToken cancellationToken)
+   at BlobTestApp.Services.BlobStorageService.UploadFile(Stream fileStream, String fileName) in /Users/presidio/Desktop/GensparkTraining/Day 51 14-07-2025/BlobTestApp/Services/BlobStorageService.cs:line 33
+   at BlobTestApp.Controllers.FilesController.Upload(UploadRequestDto request) in /Users/presidio/Desktop/GensparkTraining/Day 51 14-07-2025/BlobTestApp/Controllers/FilesController.cs:line 36
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at BlobTestAppBlobTestApp.Misc.LoggingMiddleWare.Invoke(HttpContext context) in /Users/presidio/Desktop/GensparkTraining/Day 51 14-07-2025/BlobTestApp/Misc/LoggingMiddleWare.cs:line 28
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-07-16 12:20:09.699 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5134/api/Files/upload - 500 null text/plain; charset=utf-8 4573.0903ms
+2025-07-16 12:20:56.923 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5134/api/Files/upload - multipart/form-data; boundary=----WebKitFormBoundary39fi5592UBoxoO3R 127334
+2025-07-16 12:20:56.923 +05:30 [INF] API Call: POST /api/Files/upload by anonymous at "2025-07-16T06:50:56.9238250Z"
+2025-07-16 12:20:56.924 +05:30 [INF] Executing endpoint 'BlobTestApp.Controllers.FilesController.Upload (BlobTestApp)'
+2025-07-16 12:20:56.924 +05:30 [INF] Route matched with {action = "Upload", controller = "Files"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Upload(BlobTestApp.Models.UploadRequestDto) on controller BlobTestApp.Controllers.FilesController (BlobTestApp).
+2025-07-16 12:20:59.483 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.String'.
+2025-07-16 12:20:59.484 +05:30 [INF] Executed action BlobTestApp.Controllers.FilesController.Upload (BlobTestApp) in 2560.0402ms
+2025-07-16 12:20:59.484 +05:30 [INF] Executed endpoint 'BlobTestApp.Controllers.FilesController.Upload (BlobTestApp)'
+2025-07-16 12:20:59.485 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5134/api/Files/upload - 200 null text/plain; charset=utf-8 2562.4052ms
+2025-07-16 12:24:08.495 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5134/swagger/index.html - null null
+2025-07-16 12:24:08.571 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5134/swagger/index.html - 200 null text/html;charset=utf-8 75.3406ms
+2025-07-16 12:24:08.575 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5134/_framework/aspnetcore-browser-refresh.js - null null
+2025-07-16 12:24:08.575 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5134/_framework/aspnetcore-browser-refresh.js - 200 16091 application/javascript; charset=utf-8 0.3867ms
+2025-07-16 12:24:09.016 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5134/swagger/v1/swagger.json - null null
+2025-07-16 12:24:09.019 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5134/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 2.6943ms
+2025-07-16 12:24:18.446 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5134/swagger/index.html - null null
+2025-07-16 12:24:18.448 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5134/swagger/index.html - 200 null text/html;charset=utf-8 1.9216ms
+2025-07-16 12:24:18.459 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5134/_framework/aspnetcore-browser-refresh.js - null null
+2025-07-16 12:24:18.459 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5134/_framework/aspnetcore-browser-refresh.js - 200 16091 application/javascript; charset=utf-8 0.2563ms
+2025-07-16 12:24:18.574 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5134/swagger/v1/swagger.json - null null
+2025-07-16 12:24:18.578 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5134/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 3.5311ms
+2025-07-16 12:24:21.505 +05:30 [INF] Application is shutting down...
+2025-07-16 12:25:16.662 +05:30 [INF] Now listening on: http://localhost:5134
+2025-07-16 12:25:16.722 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-07-16 12:25:16.722 +05:30 [INF] Hosting environment: Development
+2025-07-16 12:25:16.722 +05:30 [INF] Content root path: /Users/presidio/Desktop/GensparkTraining/Day 51 14-07-2025/BlobTestApp
+2025-07-16 12:25:17.190 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5134/_framework/aspnetcore-browser-refresh.js - null null
+2025-07-16 12:25:17.202 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5134/_framework/aspnetcore-browser-refresh.js - 200 16091 application/javascript; charset=utf-8 15.2588ms
+2025-07-16 12:25:17.237 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5134/swagger/v1/swagger.json - null null
+2025-07-16 12:25:17.420 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5134/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 183.4048ms
+2025-07-16 12:25:30.424 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5134/api/Files?fileName=1%2Cmp4 - null null
+2025-07-16 12:25:30.434 +05:30 [INF] API Call: GET /api/Files by anonymous at "2025-07-16T06:55:30.4328090Z"
+2025-07-16 12:25:30.438 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-07-16 12:25:30.441 +05:30 [INF] Executing endpoint 'BlobTestApp.Controllers.FilesController.Download (BlobTestApp)'
+2025-07-16 12:25:30.462 +05:30 [INF] Route matched with {action = "Download", controller = "Files"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Download(System.String) on controller BlobTestApp.Controllers.FilesController (BlobTestApp).
+2025-07-16 12:25:34.797 +05:30 [INF] Executing ObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ProblemDetails'.
+2025-07-16 12:25:34.840 +05:30 [INF] Executed action BlobTestApp.Controllers.FilesController.Download (BlobTestApp) in 4375.0746ms
+2025-07-16 12:25:34.841 +05:30 [INF] Executed endpoint 'BlobTestApp.Controllers.FilesController.Download (BlobTestApp)'
+2025-07-16 12:25:34.843 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5134/api/Files?fileName=1%2Cmp4 - 404 null application/problem+json; charset=utf-8 4419.9025ms
+2025-07-16 12:25:37.775 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5134/api/Files?fileName=1.mp4 - null null
+2025-07-16 12:25:37.777 +05:30 [INF] API Call: GET /api/Files by anonymous at "2025-07-16T06:55:37.7776150Z"
+2025-07-16 12:25:37.778 +05:30 [INF] Executing endpoint 'BlobTestApp.Controllers.FilesController.Download (BlobTestApp)'
+2025-07-16 12:25:37.778 +05:30 [INF] Route matched with {action = "Download", controller = "Files"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Download(System.String) on controller BlobTestApp.Controllers.FilesController (BlobTestApp).
+2025-07-16 12:25:39.433 +05:30 [INF] Executing ObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ProblemDetails'.
+2025-07-16 12:25:39.434 +05:30 [INF] Executed action BlobTestApp.Controllers.FilesController.Download (BlobTestApp) in 1655.9683ms
+2025-07-16 12:25:39.434 +05:30 [INF] Executed endpoint 'BlobTestApp.Controllers.FilesController.Download (BlobTestApp)'
+2025-07-16 12:25:39.435 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5134/api/Files?fileName=1.mp4 - 404 null application/problem+json; charset=utf-8 1659.5939ms
+2025-07-16 12:29:29.436 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5134/swagger/index.html - null null
+2025-07-16 12:29:29.514 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5134/swagger/index.html - 200 null text/html;charset=utf-8 78.6621ms
+2025-07-16 12:29:29.519 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5134/_framework/aspnetcore-browser-refresh.js - null null
+2025-07-16 12:29:29.520 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5134/_framework/aspnetcore-browser-refresh.js - 200 16091 application/javascript; charset=utf-8 0.3937ms
+2025-07-16 12:29:29.706 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5134/swagger/v1/swagger.json - null null
+2025-07-16 12:29:29.710 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5134/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 4.4866ms
+2025-07-16 12:30:00.108 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5134/api/Files?fileName=istockphoto-1514093059-612x612.jpg - null null
+2025-07-16 12:30:00.109 +05:30 [INF] API Call: GET /api/Files by anonymous at "2025-07-16T07:00:00.1094420Z"
+2025-07-16 12:30:00.109 +05:30 [INF] Executing endpoint 'BlobTestApp.Controllers.FilesController.Download (BlobTestApp)'
+2025-07-16 12:30:00.114 +05:30 [INF] Route matched with {action = "Download", controller = "Files"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Download(System.String) on controller BlobTestApp.Controllers.FilesController (BlobTestApp).
+2025-07-16 12:30:03.425 +05:30 [INF] Executing ObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ProblemDetails'.
+2025-07-16 12:30:03.431 +05:30 [INF] Executed action BlobTestApp.Controllers.FilesController.Download (BlobTestApp) in 3316.298ms
+2025-07-16 12:30:03.431 +05:30 [INF] Executed endpoint 'BlobTestApp.Controllers.FilesController.Download (BlobTestApp)'
+2025-07-16 12:30:03.432 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5134/api/Files?fileName=istockphoto-1514093059-612x612.jpg - 404 null application/problem+json; charset=utf-8 3323.4572ms
+2025-07-16 12:32:07.753 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5134/swagger/index.html - null null
+2025-07-16 12:32:07.755 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5134/swagger/index.html - 200 null text/html;charset=utf-8 2.3892ms
+2025-07-16 12:32:07.771 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5134/_framework/aspnetcore-browser-refresh.js - null null
+2025-07-16 12:32:07.772 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5134/_framework/aspnetcore-browser-refresh.js - 200 16091 application/javascript; charset=utf-8 0.4658ms
+2025-07-16 12:32:07.902 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5134/swagger/v1/swagger.json - null null
+2025-07-16 12:32:07.909 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5134/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 7.6252ms
+2025-07-16 12:32:18.644 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5134/api/Files?fileName=sa - null null
+2025-07-16 12:32:18.645 +05:30 [INF] API Call: GET /api/Files by anonymous at "2025-07-16T07:02:18.6451880Z"
+2025-07-16 12:32:18.645 +05:30 [INF] Executing endpoint 'BlobTestApp.Controllers.FilesController.Download (BlobTestApp)'
+2025-07-16 12:32:18.649 +05:30 [INF] Route matched with {action = "Download", controller = "Files"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Download(System.String) on controller BlobTestApp.Controllers.FilesController (BlobTestApp).
+2025-07-16 12:32:18.661 +05:30 [INF] Start processing HTTP request GET https://rizwanfunc20250715.azurewebsites.net/api/generate-sas/sa?*
+2025-07-16 12:32:18.662 +05:30 [INF] Sending HTTP request GET https://rizwanfunc20250715.azurewebsites.net/api/generate-sas/sa?*
+2025-07-16 12:32:23.244 +05:30 [INF] Received HTTP response headers after 4579.19ms - 500
+2025-07-16 12:32:23.245 +05:30 [INF] End processing HTTP request after 4584.5963ms - 500
+2025-07-16 12:32:23.246 +05:30 [ERR] Failed to get SAS URL: 
+2025-07-16 12:32:23.249 +05:30 [INF] Executed action BlobTestApp.Controllers.FilesController.Download (BlobTestApp) in 4599.035ms
+2025-07-16 12:32:23.249 +05:30 [INF] Executed endpoint 'BlobTestApp.Controllers.FilesController.Download (BlobTestApp)'
+2025-07-16 12:32:23.252 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Could not obtain SAS URL.
+   at BlobTestApp.Services.BlobStorageService.GetBlobClientWithSas(String fileName)
+   at BlobTestApp.Services.BlobStorageService.DownloadFile(String fileName)
+   at BlobTestApp.Controllers.FilesController.Download(String fileName)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at BlobTestAppBlobTestApp.Misc.LoggingMiddleWare.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-07-16 12:32:23.262 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5134/api/Files?fileName=sa - 500 null text/plain; charset=utf-8 4617.6653ms
+2025-07-16 13:16:34.335 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5134/api/Files?fileName=sa - null null
+2025-07-16 13:16:34.344 +05:30 [INF] API Call: GET /api/Files by anonymous at "2025-07-16T07:46:34.3440240Z"
+2025-07-16 13:16:34.346 +05:30 [INF] Executing endpoint 'BlobTestApp.Controllers.FilesController.Download (BlobTestApp)'
+2025-07-16 13:16:34.347 +05:30 [INF] Route matched with {action = "Download", controller = "Files"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Download(System.String) on controller BlobTestApp.Controllers.FilesController (BlobTestApp).
+2025-07-16 13:16:34.357 +05:30 [INF] Start processing HTTP request GET https://rizwanfunc20250715.azurewebsites.net/api/generate-sas/sa?*
+2025-07-16 13:16:34.358 +05:30 [INF] Sending HTTP request GET https://rizwanfunc20250715.azurewebsites.net/api/generate-sas/sa?*
+2025-07-16 13:16:35.509 +05:30 [INF] Received HTTP response headers after 1150.5991ms - 200
+2025-07-16 13:16:35.510 +05:30 [INF] End processing HTTP request after 1153.5385ms - 200
+2025-07-16 13:16:35.533 +05:30 [INF] SAS URL obtained: https://rizwanstorageblob.blob.core.windows.net/filecontainer/sa?sv=2025-07-05&se=2025-07-16T08%3A46%3A35Z&sr=b&sp=rw&sig=UXUUzzxyNBsinhS0AIMlDJDPiqprjCk1eqTEroi9P9M%3D
+2025-07-16 13:16:36.578 +05:30 [INF] Executing ObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ProblemDetails'.
+2025-07-16 13:16:36.585 +05:30 [INF] Executed action BlobTestApp.Controllers.FilesController.Download (BlobTestApp) in 2237.9243ms
+2025-07-16 13:16:36.585 +05:30 [INF] Executed endpoint 'BlobTestApp.Controllers.FilesController.Download (BlobTestApp)'
+2025-07-16 13:16:36.586 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5134/api/Files?fileName=sa - 404 null application/problem+json; charset=utf-8 2250.8659ms
+2025-07-16 13:16:57.328 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5134/api/Files?fileName=istockphoto-1514093059-612x612.jpg - null null
+2025-07-16 13:16:57.329 +05:30 [INF] API Call: GET /api/Files by anonymous at "2025-07-16T07:46:57.3298370Z"
+2025-07-16 13:16:57.330 +05:30 [INF] Executing endpoint 'BlobTestApp.Controllers.FilesController.Download (BlobTestApp)'
+2025-07-16 13:16:57.330 +05:30 [INF] Route matched with {action = "Download", controller = "Files"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Download(System.String) on controller BlobTestApp.Controllers.FilesController (BlobTestApp).
+2025-07-16 13:16:57.330 +05:30 [INF] Start processing HTTP request GET https://rizwanfunc20250715.azurewebsites.net/api/generate-sas/istockphoto-1514093059-612x612.jpg?*
+2025-07-16 13:16:57.330 +05:30 [INF] Sending HTTP request GET https://rizwanfunc20250715.azurewebsites.net/api/generate-sas/istockphoto-1514093059-612x612.jpg?*
+2025-07-16 13:16:57.637 +05:30 [INF] Received HTTP response headers after 306.9989ms - 200
+2025-07-16 13:16:57.637 +05:30 [INF] End processing HTTP request after 307.4847ms - 200
+2025-07-16 13:16:57.643 +05:30 [INF] SAS URL obtained: https://rizwanstorageblob.blob.core.windows.net/filecontainer/istockphoto-1514093059-612x612.jpg?sv=2025-07-05&se=2025-07-16T08%3A46%3A57Z&sr=b&sp=rw&sig=2%2FPaVnHvgrLFdHpQc291gtcbZZ2JTVC0tNJmQJqOaXw%3D
+2025-07-16 13:16:58.223 +05:30 [INF] Executing FileStreamResult, sending file with download name 'istockphoto-1514093059-612x612.jpg' ...
+2025-07-16 13:16:58.231 +05:30 [INF] Executed action BlobTestApp.Controllers.FilesController.Download (BlobTestApp) in 900.7781ms
+2025-07-16 13:16:58.231 +05:30 [INF] Executed endpoint 'BlobTestApp.Controllers.FilesController.Download (BlobTestApp)'
+2025-07-16 13:16:58.231 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5134/api/Files?fileName=istockphoto-1514093059-612x612.jpg - 200 null application/octet-stream 902.4002ms
+2025-07-16 15:33:07.529 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5134/api/Files?fileName=istockphoto-1514093059-612x612.jpg - null null
+2025-07-16 15:33:07.536 +05:30 [INF] API Call: GET /api/Files by anonymous at "2025-07-16T10:03:07.5364820Z"
+2025-07-16 15:33:07.538 +05:30 [INF] Executing endpoint 'BlobTestApp.Controllers.FilesController.Download (BlobTestApp)'
+2025-07-16 15:33:07.541 +05:30 [INF] Route matched with {action = "Download", controller = "Files"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Download(System.String) on controller BlobTestApp.Controllers.FilesController (BlobTestApp).
+2025-07-16 15:33:07.553 +05:30 [INF] Start processing HTTP request GET https://rizwanfunc20250715.azurewebsites.net/api/generate-sas/istockphoto-1514093059-612x612.jpg?*
+2025-07-16 15:33:07.554 +05:30 [INF] Sending HTTP request GET https://rizwanfunc20250715.azurewebsites.net/api/generate-sas/istockphoto-1514093059-612x612.jpg?*
+2025-07-16 15:33:08.693 +05:30 [INF] Received HTTP response headers after 1138.5957ms - 200
+2025-07-16 15:33:08.693 +05:30 [INF] End processing HTTP request after 1139.8316ms - 200
+2025-07-16 15:33:08.695 +05:30 [INF] SAS URL obtained: https://rizwanstorageblob.blob.core.windows.net/filecontainer/istockphoto-1514093059-612x612.jpg?sv=2025-07-05&se=2025-07-16T11%3A03%3A08Z&sr=b&sp=rw&sig=%2BttrXptpJShxfrADvWbUfZIJgSTMJhBjGkdBZkYOGpI%3D
+2025-07-16 15:33:09.883 +05:30 [INF] Executing FileStreamResult, sending file with download name 'istockphoto-1514093059-612x612.jpg' ...
+2025-07-16 15:33:09.886 +05:30 [INF] Executed action BlobTestApp.Controllers.FilesController.Download (BlobTestApp) in 2342.4052ms
+2025-07-16 15:33:09.886 +05:30 [INF] Executed endpoint 'BlobTestApp.Controllers.FilesController.Download (BlobTestApp)'
+2025-07-16 15:33:09.888 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5134/api/Files?fileName=istockphoto-1514093059-612x612.jpg - 200 null application/octet-stream 2359.5072ms

@@ -16,6 +16,8 @@ Log.Logger = new LoggerConfiguration()
 
 // Add your custom service
 builder.Services.AddSingleton<BlobStorageService>();
+builder.Services.AddHttpClient(); // ✅ Register IHttpClientFactory
+
 builder.Host.UseSerilog(); 
 var app = builder.Build();
 

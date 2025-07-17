@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BlobTestApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+02c4cafd953d3e565d4f7ef9ef975f0d7986e9b1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fa13ce2388ebb252bd2eac2ee5552221d00a8fc6")]
 [assembly: System.Reflection.AssemblyProductAttribute("BlobTestApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BlobTestApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
