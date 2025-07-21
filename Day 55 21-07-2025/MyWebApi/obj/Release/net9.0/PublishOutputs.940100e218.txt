@@ -1,0 +1,9 @@
+/Users/presidio/Desktop/GensparkTraining/Day 55 21-07-2025/MyWebApi/bin/Release/net9.0/publish/MyWebApi
+/Users/presidio/Desktop/GensparkTraining/Day 55 21-07-2025/MyWebApi/bin/Release/net9.0/publish/appsettings.Development.json
+/Users/presidio/Desktop/GensparkTraining/Day 55 21-07-2025/MyWebApi/bin/Release/net9.0/publish/appsettings.json
+/Users/presidio/Desktop/GensparkTraining/Day 55 21-07-2025/MyWebApi/bin/Release/net9.0/publish/MyWebApi.dll
+/Users/presidio/Desktop/GensparkTraining/Day 55 21-07-2025/MyWebApi/bin/Release/net9.0/publish/MyWebApi.deps.json
+/Users/presidio/Desktop/GensparkTraining/Day 55 21-07-2025/MyWebApi/bin/Release/net9.0/publish/MyWebApi.runtimeconfig.json
+/Users/presidio/Desktop/GensparkTraining/Day 55 21-07-2025/MyWebApi/bin/Release/net9.0/publish/MyWebApi.pdb
+/Users/presidio/Desktop/GensparkTraining/Day 55 21-07-2025/MyWebApi/bin/Release/net9.0/publish/Microsoft.AspNetCore.OpenApi.dll
+/Users/presidio/Desktop/GensparkTraining/Day 55 21-07-2025/MyWebApi/bin/Release/net9.0/publish/Microsoft.OpenApi.dll

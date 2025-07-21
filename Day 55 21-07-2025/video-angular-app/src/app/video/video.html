@@ -1,0 +1,60 @@
+<div class="container mt-4">
+  <h2>Upload Video</h2>
+  <form [formGroup]="videoForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input
+        type="text"
+        id="title"
+        class="form-control"
+        formControlName="title"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <textarea
+        id="description"
+        class="form-control"
+        formControlName="description"
+      ></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="file" class="form-label">Video File</label>
+      <input
+        type="file"
+        id="file"
+        class="form-control"
+        (change)="onFileChange($event)"
+      />
+    </div>
+    <button type="submit" class="btn btn-primary">Upload</button>
+  </form>
+
+  <hr />
+
+  <h2>Video List</h2>
+  <div
+    *ngFor="let video of videos"
+    class="card mb-3"
+    (click)="onSelect(video.id)"
+  >
+    <div class="card-body">
+      <h5 class="card-title">{{ video.title }}</h5>
+      <p class="card-text">{{ video.description }}</p>
+      <video width="320" height="240" controls *ngIf="video.blobUrl">
+        <source [src]="video.blobUrl" type="video/mp4" />
+      </video>
+    </div>
+  </div>
+
+  <div *ngIf="selectedVideo" class="card mt-4 border-success">
+    <h4 class="card-header">Selected Video</h4>
+    <div class="card-body">
+      <h5 class="card-title">{{ selectedVideo.title }}</h5>
+      <p class="card-text">{{ selectedVideo.description }}</p>
+      <video width="480" height="320" controls>
+        <source [src]="selectedVideo.blobUrl" type="video/mp4" />
+      </video>
+    </div>
+  </div>
+</div>
