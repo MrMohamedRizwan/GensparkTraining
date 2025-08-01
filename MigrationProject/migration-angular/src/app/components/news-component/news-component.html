@@ -1,0 +1,30 @@
+<!-- Breadcrumb -->
+<div class="top-breadcrumb">
+  <ul>
+    <!-- <li><a href="#">Home</a><span class="span-breadcrumb">>></span></li>
+    <li><a href="#">News</a></li> -->
+  </ul>
+</div>
+
+<!-- News Items -->
+<div *ngFor="let item of newsList" class="main-content">
+  <div class="content-image">
+    <a [routerLink]="['/news-management/views', item.newsId]">
+      <img
+        [src]="'https://plus.unsplash.com/premium_photo-1707080369554-359143c6aa0b?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8bmV3c3xlbnwwfHwwfHx8MA%3D%3D'"
+        alt="News Image"
+      />
+    </a>
+  </div>
+  <div class="content-title">
+    <a [routerLink]="['/news', item.id]">{{ item.title }}</a>
+  </div>
+</div>
+
+<!-- Pagination -->
+<!-- <div class="clear"></div>
+<div class="div-pagination">
+  <pagination-controls
+    (pageChange)="onPageChange($event)"
+  ></pagination-controls>
+</div> -->

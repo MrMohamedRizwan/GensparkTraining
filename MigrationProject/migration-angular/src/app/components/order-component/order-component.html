@@ -1,0 +1,58 @@
+<h2>Orders Listing</h2>
+
+<a class="btn btn-primary mb-3" href="http://localhost:5022/api/Order/export">
+  Export Order Listing
+</a>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>OrderDate</th>
+      <th>PaymentType</th>
+      <th>Status</th>
+      <th>CustomerName</th>
+      <th>CustomerPhone</th>
+      <th>CustomerEmail</th>
+      <th>CustomerAddress</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let order of orders">
+      <td>{{ order.orderDate | date: 'MM/dd/yyyy' }}</td>
+      <td>{{ order.paymentType }}</td>
+      <td>{{ order.status }}</td>
+      <td>{{ order.customerName }}</td>
+      <td>{{ order.customerPhone }}</td>
+      <td>{{ order.customerEmail }}</td>
+      <td>{{ order.customerAddress }}</td>
+      <td>
+        <a
+          [routerLink]="['/orders', order.orderID]"
+          class="btn btn-sm btn-success"
+          >Details</a
+        >
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<nav>
+  <ul class="pagination">
+    <li class="page-item">
+      <button class="page-link" (click)="loadOrders(currentPage - 1)">
+        Previous
+      </button>
+    </li>
+    <!-- <li
+      class="page-item"
+      *ngFor="let i of [].constructor(totalPages); let page = index"
+      [class.active]="currentPage"
+    >
+      <button class="page-link" (click)="loadOrders(1)">{{ i + 1 }}</button>
+    </li> -->
+    <li class="page-item">
+      <button class="page-link" (click)="loadOrders( 2)">Next</button>
+    </li>
+  </ul>
+</nav>

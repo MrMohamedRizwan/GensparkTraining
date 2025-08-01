@@ -1,0 +1,56 @@
+<div class="div-container">
+  <!-- <div class="div-header">Shopping Online - Get Reward</div>
+  <div class="clear"></div> -->
+
+  <!-- <div class="div-topmenu">
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">News</a></li>
+      <li><a href="#">Products</a></li>
+      <li><a href="#">Contact Us</a></li>
+    </ul>
+  </div>
+  <div class="clear"></div> -->
+  <!-- 
+  <div class="div-left">
+    <div class="category-title">Category</div>
+    <div class="category-list">
+      <ul>
+        <li><a href="#">iPhone</a></li>
+        <li><a href="#">iPad</a></li>
+        <li><a href="#">Macbook</a></li>
+      </ul>
+    </div>
+  </div> -->
+
+  <div class="div-main">
+    <div class="top-breadcrumb">
+      <ul>
+        <li><a href="#">Home</a><span class="span-breadcrumb"> >></span></li>
+        <li><a href="#">Product</a></li>
+      </ul>
+    </div>
+
+    <div class="clear"></div>
+
+    <div class="main-content" *ngFor="let product of products">
+      <div class="content-image">
+        <img [src]="product.image" [alt]="product.title" />
+      </div>
+      <div class="content-title">
+        <a href="#">{{ product.title }}</a>
+      </div>
+      <div class="content-price">Price: {{ product.price }}</div>
+    </div>
+  </div>
+
+  <div class="clear"></div>
+  <!-- <div class="div-footer">
+    <p>Copyright © 2015 Chien Vu Hoang. All rights reserved.</p>
+    <p>Email: <a href="mailto:chien.vh@gmail.com">ChienVH</a></p>
+    <p>
+      Facebook:
+      <a href="https://facebook.com/chienvh">https://facebook.com/chienvh</a>
+    </p>
+  </div> -->
+</div>

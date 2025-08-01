@@ -1,0 +1,132 @@
+<div class="container mt-4">
+  <h2>Color List</h2>
+  <button class="btn btn-success mb-3" (click)="openCreateModal()">
+    + Create Color
+  </button>
+
+  <table class="table table-bordered table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th>Name</th>
+        <th style="width: 180px">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let color of colors">
+        <td>{{ color.color1 }}</td>
+        <td>
+          <button
+            class="btn btn-sm btn-primary me-2"
+            (click)="openEditModal(color)"
+          >
+            Edit
+          </button>
+          <button
+            class="btn btn-sm btn-danger"
+            (click)="deleteColor(color.colorId)"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Create Modal -->
+<div class="modal fade" id="createModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <form [formGroup]="colorForm" (ngSubmit)="onCreateSubmit()">
+        <div class="modal-header">
+          <h5 class="modal-title">Create Color</h5>
+          <button type="button" class="close" (click)="closeCreateModal()">
+            <span>&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="create-name">Color Name</label>
+            <input
+              type="text"
+              id="create-name"
+              class="form-control"
+              formControlName="name"
+            />
+            <div
+              *ngIf="colorForm.get('name')?.invalid && colorForm.get('name')?.touched"
+              class="text-danger"
+            >
+              Name is required.
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            (click)="closeCreateModal()"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="colorForm.invalid"
+          >
+            Create
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <form [formGroup]="colorForm" (ngSubmit)="onEditSubmit()">
+        <div class="modal-header">
+          <h5 class="modal-title">Edit Color</h5>
+          <button type="button" class="close" (click)="closeEditModal()">
+            <span>&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="edit-name">Color Name</label>
+            <input
+              type="text"
+              id="edit-name"
+              class="form-control"
+              formControlName="name"
+            />
+            <div
+              *ngIf="colorForm.get('name')?.invalid && colorForm.get('name')?.touched"
+              class="text-danger"
+            >
+              Name is required.
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            (click)="closeEditModal()"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="colorForm.invalid"
+          >
+            Update
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,128 @@
+<ng-template #viewMode>
+  <div class="container mt-4">
+    <div class="d-flex justify-content-between mb-2">
+      <h2>News</h2>
+      <button class="btn btn-primary" (click)="toggleEdit()">Create New</button>
+    </div>
+
+    <div class="mb-3">
+      <a
+        class="btn btn-outline-secondary me-2"
+        href="http://localhost:5022/api/NewsManagement/export/csv"
+      >
+        Export to CSV
+      </a>
+      <!-- <button class="btn btn-outline-success" (click)="exportExcel()">
+      Export to Excel
+    </button> -->
+    </div>
+
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Short Description</th>
+          <th>Image</th>
+          <th>Content</th>
+          <th>Created Date</th>
+          <th>Status</th>
+          <th>User</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of newsList">
+          <td>{{ item.title }}</td>
+          <td>{{ item.shortDescription }}</td>
+          <td>
+            <img
+              [src]="'https://plus.unsplash.com/premium_photo-1707080369554-359143c6aa0b?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8bmV3c3xlbnwwfHwwfHx8MA%3D%3D'"
+              alt="image"
+              width="80"
+            />
+          </td>
+          <td>{{ item.content }}</td>
+          <td>{{ item.createdDate | date:'short' }}</td>
+          <td>{{ item.status === 1 ? 'Active' : 'Inactive' }}</td>
+          <td>{{ item.userName }}</td>
+          <td>
+            <button
+              class="btn btn-sm btn-warning"
+              (click)="openDetailsModal(item)"
+            >
+              Details
+            </button>
+            <br />
+            <br />
+            <!-- <button class="btn btn-sm btn-warning" (click)="openEditModal(item)">
+            Edit
+          </button> -->
+
+            <button
+              class="btn btn-sm btn-danger"
+              (click)="openDeleteModal(item)"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</ng-template>
+
+<!-- Modals -->
+<ng-template #modalTemplate>
+  <!-- Bootstrap modal structure here depending on context -->
+</ng-template>
+
+<form
+  [formGroup]="newsForm"
+  (ngSubmit)="onSubmit()"
+  *ngIf="isEditMode; else viewMode"
+>
+  <div class="mb-3">
+    <label>Title</label>
+    <input type="text" formControlName="title" class="form-control" />
+  </div>
+
+  <div class="mb-3">
+    <label>Short Description</label>
+    <input
+      type="text"
+      formControlName="shortDescription"
+      class="form-control"
+    />
+  </div>
+
+  <div class="mb-3">
+    <label>Upload New Image</label>
+    <input type="file" class="form-control" (change)="onFileChange($event)" />
+  </div>
+
+  <div class="mb-3">
+    <label>Content</label>
+    <textarea
+      rows="4"
+      formControlName="content"
+      class="form-control"
+    ></textarea>
+  </div>
+
+  <div class="mb-3">
+    <label>Status</label>
+    <select formControlName="status" class="form-control">
+      <option [value]="true">Active</option>
+      <option [value]="false">Inactive</option>
+    </select>
+  </div>
+
+  <button type="submit" class="btn btn-success btn-sm">Submit</button>
+  <button
+    type="button"
+    class="btn btn-secondary btn-sm ms-2"
+    (click)="isEditMode = false"
+  >
+    Cancel
+  </button>
+</form>

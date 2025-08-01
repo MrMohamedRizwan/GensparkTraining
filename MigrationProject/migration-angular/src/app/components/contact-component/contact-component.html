@@ -1,0 +1,42 @@
+<div class="container mt-4">
+  <h2>You guys contact me if have any issues:</h2>
+  <p>FullName: Chien Vu Hoang</p>
+  <p>Email: chien.vh.com</p>
+  <p>Skype: chien.vh</p>
+  <p>Facebook: facebook.com/chienvh</p>
+
+  <div *ngIf="message" class="alert alert-info mt-2">{{ message }}</div>
+
+  <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label>Customer Name:</label>
+      <input type="text" formControlName="cusName" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label>Customer Phone:</label>
+      <input type="text" formControlName="cusPhone" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label>Customer Email:</label>
+      <input type="email" formControlName="cusEmail" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label>Content:</label>
+      <textarea
+        formControlName="cusContent"
+        rows="5"
+        class="form-control"
+      ></textarea>
+    </div>
+
+    <re-captcha
+      (resolved)="onCaptchaResolved($event)"
+      siteKey="6Le2GC8UAAAAAB8qs65dp2f5SCPs-EWOSB4HHFPz"
+    ></re-captcha>
+
+    <button type="submit" class="btn btn-primary mt-3">Submit Form</button>
+  </form>
+</div>

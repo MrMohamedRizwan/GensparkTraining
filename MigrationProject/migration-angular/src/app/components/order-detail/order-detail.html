@@ -1,0 +1,39 @@
+<h2>Order Details</h2>
+
+<div *ngIf="order">
+  <h4>Order: {{ order.orderID }}</h4>
+  <hr />
+  <ul class="list-group mb-3">
+    <li class="list-group-item">
+      Order Date: {{ order.orderDate | date: 'MM/dd/yyyy' }}
+    </li>
+    <li class="list-group-item">Payment Type: {{ order.paymentType }}</li>
+    <li class="list-group-item">Status: {{ order.status }}</li>
+    <li class="list-group-item">Customer Name: {{ order.customerName }}</li>
+    <li class="list-group-item">Customer Phone: {{ order.customerPhone }}</li>
+    <li class="list-group-item">Customer Email: {{ order.customerEmail }}</li>
+    <li class="list-group-item">
+      Customer Address: {{ order.customerAddress }}
+    </li>
+  </ul>
+
+  <h5>Order Items</h5>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Product Name</th>
+        <th>Quantity</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of order.orderDetails.$values">
+        <td>{{ item.productName }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>${{ item.price | number:'1.0-0' }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <button class="btn btn-secondary" routerLink="/orders">Back to List</button>
+</div>

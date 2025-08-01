@@ -1,0 +1,139 @@
+<!-- shopping-cart.component.html -->
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Product Name</th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <th>Subtotal</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let cart of cartItems; let i = index">
+      <td>
+        <a
+          [routerLink]="['/products/details', cart.productId]"
+          class="delete-shopping"
+        >
+          {{ cart.productName }}
+        </a>
+      </td>
+      <td>${{ cart.price | number: '1.0-0' }}</td>
+      <td>
+        <input
+          type="number"
+          [value]="cart.quantity"
+          (input)="updateQuantity(i, $event.target)"
+          class="form-control"
+          min="1"
+        />
+      </td>
+      <td>${{ cart.price * cart.quantity | number: '1.0-0' }}</td>
+      <td>
+        <button
+          (click)="deleteItem(cart.productId)"
+          class="btn btn-danger btn-sm"
+        >
+          Delete
+        </button>
+      </td>
+    </tr>
+    <tr *ngIf="cartItems.length > 0">
+      <td colspan="3" class="text-end fw-bold">Total:</td>
+      <td colspan="2" class="fw-bold">${{ getTotal() }}</td>
+    </tr>
+    <tr *ngIf="cartItems.length === 0">
+      <td colspan="5" class="text-center">No items in cart.</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Trigger Button -->
+<button
+  *ngIf="!openOrderValues"
+  class="btn btn-primary"
+  (click)="openOrderValues = true"
+>
+  Submit Order
+</button>
+
+<!-- Modal -->
+<div *ngIf="this.openOrderValues">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <form (ngSubmit)="submitOrder()" #orderForm="ngForm">
+        <div class="modal-header">
+          <h5 class="modal-title" id="orderModalLabel">Complete Your Order</h5>
+          <button
+            type="button"
+            class="btn-close"
+            (click)="openOrderValues = false"
+          ></button>
+        </div>
+
+        <div class="modal-body">
+          <!-- Order Info -->
+          <div class="row mb-3"></div>
+        </div>
+
+        <!-- Customer Info -->
+        <div class="mb-3">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Customer Name"
+            [(ngModel)]="order.customerName"
+            name="customerName"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Phone"
+            [(ngModel)]="order.customerPhone"
+            name="customerPhone"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <input
+            type="email"
+            class="form-control"
+            placeholder="Email"
+            [(ngModel)]="order.customerEmail"
+            name="customerEmail"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Address"
+            [(ngModel)]="order.customerAddress"
+            name="customerAddress"
+            required
+          />
+        </div>
+
+        <!-- Products Summary -->
+
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success" (click)="razorPay()">
+            Confirm Order
+          </button>
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

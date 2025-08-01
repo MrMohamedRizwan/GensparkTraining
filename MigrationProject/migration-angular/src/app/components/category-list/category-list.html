@@ -1,0 +1,53 @@
+<ul>
+  <li *ngFor="let category of categories">
+    <a href="{{category.name}}">{{ category.name }}</a>
+  </li>
+</ul>
+<!-- <app-category-create-component></app-category-create-component> -->
+<!-- <div class="container mt-4">
+  <h2>Categories</h2>
+  <a class="btn btn-success mb-2" routerLink="/categories/create">Create New</a>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let category of categories">
+        <td>{{ category.name }}</td>
+        <td>
+          <a
+            class="btn btn-sm btn-primary"
+            [routerLink]="['/categories/edit', category.categoryId]"
+            >Edit</a
+          >
+          <a
+            class="btn btn-sm btn-info"
+            [routerLink]="['/categories/details', category.categoryId]"
+            >Details</a
+          >
+          <button
+            class="btn btn-sm btn-danger"
+            (click)="deleteCategory(category.categoryId)"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <nav>
+    <ul class="pagination">
+      <li class="page-item" [class.disabled]="page === 1">
+        <button class="page-link" (click)="prevPage()">Previous</button>
+      </li>
+      <li class="page-item" [class.disabled]="page === totalPages">
+        <button class="page-link" (click)="nextPage()">Next</button>
+      </li>
+    </ul>
+    Page {{ page }} / {{ totalPages }}
+  </nav>
+</div> -->

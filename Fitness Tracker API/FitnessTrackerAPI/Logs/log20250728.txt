@@ -1,0 +1,549 @@
+2025-07-28 20:15:34.742 +05:30 [INF] User profile is available. Using '/Users/presidio/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-07-28 20:15:36.490 +05:30 [INF] Now listening on: http://localhost:5002
+2025-07-28 20:15:36.492 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-07-28 20:15:36.493 +05:30 [INF] Hosting environment: Development
+2025-07-28 20:15:36.493 +05:30 [INF] Content root path: /Users/presidio/Desktop/GensparkTraining/Fitness Tracker API/FitnessTrackerAPI
+2025-07-28 20:15:37.087 +05:30 [INF] Executed DbCommand (38ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."HashKey", u."IsActive", u."LastLoginAt", u."Password", u."RefreshToken", u."RefreshTokenExpiryTime", u."Role"
+FROM "Users" AS u
+2025-07-28 20:17:13.076 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5002/api/v1/Authentication - null null
+2025-07-28 20:17:13.151 +05:30 [INF] CORS policy execution successful.
+2025-07-28 20:17:13.161 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5002/api/v1/Authentication - 204 null null 87.5816ms
+2025-07-28 20:17:13.169 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5002/api/v1/Authentication - application/json 51
+2025-07-28 20:17:13.178 +05:30 [INF] CORS policy execution successful.
+2025-07-28 20:17:13.184 +05:30 [INF] API Call: POST /api/v1/Authentication by anonymous at "2025-07-28T14:47:13.1825800Z"
+2025-07-28 20:17:13.250 +05:30 [INF] Executing endpoint 'FitnessTrackerAPI.Controllers.AuthenticationController.PostClient (FitnessTrackerAPI)'
+2025-07-28 20:17:13.279 +05:30 [INF] Route matched with {action = "PostClient", controller = "Authentication"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[FitnessTrackerAPI.Models.DTOs.UserLoginResponse]] PostClient(FitnessTrackerAPI.Models.DTOs.UserLoginRequest) on controller FitnessTrackerAPI.Controllers.AuthenticationController (FitnessTrackerAPI).
+2025-07-28 20:17:13.291 +05:30 [INF] Using AWS credentials specified with the AWSOptions.Credentials property
+2025-07-28 20:17:13.583 +05:30 [INF] Executed DbCommand (17ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."HashKey", u."IsActive", u."LastLoginAt", u."Password", u."RefreshToken", u."RefreshTokenExpiryTime", u."Role"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-07-28 20:17:14.089 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."Email", c."Name", c."Phone", c."YearsOfExperience"
+FROM "Coach" AS c
+2025-07-28 20:17:14.176 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."HashKey", u."IsActive", u."LastLoginAt", u."Password", u."RefreshToken", u."RefreshTokenExpiryTime", u."Role"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-07-28 20:17:14.308 +05:30 [INF] Executed DbCommand (17ms) [Parameters=[@p3='?', @p0='?' (DbType = DateTime), @p1='?', @p2='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+UPDATE "Users" SET "LastLoginAt" = @p0, "RefreshToken" = @p1, "RefreshTokenExpiryTime" = @p2
+WHERE "Email" = @p3;
+2025-07-28 20:17:14.330 +05:30 [INF] Executing OkObjectResult, writing value of type 'FitnessTrackerAPI.Models.DTOs.UserLoginResponse'.
+2025-07-28 20:17:14.347 +05:30 [INF] Executed action FitnessTrackerAPI.Controllers.AuthenticationController.PostClient (FitnessTrackerAPI) in 1062.2294ms
+2025-07-28 20:17:14.347 +05:30 [INF] Executed endpoint 'FitnessTrackerAPI.Controllers.AuthenticationController.PostClient (FitnessTrackerAPI)'
+2025-07-28 20:17:14.356 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5002/api/v1/Authentication - 200 null application/json; charset=utf-8 1188.3278ms
+2025-07-28 20:17:14.379 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5002/notificationHub/negotiate?negotiateVersion=1 - null null
+2025-07-28 20:17:14.382 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5002/api/v1/DietPlan/diet/all - null null
+2025-07-28 20:17:14.382 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5002/api/v1/WorkoutPlan/Workout/all - null null
+2025-07-28 20:17:14.382 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5002/api/v1/Coach/ClientWithoutPlansAssigned?pageNumber=1&pageSize=100&searchTerm=all - null null
+2025-07-28 20:17:14.382 +05:30 [INF] CORS policy execution successful.
+2025-07-28 20:17:14.382 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5002/api/v1/Coach/assignedPlansByWeek - null null
+2025-07-28 20:17:14.382 +05:30 [INF] CORS policy execution successful.
+2025-07-28 20:17:14.383 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5002/notificationHub/negotiate?negotiateVersion=1 - 204 null null 4.125ms
+2025-07-28 20:17:14.382 +05:30 [INF] CORS policy execution successful.
+2025-07-28 20:17:14.382 +05:30 [INF] CORS policy execution successful.
+2025-07-28 20:17:14.383 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5002/api/v1/DietPlan/diet/all - 204 null null 1.089ms
+2025-07-28 20:17:14.383 +05:30 [INF] CORS policy execution successful.
+2025-07-28 20:17:14.383 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5002/api/v1/Coach/ClientWithoutPlansAssigned?pageNumber=1&pageSize=100&searchTerm=all - 204 null null 1.3042ms
+2025-07-28 20:17:14.383 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5002/api/v1/WorkoutPlan/Workout/all - 204 null null 1.162ms
+2025-07-28 20:17:14.384 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5002/api/v1/Coach/assignedPlansByWeek - 204 null null 1.4987ms
+2025-07-28 20:17:14.388 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5002/api/v1/DietPlan/diet/all - null null
+2025-07-28 20:17:14.388 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5002/api/v1/Coach/ClientWithoutPlansAssigned?pageNumber=1&pageSize=100&searchTerm=all - null null
+2025-07-28 20:17:14.388 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5002/api/v1/WorkoutPlan/Workout/all - null null
+2025-07-28 20:17:14.388 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5002/api/v1/Coach/assignedPlansByWeek - null null
+2025-07-28 20:17:14.388 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5002/notificationHub/negotiate?negotiateVersion=1 - null 0
+2025-07-28 20:17:14.389 +05:30 [INF] CORS policy execution successful.
+2025-07-28 20:17:14.389 +05:30 [INF] API Call: POST /notificationHub/negotiate by anonymous at "2025-07-28T14:47:14.3894440Z"
+2025-07-28 20:17:14.391 +05:30 [INF] Executing endpoint '/notificationHub/negotiate'
+2025-07-28 20:17:14.399 +05:30 [INF] CORS policy execution successful.
+2025-07-28 20:17:14.399 +05:30 [INF] CORS policy execution successful.
+2025-07-28 20:17:14.399 +05:30 [INF] API Call: GET /api/v1/Coach/assignedPlansByWeek by anonymous at "2025-07-28T14:47:14.3992920Z"
+2025-07-28 20:17:14.399 +05:30 [INF] CORS policy execution successful.
+2025-07-28 20:17:14.399 +05:30 [INF] CORS policy execution successful.
+2025-07-28 20:17:14.399 +05:30 [INF] API Call: GET /api/v1/Coach/ClientWithoutPlansAssigned by anonymous at "2025-07-28T14:47:14.3994510Z"
+2025-07-28 20:17:14.399 +05:30 [INF] API Call: GET /api/v1/DietPlan/diet/all by anonymous at "2025-07-28T14:47:14.3995670Z"
+2025-07-28 20:17:14.399 +05:30 [INF] API Call: GET /api/v1/WorkoutPlan/Workout/all by anonymous at "2025-07-28T14:47:14.3996610Z"
+2025-07-28 20:17:14.409 +05:30 [INF] Executed endpoint '/notificationHub/negotiate'
+2025-07-28 20:17:14.409 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5002/notificationHub/negotiate?negotiateVersion=1 - 200 316 application/json 20.7007ms
+2025-07-28 20:17:14.468 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5002/notificationHub?id=8QJEZbdAlTKpxr3nE7BzWQ - null null
+2025-07-28 20:17:14.472 +05:30 [INF] CORS policy execution successful.
+2025-07-28 20:17:14.473 +05:30 [INF] API Call: GET /notificationHub by anonymous at "2025-07-28T14:47:14.4730560Z"
+2025-07-28 20:17:14.473 +05:30 [INF] Executing endpoint '/notificationHub'
+2025-07-28 20:17:14.477 +05:30 [INF] Executing endpoint 'FitnessTrackerAPI.Controllers.CoachController.GetClientsWithoutAssignedPlans (FitnessTrackerAPI)'
+2025-07-28 20:17:14.477 +05:30 [INF] Executing endpoint 'FitnessTrackerAPI.Controllers.CoachController.AssignedPlansByWeek (FitnessTrackerAPI)'
+2025-07-28 20:17:14.477 +05:30 [INF] Executing endpoint 'FitnessTrackerAPI.Controllers.DietPlanController.GetAllDietPlans (FitnessTrackerAPI)'
+2025-07-28 20:17:14.477 +05:30 [INF] Executing endpoint 'FitnessTrackerAPI.Controllers.WorkoutPlanController.GetAllWorkoutPlans (FitnessTrackerAPI)'
+2025-07-28 20:17:14.494 +05:30 [INF] Route matched with {action = "AssignedPlansByWeek", controller = "Coach"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AssignedPlansByWeek() on controller FitnessTrackerAPI.Controllers.CoachController (FitnessTrackerAPI).
+2025-07-28 20:17:14.495 +05:30 [INF] Route matched with {action = "GetAllDietPlans", controller = "DietPlan"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllDietPlans(Int32, Int32) on controller FitnessTrackerAPI.Controllers.DietPlanController (FitnessTrackerAPI).
+2025-07-28 20:17:14.495 +05:30 [INF] Route matched with {action = "GetAllWorkoutPlans", controller = "WorkoutPlan"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllWorkoutPlans(Int32, Int32) on controller FitnessTrackerAPI.Controllers.WorkoutPlanController (FitnessTrackerAPI).
+2025-07-28 20:17:14.495 +05:30 [INF] Route matched with {action = "GetClientsWithoutAssignedPlans", controller = "Coach"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetClientsWithoutAssignedPlans(Int32, Int32, System.String) on controller FitnessTrackerAPI.Controllers.CoachController (FitnessTrackerAPI).
+2025-07-28 20:17:14.950 +05:30 [INF] Executed DbCommand (9ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT w."Id", w."CoachId", w."Description", w."DurationInWeeks", w."Title"
+FROM "WorkoutPlan" AS w
+2025-07-28 20:17:14.970 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT d."Id", d."CoachId", d."Description", d."DurationInWeeks", d."Title"
+FROM "DietPlans" AS d
+2025-07-28 20:17:14.971 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."Age", c."CoachId", c."Email", c."Gender", c."Goal", c."Height", c."Name", c."Phone", c."Weight"
+FROM "Client" AS c
+2025-07-28 20:17:14.974 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AssignedByCoachId", p."AssignedOn", p."ClientId", p."CompletionStatus", p."DietPlanId", p."DueDate", p."WorkoutPlanId"
+FROM "PlanAssignment" AS p
+2025-07-28 20:17:14.994 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT w."Id", w."Name", w."Notes", w."Reps", w."RestSeconds", w."Sets", w."WorkoutPlanId", w."caloriesBurnt"
+FROM "WorkoutExercise" AS w
+2025-07-28 20:17:15.008 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT d."Id", d."Calories", d."CarbsGrams", d."DietPlanId", d."FatGrams", d."MealName", d."MealType", d."ProteinGrams"
+FROM "DietMeal" AS d
+2025-07-28 20:17:15.020 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AssignedByCoachId", p."AssignedOn", p."ClientId", p."CompletionStatus", p."DietPlanId", p."DueDate", p."WorkoutPlanId"
+FROM "PlanAssignment" AS p
+2025-07-28 20:17:15.050 +05:30 [INF] Executing OkObjectResult, writing value of type 'FitnessTrackerAPI.Models.DTOs.ChartResponse'.
+2025-07-28 20:17:15.051 +05:30 [INF] Executing OkObjectResult, writing value of type 'FitnessTrackerAPI.Models.DTOs.PagedResult`1[[FitnessTrackerAPI.Models.DTOs.ClientWithoutPlansDTO, FitnessTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-07-28 20:17:15.053 +05:30 [INF] Executing OkObjectResult, writing value of type 'FitnessTrackerAPI.Models.DTOs.PagedResult`1[[FitnessTrackerAPI.Models.DTOs.DietPlanResponseDTO, FitnessTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-07-28 20:17:15.054 +05:30 [INF] Executing OkObjectResult, writing value of type 'FitnessTrackerAPI.Models.DTOs.PagedResult`1[[FitnessTrackerAPI.Models.DTOs.WorkoutPlanResponseDTO, FitnessTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-07-28 20:17:15.063 +05:30 [INF] Executed action FitnessTrackerAPI.Controllers.CoachController.AssignedPlansByWeek (FitnessTrackerAPI) in 569.4484ms
+2025-07-28 20:17:15.064 +05:30 [INF] Executed endpoint 'FitnessTrackerAPI.Controllers.CoachController.AssignedPlansByWeek (FitnessTrackerAPI)'
+2025-07-28 20:17:15.064 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5002/api/v1/Coach/assignedPlansByWeek - 200 null application/json; charset=utf-8 675.9791ms
+2025-07-28 20:17:15.069 +05:30 [INF] Executed action FitnessTrackerAPI.Controllers.CoachController.GetClientsWithoutAssignedPlans (FitnessTrackerAPI) in 573.4245ms
+2025-07-28 20:17:15.070 +05:30 [INF] Executed endpoint 'FitnessTrackerAPI.Controllers.CoachController.GetClientsWithoutAssignedPlans (FitnessTrackerAPI)'
+2025-07-28 20:17:15.070 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5002/api/v1/Coach/ClientWithoutPlansAssigned?pageNumber=1&pageSize=100&searchTerm=all - 200 null application/json; charset=utf-8 681.7142ms
+2025-07-28 20:17:15.078 +05:30 [INF] Executed action FitnessTrackerAPI.Controllers.DietPlanController.GetAllDietPlans (FitnessTrackerAPI) in 582.5205ms
+2025-07-28 20:17:15.079 +05:30 [INF] Executed endpoint 'FitnessTrackerAPI.Controllers.DietPlanController.GetAllDietPlans (FitnessTrackerAPI)'
+2025-07-28 20:17:15.079 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5002/api/v1/DietPlan/diet/all - 200 null application/json; charset=utf-8 691.1901ms
+2025-07-28 20:17:15.141 +05:30 [INF] Executed action FitnessTrackerAPI.Controllers.WorkoutPlanController.GetAllWorkoutPlans (FitnessTrackerAPI) in 645.9679ms
+2025-07-28 20:17:15.142 +05:30 [INF] Executed endpoint 'FitnessTrackerAPI.Controllers.WorkoutPlanController.GetAllWorkoutPlans (FitnessTrackerAPI)'
+2025-07-28 20:17:15.142 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5002/api/v1/WorkoutPlan/Workout/all - 200 null application/json; charset=utf-8 754.1481ms
+2025-07-28 20:17:16.967 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5002/api/v1/Authentication - application/json 51
+2025-07-28 20:17:16.967 +05:30 [INF] CORS policy execution successful.
+2025-07-28 20:17:16.968 +05:30 [INF] API Call: POST /api/v1/Authentication by anonymous at "2025-07-28T14:47:16.9679280Z"
+2025-07-28 20:17:16.968 +05:30 [INF] Executing endpoint 'FitnessTrackerAPI.Controllers.AuthenticationController.PostClient (FitnessTrackerAPI)'
+2025-07-28 20:17:16.968 +05:30 [INF] Route matched with {action = "PostClient", controller = "Authentication"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[FitnessTrackerAPI.Models.DTOs.UserLoginResponse]] PostClient(FitnessTrackerAPI.Models.DTOs.UserLoginRequest) on controller FitnessTrackerAPI.Controllers.AuthenticationController (FitnessTrackerAPI).
+2025-07-28 20:17:16.975 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."HashKey", u."IsActive", u."LastLoginAt", u."Password", u."RefreshToken", u."RefreshTokenExpiryTime", u."Role"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-07-28 20:17:17.320 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."Email", c."Name", c."Phone", c."YearsOfExperience"
+FROM "Coach" AS c
+2025-07-28 20:17:17.323 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."HashKey", u."IsActive", u."LastLoginAt", u."Password", u."RefreshToken", u."RefreshTokenExpiryTime", u."Role"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-07-28 20:17:17.329 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@p3='?', @p0='?' (DbType = DateTime), @p1='?', @p2='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+UPDATE "Users" SET "LastLoginAt" = @p0, "RefreshToken" = @p1, "RefreshTokenExpiryTime" = @p2
+WHERE "Email" = @p3;
+2025-07-28 20:17:17.330 +05:30 [INF] Executing OkObjectResult, writing value of type 'FitnessTrackerAPI.Models.DTOs.UserLoginResponse'.
+2025-07-28 20:17:17.330 +05:30 [INF] Executed action FitnessTrackerAPI.Controllers.AuthenticationController.PostClient (FitnessTrackerAPI) in 361.8389ms
+2025-07-28 20:17:17.330 +05:30 [INF] Executed endpoint 'FitnessTrackerAPI.Controllers.AuthenticationController.PostClient (FitnessTrackerAPI)'
+2025-07-28 20:17:17.330 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5002/api/v1/Authentication - 200 null application/json; charset=utf-8 363.6691ms
+2025-07-28 20:17:17.362 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5002/api/v1/Coach/ClientWithoutPlansAssigned?pageNumber=1&pageSize=100&searchTerm=all - null null
+2025-07-28 20:17:17.363 +05:30 [INF] CORS policy execution successful.
+2025-07-28 20:17:17.363 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5002/api/v1/WorkoutPlan/Workout/all - null null
+2025-07-28 20:17:17.363 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5002/api/v1/Coach/assignedPlansByWeek - null null
+2025-07-28 20:17:17.363 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5002/api/v1/DietPlan/diet/all - null null
+2025-07-28 20:17:17.363 +05:30 [INF] API Call: GET /api/v1/Coach/ClientWithoutPlansAssigned by anonymous at "2025-07-28T14:47:17.3636400Z"
+2025-07-28 20:17:17.363 +05:30 [INF] CORS policy execution successful.
+2025-07-28 20:17:17.363 +05:30 [INF] CORS policy execution successful.
+2025-07-28 20:17:17.363 +05:30 [INF] API Call: GET /api/v1/WorkoutPlan/Workout/all by anonymous at "2025-07-28T14:47:17.3639450Z"
+2025-07-28 20:17:17.364 +05:30 [INF] API Call: GET /api/v1/Coach/assignedPlansByWeek by anonymous at "2025-07-28T14:47:17.3640280Z"
+2025-07-28 20:17:17.363 +05:30 [INF] CORS policy execution successful.
+2025-07-28 20:17:17.364 +05:30 [INF] API Call: GET /api/v1/DietPlan/diet/all by anonymous at "2025-07-28T14:47:17.3642730Z"
+2025-07-28 20:17:17.368 +05:30 [INF] Executing endpoint 'FitnessTrackerAPI.Controllers.DietPlanController.GetAllDietPlans (FitnessTrackerAPI)'
+2025-07-28 20:17:17.368 +05:30 [INF] Executing endpoint 'FitnessTrackerAPI.Controllers.WorkoutPlanController.GetAllWorkoutPlans (FitnessTrackerAPI)'
+2025-07-28 20:17:17.369 +05:30 [INF] Route matched with {action = "GetAllDietPlans", controller = "DietPlan"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllDietPlans(Int32, Int32) on controller FitnessTrackerAPI.Controllers.DietPlanController (FitnessTrackerAPI).
+2025-07-28 20:17:17.370 +05:30 [INF] Executing endpoint 'FitnessTrackerAPI.Controllers.CoachController.GetClientsWithoutAssignedPlans (FitnessTrackerAPI)'
+2025-07-28 20:17:17.369 +05:30 [INF] Route matched with {action = "GetAllWorkoutPlans", controller = "WorkoutPlan"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllWorkoutPlans(Int32, Int32) on controller FitnessTrackerAPI.Controllers.WorkoutPlanController (FitnessTrackerAPI).
+2025-07-28 20:17:17.371 +05:30 [INF] Executing endpoint 'FitnessTrackerAPI.Controllers.CoachController.AssignedPlansByWeek (FitnessTrackerAPI)'
+2025-07-28 20:17:17.371 +05:30 [INF] Route matched with {action = "GetClientsWithoutAssignedPlans", controller = "Coach"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetClientsWithoutAssignedPlans(Int32, Int32, System.String) on controller FitnessTrackerAPI.Controllers.CoachController (FitnessTrackerAPI).
+2025-07-28 20:17:17.372 +05:30 [INF] Route matched with {action = "AssignedPlansByWeek", controller = "Coach"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AssignedPlansByWeek() on controller FitnessTrackerAPI.Controllers.CoachController (FitnessTrackerAPI).
+2025-07-28 20:17:17.392 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT w."Id", w."CoachId", w."Description", w."DurationInWeeks", w."Title"
+FROM "WorkoutPlan" AS w
+2025-07-28 20:17:17.393 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT d."Id", d."CoachId", d."Description", d."DurationInWeeks", d."Title"
+FROM "DietPlans" AS d
+2025-07-28 20:17:17.406 +05:30 [INF] Executed DbCommand (12ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT d."Id", d."Calories", d."CarbsGrams", d."DietPlanId", d."FatGrams", d."MealName", d."MealType", d."ProteinGrams"
+FROM "DietMeal" AS d
+2025-07-28 20:17:17.407 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT w."Id", w."Name", w."Notes", w."Reps", w."RestSeconds", w."Sets", w."WorkoutPlanId", w."caloriesBurnt"
+FROM "WorkoutExercise" AS w
+2025-07-28 20:17:17.410 +05:30 [INF] Executing OkObjectResult, writing value of type 'FitnessTrackerAPI.Models.DTOs.PagedResult`1[[FitnessTrackerAPI.Models.DTOs.DietPlanResponseDTO, FitnessTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-07-28 20:17:17.410 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AssignedByCoachId", p."AssignedOn", p."ClientId", p."CompletionStatus", p."DietPlanId", p."DueDate", p."WorkoutPlanId"
+FROM "PlanAssignment" AS p
+2025-07-28 20:17:17.410 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."Age", c."CoachId", c."Email", c."Gender", c."Goal", c."Height", c."Name", c."Phone", c."Weight"
+FROM "Client" AS c
+2025-07-28 20:17:17.411 +05:30 [INF] Executed action FitnessTrackerAPI.Controllers.DietPlanController.GetAllDietPlans (FitnessTrackerAPI) in 41.384ms
+2025-07-28 20:17:17.411 +05:30 [INF] Executed endpoint 'FitnessTrackerAPI.Controllers.DietPlanController.GetAllDietPlans (FitnessTrackerAPI)'
+2025-07-28 20:17:17.412 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5002/api/v1/DietPlan/diet/all - 200 null application/json; charset=utf-8 48.3484ms
+2025-07-28 20:17:17.413 +05:30 [INF] Executing OkObjectResult, writing value of type 'FitnessTrackerAPI.Models.DTOs.PagedResult`1[[FitnessTrackerAPI.Models.DTOs.WorkoutPlanResponseDTO, FitnessTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-07-28 20:17:17.423 +05:30 [INF] Executed action FitnessTrackerAPI.Controllers.WorkoutPlanController.GetAllWorkoutPlans (FitnessTrackerAPI) in 51.4255ms
+2025-07-28 20:17:17.424 +05:30 [INF] Executed endpoint 'FitnessTrackerAPI.Controllers.WorkoutPlanController.GetAllWorkoutPlans (FitnessTrackerAPI)'
+2025-07-28 20:17:17.424 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5002/api/v1/WorkoutPlan/Workout/all - 200 null application/json; charset=utf-8 61.113ms
+2025-07-28 20:17:17.428 +05:30 [INF] Executed DbCommand (14ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AssignedByCoachId", p."AssignedOn", p."ClientId", p."CompletionStatus", p."DietPlanId", p."DueDate", p."WorkoutPlanId"
+FROM "PlanAssignment" AS p
+2025-07-28 20:17:17.439 +05:30 [INF] Executing OkObjectResult, writing value of type 'FitnessTrackerAPI.Models.DTOs.ChartResponse'.
+2025-07-28 20:17:17.439 +05:30 [INF] Executed action FitnessTrackerAPI.Controllers.CoachController.AssignedPlansByWeek (FitnessTrackerAPI) in 67.2466ms
+2025-07-28 20:17:17.440 +05:30 [INF] Executed endpoint 'FitnessTrackerAPI.Controllers.CoachController.AssignedPlansByWeek (FitnessTrackerAPI)'
+2025-07-28 20:17:17.440 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5002/api/v1/Coach/assignedPlansByWeek - 200 null application/json; charset=utf-8 77.0227ms
+2025-07-28 20:17:17.461 +05:30 [INF] Executing OkObjectResult, writing value of type 'FitnessTrackerAPI.Models.DTOs.PagedResult`1[[FitnessTrackerAPI.Models.DTOs.ClientWithoutPlansDTO, FitnessTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-07-28 20:17:17.463 +05:30 [INF] Executed action FitnessTrackerAPI.Controllers.CoachController.GetClientsWithoutAssignedPlans (FitnessTrackerAPI) in 90.8561ms
+2025-07-28 20:17:17.463 +05:30 [INF] Executed endpoint 'FitnessTrackerAPI.Controllers.CoachController.GetClientsWithoutAssignedPlans (FitnessTrackerAPI)'
+2025-07-28 20:17:17.463 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5002/api/v1/Coach/ClientWithoutPlansAssigned?pageNumber=1&pageSize=100&searchTerm=all - 200 null application/json; charset=utf-8 101.3703ms
+2025-07-28 20:23:36.284 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5002/api/v1/Authentication - null null
+2025-07-28 20:23:36.286 +05:30 [INF] CORS policy execution successful.
+2025-07-28 20:23:36.286 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5002/api/v1/Authentication - 204 null null 2.2537ms
+2025-07-28 20:23:36.287 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5002/api/v1/Authentication - application/json 51
+2025-07-28 20:23:36.288 +05:30 [INF] CORS policy execution successful.
+2025-07-28 20:23:36.288 +05:30 [INF] API Call: POST /api/v1/Authentication by anonymous at "2025-07-28T14:53:36.2885150Z"
+2025-07-28 20:23:36.289 +05:30 [INF] Executing endpoint 'FitnessTrackerAPI.Controllers.AuthenticationController.PostClient (FitnessTrackerAPI)'
+2025-07-28 20:23:36.290 +05:30 [INF] Route matched with {action = "PostClient", controller = "Authentication"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[FitnessTrackerAPI.Models.DTOs.UserLoginResponse]] PostClient(FitnessTrackerAPI.Models.DTOs.UserLoginRequest) on controller FitnessTrackerAPI.Controllers.AuthenticationController (FitnessTrackerAPI).
+2025-07-28 20:23:36.311 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."HashKey", u."IsActive", u."LastLoginAt", u."Password", u."RefreshToken", u."RefreshTokenExpiryTime", u."Role"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-07-28 20:23:36.512 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."Email", c."Name", c."Phone", c."YearsOfExperience"
+FROM "Coach" AS c
+2025-07-28 20:23:36.514 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__key_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Email", u."HashKey", u."IsActive", u."LastLoginAt", u."Password", u."RefreshToken", u."RefreshTokenExpiryTime", u."Role"
+FROM "Users" AS u
+WHERE u."Email" = @__key_0
+LIMIT 2
+2025-07-28 20:23:36.519 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@p3='?', @p0='?' (DbType = DateTime), @p1='?', @p2='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+UPDATE "Users" SET "LastLoginAt" = @p0, "RefreshToken" = @p1, "RefreshTokenExpiryTime" = @p2
+WHERE "Email" = @p3;
+2025-07-28 20:23:36.520 +05:30 [INF] Executing OkObjectResult, writing value of type 'FitnessTrackerAPI.Models.DTOs.UserLoginResponse'.
+2025-07-28 20:23:36.520 +05:30 [INF] Executed action FitnessTrackerAPI.Controllers.AuthenticationController.PostClient (FitnessTrackerAPI) in 230.4701ms
+2025-07-28 20:23:36.520 +05:30 [INF] Executed endpoint 'FitnessTrackerAPI.Controllers.AuthenticationController.PostClient (FitnessTrackerAPI)'
+2025-07-28 20:23:36.521 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5002/api/v1/Authentication - 200 null application/json; charset=utf-8 233.3864ms
+2025-07-28 20:23:36.549 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5002/api/v1/Coach/ClientWithoutPlansAssigned?pageNumber=1&pageSize=100&searchTerm=all - null null
+2025-07-28 20:23:36.549 +05:30 [INF] CORS policy execution successful.
+2025-07-28 20:23:36.550 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5002/api/v1/Coach/ClientWithoutPlansAssigned?pageNumber=1&pageSize=100&searchTerm=all - 204 null null 0.7045ms
+2025-07-28 20:23:36.551 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5002/api/v1/WorkoutPlan/Workout/all - null null
+2025-07-28 20:23:36.551 +05:30 [INF] CORS policy execution successful.
+2025-07-28 20:23:36.551 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5002/api/v1/DietPlan/diet/all - null null
+2025-07-28 20:23:36.551 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5002/api/v1/WorkoutPlan/Workout/all - 204 null null 0.6539ms
+2025-07-28 20:23:36.551 +05:30 [INF] CORS policy execution successful.
+2025-07-28 20:23:36.552 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5002/api/v1/Coach/assignedPlansByWeek - null null
+2025-07-28 20:23:36.552 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5002/api/v1/DietPlan/diet/all - 204 null null 0.5397ms
+2025-07-28 20:23:36.552 +05:30 [INF] CORS policy execution successful.
+2025-07-28 20:23:36.552 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5002/api/v1/Coach/assignedPlansByWeek - 204 null null 0.3716ms
+2025-07-28 20:23:36.552 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5002/api/v1/Coach/ClientWithoutPlansAssigned?pageNumber=1&pageSize=100&searchTerm=all - null null
+2025-07-28 20:23:36.553 +05:30 [INF] CORS policy execution successful.
+2025-07-28 20:23:36.553 +05:30 [INF] API Call: GET /api/v1/Coach/ClientWithoutPlansAssigned by anonymous at "2025-07-28T14:53:36.5530760Z"
+2025-07-28 20:23:36.554 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5002/api/v1/WorkoutPlan/Workout/all - null null
+2025-07-28 20:23:36.554 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5002/api/v1/DietPlan/diet/all - null null
+2025-07-28 20:23:36.554 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5002/api/v1/Coach/assignedPlansByWeek - null null
+2025-07-28 20:23:36.554 +05:30 [INF] CORS policy execution successful.
+2025-07-28 20:23:36.554 +05:30 [INF] CORS policy execution successful.
+2025-07-28 20:23:36.555 +05:30 [INF] CORS policy execution successful.
+2025-07-28 20:23:36.554 +05:30 [INF] API Call: GET /api/v1/WorkoutPlan/Workout/all by anonymous at "2025-07-28T14:53:36.5549130Z"
+2025-07-28 20:23:36.555 +05:30 [INF] API Call: GET /api/v1/Coach/assignedPlansByWeek by anonymous at "2025-07-28T14:53:36.5557550Z"
+2025-07-28 20:23:36.555 +05:30 [INF] API Call: GET /api/v1/DietPlan/diet/all by anonymous at "2025-07-28T14:53:36.5557120Z"
+2025-07-28 20:23:36.556 +05:30 [INF] Executing endpoint 'FitnessTrackerAPI.Controllers.CoachController.GetClientsWithoutAssignedPlans (FitnessTrackerAPI)'
+2025-07-28 20:23:36.556 +05:30 [INF] Executing endpoint 'FitnessTrackerAPI.Controllers.WorkoutPlanController.GetAllWorkoutPlans (FitnessTrackerAPI)'
+2025-07-28 20:23:36.556 +05:30 [INF] Executing endpoint 'FitnessTrackerAPI.Controllers.DietPlanController.GetAllDietPlans (FitnessTrackerAPI)'
+2025-07-28 20:23:36.556 +05:30 [INF] Executing endpoint 'FitnessTrackerAPI.Controllers.CoachController.AssignedPlansByWeek (FitnessTrackerAPI)'
+2025-07-28 20:23:36.557 +05:30 [INF] Route matched with {action = "GetAllWorkoutPlans", controller = "WorkoutPlan"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllWorkoutPlans(Int32, Int32) on controller FitnessTrackerAPI.Controllers.WorkoutPlanController (FitnessTrackerAPI).
+2025-07-28 20:23:36.557 +05:30 [INF] Route matched with {action = "GetClientsWithoutAssignedPlans", controller = "Coach"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetClientsWithoutAssignedPlans(Int32, Int32, System.String) on controller FitnessTrackerAPI.Controllers.CoachController (FitnessTrackerAPI).
+2025-07-28 20:23:36.557 +05:30 [INF] Route matched with {action = "GetAllDietPlans", controller = "DietPlan"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllDietPlans(Int32, Int32) on controller FitnessTrackerAPI.Controllers.DietPlanController (FitnessTrackerAPI).
+2025-07-28 20:23:36.557 +05:30 [INF] Route matched with {action = "AssignedPlansByWeek", controller = "Coach"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AssignedPlansByWeek() on controller FitnessTrackerAPI.Controllers.CoachController (FitnessTrackerAPI).
+2025-07-28 20:23:36.560 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AssignedByCoachId", p."AssignedOn", p."ClientId", p."CompletionStatus", p."DietPlanId", p."DueDate", p."WorkoutPlanId"
+FROM "PlanAssignment" AS p
+2025-07-28 20:23:36.564 +05:30 [INF] Executing OkObjectResult, writing value of type 'FitnessTrackerAPI.Models.DTOs.ChartResponse'.
+2025-07-28 20:23:36.565 +05:30 [INF] Executed action FitnessTrackerAPI.Controllers.CoachController.AssignedPlansByWeek (FitnessTrackerAPI) in 7.803ms
+2025-07-28 20:23:36.565 +05:30 [INF] Executed endpoint 'FitnessTrackerAPI.Controllers.CoachController.AssignedPlansByWeek (FitnessTrackerAPI)'
+2025-07-28 20:23:36.565 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5002/api/v1/Coach/assignedPlansByWeek - 200 null application/json; charset=utf-8 10.6872ms
+2025-07-28 20:23:36.574 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."Age", c."CoachId", c."Email", c."Gender", c."Goal", c."Height", c."Name", c."Phone", c."Weight"
+FROM "Client" AS c
+2025-07-28 20:23:36.576 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AssignedByCoachId", p."AssignedOn", p."ClientId", p."CompletionStatus", p."DietPlanId", p."DueDate", p."WorkoutPlanId"
+FROM "PlanAssignment" AS p
+2025-07-28 20:23:36.576 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT d."Id", d."CoachId", d."Description", d."DurationInWeeks", d."Title"
+FROM "DietPlans" AS d
+2025-07-28 20:23:36.576 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT w."Id", w."CoachId", w."Description", w."DurationInWeeks", w."Title"
+FROM "WorkoutPlan" AS w
+2025-07-28 20:23:36.578 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT w."Id", w."Name", w."Notes", w."Reps", w."RestSeconds", w."Sets", w."WorkoutPlanId", w."caloriesBurnt"
+FROM "WorkoutExercise" AS w
+2025-07-28 20:23:36.578 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT d."Id", d."Calories", d."CarbsGrams", d."DietPlanId", d."FatGrams", d."MealName", d."MealType", d."ProteinGrams"
+FROM "DietMeal" AS d
+2025-07-28 20:23:36.579 +05:30 [INF] Executing OkObjectResult, writing value of type 'FitnessTrackerAPI.Models.DTOs.PagedResult`1[[FitnessTrackerAPI.Models.DTOs.ClientWithoutPlansDTO, FitnessTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-07-28 20:23:36.579 +05:30 [INF] Executing OkObjectResult, writing value of type 'FitnessTrackerAPI.Models.DTOs.PagedResult`1[[FitnessTrackerAPI.Models.DTOs.DietPlanResponseDTO, FitnessTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-07-28 20:23:36.580 +05:30 [INF] Executing OkObjectResult, writing value of type 'FitnessTrackerAPI.Models.DTOs.PagedResult`1[[FitnessTrackerAPI.Models.DTOs.WorkoutPlanResponseDTO, FitnessTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-07-28 20:23:36.581 +05:30 [INF] Executed action FitnessTrackerAPI.Controllers.CoachController.GetClientsWithoutAssignedPlans (FitnessTrackerAPI) in 23.8559ms
+2025-07-28 20:23:36.581 +05:30 [INF] Executed endpoint 'FitnessTrackerAPI.Controllers.CoachController.GetClientsWithoutAssignedPlans (FitnessTrackerAPI)'
+2025-07-28 20:23:36.581 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5002/api/v1/Coach/ClientWithoutPlansAssigned?pageNumber=1&pageSize=100&searchTerm=all - 200 null application/json; charset=utf-8 28.8479ms
+2025-07-28 20:23:36.581 +05:30 [INF] Executed action FitnessTrackerAPI.Controllers.DietPlanController.GetAllDietPlans (FitnessTrackerAPI) in 24.3699ms
+2025-07-28 20:23:36.581 +05:30 [INF] Executed endpoint 'FitnessTrackerAPI.Controllers.DietPlanController.GetAllDietPlans (FitnessTrackerAPI)'
+2025-07-28 20:23:36.581 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5002/api/v1/DietPlan/diet/all - 200 null application/json; charset=utf-8 27.4322ms
+2025-07-28 20:23:36.582 +05:30 [INF] Executed action FitnessTrackerAPI.Controllers.WorkoutPlanController.GetAllWorkoutPlans (FitnessTrackerAPI) in 25.2306ms
+2025-07-28 20:23:36.582 +05:30 [INF] Executed endpoint 'FitnessTrackerAPI.Controllers.WorkoutPlanController.GetAllWorkoutPlans (FitnessTrackerAPI)'
+2025-07-28 20:23:36.582 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5002/api/v1/WorkoutPlan/Workout/all - 200 null application/json; charset=utf-8 28.3241ms
+2025-07-28 20:23:41.875 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5002/api/v1/Coach/ClientWithoutPlansAssigned?pageNumber=1&pageSize=100&searchTerm=all - null null
+2025-07-28 20:23:41.876 +05:30 [INF] CORS policy execution successful.
+2025-07-28 20:23:41.876 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5002/api/v1/Coach/ClientWithoutPlansAssigned?pageNumber=1&pageSize=100&searchTerm=all - 204 null null 0.4907ms
+2025-07-28 20:23:41.877 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5002/api/v1/Coach/ClientWithoutPlansAssigned?pageNumber=1&pageSize=100&searchTerm=all - null null
+2025-07-28 20:23:41.878 +05:30 [INF] CORS policy execution successful.
+2025-07-28 20:23:41.878 +05:30 [INF] API Call: GET /api/v1/Coach/ClientWithoutPlansAssigned by anonymous at "2025-07-28T14:53:41.8782770Z"
+2025-07-28 20:23:41.878 +05:30 [INF] Executing endpoint 'FitnessTrackerAPI.Controllers.CoachController.GetClientsWithoutAssignedPlans (FitnessTrackerAPI)'
+2025-07-28 20:23:41.879 +05:30 [INF] Route matched with {action = "GetClientsWithoutAssignedPlans", controller = "Coach"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetClientsWithoutAssignedPlans(Int32, Int32, System.String) on controller FitnessTrackerAPI.Controllers.CoachController (FitnessTrackerAPI).
+2025-07-28 20:23:41.883 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."Age", c."CoachId", c."Email", c."Gender", c."Goal", c."Height", c."Name", c."Phone", c."Weight"
+FROM "Client" AS c
+2025-07-28 20:23:41.884 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AssignedByCoachId", p."AssignedOn", p."ClientId", p."CompletionStatus", p."DietPlanId", p."DueDate", p."WorkoutPlanId"
+FROM "PlanAssignment" AS p
+2025-07-28 20:23:41.886 +05:30 [INF] Executing OkObjectResult, writing value of type 'FitnessTrackerAPI.Models.DTOs.PagedResult`1[[FitnessTrackerAPI.Models.DTOs.ClientWithoutPlansDTO, FitnessTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-07-28 20:23:41.887 +05:30 [INF] Executed action FitnessTrackerAPI.Controllers.CoachController.GetClientsWithoutAssignedPlans (FitnessTrackerAPI) in 8.013ms
+2025-07-28 20:23:41.887 +05:30 [INF] Executed endpoint 'FitnessTrackerAPI.Controllers.CoachController.GetClientsWithoutAssignedPlans (FitnessTrackerAPI)'
+2025-07-28 20:23:41.887 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5002/api/v1/Coach/ClientWithoutPlansAssigned?pageNumber=1&pageSize=100&searchTerm=all - 200 null application/json; charset=utf-8 9.7019ms
+2025-07-28 20:23:43.950 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5002/api/v1/Client/get-client/0197cfa3-30cc-76b7-9d74-94d26efae59a - null null
+2025-07-28 20:23:43.950 +05:30 [INF] CORS policy execution successful.
+2025-07-28 20:23:43.950 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5002/api/v1/Client/get-client/0197cfa3-30cc-76b7-9d74-94d26efae59a - 204 null null 0.7015ms
+2025-07-28 20:23:43.951 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5002/api/v1/Workout/client/0197cfa3-30cc-76b7-9d74-94d26efae59a - null null
+2025-07-28 20:23:43.952 +05:30 [INF] CORS policy execution successful.
+2025-07-28 20:23:43.952 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5002/api/v1/Client/get-client/0197cfa3-30cc-76b7-9d74-94d26efae59a - null null
+2025-07-28 20:23:43.952 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5002/api/v1/Workout/client/0197cfa3-30cc-76b7-9d74-94d26efae59a - 204 null null 0.4385ms
+2025-07-28 20:23:43.953 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5002/api/v1/Workout/client/0197cfa3-30cc-76b7-9d74-94d26efae59a - null null
+2025-07-28 20:23:43.953 +05:30 [INF] CORS policy execution successful.
+2025-07-28 20:23:43.953 +05:30 [INF] API Call: GET /api/v1/Workout/client/0197cfa3-30cc-76b7-9d74-94d26efae59a by anonymous at "2025-07-28T14:53:43.9536460Z"
+2025-07-28 20:23:43.954 +05:30 [INF] Executing endpoint 'FitnessTrackerAPI.Controllers.WorkoutController.GetWorkoutsForClient (FitnessTrackerAPI)'
+2025-07-28 20:23:43.955 +05:30 [INF] CORS policy execution successful.
+2025-07-28 20:23:43.955 +05:30 [INF] API Call: GET /api/v1/Client/get-client/0197cfa3-30cc-76b7-9d74-94d26efae59a by anonymous at "2025-07-28T14:53:43.9553650Z"
+2025-07-28 20:23:43.957 +05:30 [INF] Executing endpoint 'FitnessTrackerAPI.Controllers.ClientController.GetClientById (FitnessTrackerAPI)'
+2025-07-28 20:23:43.962 +05:30 [INF] Route matched with {action = "GetWorkoutsForClient", controller = "Workout"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetWorkoutsForClient(System.Guid) on controller FitnessTrackerAPI.Controllers.WorkoutController (FitnessTrackerAPI).
+2025-07-28 20:23:43.963 +05:30 [INF] Route matched with {action = "GetClientById", controller = "Client"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetClientById(System.Guid) on controller FitnessTrackerAPI.Controllers.ClientController (FitnessTrackerAPI).
+2025-07-28 20:23:43.994 +05:30 [INF] Executed DbCommand (15ms) [Parameters=[@__key_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."Age", c."CoachId", c."Email", c."Gender", c."Goal", c."Height", c."Name", c."Phone", c."Weight"
+FROM "Client" AS c
+WHERE c."Id" = @__key_0
+LIMIT 2
+2025-07-28 20:23:43.995 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType0`1[[System.Collections.Generic.IEnumerable`1[[FitnessTrackerAPI.Models.Client, FitnessTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-28 20:23:43.995 +05:30 [INF] Executed DbCommand (16ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT w."Id", w."ClientId", w."Date", w."DietMealJSON", w."ExerciseJSON", w."PlanAssignmentId", w."caloriesBurnt", w."caloriesTaken", w."totalExercises"
+FROM "Workout" AS w
+2025-07-28 20:23:44.021 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+ListWhereSelectIterator`2[[FitnessTrackerAPI.Models.WorkoutModel.Workout, FitnessTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[FitnessTrackerAPI.Models.DTOs.WorkoutResponseDTO, FitnessTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-07-28 20:23:44.030 +05:30 [INF] Executed action FitnessTrackerAPI.Controllers.WorkoutController.GetWorkoutsForClient (FitnessTrackerAPI) in 68.4111ms
+2025-07-28 20:23:44.030 +05:30 [INF] Executed endpoint 'FitnessTrackerAPI.Controllers.WorkoutController.GetWorkoutsForClient (FitnessTrackerAPI)'
+2025-07-28 20:23:44.030 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5002/api/v1/Workout/client/0197cfa3-30cc-76b7-9d74-94d26efae59a - 200 null application/json; charset=utf-8 77.8849ms
+2025-07-28 20:23:44.034 +05:30 [INF] Executed action FitnessTrackerAPI.Controllers.ClientController.GetClientById (FitnessTrackerAPI) in 70.8886ms
+2025-07-28 20:23:44.034 +05:30 [INF] Executed endpoint 'FitnessTrackerAPI.Controllers.ClientController.GetClientById (FitnessTrackerAPI)'
+2025-07-28 20:23:44.034 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5002/api/v1/Client/get-client/0197cfa3-30cc-76b7-9d74-94d26efae59a - 200 null application/json; charset=utf-8 82.7177ms
+2025-07-28 20:23:44.038 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5002/api/v1/Coach/getAssignedPlan/sathish@gmail.com - null null
+2025-07-28 20:23:44.038 +05:30 [INF] CORS policy execution successful.
+2025-07-28 20:23:44.038 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5002/api/v1/Coach/getAssignedPlan/sathish@gmail.com - 204 null null 0.2931ms
+2025-07-28 20:23:44.039 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5002/api/v1/Coach/getAssignedPlan/sathish@gmail.com - null null
+2025-07-28 20:23:44.039 +05:30 [INF] CORS policy execution successful.
+2025-07-28 20:23:44.039 +05:30 [INF] API Call: GET /api/v1/Coach/getAssignedPlan/sathish@gmail.com by anonymous at "2025-07-28T14:53:44.0396980Z"
+2025-07-28 20:23:44.040 +05:30 [INF] Executing endpoint 'FitnessTrackerAPI.Controllers.CoachController.GetAssignedPlansForParticualrClient (FitnessTrackerAPI)'
+2025-07-28 20:23:44.044 +05:30 [INF] Route matched with {action = "GetAssignedPlansForParticualrClient", controller = "Coach"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAssignedPlansForParticualrClient(System.String) on controller FitnessTrackerAPI.Controllers.CoachController (FitnessTrackerAPI).
+2025-07-28 20:23:44.049 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."Age", c."CoachId", c."Email", c."Gender", c."Goal", c."Height", c."Name", c."Phone", c."Weight"
+FROM "Client" AS c
+2025-07-28 20:23:44.051 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AssignedByCoachId", p."AssignedOn", p."ClientId", p."CompletionStatus", p."DietPlanId", p."DueDate", p."WorkoutPlanId"
+FROM "PlanAssignment" AS p
+2025-07-28 20:23:44.053 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[FirstAPI.Models.DTOs.AssignedPlanNamesDTO, FitnessTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-07-28 20:23:44.055 +05:30 [INF] Executed action FitnessTrackerAPI.Controllers.CoachController.GetAssignedPlansForParticualrClient (FitnessTrackerAPI) in 11.073ms
+2025-07-28 20:23:44.055 +05:30 [INF] Executed endpoint 'FitnessTrackerAPI.Controllers.CoachController.GetAssignedPlansForParticualrClient (FitnessTrackerAPI)'
+2025-07-28 20:23:44.055 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5002/api/v1/Coach/getAssignedPlan/sathish@gmail.com - 200 null application/json; charset=utf-8 16.5112ms
+2025-07-28 20:23:45.296 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5002/api/v1/Coach/ClientWithoutPlansAssigned?pageNumber=1&pageSize=100&searchTerm=all - null null
+2025-07-28 20:23:45.297 +05:30 [INF] CORS policy execution successful.
+2025-07-28 20:23:45.297 +05:30 [INF] API Call: GET /api/v1/Coach/ClientWithoutPlansAssigned by anonymous at "2025-07-28T14:53:45.2971640Z"
+2025-07-28 20:23:45.297 +05:30 [INF] Executing endpoint 'FitnessTrackerAPI.Controllers.CoachController.GetClientsWithoutAssignedPlans (FitnessTrackerAPI)'
+2025-07-28 20:23:45.297 +05:30 [INF] Route matched with {action = "GetClientsWithoutAssignedPlans", controller = "Coach"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetClientsWithoutAssignedPlans(Int32, Int32, System.String) on controller FitnessTrackerAPI.Controllers.CoachController (FitnessTrackerAPI).
+2025-07-28 20:23:45.299 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."Age", c."CoachId", c."Email", c."Gender", c."Goal", c."Height", c."Name", c."Phone", c."Weight"
+FROM "Client" AS c
+2025-07-28 20:23:45.301 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AssignedByCoachId", p."AssignedOn", p."ClientId", p."CompletionStatus", p."DietPlanId", p."DueDate", p."WorkoutPlanId"
+FROM "PlanAssignment" AS p
+2025-07-28 20:23:45.303 +05:30 [INF] Executing OkObjectResult, writing value of type 'FitnessTrackerAPI.Models.DTOs.PagedResult`1[[FitnessTrackerAPI.Models.DTOs.ClientWithoutPlansDTO, FitnessTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-07-28 20:23:45.303 +05:30 [INF] Executed action FitnessTrackerAPI.Controllers.CoachController.GetClientsWithoutAssignedPlans (FitnessTrackerAPI) in 5.8232ms
+2025-07-28 20:23:45.303 +05:30 [INF] Executed endpoint 'FitnessTrackerAPI.Controllers.CoachController.GetClientsWithoutAssignedPlans (FitnessTrackerAPI)'
+2025-07-28 20:23:45.304 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5002/api/v1/Coach/ClientWithoutPlansAssigned?pageNumber=1&pageSize=100&searchTerm=all - 200 null application/json; charset=utf-8 7.1882ms
+2025-07-28 20:23:47.440 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5002/api/v1/Client/get-client/0197b7f2-40dd-788f-a47e-2cf748d6e8cc - null null
+2025-07-28 20:23:47.441 +05:30 [INF] CORS policy execution successful.
+2025-07-28 20:23:47.441 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5002/api/v1/Client/get-client/0197b7f2-40dd-788f-a47e-2cf748d6e8cc - 204 null null 0.6216ms
+2025-07-28 20:23:47.441 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5002/api/v1/Workout/client/0197b7f2-40dd-788f-a47e-2cf748d6e8cc - null null
+2025-07-28 20:23:47.441 +05:30 [INF] CORS policy execution successful.
+2025-07-28 20:23:47.442 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5002/api/v1/Workout/client/0197b7f2-40dd-788f-a47e-2cf748d6e8cc - 204 null null 0.2443ms
+2025-07-28 20:23:47.442 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5002/api/v1/Client/get-client/0197b7f2-40dd-788f-a47e-2cf748d6e8cc - null null
+2025-07-28 20:23:47.443 +05:30 [INF] CORS policy execution successful.
+2025-07-28 20:23:47.443 +05:30 [INF] API Call: GET /api/v1/Client/get-client/0197b7f2-40dd-788f-a47e-2cf748d6e8cc by anonymous at "2025-07-28T14:53:47.4433570Z"
+2025-07-28 20:23:47.443 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5002/api/v1/Workout/client/0197b7f2-40dd-788f-a47e-2cf748d6e8cc - null null
+2025-07-28 20:23:47.443 +05:30 [INF] CORS policy execution successful.
+2025-07-28 20:23:47.443 +05:30 [INF] API Call: GET /api/v1/Workout/client/0197b7f2-40dd-788f-a47e-2cf748d6e8cc by anonymous at "2025-07-28T14:53:47.4436450Z"
+2025-07-28 20:23:47.443 +05:30 [INF] Executing endpoint 'FitnessTrackerAPI.Controllers.ClientController.GetClientById (FitnessTrackerAPI)'
+2025-07-28 20:23:47.444 +05:30 [INF] Route matched with {action = "GetClientById", controller = "Client"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetClientById(System.Guid) on controller FitnessTrackerAPI.Controllers.ClientController (FitnessTrackerAPI).
+2025-07-28 20:23:47.444 +05:30 [INF] Executing endpoint 'FitnessTrackerAPI.Controllers.WorkoutController.GetWorkoutsForClient (FitnessTrackerAPI)'
+2025-07-28 20:23:47.444 +05:30 [INF] Route matched with {action = "GetWorkoutsForClient", controller = "Workout"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetWorkoutsForClient(System.Guid) on controller FitnessTrackerAPI.Controllers.WorkoutController (FitnessTrackerAPI).
+2025-07-28 20:23:47.448 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__key_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."Age", c."CoachId", c."Email", c."Gender", c."Goal", c."Height", c."Name", c."Phone", c."Weight"
+FROM "Client" AS c
+WHERE c."Id" = @__key_0
+LIMIT 2
+2025-07-28 20:23:47.449 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT w."Id", w."ClientId", w."Date", w."DietMealJSON", w."ExerciseJSON", w."PlanAssignmentId", w."caloriesBurnt", w."caloriesTaken", w."totalExercises"
+FROM "Workout" AS w
+2025-07-28 20:23:47.449 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType0`1[[System.Collections.Generic.IEnumerable`1[[FitnessTrackerAPI.Models.Client, FitnessTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-28 20:23:47.449 +05:30 [INF] Executed action FitnessTrackerAPI.Controllers.ClientController.GetClientById (FitnessTrackerAPI) in 5.3252ms
+2025-07-28 20:23:47.449 +05:30 [INF] Executed endpoint 'FitnessTrackerAPI.Controllers.ClientController.GetClientById (FitnessTrackerAPI)'
+2025-07-28 20:23:47.450 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5002/api/v1/Client/get-client/0197b7f2-40dd-788f-a47e-2cf748d6e8cc - 200 null application/json; charset=utf-8 7.0476ms
+2025-07-28 20:23:47.450 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+ListWhereSelectIterator`2[[FitnessTrackerAPI.Models.WorkoutModel.Workout, FitnessTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[FitnessTrackerAPI.Models.DTOs.WorkoutResponseDTO, FitnessTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-07-28 20:23:47.457 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5002/api/v1/Coach/getAssignedPlan/test4@gmail.com - null null
+2025-07-28 20:23:47.457 +05:30 [INF] CORS policy execution successful.
+2025-07-28 20:23:47.458 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5002/api/v1/Coach/getAssignedPlan/test4@gmail.com - 204 null null 0.284ms
+2025-07-28 20:23:47.458 +05:30 [INF] Executed action FitnessTrackerAPI.Controllers.WorkoutController.GetWorkoutsForClient (FitnessTrackerAPI) in 13.9128ms
+2025-07-28 20:23:47.458 +05:30 [INF] Executed endpoint 'FitnessTrackerAPI.Controllers.WorkoutController.GetWorkoutsForClient (FitnessTrackerAPI)'
+2025-07-28 20:23:47.458 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5002/api/v1/Workout/client/0197b7f2-40dd-788f-a47e-2cf748d6e8cc - 200 null application/json; charset=utf-8 15.5524ms
+2025-07-28 20:23:47.459 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5002/api/v1/Coach/getAssignedPlan/test4@gmail.com - null null
+2025-07-28 20:23:47.459 +05:30 [INF] CORS policy execution successful.
+2025-07-28 20:23:47.459 +05:30 [INF] API Call: GET /api/v1/Coach/getAssignedPlan/test4@gmail.com by anonymous at "2025-07-28T14:53:47.4593690Z"
+2025-07-28 20:23:47.460 +05:30 [INF] Executing endpoint 'FitnessTrackerAPI.Controllers.CoachController.GetAssignedPlansForParticualrClient (FitnessTrackerAPI)'
+2025-07-28 20:23:47.460 +05:30 [INF] Route matched with {action = "GetAssignedPlansForParticualrClient", controller = "Coach"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAssignedPlansForParticualrClient(System.String) on controller FitnessTrackerAPI.Controllers.CoachController (FitnessTrackerAPI).
+2025-07-28 20:23:47.462 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."Age", c."CoachId", c."Email", c."Gender", c."Goal", c."Height", c."Name", c."Phone", c."Weight"
+FROM "Client" AS c
+2025-07-28 20:23:47.464 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AssignedByCoachId", p."AssignedOn", p."ClientId", p."CompletionStatus", p."DietPlanId", p."DueDate", p."WorkoutPlanId"
+FROM "PlanAssignment" AS p
+2025-07-28 20:23:47.475 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__key_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT d."Id", d."CoachId", d."Description", d."DurationInWeeks", d."Title"
+FROM "DietPlans" AS d
+WHERE d."Id" = @__key_0
+LIMIT 2
+2025-07-28 20:23:47.483 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AssignedByCoachId", p."AssignedOn", p."ClientId", p."CompletionStatus", p."DietPlanId", p."DueDate", p."WorkoutPlanId"
+FROM "PlanAssignment" AS p
+2025-07-28 20:23:47.486 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT w."Id", w."ClientId", w."Date", w."DietMealJSON", w."ExerciseJSON", w."PlanAssignmentId", w."caloriesBurnt", w."caloriesTaken", w."totalExercises"
+FROM "Workout" AS w
+2025-07-28 20:23:47.505 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__key_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT w."Id", w."CoachId", w."Description", w."DurationInWeeks", w."Title"
+FROM "WorkoutPlan" AS w
+WHERE w."Id" = @__key_0
+LIMIT 2
+2025-07-28 20:23:47.508 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AssignedByCoachId", p."AssignedOn", p."ClientId", p."CompletionStatus", p."DietPlanId", p."DueDate", p."WorkoutPlanId"
+FROM "PlanAssignment" AS p
+2025-07-28 20:23:47.509 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT w."Id", w."ClientId", w."Date", w."DietMealJSON", w."ExerciseJSON", w."PlanAssignmentId", w."caloriesBurnt", w."caloriesTaken", w."totalExercises"
+FROM "Workout" AS w
+2025-07-28 20:23:47.511 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[FirstAPI.Models.DTOs.AssignedPlanNamesDTO, FitnessTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-07-28 20:23:47.514 +05:30 [INF] Executed action FitnessTrackerAPI.Controllers.CoachController.GetAssignedPlansForParticualrClient (FitnessTrackerAPI) in 54.298ms
+2025-07-28 20:23:47.514 +05:30 [INF] Executed endpoint 'FitnessTrackerAPI.Controllers.CoachController.GetAssignedPlansForParticualrClient (FitnessTrackerAPI)'
+2025-07-28 20:23:47.514 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5002/api/v1/Coach/getAssignedPlan/test4@gmail.com - 200 null application/json; charset=utf-8 55.8096ms
+2025-07-28 20:23:48.945 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5002/api/v1/Progress/getProgressLogs/0197b7f2-40dd-788f-a47e-2cf748d6e8cc - null null
+2025-07-28 20:23:48.945 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5002/api/v1/Progress/client/0197b7f2-40dd-788f-a47e-2cf748d6e8cc - null null
+2025-07-28 20:23:48.946 +05:30 [INF] CORS policy execution successful.
+2025-07-28 20:23:48.946 +05:30 [INF] CORS policy execution successful.
+2025-07-28 20:23:48.946 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5002/api/v1/Progress/getProgressLogs/0197b7f2-40dd-788f-a47e-2cf748d6e8cc - 204 null null 0.4558ms
+2025-07-28 20:23:48.946 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5002/api/v1/Progress/client/0197b7f2-40dd-788f-a47e-2cf748d6e8cc - 204 null null 0.4539ms
+2025-07-28 20:23:48.959 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5002/api/v1/Progress/client/0197b7f2-40dd-788f-a47e-2cf748d6e8cc - null null
+2025-07-28 20:23:48.961 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5002/api/v1/Progress/getProgressLogs/0197b7f2-40dd-788f-a47e-2cf748d6e8cc - null null
+2025-07-28 20:23:48.961 +05:30 [INF] CORS policy execution successful.
+2025-07-28 20:23:48.961 +05:30 [INF] CORS policy execution successful.
+2025-07-28 20:23:48.963 +05:30 [INF] API Call: GET /api/v1/Progress/getProgressLogs/0197b7f2-40dd-788f-a47e-2cf748d6e8cc by anonymous at "2025-07-28T14:53:48.9619440Z"
+2025-07-28 20:23:48.963 +05:30 [INF] API Call: GET /api/v1/Progress/client/0197b7f2-40dd-788f-a47e-2cf748d6e8cc by anonymous at "2025-07-28T14:53:48.9638860Z"
+2025-07-28 20:23:48.964 +05:30 [INF] Executing endpoint 'FitnessTrackerAPI.Controllers.ProgressController.GetProgressForClient (FitnessTrackerAPI)'
+2025-07-28 20:23:48.964 +05:30 [INF] Executing endpoint 'FitnessTrackerAPI.Controllers.ProgressController.GetProgressLog (FitnessTrackerAPI)'
+2025-07-28 20:23:48.970 +05:30 [INF] Route matched with {action = "GetProgressForClient", controller = "Progress"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetProgressForClient(System.Guid) on controller FitnessTrackerAPI.Controllers.ProgressController (FitnessTrackerAPI).
+2025-07-28 20:23:48.970 +05:30 [INF] Route matched with {action = "GetProgressLog", controller = "Progress"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetProgressLog(System.Guid) on controller FitnessTrackerAPI.Controllers.ProgressController (FitnessTrackerAPI).
+2025-07-28 20:23:48.971 +05:30 [INF] Using AWS credentials specified with the AWSOptions.Credentials property
+2025-07-28 20:23:48.999 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT w."Id", w."ClientId", w."Date", w."DietMealJSON", w."ExerciseJSON", w."PlanAssignmentId", w."caloriesBurnt", w."caloriesTaken", w."totalExercises"
+FROM "Workout" AS w
+2025-07-28 20:23:48.999 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AssignedByCoachId", p."AssignedOn", p."ClientId", p."CompletionStatus", p."DietPlanId", p."DueDate", p."WorkoutPlanId"
+FROM "PlanAssignment" AS p
+2025-07-28 20:23:49.007 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AssignedByCoachId", p."AssignedOn", p."ClientId", p."CompletionStatus", p."DietPlanId", p."DueDate", p."WorkoutPlanId"
+FROM "PlanAssignment" AS p
+2025-07-28 20:23:49.012 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AssignedByCoachId", p."AssignedOn", p."ClientId", p."CompletionStatus", p."DietPlanId", p."DueDate", p."WorkoutPlanId"
+FROM "PlanAssignment" AS p
+2025-07-28 20:23:49.014 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT w."Id", w."ClientId", w."Date", w."DietMealJSON", w."ExerciseJSON", w."PlanAssignmentId", w."caloriesBurnt", w."caloriesTaken", w."totalExercises"
+FROM "Workout" AS w
+2025-07-28 20:23:49.019 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT w."Id", w."ClientId", w."Date", w."DietMealJSON", w."ExerciseJSON", w."PlanAssignmentId", w."caloriesBurnt", w."caloriesTaken", w."totalExercises"
+FROM "Workout" AS w
+2025-07-28 20:23:49.020 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."ClientId", p."Height", p."ImagePath", p."UploadedAt", p."Weight"
+FROM "Progress" AS p
+2025-07-28 20:23:49.021 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT w."Id", w."ClientId", w."Date", w."DietMealJSON", w."ExerciseJSON", w."PlanAssignmentId", w."caloriesBurnt", w."caloriesTaken", w."totalExercises"
+FROM "Workout" AS w
+2025-07-28 20:23:49.029 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT w."Id", w."ClientId", w."Date", w."DietMealJSON", w."ExerciseJSON", w."PlanAssignmentId", w."caloriesBurnt", w."caloriesTaken", w."totalExercises"
+FROM "Workout" AS w
+2025-07-28 20:23:49.038 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AssignedByCoachId", p."AssignedOn", p."ClientId", p."CompletionStatus", p."DietPlanId", p."DueDate", p."WorkoutPlanId"
+FROM "PlanAssignment" AS p
+2025-07-28 20:23:49.038 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."ClientId", p."Height", p."ImagePath", p."UploadedAt", p."Weight"
+FROM "Progress" AS p
+2025-07-28 20:23:49.039 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."AssignedByCoachId", p."AssignedOn", p."ClientId", p."CompletionStatus", p."DietPlanId", p."DueDate", p."WorkoutPlanId"
+FROM "PlanAssignment" AS p
+2025-07-28 20:23:49.040 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT w."Id", w."ClientId", w."Date", w."DietMealJSON", w."ExerciseJSON", w."PlanAssignmentId", w."caloriesBurnt", w."caloriesTaken", w."totalExercises"
+FROM "Workout" AS w
+2025-07-28 20:23:49.041 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."ClientId", p."Height", p."ImagePath", p."UploadedAt", p."Weight"
+FROM "Progress" AS p
+2025-07-28 20:23:49.041 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT w."Id", w."ClientId", w."Date", w."DietMealJSON", w."ExerciseJSON", w."PlanAssignmentId", w."caloriesBurnt", w."caloriesTaken", w."totalExercises"
+FROM "Workout" AS w
+2025-07-28 20:23:49.043 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT w."Id", w."ClientId", w."Date", w."DietMealJSON", w."ExerciseJSON", w."PlanAssignmentId", w."caloriesBurnt", w."caloriesTaken", w."totalExercises"
+FROM "Workout" AS w
+2025-07-28 20:23:49.043 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."ClientId", p."Height", p."ImagePath", p."UploadedAt", p."Weight"
+FROM "Progress" AS p
+2025-07-28 20:23:49.044 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."ClientId", p."Height", p."ImagePath", p."UploadedAt", p."Weight"
+FROM "Progress" AS p
+2025-07-28 20:23:49.045 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."ClientId", p."Height", p."ImagePath", p."UploadedAt", p."Weight"
+FROM "Progress" AS p
+2025-07-28 20:23:49.045 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT w."Id", w."ClientId", w."Date", w."DietMealJSON", w."ExerciseJSON", w."PlanAssignmentId", w."caloriesBurnt", w."caloriesTaken", w."totalExercises"
+FROM "Workout" AS w
+2025-07-28 20:23:49.046 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."ClientId", p."Height", p."ImagePath", p."UploadedAt", p."Weight"
+FROM "Progress" AS p
+2025-07-28 20:23:49.047 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."ClientId", p."Height", p."ImagePath", p."UploadedAt", p."Weight"
+FROM "Progress" AS p
+2025-07-28 20:23:49.047 +05:30 [INF] Executing OkObjectResult, writing value of type 'ProgressGraphDTO'.
+2025-07-28 20:23:49.048 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT p."Id", p."ClientId", p."Height", p."ImagePath", p."UploadedAt", p."Weight"
+FROM "Progress" AS p
+2025-07-28 20:23:49.048 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[FitnessTrackerAPI.Models.DTOs.ProgressResponseDTO, FitnessTrackerAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-07-28 20:23:49.052 +05:30 [INF] Executed action FitnessTrackerAPI.Controllers.ProgressController.GetProgressForClient (FitnessTrackerAPI) in 82.1033ms
+2025-07-28 20:23:49.052 +05:30 [INF] Executed endpoint 'FitnessTrackerAPI.Controllers.ProgressController.GetProgressForClient (FitnessTrackerAPI)'
+2025-07-28 20:23:49.052 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5002/api/v1/Progress/client/0197b7f2-40dd-788f-a47e-2cf748d6e8cc - 200 null application/json; charset=utf-8 92.9923ms
+2025-07-28 20:23:49.054 +05:30 [INF] Executed action FitnessTrackerAPI.Controllers.ProgressController.GetProgressLog (FitnessTrackerAPI) in 83.6889ms
+2025-07-28 20:23:49.054 +05:30 [INF] Executed endpoint 'FitnessTrackerAPI.Controllers.ProgressController.GetProgressLog (FitnessTrackerAPI)'
+2025-07-28 20:23:49.054 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5002/api/v1/Progress/getProgressLogs/0197b7f2-40dd-788f-a47e-2cf748d6e8cc - 200 null application/json; charset=utf-8 93.3362ms
+2025-07-28 20:23:58.585 +05:30 [INF] Executed endpoint '/notificationHub'
+2025-07-28 20:23:58.585 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5002/notificationHub?id=8QJEZbdAlTKpxr3nE7BzWQ - 101 null null 404120.6659ms

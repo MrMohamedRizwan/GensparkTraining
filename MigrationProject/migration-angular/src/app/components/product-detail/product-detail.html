@@ -1,0 +1,17 @@
+<div class="product-detail" *ngIf="product">
+  <div class="product-image">
+    <img
+      [src]="'https://images.ctfassets.net/hrltx12pl8hq/28ECAQiPJZ78hxatLTa7Ts/2f695d869736ae3b0de3e56ceaca3958/free-nature-images.jpg?fit=fill&w=1200&h=630'"
+      alt="Product Image"
+    />
+  </div>
+  <div class="product-detail-content">
+    <p><strong>Product Name:</strong> {{ product.productName }}</p>
+    <p>
+      <strong>Product Price:</strong> ${{ product.price | number: '1.0-0' }}
+    </p>
+    <button class="btn btn-primary" (click)="addToCart(product.productId)">
+      Add to Cart
+    </button>
+  </div>
+</div>

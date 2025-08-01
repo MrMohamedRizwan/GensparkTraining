@@ -1,0 +1,52 @@
+<div class="product-container">
+  <div *ngFor="let item of products" class="main-content">
+    <div class="content-image">
+      <a [routerLink]="['/products/details', item.productId]">
+        <img
+          [src]="'https://images.ctfassets.net/hrltx12pl8hq/28ECAQiPJZ78hxatLTa7Ts/2f695d869736ae3b0de3e56ceaca3958/free-nature-images.jpg?fit=fill&w=1200&h=630'"
+          alt="{{ item.productName }}"
+        />
+      </a>
+    </div>
+
+    <div class="content-title">
+      <a [routerLink]="['/products/details', item.productId]"
+        >{{ item.productName }}sa</a
+      >
+    </div>
+
+    <div class="content-price">Price: ${{ item.price | number: '1.0-0' }}</div>
+
+    <div class="content-price">
+      <button class="btn btn-primary" (click)="addToCart(item)">
+        Add to Cart
+      </button>
+    </div>
+  </div>
+
+  <div class="clear"></div>
+
+  <div class="text-center my-3">
+    <span>Page {{ pageNumber }}/{{ totalPages }}</span>
+  </div>
+
+  <nav *ngIf="totalPages > 1">
+    <ul class="pagination justify-content-center">
+      <li class="page-item" [class.disabled]="pageNumber === 1">
+        <a class="page-link" (click)="goToPage(pageNumber - 1)">Previous</a>
+      </li>
+
+      <li
+        class="page-item"
+        *ngFor="let page of [].constructor(totalPages); let i = index"
+        [class.active]="pageNumber === i + 1"
+      >
+        <a class="page-link" (click)="goToPage(i + 1)">{{ i + 1 }}</a>
+      </li>
+
+      <li class="page-item" [class.disabled]="pageNumber === totalPages">
+        <a class="page-link" (click)="goToPage(pageNumber + 1)">Next</a>
+      </li>
+    </ul>
+  </nav>
+</div>
